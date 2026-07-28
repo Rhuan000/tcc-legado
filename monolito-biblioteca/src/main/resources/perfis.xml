@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<perfis>
+    <perfil nome="ADMIN">
+        <permissao>livro.listar</permissao>
+        <permissao>livro.cadastrar</permissao>
+        <permissao>livro.editar</permissao>
+        <permissao>livro.excluir</permissao>
+        <permissao>usuario.listar</permissao>
+        <permissao>usuario.cadastrar</permissao>
+        <permissao>usuario.editar</permissao>
+        <permissao>usuario.excluir</permissao>
+    </perfil>
+    <perfil nome="BIBLIOTECARIO">
+        <permissao>livro.listar</permissao>
+        <permissao>livro.cadastrar</permissao>
+        <permissao>livro.editar</permissao>
+        <permissao>usuario.listar</permissao>
+    </perfil>
+    <perfil nome="CONSULTA">
+        <permissao>livro.listar</permissao>
+        <permissao>usuario.listar</permissao>
+    </perfil>
+</perfis>

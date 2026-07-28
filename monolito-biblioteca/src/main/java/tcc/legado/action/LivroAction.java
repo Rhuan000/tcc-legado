@@ -1,6 +1,6 @@
 package tcc.legado.action;
 
-import tcc.legado.ejb.livro.LivroEJB;
+import tcc.legado.ejb.livro.ILivroEJB;
 import tcc.legado.model.Livro;
 
 import org.apache.struts.actions.DispatchAction;
@@ -15,17 +15,16 @@ import java.util.List;
 
 public class LivroAction extends DispatchAction {
 
-    private LivroEJB getLivroEJB() throws Exception {
+    private ILivroEJB getLivroEJB() throws Exception {
         InitialContext ctx = new InitialContext();
-        // Nome JNDI do EJB (padrão JBoss EAP 7.4)
-        String jndiName = "java:global/monolito-biblioteca/LivroEJBImpl!tcc.legado.ejb.LivroEJB";
-        return (LivroEJB) ctx.lookup(jndiName);
+        String jndiName = "java:global/monolito-biblioteca/LivroEJB!tcc.legado.ejb.livro.ILivroEJB";
+        return (ILivroEJB) ctx.lookup(jndiName);
     }
 
     public ActionForward listar(ActionMapping mapping, ActionForm form,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
         
-        LivroEJB livroEJB = getLivroEJB();
+        ILivroEJB livroEJB = getLivroEJB();
         List<Livro> livros = livroEJB.listarTodos();
         request.setAttribute("lista", livros);
         
@@ -68,7 +67,7 @@ public class LivroAction extends DispatchAction {
             livro.setQuantidade(Integer.parseInt(quantidadeStr));
         }
         
-        LivroEJB livroEJB = getLivroEJB();
+        ILivroEJB livroEJB = getLivroEJB();
         if (livro.getId() != null) {
             livroEJB.atualizar(livro);
             request.setAttribute("mensagem", "Livro atualizado com sucesso!");
@@ -90,7 +89,7 @@ public class LivroAction extends DispatchAction {
         }
         
         Long id = Long.parseLong(idStr);
-        LivroEJB livroEJB = getLivroEJB();
+        ILivroEJB livroEJB = getLivroEJB();
         Livro livro = livroEJB.buscarPorId(id);
         request.setAttribute("livro", livro);
         
@@ -107,7 +106,7 @@ public class LivroAction extends DispatchAction {
         }
         
         Long id = Long.parseLong(idStr);
-        LivroEJB livroEJB = getLivroEJB();
+        ILivroEJB livroEJB = getLivroEJB();
         livroEJB.excluir(id);
         request.setAttribute("mensagem", "Livro excluído com sucesso!");
         

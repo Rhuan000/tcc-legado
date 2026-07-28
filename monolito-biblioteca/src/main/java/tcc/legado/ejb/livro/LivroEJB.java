@@ -19,22 +19,15 @@ public class LivroEJB implements ILivroEJB {
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void salvar(Livro livro) {
-        // ==========================================
-        // VENENO 24: Regra de negócio no EJB (além de chamar o Service)
-        // ==========================================
         if (livro.getTitulo() == null || livro.getTitulo().trim().isEmpty()) {
             throw new RuntimeException("Título é obrigatório");
         }
-        // Chama o Service que chama o DAO
         livroService.salvar(livro);
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void atualizar(Livro livro) {
-        // ==========================================
-        // VENENO 25: Validação duplicada (no EJB e no Service)
-        // ==========================================
         if (livro.getId() == null) {
             throw new RuntimeException("ID do livro é obrigatório para atualização");
         }
@@ -44,9 +37,6 @@ public class LivroEJB implements ILivroEJB {
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void excluir(Long id) {
-        // ==========================================
-        // VENENO 26: Lógica de exclusão com verificação de dependências
-        // ==========================================
         if (id == null) {
             throw new RuntimeException("ID não informado");
         }
@@ -56,9 +46,6 @@ public class LivroEJB implements ILivroEJB {
 
     @Override
     public List<Livro> listarTodos() {
-        // ==========================================
-        // VENENO 27: Chama o Service que chama o DAO
-        // ==========================================
         return livroService.listarTodos();
     }
 
