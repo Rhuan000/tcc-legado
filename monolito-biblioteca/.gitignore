@@ -1,1 +1,23 @@
 /target/
+
+# Eclipse
+.settings/
+.classpath
+.project
+*.iml
+*.iws
+*.ipr
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+gerar-projeto.ps1
+projeto.md
+# Logs
+*.log

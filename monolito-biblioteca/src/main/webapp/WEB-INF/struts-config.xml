@@ -4,15 +4,20 @@
     "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 
 <struts-config>
-    
-    <!-- Mapeamento de Actions: 
-         /ola.do → OlaAction → /ola.jsp -->
     <action-mappings>
-        <action path="/ola"
-                type="tcc.legado.OlaAction"
-                scope="request">
-            <forward name="sucesso" path="/ola.jsp"/>
+        <!-- LivroAction (DispatchAction) -->
+        <action path="/livro" 
+                type="tcc.legado.action.LivroAction"
+                scope="request"
+                parameter="metodo">  
+            
+            <forward name="listarSucesso" path="/lista-livros.jsp"/>
+            <forward name="novo" path="/cadastro-livro.jsp"/>
+            <forward name="editar" path="/cadastro-livro.jsp"/>
+            <forward name="erro" path="/erro.jsp"/>
         </action>
+        
+        <!-- (Em breve: UsuarioAction, EmprestimoAction, DevolucaoAction) -->
     </action-mappings>
     
 </struts-config>
