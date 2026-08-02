@@ -33,6 +33,15 @@
             <forward name="erro" path="/login.jsp"/>
             <forward name="logout" path="/login.jsp"/>
         </action>
+        <action path="/emprestimo" 
+        type="tcc.legado.action.EmprestimoAction"
+        scope="request"
+        parameter="metodo">
+        <forward name="novo" path="/emprestimo/emprestimo.jsp"/>
+            <forward name="listarSucesso" path="/emprestimo/lista-emprestimos.jsp"/>
+            <forward name="devolver" path="/emprestimo/devolucao.jsp"/>
+            <forward name="erro" path="/erro.jsp"/>
+    </action>
     </action-mappings>
 
 </struts-config>

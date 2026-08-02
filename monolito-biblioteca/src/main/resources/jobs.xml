@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job-scheduling-data xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData 
+    http://www.quartz-scheduler.org/xml/job_scheduling_data_2_0.xsd"
+    version="2.0">
+
+    <schedule>
+        <!-- Job diário (00:00) -->
+        <job>
+            <name>MultaDiariaJob</name>
+            <group>Sistema</group>
+            <description>Recalcula multas de empréstimos atrasados (diário)</description>
+            <job-class>tcc.legado.job.MultaDiariaJob</job-class>
+        </job>
+        <trigger>
+            <cron>
+                <name>triggerMultaDiaria</name>
+                <group>Sistema</group>
+                <job-name>MultaDiariaJob</job-name>
+                <job-group>Sistema</job-group>
+                <cron-expression>0 0 0 * * ?</cron-expression> <!-- todo dia à meia-noite -->
+            </cron>
+        </trigger>
+
+        <!-- Job de teste (a cada 5 minutos) -->
+        <job>
+            <name>MultaDiariaJobTeste</name>
+            <group>Sistema</group>
+            <description>Versão de teste para validação rápida</description>
+            <job-class>tcc.legado.job.MultaDiariaJob</job-class>
+        </job>
+        <trigger>
+            <cron>
+                <name>triggerMultaTeste</name>
+                <group>Sistema</group>
+                <job-name>MultaDiariaJobTeste</job-name>
+                <job-group>Sistema</job-group>
+                <cron-expression>0 */5 * * * ?</cron-expression> <!-- a cada 5 minutos -->
+            </cron>
+        </trigger>
+    </schedule>
+</job-scheduling-data>

@@ -4,14 +4,14 @@
     String mensagem = (String) request.getAttribute("mensagem");
 %>
 <html>
-<head><title>Lista de UsuÃ¡rios</title></head>
+<head><title>Lista de Usuários</title></head>
 <body>
-    <h1>ğŸ‘¤ UsuÃ¡rios</h1>
+    <h1>Usuários</h1>
     <% if (mensagem != null) { %>
         <p style="color:green;"><%= mensagem %></p>
     <% } %>
     <table border="1">
-        <tr><th>ID</th><th>Nome</th><th>MatrÃ­cula</th><th>Email</th><th>Tipo</th><th>AÃ§Ãµes</th></tr>
+       	<tr><th>ID</th><th>Nome</th><th>Matrícula</th><th>Email</th><th>Tipo</th><th>Ações</th></tr>
         <%
             for (Usuario u : usuarios) {
         %>
@@ -30,7 +30,7 @@
             }
         %>
     </table>
-    <a href="usuario.do?metodo=novo">â• Cadastrar</a>
-    <a href="index.jsp">ğŸ  Voltar</a>
+    <a href="usuario.do?metodo=novo">Cadastrar</a>
+    <a href="index.jsp">Voltar</a>
 </body>
 </html>

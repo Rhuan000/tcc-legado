@@ -7,7 +7,7 @@
 <html>
 <head><title><%= editando ? "Editar" : "Cadastrar" %> Livro</title></head>
 <body>
-    <h1><%= editando ? "✏️ Editar" : "📖 Cadastrar" %> Livro</h1>
+    <h1><%= editando ? "Editar" : "Cadastrar" %> Livro</h1>
     <form action="livro.do" method="post">
         <input type="hidden" name="metodo" value="<%= editando ? "salvar" : "salvar" %>" />
         <% if (editando) { %>
