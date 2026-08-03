@@ -11,18 +11,18 @@
             scope="request"
             parameter="metodo">  
 
-            <forward name="listarSucesso" path="/livro/lista-livros.jsp"/>
-            <forward name="novo" path="/livro/cadastro-livro.jsp"/>
-            <forward name="editar" path="/livro/cadastro-livro.jsp"/>
+            <forward name="listarSucesso" path="/WEB-INF/views/livro/lista-livros.jsp"/>
+            <forward name="novo" path="/WEB-INF/views/livro/cadastro-livro.jsp"/>
+            <forward name="editar" path="/WEB-INF/views/livro/cadastro-livro.jsp"/>
             <forward name="erro" path="/error.jsp"/>
         </action>
         <action path="/usuario" 
             type="tcc.legado.action.UsuarioAction"
             scope="request"
             parameter="metodo">
-            <forward name="listarSucesso" path="/usuario/lista-usuarios.jsp"/>
-            <forward name="novo" path="/usuario/cadastro-usuario.jsp"/>
-            <forward name="editar" path="/usuario/cadastro-usuario.jsp"/>
+            <forward name="listarSucesso" path="/WEB-INF/views/usuario/lista-usuarios.jsp"/>
+            <forward name="novo" path="/WEB-INF/views/usuario/cadastro-usuario.jsp"/>
+            <forward name="editar" path="/WEB-INF/views/usuario/cadastro-usuario.jsp"/>
             <forward name="erro" path="/error.jsp"/>
         </action>
         <action path="/auth" 
@@ -37,19 +37,19 @@
         type="tcc.legado.action.EmprestimoAction"
         scope="request"
         parameter="metodo">
-        <forward name="novo" path="/emprestimo/emprestimo.jsp"/>
-            <forward name="listarSucesso" path="/emprestimo/lista-emprestimos.jsp"/>
-            <forward name="devolver" path="/emprestimo/devolucao.jsp"/>
+        <forward name="novo" path="/WEB-INF/views/emprestimo/emprestimo.jsp"/>
+            <forward name="listarSucesso" path="/WEB-INF/views/emprestimo/lista-emprestimos.jsp"/>
+            <forward name="devolver" path="/WEB-INF/views/emprestimo/devolucao.jsp"/>
             <forward name="erro" path="/error.jsp"/>
     </action>
         <action path="/destaque"
             type="tcc.legado.action.LivroDestaqueAction"
             scope="request"
             parameter="metodo">
-            <forward name="listarSucesso" path="/destaque/lista-destaques.jsp"/>
-            <forward name="novo" path="/destaque/cadastro-destaque.jsp"/>
-            <forward name="editar" path="/destaque/cadastro-destaque.jsp"/>
-            <forward name="visualizar" path="/destaque/lista-destaques.jsp"/>
+            <forward name="listarSucesso" path="/WEB-INF/views/destaque/lista-destaques.jsp"/>
+            <forward name="novo" path="/WEB-INF/views/destaque/cadastro-destaque.jsp"/>
+            <forward name="editar" path="/WEB-INF/views/destaque/cadastro-destaque.jsp"/>
+            <forward name="visualizar" path="/WEB-INF/views/destaque/lista-destaques.jsp"/>
             <forward name="erro" path="/error.jsp"/>
         </action>
     </action-mappings>

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Biblioteca Legada</title>
-    <link rel="stylesheet" href="styles.css">
+   	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/webjars/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body class="login-page">
