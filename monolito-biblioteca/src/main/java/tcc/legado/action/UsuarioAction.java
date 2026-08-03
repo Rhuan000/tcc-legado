@@ -11,6 +11,8 @@ import org.apache.struts.action.ActionMapping;
 import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -20,7 +22,12 @@ public class UsuarioAction extends DispatchAction {
         InitialContext ctx = new InitialContext();
         return (IUsuarioEJB) ctx.lookup("java:global/monolito-biblioteca/UsuarioEJB!tcc.legado.ejb.usuario.IUsuarioEJB");
     }
-    
+       private boolean checarAutenticacao(HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession();
+        String perfil = (String) session.getAttribute("perfil");
+        return !"ADMIN".equals(perfil); 
+    }
+  
     public ActionForward listar(ActionMapping mapping, ActionForm form,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
         IUsuarioEJB ejb = getUsuarioEJB();
@@ -36,6 +43,10 @@ public class UsuarioAction extends DispatchAction {
     
     public ActionForward salvar(ActionMapping mapping, ActionForm form,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
+        if (checarAutenticacao(request)) {
+            request.setAttribute("erro", "Acesso negado. Apenas administradores podem realizar esta ação.");
+            return mapping.findForward("erro");
+        }
         String idStr = request.getParameter("id");
         String nome = request.getParameter("nome");
         String matricula = request.getParameter("matricula");
@@ -64,6 +75,11 @@ public class UsuarioAction extends DispatchAction {
     
     public ActionForward editar(ActionMapping mapping, ActionForm form,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
+        if (checarAutenticacao(request)) {
+            request.setAttribute("erro", "Acesso negado. Apenas administradores podem realizar esta ação.");
+            return mapping.findForward("erro");
+        }
+ 
         String idStr = request.getParameter("id");
         if (idStr == null) {
             request.setAttribute("erro", "ID não informado");
@@ -78,6 +94,11 @@ public class UsuarioAction extends DispatchAction {
     
     public ActionForward excluir(ActionMapping mapping, ActionForm form,
                                  HttpServletRequest request, HttpServletResponse response) throws Exception {
+        if (checarAutenticacao(request)) {
+            request.setAttribute("erro", "Acesso negado. Apenas administradores podem realizar esta ação.");
+            return mapping.findForward("erro");
+        }
+ 
         String idStr = request.getParameter("id");
         if (idStr == null) {
             request.setAttribute("erro", "ID não informado");

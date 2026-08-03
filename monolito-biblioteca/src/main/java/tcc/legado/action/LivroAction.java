@@ -11,6 +11,8 @@ import org.apache.struts.action.ActionMapping;
 import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.util.List;
 
 public class LivroAction extends DispatchAction {
@@ -20,7 +22,11 @@ public class LivroAction extends DispatchAction {
         String jndiName = "java:global/monolito-biblioteca/LivroEJB!tcc.legado.ejb.livro.ILivroEJB";
         return (ILivroEJB) ctx.lookup(jndiName);
     }
-
+    private boolean checarAutenticacao(HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession();
+        String perfil = (String) session.getAttribute("perfil");
+        return !"ADMIN".equals(perfil); 
+    }
     public ActionForward listar(ActionMapping mapping, ActionForm form,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
         
@@ -39,6 +45,11 @@ public class LivroAction extends DispatchAction {
     public ActionForward salvar(ActionMapping mapping, ActionForm form,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
         
+        if (checarAutenticacao(request)) {
+            request.setAttribute("erro", "Acesso negado. Apenas administradores podem realizar esta ação.");
+            return mapping.findForward("erro");
+        }
+
         String idStr = request.getParameter("id");
         String titulo = request.getParameter("titulo");
         String autor = request.getParameter("autor");
@@ -81,7 +92,10 @@ public class LivroAction extends DispatchAction {
 
     public ActionForward editar(ActionMapping mapping, ActionForm form,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
-        
+         if (checarAutenticacao(request)) {
+            request.setAttribute("erro", "Acesso negado. Apenas administradores podem realizar esta ação.");
+            return mapping.findForward("erro");
+        }
         String idStr = request.getParameter("id");
         if (idStr == null) {
             request.setAttribute("erro", "ID do livro não informado");
@@ -98,7 +112,10 @@ public class LivroAction extends DispatchAction {
 
     public ActionForward excluir(ActionMapping mapping, ActionForm form,
                                  HttpServletRequest request, HttpServletResponse response) throws Exception {
-        
+        if (checarAutenticacao(request)) {
+            request.setAttribute("erro", "Acesso negado. Apenas administradores podem realizar esta ação.");
+            return mapping.findForward("erro");
+        }
         String idStr = request.getParameter("id");
         if (idStr == null) {
             request.setAttribute("erro", "ID do livro não informado");
