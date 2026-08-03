@@ -14,7 +14,7 @@
             <forward name="listarSucesso" path="/livro/lista-livros.jsp"/>
             <forward name="novo" path="/livro/cadastro-livro.jsp"/>
             <forward name="editar" path="/livro/cadastro-livro.jsp"/>
-            <forward name="erro" path="/erro.jsp"/>
+            <forward name="erro" path="/error.jsp"/>
         </action>
         <action path="/usuario" 
             type="tcc.legado.action.UsuarioAction"
@@ -23,7 +23,7 @@
             <forward name="listarSucesso" path="/usuario/lista-usuarios.jsp"/>
             <forward name="novo" path="/usuario/cadastro-usuario.jsp"/>
             <forward name="editar" path="/usuario/cadastro-usuario.jsp"/>
-            <forward name="erro" path="/erro.jsp"/>
+            <forward name="erro" path="/error.jsp"/>
         </action>
         <action path="/auth" 
         type="tcc.legado.action.AuthAction"
@@ -40,8 +40,18 @@
         <forward name="novo" path="/emprestimo/emprestimo.jsp"/>
             <forward name="listarSucesso" path="/emprestimo/lista-emprestimos.jsp"/>
             <forward name="devolver" path="/emprestimo/devolucao.jsp"/>
-            <forward name="erro" path="/erro.jsp"/>
+            <forward name="erro" path="/error.jsp"/>
     </action>
+        <action path="/destaque"
+            type="tcc.legado.action.LivroDestaqueAction"
+            scope="request"
+            parameter="metodo">
+            <forward name="listarSucesso" path="/destaque/lista-destaques.jsp"/>
+            <forward name="novo" path="/destaque/cadastro-destaque.jsp"/>
+            <forward name="editar" path="/destaque/cadastro-destaque.jsp"/>
+            <forward name="visualizar" path="/destaque/lista-destaques.jsp"/>
+            <forward name="erro" path="/error.jsp"/>
+        </action>
     </action-mappings>
 
 </struts-config>

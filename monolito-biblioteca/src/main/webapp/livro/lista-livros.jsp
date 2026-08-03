@@ -5,34 +5,73 @@
     String mensagem = (String) request.getAttribute("mensagem");
 %>
 <html>
-<head><title>Lista de Livros</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Livros</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/webjars/font-awesome/6.5.2/css/all.min.css">
+</head>
 <body>
-    <h1>📚 Lista de Livros</h1>
-    <% if (mensagem != null) { %>
-        <p style="color:green;"><%= mensagem %></p>
-    <% } %>
-    <table border="1">
-        <tr><th>ID</th><th>Título</th><th>Autor</th><th>ISBN</th><th>Ano</th><th>Editora</th><th>Qtd</th></tr>
-        <%
-            if (livros != null) {
-                for (Livro l : livros) {
-        %>
-        <tr>
-            <td><%= l.getId() %></td>
-            <td><%= l.getTitulo() %></td>
-            <td><%= l.getAutor() %></td>
-            <td><%= l.getIsbn() %></td>
-            <td><%= l.getAno() %></td>
-            <td><%= l.getEditora() %></td>
-            <td><%= l.getQuantidade() %></td>
-        </tr>
-        <%
-                }
-            }
-        %>
-    </table>
-    <br/>
-    <a href="livro.do?metodo=novo">Cadastrar novo livro</a> |
-    <a href="index.jsp">Voltar</a>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fa-solid fa-book-open page-icon"></i>Catálogo de Livros</h1>
+            <p class="subtitle">Gerenciamento do acervo da biblioteca</p>
+        </div>
+
+        <% if (mensagem != null) { %>
+            <div class="alert alert-success"><%= mensagem %></div>
+        <% } %>
+
+        <div class="content">
+            <div class="action-buttons">
+                <a href="livro.do?metodo=novo" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Cadastrar Novo Livro</a>
+                <a href="index.jsp" class="btn btn-light"><i class="fa-solid fa-house"></i> Voltar</a>
+            </div>
+
+            <% if (livros != null && !livros.isEmpty()) { %>
+                <div class="livro-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Título</th>
+                                <th>Autor</th>
+                                <th>ISBN</th>
+                                <th>Ano</th>
+                                <th>Editora</th>
+                                <th>Quantidade</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (Livro l : livros) { %>
+                                <tr>
+                                    <td><%= l.getId() %></td>
+                                    <td><strong><%= l.getTitulo() %></strong></td>
+                                    <td><%= l.getAutor() %></td>
+                                    <td><%= l.getIsbn() %></td>
+                                    <td><%= l.getAno() %></td>
+                                    <td><%= l.getEditora() %></td>
+                                    <td>
+                                        <span class="quantidade-badge <%= l.getQuantidade() > 0 ? "quantidade-disponivel" : "quantidade-indisponivel" %>"><%= l.getQuantidade() %></span>
+                                    </td>
+                                    <td>
+                                        <a href="livro.do?metodo=editar&id=<%= l.getId() %>" class="btn btn-small btn-warning"><i class="fa-solid fa-pen"></i> Editar</a>
+                                        <a href="livro.do?metodo=excluir&id=<%= l.getId() %>" class="btn btn-small btn-danger" onclick="return confirm('Tem certeza?')"><i class="fa-solid fa-trash"></i> Excluir</a>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            <% } else { %>
+                <div class="empty-state">
+                    <p>Nenhum livro cadastrado ainda.</p>
+                    <a href="livro.do?metodo=novo" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Cadastrar Primeiro Livro</a>
+                </div>
+            <% } %>
+        </div>
+    </div>
 </body>
 </html>

@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionMapping;
 import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.List;
 
 public class UsuarioAction extends DispatchAction {
@@ -87,5 +88,23 @@ public class UsuarioAction extends DispatchAction {
         ejb.excluir(id);
         request.setAttribute("mensagem", "Usuário excluído!");
         return listar(mapping, form, request, response);
+    }
+
+    public ActionForward buscarPorMatricula(ActionMapping mapping, ActionForm form,
+                                            HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String matricula = request.getParameter("matricula");
+        response.setContentType("application/json;charset=UTF-8");
+        if (matricula == null || matricula.trim().isEmpty()) {
+            response.getWriter().write("{\"encontrado\":false}");
+            return null;
+        }
+        Usuario usuario = getUsuarioEJB().buscarPorMatricula(matricula);
+        PrintWriter out = response.getWriter();
+        if (usuario == null) {
+            out.write("{\"encontrado\":false}");
+        } else {
+            out.write("{\"encontrado\":true,\"id\":" + usuario.getId() + ",\"nome\":\"" + usuario.getNome().replace("\"", "\\\"") + "\",\"matricula\":\"" + usuario.getMatricula() + "\",\"tipo\":\"" + usuario.getTipo() + "\"}");
+        }
+        return null;
     }
 }

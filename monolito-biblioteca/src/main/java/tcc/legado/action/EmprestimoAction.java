@@ -13,8 +13,6 @@ import org.apache.struts.action.ActionMapping;
 import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class EmprestimoAction extends DispatchAction {
@@ -37,39 +35,19 @@ public class EmprestimoAction extends DispatchAction {
                                   HttpServletRequest request, HttpServletResponse response) throws Exception {
         String idLivroStr = request.getParameter("idLivro");
         String matricula = request.getParameter("matricula");
-        String dataPrevistaFront = request.getParameter("dataPrevistaFront"); // campo hidden
 
         if (idLivroStr == null || idLivroStr.trim().isEmpty()) {
             request.setAttribute("erro", "Selecione um livro");
             return mapping.findForward("erro");
         }
-        Long idLivro = Long.parseLong(idLivroStr);
-
-        // VENENO: validação da data prevista vinda do front (duplicada)
-        if (dataPrevistaFront != null && !dataPrevistaFront.isEmpty()) {
-            try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                Date dataFront = sdf.parse(dataPrevistaFront);
-                // Comparar com a data que será calculada no EJB? Não temos como aqui.
-                // Vamos apenas armazenar num atributo para depois comparar.
-                request.setAttribute("dataFront", dataFront);
-            } catch (Exception e) {
-                request.setAttribute("erro", "Data prevista inválida");
-                return mapping.findForward("erro");
-            }
-        }
-
-        IEmprestimoEJB ejb = getEmprestimoEJB();
-        Emprestimo emp = ejb.criarEmprestimo(idLivro, matricula);
-
-        // VENENO: comparação da data calculada pelo back com a data do front (se enviada)
-        Date dataFront = (Date) request.getAttribute("dataFront");
-        if (dataFront != null && !dataFront.equals(emp.getDataPrevistaDevolucao())) {
-            // Divergência proposital – lança erro
-            request.setAttribute("erro", "Divergência na data prevista: Front=" + dataFront + " Back=" + emp.getDataPrevistaDevolucao());
+        if (matricula == null || matricula.trim().isEmpty()) {
+            request.setAttribute("erro", "Informe a matrícula do usuário");
             return mapping.findForward("erro");
         }
 
+        Long idLivro = Long.parseLong(idLivroStr);
+        IEmprestimoEJB ejb = getEmprestimoEJB();
+        Emprestimo emp = ejb.criarEmprestimo(idLivro, matricula);
         request.setAttribute("mensagem", "Empréstimo realizado com sucesso! ID: " + emp.getId());
         return listar(mapping, form, request, response);
     }

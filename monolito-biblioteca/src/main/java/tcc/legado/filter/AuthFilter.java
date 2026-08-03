@@ -19,7 +19,7 @@ public class AuthFilter implements Filter {
         String uri = request.getRequestURI();
 
         // Permite acesso público à página de login
-        if (uri.contains("/auth.do") || uri.contains("/login.jsp") || uri.contains("/erro.jsp")) {
+        if (uri.contains("/auth.do") || uri.contains("/login.jsp") || uri.contains("/error.jsp")) {
             chain.doFilter(request, response);
             return;
         }
@@ -35,7 +35,7 @@ public class AuthFilter implements Filter {
         String perfil = (String) session.getAttribute("perfil");
         if (!temPermissao(uri, perfil)) {
             request.setAttribute("erro", "Acesso negado para este perfil");
-            request.getRequestDispatcher("/erro.jsp").forward(request, response);
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
             return;
         }
 

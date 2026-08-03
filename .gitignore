@@ -1,0 +1,6 @@
+gerar-projeto.ps1
+monolito-biblioteca/.settings/org.eclipse.jdt.core.prefs
+monolito-biblioteca/.project
+monolito-biblioteca/.settings/org.eclipse.wst.common.project.facet.core.prefs.xml
+monolito-biblioteca/.settings/org.eclipse.wst.common.project.facet.core.xml
+monolito-biblioteca/src/main/webapp/webjars/*

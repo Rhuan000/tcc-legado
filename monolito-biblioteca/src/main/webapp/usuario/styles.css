@@ -1,0 +1,388 @@
+/* ========================================
+   ESTILOS ESPECÍFICOS - DOMÍNIO USUÁRIO
+   ======================================== */
+
+/* ========================================
+   TABELA DE USUÁRIOS
+   ======================================== */
+
+.usuario-table {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.usuario-table table {
+    min-width: 100%;
+}
+
+.usuario-table th {
+    background-color: #2980b9;
+    color: white;
+    font-weight: 700;
+}
+
+.usuario-table tr:hover {
+    background-color: #ebf5fb;
+}
+
+/* ========================================
+   CARDS DE USUÁRIO
+   ======================================== */
+
+.usuarios-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.usuario-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #ecf0f1;
+}
+
+.usuario-card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    transform: translateY(-4px);
+}
+
+.usuario-avatar {
+    background: linear-gradient(135deg, #2980b9 0%, #1e5a96 100%);
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.usuario-info {
+    padding: 20px;
+}
+
+.usuario-nome {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.usuario-tipo {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.tipo-aluno {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.tipo-professor {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.tipo-bolsista {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.usuario-dados {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.usuario-dados-item {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.usuario-dados-label {
+    color: #7f8c8d;
+    font-weight: 600;
+    min-width: 80px;
+}
+
+.usuario-dados-valor {
+    color: #2c3e50;
+    word-break: break-all;
+}
+
+.usuario-status {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #ecf0f1;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-ativo {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-inativo {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.usuario-actions {
+    padding: 15px 20px;
+    border-top: 1px solid #ecf0f1;
+    display: flex;
+    gap: 8px;
+}
+
+.usuario-actions .btn {
+    flex: 1;
+    margin: 0;
+    font-size: 0.85rem;
+    padding: 8px 10px;
+}
+
+/* ========================================
+   FORMULÁRIO DE CADASTRO/EDIÇÃO
+   ======================================== */
+
+.usuario-form {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-group small {
+    display: block;
+    color: #7f8c8d;
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #2980b9;
+    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
+}
+
+.form-control[readonly] {
+    background-color: #ecf0f1;
+    cursor: not-allowed;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.form-hint {
+    background-color: #ebf5fb;
+    border-left: 4px solid #2980b9;
+    padding: 12px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #1e5a96;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ecf0f1;
+}
+
+.form-actions .btn {
+    flex: 1;
+    margin: 0;
+}
+
+/* ========================================
+   FILTROS E BUSCA
+   ======================================== */
+
+.usuario-filtros {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border-left: 4px solid #2980b9;
+}
+
+.filtros-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filtro-btn {
+    padding: 8px 16px;
+    border: 1px solid #bdc3c7;
+    background-color: white;
+    color: #2c3e50;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.filtro-btn:hover {
+    border-color: #2980b9;
+    color: #2980b9;
+}
+
+.filtro-btn.active {
+    background-color: #2980b9;
+    color: white;
+    border-color: #2980b9;
+}
+
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #bdc3c7;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #2980b9;
+    box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.1);
+}
+
+/* ========================================
+   RESUMO DE USUÁRIOS
+   ======================================== */
+
+.usuario-resumo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.resumo-card {
+    background: linear-gradient(135deg, #2980b9 0%, #1e5a96 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.resumo-numero {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.resumo-label {
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+/* ========================================
+   MENSAGENS DE VALIDAÇÃO
+   ======================================== */
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.success-message {
+    color: #27ae60;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .usuarios-lista {
+        grid-template-columns: 1fr;
+    }
+
+    .usuario-actions {
+        flex-direction: column;
+    }
+
+    .usuario-actions .btn {
+        width: 100%;
+    }
+
+    .usuario-form {
+        padding: 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .usuario-resumo {
+        grid-template-columns: 1fr;
+    }
+
+    .filtros-group {
+        flex-direction: column;
+    }
+
+    .filtro-btn {
+        width: 100%;
+    }
+}

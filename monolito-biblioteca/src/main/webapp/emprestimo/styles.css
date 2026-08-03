@@ -1,0 +1,295 @@
+/* ========================================
+   ESTILOS ESPECÍFICOS - DOMÍNIO EMPRÉSTIMO
+   ======================================== */
+
+/* ========================================
+   TABELA DE EMPRÉSTIMOS
+   ======================================== */
+
+.emprestimo-table {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.emprestimo-table table {
+    min-width: 900px;
+}
+
+.emprestimo-table th {
+    background-color: #c0392b;
+    color: white;
+    font-weight: 700;
+}
+
+.emprestimo-table tr:hover {
+    background-color: #fef5e7;
+}
+
+/* ========================================
+   CARDS DE EMPRÉSTIMO
+   ======================================== */
+
+.emprestimo-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.emprestimo-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border-left: 4px solid #c0392b;
+}
+
+.emprestimo-card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    transform: translateY(-4px);
+}
+
+.emprestimo-card.pendente {
+    border-left-color: #f39c12;
+}
+
+.emprestimo-card.devolvido {
+    border-left-color: #27ae60;
+}
+
+.emprestimo-card.atrasado {
+    border-left-color: #e74c3c;
+}
+
+.emprestimo-header {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-bottom: 1px solid #bdc3c7;
+}
+
+.emprestimo-header .status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-pendente {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-devolvido {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-atrasado {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.emprestimo-body {
+    padding: 20px;
+}
+
+.emprestimo-body h4 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.emprestimo-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.emprestimo-item:last-child {
+    border-bottom: none;
+}
+
+.emprestimo-item strong {
+    color: #2c3e50;
+}
+
+.emprestimo-item span {
+    color: #7f8c8d;
+}
+
+.multa-info {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #ecf0f1;
+}
+
+.multa-valor {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #e74c3c;
+    text-align: right;
+}
+
+.emprestimo-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #ecf0f1;
+    display: flex;
+    gap: 8px;
+}
+
+.emprestimo-footer .btn {
+    flex: 1;
+    margin: 0;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+}
+
+/* ========================================
+   TIMELINE DE DATAS
+   ======================================== */
+
+.datas-timeline {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #3498db;
+    margin-right: 15px;
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.timeline-item.devolvido .timeline-dot {
+    background-color: #27ae60;
+}
+
+.timeline-item.pendente .timeline-dot {
+    background-color: #f39c12;
+}
+
+.timeline-item.atrasado .timeline-dot {
+    background-color: #e74c3c;
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-content strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.timeline-content span {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* ========================================
+   FILTROS
+   ======================================== */
+
+.filtros {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border-left: 4px solid #3498db;
+}
+
+.filtros-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filtro-btn {
+    padding: 8px 16px;
+    border: 1px solid #bdc3c7;
+    background-color: white;
+    color: #2c3e50;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.filtro-btn:hover {
+    border-color: #3498db;
+    color: #3498db;
+}
+
+.filtro-btn.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+/* ========================================
+   FORMULÁRIOS
+   ======================================== */
+
+.form-hint {
+    display: block;
+    margin-top: 8px;
+    color: #7f8c8d;
+    font-size: 0.85rem;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .emprestimo-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .emprestimo-footer {
+        flex-direction: column;
+    }
+
+    .emprestimo-footer .btn {
+        width: 100%;
+    }
+
+    .emprestimo-item {
+        flex-direction: column;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+    }
+
+    .timeline-dot {
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+
+    .filtros-group {
+        flex-direction: column;
+    }
+
+    .filtro-btn {
+        width: 100%;
+    }
+}

@@ -1,31 +1,89 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List, tcc.legado.model.Emprestimo" %>
 <%
     List<Emprestimo> lista = (List<Emprestimo>) request.getAttribute("lista");
     String mensagem = (String) request.getAttribute("mensagem");
 %>
 <html>
-<head><title>EmprÈstimos</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Empr√©stimos</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/webjars/font-awesome/6.5.2/css/all.min.css">
+</head>
 <body>
-    <h1>EmprÈstimos</h1>
-    <% if (mensagem != null) { %>
-        <p style="color:green;"><%= mensagem %></p>
-    <% } %>
-    <table border="1">
-        <tr><th>ID</th><th>Livro</th><th>Usu·rio</th><th>EmprÈstimos</th><th>Previs„o</th><th>DevoluÁ„o</th><th>Multa</th></tr>
-        <% for (Emprestimo e : lista) { %>
-        <tr>
-            <td><%= e.getId() %></td>
-            <td><%= e.getIdLivro() %></td>
-            <td><%= e.getIdUsuario() %></td>
-            <td><%= e.getDataEmprestimo() %></td>
-            <td><%= e.getDataPrevistaDevolucao() %></td>
-            <td><%= e.getDataDevolucaoReal() != null ? e.getDataDevolucaoReal() : "Pendente" %></td>
-            <td><%= e.getMulta() %></td>
-        </tr>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fa-solid fa-arrow-right-arrow-left page-icon"></i>Gerenciamento de Empr√©stimos</h1>
+            <p class="subtitle">Controle de empr√©stimos, devolu√ß√µes e multas</p>
+        </div>
+
+        <% if (mensagem != null) { %>
+            <div class="alert alert-success"><%= mensagem %></div>
         <% } %>
-    </table>
-    <a href="emprestimo.do?metodo=novo">Novo EmprÈstimos</a>
-    <a href="emprestimo.do?metodo=devolver">Registrar DevoluÁ„o</a>
-    <a href="index.jsp">Voltar</a>
+
+        <div class="content">
+            <div class="action-buttons">
+                <a href="emprestimo.do?metodo=novo" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Novo Empr√©stimo</a>
+                <a href="emprestimo.do?metodo=devolver" class="btn btn-secondary"><i class="fa-solid fa-rotate-left"></i> Registrar Devolu√ß√£o</a>
+                <a href="index.jsp" class="btn btn-light"><i class="fa-solid fa-house"></i> Voltar</a>
+            </div>
+
+            <% if (lista != null && !lista.isEmpty()) { %>
+                <div class="emprestimo-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Livro</th>
+                                <th>Usu√°rio</th>
+                                <th>Data Empr√©stimo</th>
+                                <th>Previs√£o Devolu√ß√£o</th>
+                                <th>Devolu√ß√£o Real</th>
+                                <th>Multa (R$)</th>
+                                <th>A√ß√µes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (Emprestimo e : lista) { 
+                                boolean devolvido = e.getDataDevolucaoReal() != null;
+                            %>
+                            <tr>
+                                <td><%= e.getId() %></td>
+                                <td><%= e.getIdLivro() %></td>
+                                <td><%= e.getIdUsuario() %></td>
+                                <td><%= e.getDataEmprestimo() %></td>
+                                <td><%= e.getDataPrevistaDevolucao() %></td>
+                                <td>
+                                    <% if (devolvido) { %>
+                                        <%= e.getDataDevolucaoReal() %>
+                                    <% } else { %>
+                                        <span class="badge badge-active">Pendente</span>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <% if (e.getMulta() != null && e.getMulta() > 0) { %>
+                                        <span class="badge badge-discount">R$ <%= String.format("%.2f", e.getMulta()) %></span>
+                                    <% } else { %>
+                                        <span>-</span>
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <a href="emprestimo.do?metodo=devolver&id=<%= e.getId() %>" class="btn btn-small btn-info"><i class="fa-solid fa-circle-info"></i> Detalhes</a>
+                                </td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            <% } else { %>
+                <div class="empty-state">
+                    <p>Nenhum empr√©stimo cadastrado ainda.</p>
+                    <a href="emprestimo.do?metodo=novo" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Fazer Primeiro Empr√©stimo</a>
+                </div>
+            <% } %>
+        </div>
+    </div>
 </body>
 </html>

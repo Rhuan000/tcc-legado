@@ -85,6 +85,13 @@
       <version>1.2</version>
     </dependency>
 
+    <!-- Font Awesome local via WebJar -->
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>font-awesome</artifactId>
+      <version>6.5.2</version>
+    </dependency>
+
     <!-- Quartz Scheduler (NOVA DEPENDÊNCIA) -->
     <dependency>
       <groupId>org.quartz-scheduler</groupId>
@@ -110,6 +117,31 @@
   <build>
     <finalName>monolito-biblioteca</finalName>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+          <execution>
+            <id>unpack-font-awesome-webjar</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.webjars</groupId>
+                  <artifactId>font-awesome</artifactId>
+                  <version>6.5.2</version>
+                  <outputDirectory>${project.basedir}/src/main/webapp/webjars/font-awesome/6.5.2</outputDirectory>
+                  <includes>**/*</includes>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
