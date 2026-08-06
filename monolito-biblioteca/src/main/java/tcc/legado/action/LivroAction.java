@@ -133,4 +133,22 @@ public class LivroAction extends DispatchAction {
         
         return listar(mapping, form, request, response);
     }
+
+	public ActionForward detalhar(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String idStr = request.getParameter("id");
+		if (idStr == null || idStr.trim().isEmpty()) {
+			request.setAttribute("erro", "ID do livro não informado");
+			return mapping.findForward("erro");
+		}
+		Long id = Long.parseLong(idStr);
+		ILivroEJB livroEJB = getLivroEJB();
+		Livro livro = livroEJB.buscarPorId(id);
+		if (livro == null) {
+			request.setAttribute("erro", "Livro não encontrado");
+			return mapping.findForward("erro");
+		}
+		request.setAttribute("livro", livro);
+		return mapping.findForward("detalhar");
+	}
 }

@@ -16,6 +16,7 @@
             <forward name="voltar" path="/WEB-INF/views/index.jsp"/>
             <forward name="editar" path="/WEB-INF/views/livro/cadastro-livro.jsp"/>
             <forward name="erro" path="/error.jsp"/>
+            <forward name="detalhar" path="/WEB-INF/views/livro/detalhe-livro.jsp"/>
         </action>
         <action path="/usuario" 
             type="tcc.legado.action.UsuarioAction"
@@ -44,6 +45,7 @@
             <forward name="devolver" path="/WEB-INF/views/emprestimo/devolucao.jsp"/>
             <forward name="erro" path="/error.jsp"/>
             <forward name="voltar" path="/WEB-INF/views/index.jsp"/>
+            <forward name="detalhar" path="/WEB-INF/views/emprestimo/detalhe-emprestimo.jsp"/>
     </action>
         <action path="/destaque"
             type="tcc.legado.action.LivroDestaqueAction"
@@ -55,6 +57,7 @@
             <forward name="visualizar" path="/WEB-INF/views/destaque/lista-destaques.jsp"/>
             <forward name="erro" path="/error.jsp"/>
             <forward name="voltar" path="/WEB-INF/views/index.jsp"/>
+            <forward name="visualizar" path="/WEB-INF/views/destaque/detalhe-destaque.jsp"/>
         </action>
     </action-mappings>
 

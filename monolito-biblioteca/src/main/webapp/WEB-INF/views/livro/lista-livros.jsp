@@ -60,13 +60,14 @@
                                         <span class="quantidade-badge <%= l.getQuantidade() > 0 ? "quantidade-disponivel" : "quantidade-indisponivel" %>"><%= l.getQuantidade() %></span>
                                     </td>
                                     <td>
-                                        <% if ("ADMIN".equals(perfil)) { %>
-                                            <a href="livro.do?metodo=editar&id=<%= l.getId() %>" class="btn btn-small btn-warning"><i class="fa-solid fa-pen"></i> Editar</a>
-                                            <a href="livro.do?metodo=excluir&id=<%= l.getId() %>" class="btn btn-small btn-danger" onclick="return confirm('Tem certeza?')"><i class="fa-solid fa-trash"></i> Excluir</a>
-                                        <% } else { %>
-                                            <span class="badge badge-inactive">Visualização apenas</span>
-                                        <% } %>
-                                    </td>
+									    <a href="livro.do?metodo=detalhar&id=<%= l.getId() %>" class="btn btn-small btn-info"><i class="fa-solid fa-eye"></i> Detalhar</a>
+									    <% 
+									        if ("ADMIN".equals(perfil)) { 
+									    %>
+									        <a href="livro.do?metodo=editar&id=<%= l.getId() %>" class="btn btn-small btn-warning"><i class="fa-solid fa-pen"></i> Editar</a>
+									        <a href="livro.do?metodo=excluir&id=<%= l.getId() %>" class="btn btn-small btn-danger" onclick="return confirm('Tem certeza?')"><i class="fa-solid fa-trash"></i> Excluir</a>
+									    <% } %>
+									</td>
                                 </tr>
                             <% } %>
                         </tbody>

@@ -2,6 +2,8 @@ package tcc.legado.action;
 
 import tcc.legado.ejb.emprestimo.IEmprestimoEJB;
 import tcc.legado.model.Emprestimo;
+import tcc.legado.model.Livro;
+import tcc.legado.model.Usuario;
 import tcc.legado.dao.LivroDAO;
 import tcc.legado.dao.UsuarioDAO;
 
@@ -127,4 +129,31 @@ public class EmprestimoAction extends DispatchAction {
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
         return mapping.findForward("voltar");
     }
+    
+	public ActionForward detalhar(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String idStr = request.getParameter("id");
+		if (idStr == null || idStr.trim().isEmpty()) {
+			request.setAttribute("erro", "ID do empréstimo não informado");
+			return mapping.findForward("erro");
+		}
+		Long id = Long.parseLong(idStr);
+		IEmprestimoEJB ejb = getEmprestimoEJB();
+		Emprestimo emp = ejb.buscarPorId(id);
+		if (emp == null) {
+			request.setAttribute("erro", "Empréstimo não encontrado");
+			return mapping.findForward("erro");
+		}
+
+		
+		LivroDAO livroDAO = new LivroDAO();
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		Livro livro = livroDAO.buscarPorId(emp.getIdLivro());
+		Usuario usuario = usuarioDAO.buscarPorId(emp.getIdUsuario());
+		
+		request.setAttribute("emprestimo", emp);
+		request.setAttribute("livro", livro);
+		request.setAttribute("usuario", usuario);
+		return mapping.findForward("detalhar");
+	}
 }

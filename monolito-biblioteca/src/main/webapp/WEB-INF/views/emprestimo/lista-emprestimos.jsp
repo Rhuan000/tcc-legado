@@ -69,9 +69,12 @@
                                         <span>-</span>
                                     <% } %>
                                 </td>
-                                <td>
-                                    <a href="emprestimo.do?metodo=devolver&id=<%= e.getId() %>" class="btn btn-small btn-info"><i class="fa-solid fa-circle-info"></i> Detalhes</a>
-                                </td>
+                               <td>
+								    <a href="emprestimo.do?metodo=detalhar&id=<%= e.getId() %>" class="btn btn-small btn-info"><i class="fa-solid fa-eye"></i> Detalhar</a>
+								    <% if (e.getDataDevolucaoReal() == null) { %>
+								        <a href="emprestimo.do?metodo=devolverForm&id=<%= e.getId() %>" class="btn btn-small btn-success"><i class="fa-solid fa-rotate-left"></i> Devolver</a>
+								    <% } %>
+								</td>
                             </tr>
                             <% } %>
                         </tbody>

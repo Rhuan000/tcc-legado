@@ -143,19 +143,20 @@ public class LivroDestaqueAction extends DispatchAction {
     }
 
     public ActionForward visualizar(ActionMapping mapping, ActionForm form,
-                                    HttpServletRequest request, HttpServletResponse response) throws Exception {
-        
-        String idStr = request.getParameter("id");
-        if (idStr == null) {
-            request.setAttribute("erro", "ID do destaque não informado");
-            return mapping.findForward("erro");
-        }
-        
-        Long id = Long.parseLong(idStr);
-        dao.incrementarVisualizacoes(id);
-        LivroDestaque livroDestaque = dao.buscarPorId(id);
-        request.setAttribute("destaque", livroDestaque);
-        
-        return mapping.findForward("visualizar");
-    }
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String idStr = request.getParameter("id");
+		if (idStr == null || idStr.trim().isEmpty()) {
+			request.setAttribute("erro", "ID do destaque não informado");
+			return mapping.findForward("erro");
+		}
+		Long id = Long.parseLong(idStr);
+		dao.incrementarVisualizacoes(id);
+		LivroDestaque destaque = dao.buscarPorId(id);
+		if (destaque == null) {
+			request.setAttribute("erro", "Destaque não encontrado");
+			return mapping.findForward("erro");
+		}
+		request.setAttribute("destaque", destaque);
+		return mapping.findForward("visualizar");
+	}
 }
