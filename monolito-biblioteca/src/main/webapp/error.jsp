@@ -20,7 +20,7 @@
             </div>
             <div style="margin-top:20px;">
                 <a href="javascript:history.back()" class="btn btn-light">Voltar</a>
-                <a href="index.jsp" class="btn btn-primary">Início</a>
+                <a href="livro.do?metodo=voltar" class="btn btn-primary">Início</a>
             </div>
         </div>
     </div>

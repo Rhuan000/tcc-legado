@@ -22,21 +22,24 @@ public class LivroDestaqueAction extends DispatchAction {
     
     private LivroDestaqueDAO dao = new LivroDestaqueDAO();
 
-    public ActionForward listar(ActionMapping mapping, ActionForm form,
-                                HttpServletRequest request, HttpServletResponse response) throws Exception {
-        
-        String tipo = request.getParameter("tipo");
-        List<LivroDestaque> destaques;
-        
-        if ("ativos".equals(tipo)) {
-            destaques = dao.listarAtivos();
-        } else {
-            destaques = dao.listarTodos();
-        }
-        
-        request.setAttribute("lista", destaques);
-        return mapping.findForward("listarSucesso");
-    }
+	public ActionForward listar(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		String tipo = request.getParameter("tipo");
+		List<LivroDestaque> destaques;
+
+		if ("ativos".equals(tipo)) {
+			destaques = dao.listarAtivos();
+		} else {
+			destaques = dao.listarTodos();
+		}
+
+		List<LivroDestaque> maisEmprestados = dao.listarPorCategoria("MAIS_EMPRESTADO");
+
+		request.setAttribute("lista", destaques);
+		request.setAttribute("listaMaisEmprestados", maisEmprestados); 
+		return mapping.findForward("listarSucesso");
+	}
 
     public ActionForward novo(ActionMapping mapping, ActionForm form,
                               HttpServletRequest request, HttpServletResponse response) throws Exception {

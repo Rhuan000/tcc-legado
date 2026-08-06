@@ -23,21 +23,21 @@
             </cron>
         </trigger>
 
-        <!-- Job de teste (a cada 5 minutos) -->
-        <job>
-            <name>MultaDiariaJobTeste</name>
-            <group>Sistema</group>
-            <description>Versão de teste para validação rápida</description>
-            <job-class>tcc.legado.job.MultaDiariaJob</job-class>
-        </job>
-        <trigger>
-            <cron>
-                <name>triggerMultaTeste</name>
-                <group>Sistema</group>
-                <job-name>MultaDiariaJobTeste</job-name>
-                <job-group>Sistema</job-group>
-                <cron-expression>0 */5 * * * ?</cron-expression> <!-- a cada 5 minutos -->
-            </cron>
-        </trigger>
+        <!-- Job de Mais Emprestados (diário, 01:00) -->
+		<job>
+		    <name>AtualizarMaisEmprestadosJob</name>
+		    <group>Sistema</group>
+		    <description>Atualiza os 5 livros mais emprestados do mês</description>
+		    <job-class>tcc.legado.job.AtualizarMaisEmprestadosJob</job-class>
+		</job>
+		<trigger>
+		    <cron>
+		        <name>triggerMaisEmprestados</name>
+		        <group>Sistema</group>
+		        <job-name>AtualizarMaisEmprestadosJob</job-name>
+		        <job-group>Sistema</job-group>
+		         <cron-expression>0 */5 * * * ?</cron-expression> <!-- a cada 5 minutos -->
+		    </cron>
+		</trigger>
     </schedule>
 </job-scheduling-data>

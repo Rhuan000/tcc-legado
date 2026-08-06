@@ -45,7 +45,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% for (Livro l : livros) { %>
+                            <% 
+                                String perfil = (String) session.getAttribute("perfil");
+                                for (Livro l : livros) { 
+                            %>
                                 <tr>
                                     <td><%= l.getId() %></td>
                                     <td><strong><%= l.getTitulo() %></strong></td>
@@ -57,8 +60,12 @@
                                         <span class="quantidade-badge <%= l.getQuantidade() > 0 ? "quantidade-disponivel" : "quantidade-indisponivel" %>"><%= l.getQuantidade() %></span>
                                     </td>
                                     <td>
-                                        <a href="livro.do?metodo=editar&id=<%= l.getId() %>" class="btn btn-small btn-warning"><i class="fa-solid fa-pen"></i> Editar</a>
-                                        <a href="livro.do?metodo=excluir&id=<%= l.getId() %>" class="btn btn-small btn-danger" onclick="return confirm('Tem certeza?')"><i class="fa-solid fa-trash"></i> Excluir</a>
+                                        <% if ("ADMIN".equals(perfil)) { %>
+                                            <a href="livro.do?metodo=editar&id=<%= l.getId() %>" class="btn btn-small btn-warning"><i class="fa-solid fa-pen"></i> Editar</a>
+                                            <a href="livro.do?metodo=excluir&id=<%= l.getId() %>" class="btn btn-small btn-danger" onclick="return confirm('Tem certeza?')"><i class="fa-solid fa-trash"></i> Excluir</a>
+                                        <% } else { %>
+                                            <span class="badge badge-inactive">Visualização apenas</span>
+                                        <% } %>
                                     </td>
                                 </tr>
                             <% } %>

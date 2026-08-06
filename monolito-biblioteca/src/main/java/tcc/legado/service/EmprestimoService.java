@@ -32,22 +32,9 @@ public class EmprestimoService {
     @Inject
     private UsuarioDAO usuarioDAO;
 
-    // =========================================================
-    // VENENO: dependência circular com LivroService via JNDI
-    // =========================================================
-    private LivroService getLivroService() {
-        try {
-            InitialContext ctx = new InitialContext();
-            return (LivroService) ctx.lookup("java:global/monolito-biblioteca/LivroService");
-        } catch (Exception e) {
-            LOG.severe("Erro ao obter LivroService via JNDI: " + e.getMessage());
-            throw new RuntimeException("Erro ao obter LivroService via JNDI", e);
-        }
-    }
+    @Inject
+    private LivroService livroService; // VENENO: dependência circular
 
-    // =========================================================
-    // CRIAÇÃO DE EMPRÉSTIMO
-    // =========================================================
     public Emprestimo criarEmprestimo(Long idLivro, String matricula) {
         Livro livro = livroDAO.buscarPorId(idLivro);
         Usuario usuario = usuarioDAO.buscarPorMatricula(matricula);
@@ -94,16 +81,13 @@ public class EmprestimoService {
 
         // VENENO: chama LivroService para registrar algo (ex: log de empréstimo)
         // Isso cria o ciclo de dependência
-        LivroService livroService = getLivroService();
         livroService.listarTodos(); // chamada inútil só para forçar o ciclo
 
         LOG.info("Empréstimo criado com sucesso: ID " + emp.getId());
         return emp;
     }
 
-    // =========================================================
-    // CÁLCULO DA DATA PREVISTA COM FERIADOS
-    // =========================================================
+
     private Date calcularDataPrevistaComFeriados(int diasUteis) {
         LocalDate dataAtual = LocalDate.now();
         int ano = dataAtual.getYear();
@@ -132,9 +116,7 @@ public class EmprestimoService {
         return Date.from(dataPrevista.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
-    // =========================================================
-    // VERIFICA SE UM DIA É ÚTIL
-    // =========================================================
+
     private boolean isDiaUtil(LocalDate data, List<LocalDate> feriados) {
         // Fim de semana (sábado = 6, domingo = 7)
         if (data.getDayOfWeek().getValue() > 5) {
@@ -144,9 +126,7 @@ public class EmprestimoService {
         return !feriados.contains(data);
     }
 
-    // =========================================================
-    // REGISTRO DE DEVOLUÇÃO
-    // =========================================================
+
     public void registrarDevolucao(Long idEmprestimo) {
         Emprestimo emp = emprestimoDAO.buscarPorId(idEmprestimo);
         if (emp == null) {
@@ -187,10 +167,14 @@ public class EmprestimoService {
             return 0.0;
         }
 
-        LocalDate dataPrevista = emp.getDataPrevistaDevolucao().toInstant()
-                .atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate dataDevolucao = emp.getDataDevolucaoReal().toInstant()
-                .atZone(ZoneId.systemDefault()).toLocalDate();
+        // Converte java.sql.Date para java.util.Date e depois para LocalDate
+        Date dataPrevistaUtil = emp.getDataPrevistaDevolucao(); // já é java.util.Date?
+        Date dataDevolucaoUtil = emp.getDataDevolucaoReal();
+
+        // Se forem java.sql.Date, converta:
+        LocalDate dataPrevista = new java.sql.Date(dataPrevistaUtil.getTime()).toLocalDate();
+        LocalDate dataDevolucao = new java.sql.Date(dataDevolucaoUtil.getTime()).toLocalDate();
+        
 
         // Se devolveu antes ou no dia, sem multa
         if (dataDevolucao.isBefore(dataPrevista) || dataDevolucao.equals(dataPrevista)) {

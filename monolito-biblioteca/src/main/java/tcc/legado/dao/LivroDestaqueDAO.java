@@ -1,5 +1,6 @@
 package tcc.legado.dao;
 
+import tcc.legado.model.Livro;
 import tcc.legado.model.LivroDestaque;
 import java.sql.*;
 import java.util.ArrayList;
@@ -137,7 +138,68 @@ public class LivroDestaqueDAO {
             e.printStackTrace();
         }
     }
+ // 1. Excluir todos os registros de uma categoria específica
+    public void excluirPorCategoria(String categoria) {
+        String sql = "DELETE FROM livro_destaque WHERE categoria = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, categoria);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    // 2. Buscar os top N livros mais emprestados no mês atual
+    public List<Livro> buscarTopLivrosMes(int limite) {
+        List<Livro> topLivros = new ArrayList<>();
+        String sql = "SELECT l.*, COUNT(e.id) AS total_emprestimos " +
+                     "FROM livro l " +
+                     "JOIN emprestimo e ON l.id = e.id_livro " +
+                     "WHERE EXTRACT(YEAR FROM e.data_emprestimo) = EXTRACT(YEAR FROM CURRENT_DATE) " +
+                     "  AND EXTRACT(MONTH FROM e.data_emprestimo) = EXTRACT(MONTH FROM CURRENT_DATE) " +
+                     "GROUP BY l.id " +
+                     "ORDER BY total_emprestimos DESC " +
+                     "LIMIT ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, limite);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Livro l = new Livro();
+                l.setId(rs.getLong("id"));
+                l.setTitulo(rs.getString("titulo"));
+                l.setAutor(rs.getString("autor"));
+                l.setIsbn(rs.getString("isbn"));
+                l.setAno(rs.getInt("ano"));
+                l.setEditora(rs.getString("editora"));
+                l.setQuantidade(rs.getInt("quantidade"));
+                // (opcional) guardar o total num atributo transitório, se quiser exibir na tela
+                topLivros.add(l);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return topLivros;
+    }
+
+    // 3. (Auxiliar) Buscar destaques por categoria (já existente, mas vou reforçar)
+    public List<LivroDestaque> listarPorCategoria(String categoria) {
+        List<LivroDestaque> lista = new ArrayList<>();
+        String sql = "SELECT * FROM livro_destaque WHERE categoria = ? ORDER BY id DESC";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, categoria);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(mapResultSetToLivroDestaque(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+    
     private LivroDestaque mapResultSetToLivroDestaque(ResultSet rs) throws SQLException {
         LivroDestaque ld = new LivroDestaque();
         ld.setId(rs.getLong("id"));
@@ -160,4 +222,5 @@ public class LivroDestaqueDAO {
         ld.setVisualizacoes(rs.getInt("visualizacoes"));
         return ld;
     }
+    
 }

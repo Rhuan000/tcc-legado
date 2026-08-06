@@ -14,24 +14,35 @@ public class AuthFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false); // não cria sessão se não existir
 
         String uri = request.getRequestURI();
+        String contextPath = request.getContextPath();
 
-        // Permite acesso público à página de login
-        if (uri.contains("/auth.do") || uri.contains("/login.jsp") || uri.contains("/error.jsp")) {
+        // 1. Ignorar recursos estáticos (CSS, JS, imagens, webjars, etc.)
+            uri.endsWith(".png") || uri.endsWith(".jpg") || uri.endsWith(".gif") ||
+            uri.endsWith(".ico") || uri.endsWith(".map") ||
+            uri.contains("/webjars/") || uri.contains("/font-awesome/")) {
             chain.doFilter(request, response);
             return;
         }
 
-        // Verifica se o usuário está logado
-        Object usuario = session.getAttribute("usuarioLogado");
-        if (usuario == null) {
-            response.sendRedirect(request.getContextPath() + "/login.jsp");
+
+        if (uri.contains("/auth.do") || 
+            uri.endsWith("/login.jsp") || 
+            uri.endsWith("/error.jsp") ||
+            uri.endsWith("/erro.jsp") ||
+            uri.equals(contextPath + "/")) {    
+            chain.doFilter(request, response);
             return;
         }
 
-        // Verifica permissão baseada no perfil
+        if (session == null || session.getAttribute("usuarioLogado") == null) {
+            // Redireciona para login
+            response.sendRedirect(contextPath + "/login.jsp");
+            return;
+        }
+
         String perfil = (String) session.getAttribute("perfil");
         if (!temPermissao(uri, perfil)) {
             request.setAttribute("erro", "Acesso negado para este perfil");
@@ -52,4 +63,5 @@ public class AuthFilter implements Filter {
         }
         return false;
     }
+
 }

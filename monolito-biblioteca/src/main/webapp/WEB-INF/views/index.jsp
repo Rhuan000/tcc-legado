@@ -31,7 +31,7 @@
                 <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 4px solid #c0392b;">
                     <h3 style="color: #c0392b; margin-bottom: 15px;"><i class="fa-solid fa-arrow-right-arrow-left page-icon"></i>Domínio: Empréstimos</h3>
                     <p style="color: #7f8c8d; margin-bottom: 15px;">Realização de empréstimos, devoluções e cálculo de multas.</p>
-                    <a href="emprestimo.do?metodo=novo" class="btn btn-secondary" style="display: block; text-align: center; margin: 0;"><i class="fa-solid fa-hand-holding-book"></i> Gerenciar Empréstimos</a>
+                    <a href="emprestimo.do?metodo=listar" class="btn btn-secondary" style="display: block; text-align: center; margin: 0;"><i class="fa-solid fa-hand-holding-book"></i> Gerenciar Empréstimos</a>
                 </div>
 
                 <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 4px solid #667eea;">

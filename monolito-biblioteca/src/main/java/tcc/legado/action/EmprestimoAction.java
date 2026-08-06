@@ -5,6 +5,7 @@ import tcc.legado.model.Emprestimo;
 import tcc.legado.dao.LivroDAO;
 import tcc.legado.dao.UsuarioDAO;
 
+
 import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -22,15 +23,22 @@ public class EmprestimoAction extends DispatchAction {
         return (IEmprestimoEJB) ctx.lookup("java:global/monolito-biblioteca/EmprestimoEJB!tcc.legado.ejb.emprestimo.IEmprestimoEJB");
     }
 
+    // Exibe formulário para novo empréstimo
     public ActionForward novo(ActionMapping mapping, ActionForm form,
                               HttpServletRequest request, HttpServletResponse response) throws Exception {
-        LivroDAO livroDAO = new LivroDAO();
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        request.setAttribute("livros", livroDAO.listarTodos());
-        request.setAttribute("usuarios", usuarioDAO.listarTodos());
-        return mapping.findForward("novo");
+        try {
+            LivroDAO livroDAO = new LivroDAO();
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            request.setAttribute("livros", livroDAO.listarTodos());
+            request.setAttribute("usuarios", usuarioDAO.listarTodos());
+            return mapping.findForward("novo");
+        } catch (Exception e) {
+            request.setAttribute("erro", "Erro ao carregar dados: " + e.getMessage());
+            return mapping.findForward("erro");
+        }
     }
 
+    // Realiza o empréstimo
     public ActionForward realizar(ActionMapping mapping, ActionForm form,
                                   HttpServletRequest request, HttpServletResponse response) throws Exception {
         String idLivroStr = request.getParameter("idLivro");
@@ -45,49 +53,78 @@ public class EmprestimoAction extends DispatchAction {
             return mapping.findForward("erro");
         }
 
-        Long idLivro = Long.parseLong(idLivroStr);
-        IEmprestimoEJB ejb = getEmprestimoEJB();
-        Emprestimo emp = ejb.criarEmprestimo(idLivro, matricula);
-        request.setAttribute("mensagem", "Empréstimo realizado com sucesso! ID: " + emp.getId());
-        return listar(mapping, form, request, response);
+        try {
+            Long idLivro = Long.parseLong(idLivroStr);
+            IEmprestimoEJB ejb = getEmprestimoEJB();
+            Emprestimo emp = ejb.criarEmprestimo(idLivro, matricula);
+            request.setAttribute("mensagem", "Empréstimo realizado com sucesso! ID: " + emp.getId());
+            return listar(mapping, form, request, response);
+        } catch (NumberFormatException e) {
+            request.setAttribute("erro", "ID do livro inválido");
+            return mapping.findForward("erro");
+        } catch (Exception e) {
+            // Captura qualquer exceção da camada de negócio (ex: Usuário não encontrado)
+            request.setAttribute("erro", e.getMessage());
+            return mapping.findForward("erro");
+        }
     }
 
+    // Lista empréstimos
     public ActionForward listar(ActionMapping mapping, ActionForm form,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
-        IEmprestimoEJB ejb = getEmprestimoEJB();
-        List<Emprestimo> lista = ejb.listarTodos();
-        request.setAttribute("lista", lista);
-        return mapping.findForward("listarSucesso");
+        try {
+            IEmprestimoEJB ejb = getEmprestimoEJB();
+            List<Emprestimo> lista = ejb.listarTodos();
+            request.setAttribute("lista", lista);
+            return mapping.findForward("listarSucesso");
+        } catch (Exception e) {
+            request.setAttribute("erro", "Erro ao listar empréstimos: " + e.getMessage());
+            return mapping.findForward("erro");
+        }
     }
 
+    // Exibe formulário de devolução
     public ActionForward devolverForm(ActionMapping mapping, ActionForm form,
                                       HttpServletRequest request, HttpServletResponse response) throws Exception {
-        IEmprestimoEJB ejb = getEmprestimoEJB();
-        List<Emprestimo> ativos = ejb.listarTodos().stream()
-                .filter(e -> e.getDataDevolucaoReal() == null)
-                .collect(java.util.stream.Collectors.toList());
-        request.setAttribute("emprestimos", ativos);
-        return mapping.findForward("devolver");
+        try {
+            IEmprestimoEJB ejb = getEmprestimoEJB();
+            List<Emprestimo> ativos = ejb.listarTodos().stream()
+                    .filter(e -> e.getDataDevolucaoReal() == null)
+                    .collect(java.util.stream.Collectors.toList());
+            request.setAttribute("emprestimos", ativos);
+            return mapping.findForward("devolver");
+        } catch (Exception e) {
+            request.setAttribute("erro", "Erro ao carregar empréstimos ativos: " + e.getMessage());
+            return mapping.findForward("erro");
+        }
     }
 
+    // Registra devolução
     public ActionForward devolver(ActionMapping mapping, ActionForm form,
                                   HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String idStr = request.getParameter("idEmprestimo");
+        String idStr = request.getParameter("id");
         if (idStr == null || idStr.trim().isEmpty()) {
             request.setAttribute("erro", "Selecione um empréstimo");
             return mapping.findForward("erro");
         }
-        Long id = Long.parseLong(idStr);
 
-        IEmprestimoEJB ejb = getEmprestimoEJB();
-        ejb.registrarDevolucao(id);
-
-        request.setAttribute("mensagem", "Devolução registrada com sucesso!");
-        return listar(mapping, form, request, response);
+        try {
+            Long id = Long.parseLong(idStr);
+            IEmprestimoEJB ejb = getEmprestimoEJB();
+            ejb.registrarDevolucao(id);
+            request.setAttribute("mensagem", "Devolução registrada com sucesso!");
+            return listar(mapping, form, request, response);
+        } catch (NumberFormatException e) {
+            request.setAttribute("erro", "ID do empréstimo inválido");
+            return mapping.findForward("erro");
+        } catch (Exception e) {
+            request.setAttribute("erro", e.getMessage());
+            return mapping.findForward("erro");
+        }
     }
-    
+
     public ActionForward voltar(ActionMapping mapping, ActionForm form,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
-    		return mapping.findForward("voltar");
+                                HttpServletRequest request, HttpServletResponse response) throws Exception {
+        return mapping.findForward("voltar");
     }
 }
