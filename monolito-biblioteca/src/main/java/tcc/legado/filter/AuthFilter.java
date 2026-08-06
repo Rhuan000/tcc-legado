@@ -20,6 +20,7 @@ public class AuthFilter implements Filter {
         String contextPath = request.getContextPath();
 
         // 1. Ignorar recursos estáticos (CSS, JS, imagens, webjars, etc.)
+        if (uri.endsWith(".css") || uri.endsWith(".js") || 
             uri.endsWith(".png") || uri.endsWith(".jpg") || uri.endsWith(".gif") ||
             uri.endsWith(".ico") || uri.endsWith(".map") ||
             uri.contains("/webjars/") || uri.contains("/font-awesome/")) {
