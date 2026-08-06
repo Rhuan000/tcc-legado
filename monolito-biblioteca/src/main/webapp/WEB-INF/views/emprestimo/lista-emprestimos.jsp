@@ -27,7 +27,7 @@
             <div class="action-buttons">
                 <a href="emprestimo.do?metodo=novo" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Novo Empréstimo</a>
                 <a href="emprestimo.do?metodo=devolver" class="btn btn-secondary"><i class="fa-solid fa-rotate-left"></i> Registrar Devolução</a>
-                <a href="index.jsp" class="btn btn-light"><i class="fa-solid fa-house"></i> Voltar</a>
+                <a href="emprestimo.do?metodo=voltar" class="btn btn-light"><i class="fa-solid fa-house"></i> Voltar</a>
             </div>
 
             <% if (lista != null && !lista.isEmpty()) { %>

@@ -26,7 +26,7 @@
         <div class="content">
             <div class="action-buttons">
                 <a href="livro.do?metodo=novo" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Cadastrar Novo Livro</a>
-                <a href="index.jsp" class="btn btn-light"><i class="fa-solid fa-house"></i> Voltar</a>
+                <a href="livro.do?metodo=voltar" class="btn btn-light"><i class="fa-solid fa-house"></i> Voltar</a>
             </div>
 
             <% if (livros != null && !livros.isEmpty()) { %>

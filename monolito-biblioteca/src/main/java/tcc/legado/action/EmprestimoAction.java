@@ -85,4 +85,9 @@ public class EmprestimoAction extends DispatchAction {
         request.setAttribute("mensagem", "Devolução registrada com sucesso!");
         return listar(mapping, form, request, response);
     }
+    
+    public ActionForward voltar(ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
+    		return mapping.findForward("voltar");
+    }
 }

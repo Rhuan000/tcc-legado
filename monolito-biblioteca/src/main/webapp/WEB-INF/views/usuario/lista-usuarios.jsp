@@ -26,7 +26,7 @@
         <div class="content">
             <div class="action-buttons">
                 <a href="usuario.do?metodo=novo" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Novo Usuário</a>
-                <a href="index.jsp" class="btn btn-light"><i class="fa-solid fa-house"></i> Voltar</a>
+                <a href="usuario.do?metodo=voltar" class="btn btn-light"><i class="fa-solid fa-house"></i> Voltar</a>
             </div>
 
             <% if (usuarios != null && !usuarios.isEmpty()) { %>

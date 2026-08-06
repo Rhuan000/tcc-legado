@@ -41,7 +41,11 @@ public class LivroAction extends DispatchAction {
                               HttpServletRequest request, HttpServletResponse response) throws Exception {
         return mapping.findForward("novo");
     }
-
+    
+    public ActionForward voltar(ActionMapping mapping, ActionForm form,
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
+    		return mapping.findForward("voltar");
+    }
     public ActionForward salvar(ActionMapping mapping, ActionForm form,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
         

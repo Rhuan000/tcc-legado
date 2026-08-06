@@ -13,6 +13,7 @@
 
             <forward name="listarSucesso" path="/WEB-INF/views/livro/lista-livros.jsp"/>
             <forward name="novo" path="/WEB-INF/views/livro/cadastro-livro.jsp"/>
+            <forward name="voltar" path="/WEB-INF/views/index.jsp"/>
             <forward name="editar" path="/WEB-INF/views/livro/cadastro-livro.jsp"/>
             <forward name="erro" path="/error.jsp"/>
         </action>
@@ -24,12 +25,13 @@
             <forward name="novo" path="/WEB-INF/views/usuario/cadastro-usuario.jsp"/>
             <forward name="editar" path="/WEB-INF/views/usuario/cadastro-usuario.jsp"/>
             <forward name="erro" path="/error.jsp"/>
+            <forward name="voltar" path="/WEB-INF/views/index.jsp"/>
         </action>
         <action path="/auth" 
         type="tcc.legado.action.AuthAction"
         scope="request"
         parameter="metodo">
-            <forward name="sucesso" path="/index.jsp"/>
+            <forward name="sucesso" path="/WEB-INF/views/index.jsp"/>
             <forward name="erro" path="/login.jsp"/>
             <forward name="logout" path="/login.jsp"/>
         </action>
@@ -41,6 +43,7 @@
             <forward name="listarSucesso" path="/WEB-INF/views/emprestimo/lista-emprestimos.jsp"/>
             <forward name="devolver" path="/WEB-INF/views/emprestimo/devolucao.jsp"/>
             <forward name="erro" path="/error.jsp"/>
+            <forward name="voltar" path="/WEB-INF/views/index.jsp"/>
     </action>
         <action path="/destaque"
             type="tcc.legado.action.LivroDestaqueAction"
@@ -51,6 +54,7 @@
             <forward name="editar" path="/WEB-INF/views/destaque/cadastro-destaque.jsp"/>
             <forward name="visualizar" path="/WEB-INF/views/destaque/lista-destaques.jsp"/>
             <forward name="erro" path="/error.jsp"/>
+            <forward name="voltar" path="/WEB-INF/views/index.jsp"/>
         </action>
     </action-mappings>
 
