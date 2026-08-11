@@ -5,11 +5,13 @@ import tcc.legado.model.Livro;
 import tcc.legado.model.Emprestimo;
 import tcc.legado.util.CacheGlobal;
 
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.naming.InitialContext;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Dependent
 public class LivroService {
 
     private static final Logger LOG = Logger.getLogger(LivroService.class.getName());
@@ -88,7 +90,7 @@ public class LivroService {
         if (totalExcluidos == null) totalExcluidos = 0;
         CacheGlobal.put("totalLivrosExcluidos", totalExcluidos + 1);
 
-        // livroDAO.excluir(id);
+        livroDAO.excluir(id);
         LOG.info("Livro excluído (simulado): " + livro.getTitulo() + " (ID " + id + ")");
     }
 }

@@ -103,4 +103,19 @@ public class LivroDAO {
             e.printStackTrace();
         }
     }
+    
+    public void excluir(Long id) {
+        String sql = "DELETE FROM livro WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, id);
+            int affected = ps.executeUpdate();
+            if (affected == 0) {
+                throw new RuntimeException("Livro com ID " + id + " não encontrado para exclusão");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao excluir livro: " + e.getMessage(), e);
+        }
+    }
 }
