@@ -1,7 +1,6 @@
-
 -- =====================================================
 -- SCRIPT DE MOCK COMPLETO - BIBLIOTECA LEGADA
--- GERADO EM: 06/08/2026
+-- GERADO EM: 06/08/2026 (VERSÃO FINAL - SEPARADO)
 -- =====================================================
 
 -- =====================================================
@@ -10,19 +9,20 @@
 DROP TABLE IF EXISTS livro_destaque CASCADE;
 DROP TABLE IF EXISTS emprestimo CASCADE;
 DROP TABLE IF EXISTS livro CASCADE;
+DROP TABLE IF EXISTS usuario_auth CASCADE;
 DROP TABLE IF EXISTS usuario CASCADE;
 
 -- =====================================================
 -- 2. CRIAÇÃO DAS TABELAS
 -- =====================================================
 
--- Usuários
+-- Usuários (DOMÍNIO - Regras de negócio)
 CREATE TABLE usuario (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     matricula VARCHAR(20) UNIQUE NOT NULL,
     email VARCHAR(100),
-    tipo VARCHAR(20) NOT NULL CHECK (tipo IN ('ALUNO', 'PROFESSOR', 'BOLSISTA'))
+    tipo VARCHAR(20) NOT NULL CHECK (tipo IN ('ALUNO', 'PROFESSOR', 'BOLSISTA', 'ADMIN', 'BIBLIOTECARIO', 'CONSULTA'))
 );
 
 -- Livros
@@ -61,43 +61,67 @@ CREATE TABLE livro_destaque (
     visualizacoes INT DEFAULT 0
 );
 
+-- Autenticação (INFRAESTRUTURA - APENAS credenciais)
+CREATE TABLE usuario_auth (
+    matricula VARCHAR(20) PRIMARY KEY,
+    senha_hash VARCHAR(64) NOT NULL, -- SHA-256 = 64 caracteres hex
+    CONSTRAINT fk_usuario_auth_usuario 
+        FOREIGN KEY (matricula) 
+        REFERENCES usuario(matricula) 
+        ON DELETE CASCADE
+);
+
 -- =====================================================
--- 3. DADOS MOCK - USUÁRIOS (30 registros)
+-- 3. DADOS MOCK - USUÁRIOS (30 registros + 3 para login)
 -- =====================================================
 INSERT INTO usuario (nome, matricula, email, tipo) VALUES
 ('Ana Paula Silva', 'mat001', 'ana.silva@email.com', 'ALUNO'),
 ('Bruno Costa', 'mat002', 'bruno.costa@email.com', 'PROFESSOR'),
-('Carla Santos', 'mat003', 'carla.santos@email.com', 'BOLSISTA'),
+('Carla Santos', 'mat003', 'carla.santos@email.com', 'ADMIN'),
 ('Daniel Oliveira', 'mat004', 'daniel.oliveira@email.com', 'ALUNO'),
 ('Elena Rodrigues', 'mat005', 'elena.rodrigues@email.com', 'PROFESSOR'),
-('Fábio Almeida', 'mat006', 'fabio.almeida@email.com', 'BOLSISTA'),
+('Fábio Almeida', 'mat006', 'fabio.almeida@email.com', 'ADMIN'),
 ('Gabriela Lima', 'mat007', 'gabriela.lima@email.com', 'ALUNO'),
 ('Henrique Ferreira', 'mat008', 'henrique.ferreira@email.com', 'PROFESSOR'),
-('Isabela Pereira', 'mat009', 'isabela.pereira@email.com', 'BOLSISTA'),
+('Isabela Pereira', 'mat009', 'isabela.pereira@email.com', 'ADMIN'),
 ('João Paulo Souza', 'mat010', 'joao.souza@email.com', 'ALUNO'),
 ('Karina Mendes', 'mat011', 'karina.mendes@email.com', 'PROFESSOR'),
-('Leonardo Rocha', 'mat012', 'leonardo.rocha@email.com', 'BOLSISTA'),
+('Leonardo Rocha', 'mat012', 'leonardo.rocha@email.com', 'ADMIN'),
 ('Mariana Nunes', 'mat013', 'mariana.nunes@email.com', 'ALUNO'),
 ('Nelson Barros', 'mat014', 'nelson.barros@email.com', 'PROFESSOR'),
-('Olivia Cardoso', 'mat015', 'olivia.cardoso@email.com', 'BOLSISTA'),
+('Olivia Cardoso', 'mat015', 'olivia.cardoso@email.com', 'ADMIN'),
 ('Paulo Henrique', 'mat016', 'paulo.henrique@email.com', 'ALUNO'),
 ('Renata Alves', 'mat017', 'renata.alves@email.com', 'PROFESSOR'),
-('Sandro Moreira', 'mat018', 'sandro.moreira@email.com', 'BOLSISTA'),
+('Sandro Moreira', 'mat018', 'sandro.moreira@email.com', 'ADMIN'),
 ('Tatiana Gonçalves', 'mat019', 'tatiana.goncalves@email.com', 'ALUNO'),
 ('Ubirajara Freitas', 'mat020', 'ubirajara.freitas@email.com', 'PROFESSOR'),
-('Valentina Castro', 'mat021', 'valentina.castro@email.com', 'BOLSISTA'),
+('Valentina Castro', 'mat021', 'valentina.castro@email.com', 'ADMIN'),
 ('William Torres', 'mat022', 'william.torres@email.com', 'ALUNO'),
 ('Ximena Cordeiro', 'mat023', 'ximena.cordeiro@email.com', 'PROFESSOR'),
-('Yuri Lopes', 'mat024', 'yuri.lopes@email.com', 'BOLSISTA'),
+('Yuri Lopes', 'mat024', 'yuri.lopes@email.com', 'ADMIN'),
 ('Zuleica Marques', 'mat025', 'zuleica.marques@email.com', 'ALUNO'),
 ('Adriano Machado', 'mat026', 'adriano.machado@email.com', 'PROFESSOR'),
-('Bianca Fonseca', 'mat027', 'bianca.fonseca@email.com', 'BOLSISTA'),
+('Bianca Fonseca', 'mat027', 'bianca.fonseca@email.com', 'ADMIN'),
 ('César Rangel', 'mat028', 'cesar.rangel@email.com', 'ALUNO'),
 ('Debora Viana', 'mat029', 'debora.viana@email.com', 'PROFESSOR'),
-('Edson Guimarães', 'mat030', 'edson.guimaraes@email.com', 'BOLSISTA');
+('Edson Guimarães', 'mat030', 'edson.guimaraes@email.com', 'ADMIN');
 
 -- =====================================================
--- 4. DADOS MOCK - LIVROS (30 registros)
+-- 4. DADOS DE AUTENTICAÇÃO (3 usuários com login)
+-- Hashes gerados pelo HashUtil.main()
+-- =====================================================
+INSERT INTO usuario (nome, matricula, email, tipo) VALUES
+('Administrador', '2024001', 'admin@biblioteca.com', 'ADMIN'),
+('Professor Numero 1', '2024002', 'professor@biblioteca.com', 'PROFESSOR'),
+('Usuario Consulta', '2024003', 'aluno@biblioteca.com', 'ALUNO');
+
+INSERT INTO usuario_auth (matricula, senha_hash) VALUES
+('2024001', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'), -- senha: admin
+('2024002', '17c1532ca6cff8f6a3a8200028af6c2580bf37f39e10cb0966e8a573e3b24a1f'), -- senha: professor
+('2024003', 'a21d6f3803f0491c32444ef91a0836be243cc4da5186357e805b7009a5b0669b'); -- senha: aluno
+
+-- =====================================================
+-- 5. DADOS MOCK - LIVROS (30 registros)
 -- =====================================================
 INSERT INTO livro (titulo, autor, isbn, ano, editora, quantidade) VALUES
 ('O Alquimista', 'Paulo Coelho', '978-85-6571-001-0', 1988, 'HarperCollins', 5),
@@ -132,13 +156,9 @@ INSERT INTO livro (titulo, autor, isbn, ano, editora, quantidade) VALUES
 ('Elasticsearch para Desenvolvedores', 'Clinton Gormley', '978-85-7890-030-0', 2015, 'O''Reilly', 3);
 
 -- =====================================================
--- 5. DADOS MOCK - EMPRÉSTIMOS (120 registros)
--- Distribuição entre Junho, Julho e Agosto/2026
--- Tipos de situação: devolvido no prazo, devolvido com atraso, ativo
+-- 6. DADOS MOCK - EMPRÉSTIMOS (120 registros)
 -- =====================================================
 INSERT INTO emprestimo (id_livro, id_usuario, data_emprestimo, data_prevista_devolucao, data_devolucao_real, multa) VALUES
-
--- 15 empréstimos em Junho/2026 (devolvidos)
 (1, 2, '2026-06-01', '2026-06-08', '2026-06-07', 0.00),
 (3, 5, '2026-06-03', '2026-06-17', '2026-06-18', 0.50),
 (5, 7, '2026-06-05', '2026-06-12', '2026-06-14', 4.00),
@@ -151,14 +171,12 @@ INSERT INTO emprestimo (id_livro, id_usuario, data_emprestimo, data_prevista_dev
 (19, 25, '2026-06-19', '2026-07-03', '2026-07-02', 0.00),
 (21, 27, '2026-06-21', '2026-06-28', '2026-06-28', 0.00),
 (23, 29, '2026-06-23', '2026-07-07', '2026-07-06', 0.00),
-(25, 1,  '2026-06-25', '2026-07-09', '2026-07-08', 0.00),
-(27, 3,  '2026-06-27', '2026-07-04', '2026-07-05', 0.50),
-(29, 6,  '2026-06-29', '2026-07-13', '2026-07-12', 0.00),
-
--- 45 empréstimos em Julho/2026 (devolvidos e alguns ativos)
-(2, 4,  '2026-07-01', '2026-07-15', '2026-07-14', 0.00),
-(4, 8,  '2026-07-02', '2026-07-09', '2026-07-10', 0.50),
-(6, 11, '2026-07-03', '2026-07-17', NULL, 0.00), -- ativo
+(25, 1, '2026-06-25', '2026-07-09', '2026-07-08', 0.00),
+(27, 3, '2026-06-27', '2026-07-04', '2026-07-05', 0.50),
+(29, 6, '2026-06-29', '2026-07-13', '2026-07-12', 0.00),
+(2, 4, '2026-07-01', '2026-07-15', '2026-07-14', 0.00),
+(4, 8, '2026-07-02', '2026-07-09', '2026-07-10', 0.50),
+(6, 11, '2026-07-03', '2026-07-17', NULL, 0.00),
 (8, 14, '2026-07-04', '2026-07-11', '2026-07-11', 0.00),
 (10, 16, '2026-07-05', '2026-07-19', '2026-07-18', 0.00),
 (12, 19, '2026-07-06', '2026-07-13', '2026-07-15', 2.00),
@@ -166,69 +184,67 @@ INSERT INTO emprestimo (id_livro, id_usuario, data_emprestimo, data_prevista_dev
 (16, 23, '2026-07-08', '2026-07-15', '2026-07-16', 2.00),
 (18, 26, '2026-07-09', '2026-07-23', '2026-07-22', 0.00),
 (20, 28, '2026-07-10', '2026-07-17', '2026-07-18', 2.00),
-(22, 30, '2026-07-11', '2026-07-25', NULL, 0.00), -- ativo
-(24, 2,  '2026-07-12', '2026-07-19', '2026-07-21', 4.00),
-(26, 5,  '2026-07-13', '2026-07-27', '2026-07-26', 0.00),
-(28, 7,  '2026-07-14', '2026-07-21', '2026-07-20', 0.00),
-(30, 9,  '2026-07-15', '2026-07-29', '2026-07-28', 0.00),
+(22, 30, '2026-07-11', '2026-07-25', NULL, 0.00),
+(24, 2, '2026-07-12', '2026-07-19', '2026-07-21', 4.00),
+(26, 5, '2026-07-13', '2026-07-27', '2026-07-26', 0.00),
+(28, 7, '2026-07-14', '2026-07-21', '2026-07-20', 0.00),
+(30, 9, '2026-07-15', '2026-07-29', '2026-07-28', 0.00),
 (1, 13, '2026-07-16', '2026-07-23', '2026-07-24', 2.00),
 (3, 17, '2026-07-17', '2026-07-31', '2026-07-30', 0.00),
 (5, 22, '2026-07-18', '2026-07-25', '2026-07-26', 2.00),
-(7, 24, '2026-07-19', '2026-08-02', NULL, 0.00), -- ativo
-(9, 1,  '2026-07-20', '2026-07-27', '2026-07-28', 2.00),
-(11, 3,  '2026-07-21', '2026-08-04', NULL, 0.00), -- ativo
-(13, 6,  '2026-07-22', '2026-07-29', '2026-07-30', 0.50),
-(15, 10, '2026-07-23', '2026-08-06', NULL, 0.00), -- ativo
+(7, 24, '2026-07-19', '2026-08-02', NULL, 0.00),
+(9, 1, '2026-07-20', '2026-07-27', '2026-07-28', 2.00),
+(11, 3, '2026-07-21', '2026-08-04', NULL, 0.00),
+(13, 6, '2026-07-22', '2026-07-29', '2026-07-30', 0.50),
+(15, 10, '2026-07-23', '2026-08-06', NULL, 0.00),
 (17, 12, '2026-07-24', '2026-07-31', '2026-08-01', 2.00),
-(19, 15, '2026-07-25', '2026-08-08', NULL, 0.00), -- ativo
+(19, 15, '2026-07-25', '2026-08-08', NULL, 0.00),
 (21, 18, '2026-07-26', '2026-08-02', '2026-08-03', 0.50),
-(23, 20, '2026-07-27', '2026-08-10', NULL, 0.00), -- ativo
+(23, 20, '2026-07-27', '2026-08-10', NULL, 0.00),
 (25, 23, '2026-07-28', '2026-08-04', '2026-08-05', 2.00),
-(27, 25, '2026-07-29', '2026-08-12', NULL, 0.00), -- ativo
+(27, 25, '2026-07-29', '2026-08-12', NULL, 0.00),
 (29, 27, '2026-07-30', '2026-08-06', '2026-08-06', 0.00),
-(2, 29, '2026-07-31', '2026-08-14', NULL, 0.00), -- ativo
-
--- 60 empréstimos em Agosto/2026 (para testar o mês corrente)
-(4, 1,  '2026-08-01', '2026-08-08', '2026-08-07', 0.00),
-(6, 4,  '2026-08-02', '2026-08-09', '2026-08-10', 2.00),
-(8, 8,  '2026-08-03', '2026-08-10', NULL, 0.00), -- ativo
+(2, 29, '2026-07-31', '2026-08-14', NULL, 0.00),
+(4, 1, '2026-08-01', '2026-08-08', '2026-08-07', 0.00),
+(6, 4, '2026-08-02', '2026-08-09', '2026-08-10', 2.00),
+(8, 8, '2026-08-03', '2026-08-10', NULL, 0.00),
 (10, 11, '2026-08-04', '2026-08-11', '2026-08-12', 2.00),
-(12, 14, '2026-08-05', '2026-08-12', NULL, 0.00), -- ativo
+(12, 14, '2026-08-05', '2026-08-12', NULL, 0.00),
 (14, 16, '2026-08-06', '2026-08-13', '2026-08-13', 0.00),
 (16, 19, '2026-08-07', '2026-08-14', '2026-08-15', 2.00),
-(18, 21, '2026-08-08', '2026-08-15', NULL, 0.00), -- ativo
+(18, 21, '2026-08-08', '2026-08-15', NULL, 0.00),
 (20, 26, '2026-08-09', '2026-08-16', '2026-08-17', 2.00),
-(22, 28, '2026-08-10', '2026-08-17', NULL, 0.00), -- ativo
+(22, 28, '2026-08-10', '2026-08-17', NULL, 0.00),
 (24, 30, '2026-08-11', '2026-08-18', '2026-08-18', 0.00),
-(26, 2,  '2026-08-12', '2026-08-19', '2026-08-20', 2.00),
-(28, 5,  '2026-08-13', '2026-08-20', NULL, 0.00), -- ativo
-(30, 7,  '2026-08-14', '2026-08-21', '2026-08-21', 0.00),
-(1,  9,  '2026-08-15', '2026-08-22', '2026-08-23', 2.00),
-(3,  13, '2026-08-16', '2026-08-23', NULL, 0.00), -- ativo
-(5,  17, '2026-08-17', '2026-08-24', '2026-08-24', 0.00),
-(7,  22, '2026-08-18', '2026-08-25', '2026-08-26', 2.00),
-(9,  24, '2026-08-19', '2026-08-26', NULL, 0.00), -- ativo
-(11, 1,  '2026-08-20', '2026-08-27', '2026-08-28', 2.00),
-(13, 3,  '2026-08-21', '2026-08-28', NULL, 0.00), -- ativo
-(15, 6,  '2026-08-22', '2026-08-29', '2026-08-29', 0.00),
+(26, 2, '2026-08-12', '2026-08-19', '2026-08-20', 2.00),
+(28, 5, '2026-08-13', '2026-08-20', NULL, 0.00),
+(30, 7, '2026-08-14', '2026-08-21', '2026-08-21', 0.00),
+(1, 9, '2026-08-15', '2026-08-22', '2026-08-23', 2.00),
+(3, 13, '2026-08-16', '2026-08-23', NULL, 0.00),
+(5, 17, '2026-08-17', '2026-08-24', '2026-08-24', 0.00),
+(7, 22, '2026-08-18', '2026-08-25', '2026-08-26', 2.00),
+(9, 24, '2026-08-19', '2026-08-26', NULL, 0.00),
+(11, 1, '2026-08-20', '2026-08-27', '2026-08-28', 2.00),
+(13, 3, '2026-08-21', '2026-08-28', NULL, 0.00),
+(15, 6, '2026-08-22', '2026-08-29', '2026-08-29', 0.00),
 (17, 10, '2026-08-23', '2026-08-30', '2026-08-31', 2.00),
-(19, 12, '2026-08-24', '2026-08-31', NULL, 0.00), -- ativo
+(19, 12, '2026-08-24', '2026-08-31', NULL, 0.00),
 (21, 15, '2026-08-25', '2026-09-01', '2026-09-01', 0.00),
-(23, 18, '2026-08-26', '2026-09-02', NULL, 0.00), -- ativo
+(23, 18, '2026-08-26', '2026-09-02', NULL, 0.00),
 (25, 20, '2026-08-27', '2026-09-03', '2026-09-03', 0.00),
 (27, 23, '2026-08-28', '2026-09-04', '2026-09-05', 2.00),
-(29, 25, '2026-08-29', '2026-09-05', NULL, 0.00), -- ativo
-(2,  27, '2026-08-30', '2026-09-06', '2026-09-06', 0.00),
-(4,  29, '2026-08-31', '2026-09-07', '2026-09-08', 2.00);
+(29, 25, '2026-08-29', '2026-09-05', NULL, 0.00),
+(2, 27, '2026-08-30', '2026-09-06', '2026-09-06', 0.00),
+(4, 29, '2026-08-31', '2026-09-07', '2026-09-08', 2.00);
 
 -- =====================================================
--- 6. DADOS MOCK - LIVROS EM DESTAQUE (15 registros)
+-- 7. DADOS MOCK - LIVROS EM DESTAQUE (15 registros)
 -- =====================================================
 INSERT INTO livro_destaque (id_livro, titulo, descricao, desconto, categoria, data_inicio, data_fim, ativo, visualizacoes) VALUES
-(3,  'O Código Limpo em Destaque', 'Um dos livros mais recomendados para programadores.', 15.00, 'Bestseller', '2026-07-01', '2026-08-31', TRUE, 120),
-(1,  'Clássico da Literatura Brasileira', 'Obra-prima de Machado de Assis em destaque.', 0.00, 'Clássico', '2026-06-01', '2026-09-30', TRUE, 45),
-(5,  'Java Moderno', 'Novidades do Java 17 e práticas avançadas.', 10.00, 'Novo Lançamento', '2026-07-15', '2026-10-15', TRUE, 78),
-(9,  'JavaScript na Prática', 'Guia definitivo para desenvolvimento front-end.', 5.00, 'Promoção', '2026-08-01', '2026-08-15', TRUE, 32),
+(3, 'O Código Limpo em Destaque', 'Um dos livros mais recomendados para programadores.', 15.00, 'Bestseller', '2026-07-01', '2026-08-31', TRUE, 120),
+(1, 'Clássico da Literatura Brasileira', 'Obra-prima de Machado de Assis em destaque.', 0.00, 'Clássico', '2026-06-01', '2026-09-30', TRUE, 45),
+(5, 'Java Moderno', 'Novidades do Java 17 e práticas avançadas.', 10.00, 'Novo Lançamento', '2026-07-15', '2026-10-15', TRUE, 78),
+(9, 'JavaScript na Prática', 'Guia definitivo para desenvolvimento front-end.', 5.00, 'Promoção', '2026-08-01', '2026-08-15', TRUE, 32),
 (11, 'Bancos de Dados', 'Livro essencial para quem trabalha com dados.', 0.00, 'Recomendado', '2026-07-01', '2026-08-31', TRUE, 15),
 (13, 'Redes de Computadores', 'Fundamentos e práticas modernas.', 20.00, 'Promoção', '2026-08-01', '2026-08-31', TRUE, 9),
 (15, 'Engenharia de Software', 'Abordagem prática e atualizada.', 0.00, 'Geral', '2026-06-01', '2026-12-31', TRUE, 22),
@@ -240,26 +256,3 @@ INSERT INTO livro_destaque (id_livro, titulo, descricao, desconto, categoria, da
 (27, 'Hibernate Eficiente', 'Otimize suas aplicações JPA.', 30.00, 'Bestseller', '2026-06-15', '2026-08-15', TRUE, 55),
 (28, 'Spring Data JPA', 'Simplifique o acesso a dados com Spring.', 0.00, 'Recomendado', '2026-08-01', '2026-09-30', TRUE, 19),
 (30, 'Elasticsearch para Devs', 'Busca e análise em tempo real.', 20.00, 'Novo Lançamento', '2026-07-01', '2026-08-31', TRUE, 7);
-
--- =====================================================
--- 7. CONSULTAS DE VERIFICAÇÃO (opcional)
--- =====================================================
--- SELECT 'Usuários' AS tabela, COUNT(*) AS total FROM usuario
--- UNION ALL
--- SELECT 'Livros', COUNT(*) FROM livro
--- UNION ALL
--- SELECT 'Empréstimos', COUNT(*) FROM emprestimo
--- UNION ALL
--- SELECT 'Destaques', COUNT(*) FROM livro_destaque;
-
--- SELECT * FROM emprestimo ORDER BY id LIMIT 10;
-
--- Top 5 livros mais emprestados do mês (Agosto/2026):
--- SELECT l.id, l.titulo, COUNT(e.id) AS total_emprestimos
--- FROM livro l
--- JOIN emprestimo e ON l.id = e.id_livro
--- WHERE EXTRACT(YEAR FROM e.data_emprestimo) = EXTRACT(YEAR FROM CURRENT_DATE)
---   AND EXTRACT(MONTH FROM e.data_emprestimo) = EXTRACT(MONTH FROM CURRENT_DATE)
--- GROUP BY l.id, l.titulo
--- ORDER BY total_emprestimos DESC
--- LIMIT 5;

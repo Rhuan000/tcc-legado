@@ -1,6 +1,6 @@
-<%@ page import="tcc.legado.model.UsuarioAuth" %>
+<%@ page import="tcc.legado.model.Usuario" %>
 <%
-    UsuarioAuth user = (UsuarioAuth) session.getAttribute("usuarioLogado");
+    Usuario user = (Usuario) session.getAttribute("usuarioLogado");
 %>
 <html>
 <head>

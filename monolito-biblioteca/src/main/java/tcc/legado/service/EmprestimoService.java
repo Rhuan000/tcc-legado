@@ -11,7 +11,6 @@ import tcc.legado.util.FeriadoClient;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import javax.naming.InitialContext;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;

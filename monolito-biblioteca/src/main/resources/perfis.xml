@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <perfis>
     <perfil nome="ADMIN">
         <permissao>livro.listar</permissao>
@@ -9,15 +8,33 @@
         <permissao>usuario.cadastrar</permissao>
         <permissao>usuario.editar</permissao>
         <permissao>usuario.excluir</permissao>
+        <permissao>emprestimo.listar</permissao>
+        <permissao>emprestimo.realizar</permissao>
+        <permissao>emprestimo.devolver</permissao>
+        <permissao>destaque.listar</permissao>
+        <permissao>destaque.cadastrar</permissao>
+        <permissao>destaque.editar</permissao>
+        <permissao>destaque.excluir</permissao>
+        <permissao>destaque.visualizar</permissao>
     </perfil>
     <perfil nome="BIBLIOTECARIO">
         <permissao>livro.listar</permissao>
         <permissao>livro.cadastrar</permissao>
         <permissao>livro.editar</permissao>
         <permissao>usuario.listar</permissao>
+        <permissao>emprestimo.listar</permissao>
+        <permissao>emprestimo.realizar</permissao>
+        <permissao>emprestimo.devolver</permissao>
+        <permissao>destaque.listar</permissao>
+        <permissao>destaque.cadastrar</permissao>
+        <permissao>destaque.editar</permissao>
+         <permissao>destaque.visualizar</permissao>
     </perfil>
     <perfil nome="CONSULTA">
         <permissao>livro.listar</permissao>
         <permissao>usuario.listar</permissao>
+        <permissao>emprestimo.listar</permissao>
+        <permissao>destaque.listar</permissao>
+        <permissao>destaque.visualizar</permissao>
     </perfil>
 </perfis>

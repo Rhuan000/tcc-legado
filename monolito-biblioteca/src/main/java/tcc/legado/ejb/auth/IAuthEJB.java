@@ -1,7 +1,7 @@
 package tcc.legado.ejb.auth;
 
-import tcc.legado.model.UsuarioAuth;
+import tcc.legado.model.Usuario;
 
 public interface IAuthEJB {
-    UsuarioAuth autenticar(String matricula, String senha);
+    Usuario autenticar(String matricula, String senha);
 }
