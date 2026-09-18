@@ -65,6 +65,7 @@ CREATE TABLE livro_destaque (
 CREATE TABLE usuario_auth (
     matricula VARCHAR(20) PRIMARY KEY,
     senha_hash VARCHAR(64) NOT NULL, -- SHA-256 = 64 caracteres hex
+    perfil VARCHAR(20) NOT NULL CHECK (perfil IN ('ADMIN', 'BIBLIOTECARIO', 'CONSULTA')),
     CONSTRAINT fk_usuario_auth_usuario 
         FOREIGN KEY (matricula) 
         REFERENCES usuario(matricula) 
@@ -113,12 +114,14 @@ INSERT INTO usuario (nome, matricula, email, tipo) VALUES
 INSERT INTO usuario (nome, matricula, email, tipo) VALUES
 ('Administrador', '2024001', 'admin@biblioteca.com', 'ADMIN'),
 ('Professor Numero 1', '2024002', 'professor@biblioteca.com', 'PROFESSOR'),
-('Usuario Consulta', '2024003', 'aluno@biblioteca.com', 'ALUNO');
+('Usuario Consulta', '2024003', 'aluno@biblioteca.com', 'ALUNO'),
+('Professor Administrador', '2024004', 'professor.admin@biblioteca.com', 'PROFESSOR');
 
-INSERT INTO usuario_auth (matricula, senha_hash) VALUES
-('2024001', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'), -- senha: admin
-('2024002', '17c1532ca6cff8f6a3a8200028af6c2580bf37f39e10cb0966e8a573e3b24a1f'), -- senha: professor
-('2024003', 'a21d6f3803f0491c32444ef91a0836be243cc4da5186357e805b7009a5b0669b'); -- senha: aluno
+INSERT INTO usuario_auth (matricula, senha_hash, perfil) VALUES
+('2024001', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'ADMIN'), -- senha: admin
+('2024002', '17c1532ca6cff8f6a3a8200028af6c2580bf37f39e10cb0966e8a573e3b24a1f', 'CONSULTA'), -- senha: professor
+('2024003', 'a21d6f3803f0491c32444ef91a0836be243cc4da5186357e805b7009a5b0669b', 'CONSULTA'), -- senha: aluno
+('2024004', '59fcda8f840d58d5cd74ba26fdd2ac3f2ce31cc8bb9c88511905a0b9fe919d9a', 'ADMIN'); -- senha: professoradmin
 
 -- =====================================================
 -- 5. DADOS MOCK - LIVROS (30 registros)

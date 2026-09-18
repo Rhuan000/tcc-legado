@@ -37,7 +37,7 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Apache Struts 1.3.10 (DEVE SER COMPILADO, NÃO PROVIDED) -->
+    <!-- Apache Struts 1.3.10 -->
     <dependency>
       <groupId>org.apache.struts</groupId>
       <artifactId>struts-core</artifactId>
@@ -54,7 +54,7 @@
       <version>1.3.10</version>
     </dependency>
 
-    <!-- Commons necessários para o Struts -->
+    <!-- Commons para Struts -->
     <dependency>
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
@@ -85,21 +85,21 @@
       <version>1.2</version>
     </dependency>
 
-    <!-- Font Awesome local via WebJar -->
+    <!-- Font Awesome -->
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>font-awesome</artifactId>
       <version>6.5.2</version>
     </dependency>
 
-    <!-- Quartz Scheduler (NOVA DEPENDÊNCIA) -->
+    <!-- Quartz Scheduler -->
     <dependency>
       <groupId>org.quartz-scheduler</groupId>
       <artifactId>quartz</artifactId>
       <version>2.3.2</version>
     </dependency>
 
-    <!-- Apache HttpClient para chamadas HTTP -->
+    <!-- Apache HttpClient -->
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
@@ -117,6 +117,7 @@
   <build>
     <finalName>monolito-biblioteca</finalName>
     <plugins>
+      <!-- Plugin para desempacotar Font Awesome -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -142,18 +143,21 @@
           </execution>
         </executions>
       </plugin>
+
+      <!-- Compiler Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
       </plugin>
+
+      <!-- WAR Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.4.0</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
-          <!-- Garante que todas as dependências vão para WEB-INF/lib -->
           <webResources>
             <resource>
               <directory>src/main/webapp</directory>
