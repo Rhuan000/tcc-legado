@@ -6,6 +6,7 @@ public class Usuario {
     private String matricula;
     private String email;
     private String tipo; // ALUNO, PROFESSOR, BOLSISTA
+    private String perfil; // ADMIN, BIBLIOTECARIO, CONSULTA
 
     public Usuario() {
     }
@@ -55,7 +56,11 @@ public class Usuario {
     }
     
     public String getPerfil() {
-        return this.tipo;
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
     
     public void setTipo(String tipo) {
@@ -70,6 +75,7 @@ public class Usuario {
                 ", matricula='" + matricula + '\'' +
                 ", email='" + email + '\'' +
                 ", tipo='" + tipo + '\'' +
+                ", perfil='" + perfil + '\'' +
                 '}';
     }
 }

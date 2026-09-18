@@ -80,6 +80,7 @@ public class AuthFilter implements Filter {
         String dominio = extrairDominio(uri);
         if (dominio == null) return null;
 
+        // Abrir o formulario de emprestimo exige a mesma permissao de realiza-lo.
         String acao = mapearMetodo(metodo);
         if (acao == null) return null;
 

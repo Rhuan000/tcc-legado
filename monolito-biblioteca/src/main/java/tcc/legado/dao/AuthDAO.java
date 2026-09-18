@@ -31,7 +31,7 @@ public class AuthDAO {
         String senhaHash = HashUtil.sha256(senha);
 
         // JOIN entre usuario e usuario_auth para validar e obter perfil
-        String sql = "SELECT u.id, u.nome, u.matricula, u.email, u.tipo " +
+        String sql = "SELECT u.id, u.nome, u.matricula, u.email, u.tipo, a.perfil " +
                      "FROM usuario u " +
                      "INNER JOIN usuario_auth a ON u.matricula = a.matricula " +
                      "WHERE u.matricula = ? AND a.senha_hash = ?";
@@ -47,7 +47,8 @@ public class AuthDAO {
                 usuario.setNome(rs.getString("nome"));
                 usuario.setMatricula(rs.getString("matricula"));
                 usuario.setEmail(rs.getString("email"));
-                usuario.setTipo(rs.getString("tipo")); // perfil de acesso
+                usuario.setTipo(rs.getString("tipo"));
+                usuario.setPerfil(rs.getString("perfil"));
                 return usuario;
             }
         } catch (SQLException e) {

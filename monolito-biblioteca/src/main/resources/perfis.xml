@@ -11,6 +11,7 @@
         <permissao>emprestimo.listar</permissao>
         <permissao>emprestimo.realizar</permissao>
         <permissao>emprestimo.devolver</permissao>
+        <permissao>emprestimo.cadastrar</permissao>
         <permissao>destaque.listar</permissao>
         <permissao>destaque.cadastrar</permissao>
         <permissao>destaque.editar</permissao>

@@ -35,7 +35,7 @@ public class AuthAction extends DispatchAction {
         if (usuario != null) {
             HttpSession session = request.getSession();
             session.setAttribute("usuarioLogado", usuario);
-            session.setAttribute("perfil", usuario.getTipo()); // ADMIN, PROFESSOR, ALUNO, etc.
+            session.setAttribute("perfil", usuario.getPerfil());
             return mapping.findForward("sucesso");
         } else {
             request.setAttribute("erro", "Usuário ou senha inválidos");
@@ -53,4 +53,5 @@ public class AuthAction extends DispatchAction {
         }
         return mapping.findForward("logout");
     }
+
 }
