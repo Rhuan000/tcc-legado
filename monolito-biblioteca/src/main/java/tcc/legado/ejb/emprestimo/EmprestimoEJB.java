@@ -51,4 +51,9 @@ public class EmprestimoEJB implements IEmprestimoEJB {
     public List<Emprestimo> buscarAtrasados() {
         return emprestimoService.buscarAtrasados();
     }
+
+    @Override
+    public void atualizarMultasAtrasadas() {
+        emprestimoService.atualizarMultasAtrasadas();
+    }
 }

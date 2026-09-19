@@ -143,7 +143,8 @@ public class EmprestimoService {
         Date hoje = new Date();
         emp.setDataDevolucaoReal(hoje);
 
-        double multa = calcularMulta(emp, usuario.getTipo());
+        double multa = calcularMulta(emp, usuario.getTipo(),
+                new java.sql.Date(hoje.getTime()).toLocalDate());
         emp.setMulta(multa);
 
         emprestimoDAO.atualizarDevolucao(emp.getId(), hoje, multa);
@@ -161,22 +162,29 @@ public class EmprestimoService {
     // =========================================================
     // CÁLCULO DE MULTA (considerando apenas dias úteis de atraso)
     // =========================================================
-    private double calcularMulta(Emprestimo emp, String tipoUsuario) {
-        if (emp.getDataDevolucaoReal() == null) {
-            return 0.0;
+    public void atualizarMultasAtrasadas() {
+        LocalDate hoje = LocalDate.now();
+        for (Emprestimo emp : emprestimoDAO.buscarAtrasados()) {
+            Usuario usuario = usuarioDAO.buscarPorId(emp.getIdUsuario());
+            if (usuario == null) {
+                throw new IllegalStateException("Usuario do emprestimo nao encontrado: " + emp.getId());
+            }
+            double multa = calcularMulta(emp, usuario.getTipo(), hoje);
+            emprestimoDAO.atualizarMulta(emp.getId(), multa);
         }
+    }
+
+    private double calcularMulta(Emprestimo emp, String tipoUsuario, LocalDate dataReferencia) {
 
         // Converte java.sql.Date para java.util.Date e depois para LocalDate
         Date dataPrevistaUtil = emp.getDataPrevistaDevolucao(); // já é java.util.Date?
-        Date dataDevolucaoUtil = emp.getDataDevolucaoReal();
 
         // Se forem java.sql.Date, converta:
         LocalDate dataPrevista = new java.sql.Date(dataPrevistaUtil.getTime()).toLocalDate();
-        LocalDate dataDevolucao = new java.sql.Date(dataDevolucaoUtil.getTime()).toLocalDate();
         
 
         // Se devolveu antes ou no dia, sem multa
-        if (dataDevolucao.isBefore(dataPrevista) || dataDevolucao.equals(dataPrevista)) {
+        if (!dataReferencia.isAfter(dataPrevista)) {
             return 0.0;
         }
 
@@ -193,7 +201,7 @@ public class EmprestimoService {
         // Conta quantos dias úteis (excluindo feriados) de atraso
         long diasUteisAtraso = 0;
         LocalDate cursor = dataPrevista.plusDays(1);
-        while (!cursor.isAfter(dataDevolucao)) {
+        while (!cursor.isAfter(dataReferencia)) {
             if (isDiaUtil(cursor, feriados)) {
                 diasUteisAtraso++;
             }

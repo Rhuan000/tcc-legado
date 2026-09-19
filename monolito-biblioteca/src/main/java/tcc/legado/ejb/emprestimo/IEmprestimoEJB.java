@@ -9,4 +9,5 @@ public interface IEmprestimoEJB {
     List<Emprestimo> listarTodos();
     Emprestimo buscarPorId(Long id);
     List<Emprestimo> buscarAtrasados();
+    void atualizarMultasAtrasadas();
 }

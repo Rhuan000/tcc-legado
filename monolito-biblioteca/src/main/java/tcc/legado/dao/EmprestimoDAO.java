@@ -56,6 +56,18 @@ public class EmprestimoDAO {
         }
     }
 
+    public void atualizarMulta(Long idEmprestimo, double multa) {
+        String sql = "UPDATE emprestimo SET multa = ? WHERE id = ? AND data_devolucao_real IS NULL";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setDouble(1, multa);
+            ps.setLong(2, idEmprestimo);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new IllegalStateException("Falha ao atualizar multa do emprestimo " + idEmprestimo, e);
+        }
+    }
+
     public List<Emprestimo> listarTodos() {
         List<Emprestimo> lista = new ArrayList<>();
         String sql = "SELECT * FROM emprestimo ORDER BY id";

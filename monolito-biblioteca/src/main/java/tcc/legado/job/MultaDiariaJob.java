@@ -4,10 +4,8 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import tcc.legado.ejb.emprestimo.IEmprestimoEJB;
-import tcc.legado.model.Emprestimo;
 
 import javax.naming.InitialContext;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class MultaDiariaJob implements Job {
@@ -25,12 +23,7 @@ public class MultaDiariaJob implements Job {
                     "java:global/monolito-biblioteca/EmprestimoEJB!tcc.legado.ejb.emprestimo.IEmprestimoEJB");
 
             // Busca empréstimos atrasados
-            List<Emprestimo> atrasados = emprestimoEJB.buscarAtrasados();
-            LOG.info("Encontrados " + atrasados.size() + " empréstimos atrasados.");
-
-            for (Emprestimo emp : atrasados) {
-                LOG.info("Processando empréstimo ID " + emp.getId() + " - multa atual: " + emp.getMulta());
-            }
+            emprestimoEJB.atualizarMultasAtrasadas();
 
             LOG.info("MultaDiariaJob concluído.");
         } catch (Exception e) {
