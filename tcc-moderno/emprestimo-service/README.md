@@ -1,4 +1,13 @@
-# multa-service
+# emprestimo-service
+
+Microsserviço criado para receber, de forma incremental, a capacidade de
+gestão de empréstimos do monólito. A migração começa pelas regras de multa,
+prazo e calendário e avança até consultas, criação, devolução, processamento
+agendado e propriedade lógica dos dados de empréstimo.
+
+O banco PostgreSQL pode permanecer fisicamente compartilhado durante o
+experimento. No estado final, somente este serviço deverá acessar diretamente
+as tabelas de empréstimo; o monólito deverá usar a API HTTP.
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
@@ -49,7 +58,7 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 ./mvnw package -Dnative -Dquarkus.native.container-build=true
 ```
 
-You can then execute your native executable with: `./target/multa-service-1.0.0-SNAPSHOT-runner`
+You can then execute your native executable with: `./target/emprestimo-service-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
 

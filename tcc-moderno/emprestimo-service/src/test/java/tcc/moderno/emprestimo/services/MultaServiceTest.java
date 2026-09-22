@@ -1,4 +1,4 @@
-package tcc.moderno.services;
+package tcc.moderno.emprestimo.services;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 /**
  * Regras extraídas de EmprestimoService.calcularMulta e isDiaUtil, em
  * monolito-biblioteca/src/main/java/tcc/legado/service/EmprestimoService.java.
- * Recorte do TCC: seções 5.3 e 5.4, extração incremental do cálculo de multa.
+ * Primeira fatia do TCC: extração incremental do domínio de empréstimos,
+ * iniciada pelas regras de cálculo de multa.
  *
  * <p>Contrato proposto, ainda NÃO implementado:
  * double calcularMulta(LocalDate dataPrevista, String tipoUsuario,

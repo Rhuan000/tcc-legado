@@ -1,4 +1,4 @@
-package tcc.moderno.resources;
+package tcc.moderno.emprestimo.resources;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
