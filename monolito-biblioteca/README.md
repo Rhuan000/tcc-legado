@@ -8,7 +8,7 @@
 
 O sistema simula uma aplicação corporativa legada com **alto acoplamento**, **baixa coesão** e **ausência de testes automatizados**, características típicas de sistemas que evoluíram organicamente. A arquitetura foi propositalmente construída com **"venenos"** para representar um cenário real de modernização.
 
-O objetivo principal é extrair a lógica de cálculo de multa – espalhada entre Action, EJB, Service e DAO – para um microsserviço independente, medindo o impacto por meio de métricas de qualidade (CBO, tempo de build e tempo de inicialização).
+O objetivo principal é extrair incrementalmente a gestão de empréstimos para um microsserviço independente, começando pelas regras de prazo e multa e avançando até consultas, persistência, criação, devolução e processamento agendado. O impacto é avaliado por CBO, tempo de build e tempo de inicialização, sem pressupor melhora em todas as métricas.
 
 ---
 
