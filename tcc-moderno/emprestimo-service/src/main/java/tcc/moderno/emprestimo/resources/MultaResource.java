@@ -1,4 +1,4 @@
-package tcc.moderno.resources;
+package tcc.moderno.emprestimo.resources;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
