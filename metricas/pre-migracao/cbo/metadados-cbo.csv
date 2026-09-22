@@ -1,0 +1,2 @@
+﻿"estado","coleta_iso","repeticoes","commit","ferramenta","ck_sha256","java_analisador","diretorio_analisado","comando"
+"pre-migracao","2026-09-21T23:40:00.7275793-03:00","1","8681c13dabf48031bc13f7cd75bd9edca0839f1a","CK 0.7.1-SNAPSHOT","2F32FA347EF739E97152741828675A9939AEAFE61BEE3F196EE5AF264E612162","java version ""21.0.8"" 2025-07-15 LTS","C:\desenvolvimento\tcc-legado\monolito-biblioteca\src\main\java","java -jar ck.jar <fontes> false 0 true"

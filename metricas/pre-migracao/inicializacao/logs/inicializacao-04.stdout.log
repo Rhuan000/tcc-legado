@@ -1,0 +1,169 @@
+Calling "C:\desenvolvimento\jboss-eap-7.4\bin\standalone.conf.bat"
+Setting JAVA property to "C:\Program Files (x86)\Java\jdk1.8.0_201\bin\java"
+===============================================================================
+
+  JBoss Bootstrap Environment
+
+  JBOSS_HOME: "C:\desenvolvimento\jboss-eap-7.4"
+
+  JAVA: "C:\Program Files (x86)\Java\jdk1.8.0_201\bin\java"
+
+  JAVA_OPTS: "-client -Dprogram.name=standalone.bat -Xms1G -Xmx1G -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -verbose:gc -Xloggc:"C:\Users\RHUANE~1\AppData\Local\Temp\tcc-jboss-medicao-pre-migracao-c6fa791d8f7644c3aa4ec71913af1098\log\gc.log" -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=3M -XX:-TraceClassUnloading "
+
+===============================================================================
+
+23:37:56,900 INFO  [org.jboss.modules] (main) JBoss Modules version 1.11.0.Final-redhat-00001
+23:37:57,311 INFO  [org.jboss.msc] (main) JBoss MSC version 1.4.12.Final-redhat-00001
+23:37:57,316 INFO  [org.jboss.threads] (main) JBoss Threads version 2.4.0.Final-redhat-00001
+23:37:57,377 INFO  [org.jboss.as] (MSC service thread 1-1) WFLYSRV0049: JBoss EAP 7.4.0.GA (WildFly Core 15.0.2.Final-redhat-00001) starting
+23:37:57,728 INFO  [org.wildfly.security] (ServerService Thread Pool -- 28) ELY00001: WildFly Elytron version 1.15.3.Final-redhat-00001
+23:37:57,867 INFO  [org.jboss.as.controller.management-deprecated] (ServerService Thread Pool -- 11) WFLYCTL0033: Extension 'security' is deprecated and may not be supported in future versions
+23:37:57,967 INFO  [org.jboss.as.controller.management-deprecated] (Controller Boot Thread) WFLYCTL0028: Attribute 'security-realm' in the resource at address '/core-service=management/management-interface=http-interface' is deprecated, and may be removed in a future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
+23:37:57,977 INFO  [org.jboss.as.controller.management-deprecated] (ServerService Thread Pool -- 4) WFLYCTL0028: Attribute 'security-realm' in the resource at address '/subsystem=undertow/server=default-server/https-listener=https' is deprecated, and may be removed in a future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
+23:37:58,079 INFO  [org.jboss.as.repository] (ServerService Thread Pool -- 22) WFLYDR0001: Content added at location C:\Users\RHUANE~1\AppData\Local\Temp\tcc-jboss-medicao-pre-migracao-c6fa791d8f7644c3aa4ec71913af1098\data\content\d5\520c4c6812e9401939c7bb21a37d1e7dcb9c84\content
+23:37:58,091 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0039: Creating http management service using socket-binding (management-http)
+23:37:58,099 INFO  [org.xnio] (MSC service thread 1-6) XNIO version 3.8.4.Final-redhat-00001
+23:37:58,103 INFO  [org.xnio.nio] (MSC service thread 1-6) XNIO NIO Implementation Version 3.8.4.Final-redhat-00001
+23:37:58,116 INFO  [org.wildfly.extension.health] (ServerService Thread Pool -- 49) WFLYHEALTH0001: Activating Base Health Subsystem
+23:37:58,116 INFO  [org.wildfly.extension.io] (ServerService Thread Pool -- 51) WFLYIO001: Worker 'default' has auto-configured to 24 IO threads with 192 max task threads based on your 12 available processors
+23:37:58,119 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 50) WFLYCLINF0001: Activating Infinispan subsystem.
+23:37:58,124 INFO  [org.jboss.as.naming] (ServerService Thread Pool -- 60) WFLYNAM0001: Activating Naming Subsystem
+23:37:58,127 INFO  [org.jboss.as.jsf] (ServerService Thread Pool -- 57) WFLYJSF0007: Activated the following Jakarta Server Faces Implementations: [main]
+23:37:58,128 INFO  [org.jboss.as.connector] (MSC service thread 1-6) WFLYJCA0009: Starting Jakarta Connectors Subsystem (WildFly/IronJacamar 1.4.30.Final-redhat-00001)
+23:37:58,126 INFO  [org.jboss.as.jaxrs] (ServerService Thread Pool -- 52) WFLYRS0016: RESTEasy version 3.15.1.Final-redhat-00001
+23:37:58,125 INFO  [org.wildfly.extension.metrics] (ServerService Thread Pool -- 59) WFLYMETRICS0001: Activating Base Metrics Subsystem
+23:37:58,124 WARN  [org.jboss.as.txn] (ServerService Thread Pool -- 68) WFLYTX0013: The node-identifier attribute on the /subsystem=transactions is set to the default value. This is a danger for environments running multiple servers. Please make sure the attribute value is unique.
+23:37:58,144 WARN  [org.wildfly.extension.elytron] (MSC service thread 1-7) WFLYELY00023: KeyStore file 'C:\Users\RHUANE~1\AppData\Local\Temp\tcc-jboss-medicao-pre-migracao-c6fa791d8f7644c3aa4ec71913af1098\configuration\application.keystore' does not exist. Used blank.
+23:37:58,143 INFO  [org.jboss.as.mail.extension] (MSC service thread 1-8) WFLYMAIL0001: Bound mail session [java:jboss/mail/Default]
+23:37:58,143 INFO  [org.jboss.as.naming] (MSC service thread 1-6) WFLYNAM0003: Starting Naming Service
+23:37:58,140 INFO  [org.jboss.remoting] (MSC service thread 1-4) JBoss Remoting version 5.0.20.SP1-redhat-00001
+23:37:58,139 INFO  [org.jboss.as.connector.subsystems.datasources] (ServerService Thread Pool -- 41) WFLYJCA0005: Deploying non-JDBC-compliant driver class org.postgresql.Driver (version 42.7)
+23:37:58,145 INFO  [org.jboss.as.webservices] (ServerService Thread Pool -- 70) WFLYWS0002: Activating WebServices Extension
+23:37:58,153 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-6) WFLYUT0003: Undertow 2.2.5.Final-redhat-00001 starting
+23:37:58,157 WARN  [org.wildfly.extension.elytron] (MSC service thread 1-6) WFLYELY01084: KeyStore C:\Users\RHUANE~1\AppData\Local\Temp\tcc-jboss-medicao-pre-migracao-c6fa791d8f7644c3aa4ec71913af1098\configuration\application.keystore not found, it will be auto generated on first use with a self-signed certificate for host localhost
+23:37:58,159 INFO  [org.jboss.as.security] (ServerService Thread Pool -- 66) WFLYSEC0002: Activating Security Subsystem
+23:37:58,161 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-1) WFLYJCA0018: Started Driver service with driver-name = postgresql
+23:37:58,162 INFO  [org.jboss.as.security] (MSC service thread 1-4) WFLYSEC0001: Current PicketBox version=5.0.3.Final-redhat-00007
+23:37:58,180 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 69) WFLYUT0014: Creating file handler for path 'C:\desenvolvimento\jboss-eap-7.4/welcome-content' with options [directory-listing: 'false', follow-symlink: 'false', case-sensitive: 'true', safe-symlink-paths: '[]']
+23:37:58,187 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-5) WFLYUT0012: Started server default-server.
+23:37:58,196 INFO  [org.jboss.as.ejb3] (MSC service thread 1-6) WFLYEJB0481: Strict pool slsb-strict-max-pool is using a max instance size of 192 (per class), which is derived from thread worker pool sizing.
+23:37:58,196 INFO  [org.jboss.as.ejb3] (MSC service thread 1-1) WFLYEJB0482: Strict pool mdb-strict-max-pool is using a max instance size of 48 (per class), which is derived from the number of CPUs on this host.
+23:37:58,196 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-6) Queuing requests.
+23:37:58,199 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-6) WFLYUT0018: Host default-host starting
+23:37:58,288 INFO  [org.jboss.as.patching] (MSC service thread 1-4) WFLYPAT0050: JBoss EAP cumulative patch ID is: base, one-off patches include: none
+23:37:58,295 WARN  [org.jboss.as.domain.management.security] (MSC service thread 1-4) WFLYDM0111: Keystore C:\Users\RHUANE~1\AppData\Local\Temp\tcc-jboss-medicao-pre-migracao-c6fa791d8f7644c3aa4ec71913af1098\configuration\application.keystore not found, it will be auto generated on first use with a self signed certificate for host localhost
+23:37:58,298 INFO  [org.jboss.as.server.deployment.scanner] (MSC service thread 1-1) WFLYDS0013: Started FileSystemDeploymentService for directory C:\Users\RHUANE~1\AppData\Local\Temp\tcc-jboss-medicao-pre-migracao-c6fa791d8f7644c3aa4ec71913af1098\deployments
+23:37:58,303 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-6) WFLYSRV0027: Starting deployment of "monolito-biblioteca.war" (runtime-name: "monolito-biblioteca.war")
+23:37:58,559 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-2) WFLYUT0006: Undertow HTTP listener default listening on 127.0.0.1:18080
+23:37:58,592 INFO  [org.jboss.as.ejb3] (MSC service thread 1-7) WFLYEJB0493: Jakarta Enterprise Beans subsystem suspension complete
+23:37:58,618 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-7) WFLYUT0006: Undertow HTTPS listener https listening on 127.0.0.1:8443
+23:37:58,619 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-5) WFLYJCA0001: Bound data source [java:/PostgresDS]
+23:37:58,655 INFO  [org.jboss.ws.common.management] (MSC service thread 1-3) JBWS022052: Starting JBossWS 5.4.2.Final-redhat-00001 (Apache CXF 3.3.9.redhat-00001) 
+23:38:00,127 INFO  [org.jboss.weld.deployer] (MSC service thread 1-5) WFLYWELD0003: Processing weld deployment monolito-biblioteca.war
+23:38:00,169 INFO  [org.hibernate.validator.internal.util.Version] (MSC service thread 1-5) HV000001: Hibernate Validator 6.0.22.Final-redhat-00002
+23:38:00,235 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-5) WFLYEJB0473: JNDI bindings for session bean named 'LivroEJB' in deployment unit 'deployment "monolito-biblioteca.war"' are as follows:
+
+	java:global/monolito-biblioteca/LivroEJB!tcc.legado.ejb.livro.ILivroEJB
+	java:app/monolito-biblioteca/LivroEJB!tcc.legado.ejb.livro.ILivroEJB
+	java:module/LivroEJB!tcc.legado.ejb.livro.ILivroEJB
+	java:global/monolito-biblioteca/LivroEJB
+	java:app/monolito-biblioteca/LivroEJB
+	java:module/LivroEJB
+
+23:38:00,236 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-5) WFLYEJB0473: JNDI bindings for session bean named 'LivroDestaqueEJB' in deployment unit 'deployment "monolito-biblioteca.war"' are as follows:
+
+	java:global/monolito-biblioteca/LivroDestaqueEJB!tcc.legado.ejb.destaque.ILivroDestaqueEJB
+	java:app/monolito-biblioteca/LivroDestaqueEJB!tcc.legado.ejb.destaque.ILivroDestaqueEJB
+	java:module/LivroDestaqueEJB!tcc.legado.ejb.destaque.ILivroDestaqueEJB
+	java:global/monolito-biblioteca/LivroDestaqueEJB
+	java:app/monolito-biblioteca/LivroDestaqueEJB
+	java:module/LivroDestaqueEJB
+
+23:38:00,236 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-5) WFLYEJB0473: JNDI bindings for session bean named 'QuartzInitializer' in deployment unit 'deployment "monolito-biblioteca.war"' are as follows:
+
+	java:global/monolito-biblioteca/QuartzInitializer!tcc.legado.job.QuartzInitializer
+	java:app/monolito-biblioteca/QuartzInitializer!tcc.legado.job.QuartzInitializer
+	java:module/QuartzInitializer!tcc.legado.job.QuartzInitializer
+	java:global/monolito-biblioteca/QuartzInitializer
+	java:app/monolito-biblioteca/QuartzInitializer
+	java:module/QuartzInitializer
+
+23:38:00,236 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-5) WFLYEJB0473: JNDI bindings for session bean named 'EmprestimoEJB' in deployment unit 'deployment "monolito-biblioteca.war"' are as follows:
+
+	java:global/monolito-biblioteca/EmprestimoEJB!tcc.legado.ejb.emprestimo.IEmprestimoEJB
+	java:app/monolito-biblioteca/EmprestimoEJB!tcc.legado.ejb.emprestimo.IEmprestimoEJB
+	java:module/EmprestimoEJB!tcc.legado.ejb.emprestimo.IEmprestimoEJB
+	java:global/monolito-biblioteca/EmprestimoEJB
+	java:app/monolito-biblioteca/EmprestimoEJB
+	java:module/EmprestimoEJB
+
+23:38:00,236 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-5) WFLYEJB0473: JNDI bindings for session bean named 'UsuarioEJB' in deployment unit 'deployment "monolito-biblioteca.war"' are as follows:
+
+	java:global/monolito-biblioteca/UsuarioEJB!tcc.legado.ejb.usuario.IUsuarioEJB
+	java:app/monolito-biblioteca/UsuarioEJB!tcc.legado.ejb.usuario.IUsuarioEJB
+	java:module/UsuarioEJB!tcc.legado.ejb.usuario.IUsuarioEJB
+	java:global/monolito-biblioteca/UsuarioEJB
+	java:app/monolito-biblioteca/UsuarioEJB
+	java:module/UsuarioEJB
+
+23:38:00,236 INFO  [org.jboss.as.ejb3.deployment] (MSC service thread 1-5) WFLYEJB0473: JNDI bindings for session bean named 'AuthEJB' in deployment unit 'deployment "monolito-biblioteca.war"' are as follows:
+
+	java:global/monolito-biblioteca/AuthEJB!tcc.legado.ejb.auth.IAuthEJB
+	java:app/monolito-biblioteca/AuthEJB!tcc.legado.ejb.auth.IAuthEJB
+	java:module/AuthEJB!tcc.legado.ejb.auth.IAuthEJB
+	java:global/monolito-biblioteca/AuthEJB
+	java:app/monolito-biblioteca/AuthEJB
+	java:module/AuthEJB
+
+23:38:00,389 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-8) WFLYJCA0005: Deploying non-JDBC-compliant driver class org.postgresql.Driver (version 42.7)
+23:38:00,408 INFO  [org.jboss.weld.Version] (MSC service thread 1-8) WELD-000900: 3.1.6 (redhat)
+23:38:00,442 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-1) WFLYJCA0018: Started Driver service with driver-name = monolito-biblioteca.war_org.postgresql.Driver_42_7
+23:38:00,469 INFO  [org.infinispan.CONTAINER] (ServerService Thread Pool -- 72) ISPN000128: Infinispan version: Red Hat Data Grid 'Infinispan 11.0.9.Final-redhat-00001' 8.1.1.GA
+23:38:00,490 INFO  [org.infinispan.CONFIG] (MSC service thread 1-4) ISPN000152: Passivation configured without an eviction policy being selected. Only manually evicted entities will be passivated.
+23:38:00,490 INFO  [org.infinispan.CONFIG] (MSC service thread 1-4) ISPN000152: Passivation configured without an eviction policy being selected. Only manually evicted entities will be passivated.
+23:38:00,533 INFO  [org.infinispan.PERSISTENCE] (ServerService Thread Pool -- 72) ISPN000556: Starting user marshaller 'org.wildfly.clustering.infinispan.spi.marshalling.InfinispanProtoStreamMarshaller'
+23:38:00,652 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 72) WFLYCLINF0002: Started http-remoting-connector cache from ejb container
+23:38:00,811 INFO  [tcc.legado.job.QuartzInitializer] (ServerService Thread Pool -- 96) Inicializando Quartz Scheduler...
+23:38:00,827 INFO  [org.quartz.impl.StdSchedulerFactory] (ServerService Thread Pool -- 96) Using default implementation for ThreadExecutor
+23:38:00,828 INFO  [org.quartz.simpl.SimpleThreadPool] (ServerService Thread Pool -- 96) Job execution threads will use class loader of thread: ServerService Thread Pool -- 96
+23:38:00,835 INFO  [org.quartz.core.SchedulerSignalerImpl] (ServerService Thread Pool -- 96) Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+23:38:00,835 INFO  [org.quartz.core.QuartzScheduler] (ServerService Thread Pool -- 96) Quartz Scheduler v.2.3.2 created.
+23:38:00,836 INFO  [org.quartz.simpl.RAMJobStore] (ServerService Thread Pool -- 96) RAMJobStore initialized.
+23:38:00,837 INFO  [org.quartz.core.QuartzScheduler] (ServerService Thread Pool -- 96) Scheduler meta-data: Quartz Scheduler (v2.3.2) 'DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+23:38:00,837 INFO  [org.quartz.impl.StdSchedulerFactory] (ServerService Thread Pool -- 96) Quartz scheduler 'DefaultQuartzScheduler' initialized from default resource file in Quartz package: 'quartz.properties'
+23:38:00,837 INFO  [org.quartz.impl.StdSchedulerFactory] (ServerService Thread Pool -- 96) Quartz scheduler version: 2.3.2
+23:38:00,838 INFO  [org.quartz.core.QuartzScheduler] (ServerService Thread Pool -- 96) Scheduler DefaultQuartzScheduler_$_NON_CLUSTERED started.
+23:38:00,838 INFO  [tcc.legado.job.QuartzInitializer] (ServerService Thread Pool -- 96) Quartz Scheduler iniciado com sucesso.
+23:38:00,843 INFO  [tcc.legado.job.QuartzInitializer] (ServerService Thread Pool -- 96) Jobs agendados com sucesso!
+23:38:00,913 INFO  [org.apache.struts.action.ActionServlet] (ServerService Thread Pool -- 96) Loading chain catalog from vfs:/C:/desenvolvimento/tcc-legado/content/monolito-biblioteca.war/WEB-INF/lib/struts-core-1.3.10.jar/org/apache/struts/chain/chain-config.xml
+23:38:00,965 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 96) WFLYUT0021: Registered web context: '/monolito-biblioteca' for server 'default-server'
+23:38:01,001 INFO  [org.jboss.as.server] (ServerService Thread Pool -- 42) WFLYSRV0010: Deployed "monolito-biblioteca.war" (runtime-name : "monolito-biblioteca.war")
+23:38:01,025 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0212: Resuming server
+23:38:01,026 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: JBoss EAP 7.4.0.GA (WildFly Core 15.0.2.Final-redhat-00001) started in 4324ms - Started 1411 of 1611 services (348 services are lazy, passive or on-demand)
+23:38:01,028 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://127.0.0.1:19990/management
+23:38:01,028 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:19990
+23:38:02,887 INFO  [org.jboss.as.server] (management-handler-thread - 1) WFLYSRV0272: Suspending server
+23:38:02,888 INFO  [org.jboss.as.ejb3] (management-handler-thread - 1) WFLYEJB0493: Jakarta Enterprise Beans subsystem suspension complete
+23:38:02,890 INFO  [org.jboss.as.server] (Management Triggered Shutdown) WFLYSRV0241: Shutting down in response to management operation 'shutdown'
+23:38:02,896 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-3) WFLYJCA0019: Stopped Driver service with driver-name = monolito-biblioteca.war_org.postgresql.Driver_42_7
+23:38:02,898 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-5) WFLYJCA0010: Unbound data source [java:/PostgresDS]
+23:38:02,898 INFO  [org.jboss.as.mail.extension] (MSC service thread 1-5) WFLYMAIL0002: Unbound mail session [java:jboss/mail/Default]
+23:38:02,899 INFO  [org.wildfly.extension.undertow] (ServerService Thread Pool -- 96) WFLYUT0022: Unregistered web context: '/monolito-biblioteca' from server 'default-server'
+23:38:02,899 INFO  [org.jboss.as.connector.deployers.jdbc] (MSC service thread 1-3) WFLYJCA0019: Stopped Driver service with driver-name = postgresql
+23:38:02,903 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-8) WFLYUT0019: Host default-host stopping
+23:38:02,922 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-6) WFLYUT0008: Undertow HTTPS listener https suspending
+23:38:02,922 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-8) WFLYUT0008: Undertow HTTP listener default suspending
+23:38:02,923 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-6) WFLYUT0007: Undertow HTTPS listener https stopped, was bound to 127.0.0.1:8443
+23:38:02,923 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-8) WFLYUT0007: Undertow HTTP listener default stopped, was bound to 127.0.0.1:18080
+23:38:02,924 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-1) WFLYUT0004: Undertow 2.2.5.Final-redhat-00001 stopping
+23:38:02,937 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 96) WFLYCLINF0003: Stopped http-remoting-connector cache from ejb container
+23:38:02,939 INFO  [org.infinispan.manager.DefaultCacheManager] (ServerService Thread Pool -- 96) Stopping cache manager null on null
+23:38:03,321 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-4) WFLYSRV0028: Stopped deployment monolito-biblioteca.war (runtime-name: monolito-biblioteca.war) in 425ms
+23:38:03,325 INFO  [org.jboss.as] (MSC service thread 1-3) WFLYSRV0050: JBoss EAP 7.4.0.GA (WildFly Core 15.0.2.Final-redhat-00001) stopped in 430ms

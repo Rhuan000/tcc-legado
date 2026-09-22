@@ -1,0 +1,41 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< tcc.legado:monolito-biblioteca >-------------------
+[INFO] Building monolito-biblioteca 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ monolito-biblioteca ---
+[INFO] Deleting C:\desenvolvimento\tcc-legado\monolito-biblioteca\target
+[INFO] 
+[INFO] --- dependency:3.6.1:unpack (unpack-font-awesome-webjar) @ monolito-biblioteca ---
+[INFO] Configured Artifact: org.webjars:font-awesome:6.5.2:jar
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ monolito-biblioteca ---
+[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ monolito-biblioteca ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 40 source files with javac [debug target 1.8] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ monolito-biblioteca ---
+[INFO] skip non existing resourceDirectory C:\desenvolvimento\tcc-legado\monolito-biblioteca\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ monolito-biblioteca ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ monolito-biblioteca ---
+[INFO] 
+[INFO] --- war:3.4.0:war (default-war) @ monolito-biblioteca ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [monolito-biblioteca] in [C:\desenvolvimento\tcc-legado\monolito-biblioteca\target\monolito-biblioteca]
+[INFO] Processing war project
+[INFO] Copying webapp webResources [C:\desenvolvimento\tcc-legado\monolito-biblioteca\src/main/webapp] to [C:\desenvolvimento\tcc-legado\monolito-biblioteca\target\monolito-biblioteca]
+[INFO] Copying webapp resources [C:\desenvolvimento\tcc-legado\monolito-biblioteca\src\main\webapp]
+[INFO] Building war: C:\desenvolvimento\tcc-legado\monolito-biblioteca\target\monolito-biblioteca.war
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.561 s
+[INFO] Finished at: 2026-09-21T23:36:19-03:00
+[INFO] ------------------------------------------------------------------------

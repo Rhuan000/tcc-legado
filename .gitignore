@@ -9,3 +9,8 @@ gerar-projeto.ps1
 *.iml
 
 monolito-biblioteca/src/main/webapp/webjars/*
+
+# Artefatos locais e diagnosticos
+git-history-detailed.txt
+metricas/ck.jar
+metricas/legado/

@@ -1,0 +1,2 @@
+﻿"estado","registro_iso","commit_base","codigo_sha256","arquivos_no_hash","arvore_limpa_no_escopo","alteracoes_no_escopo"
+"pre-migracao","2026-09-21T23:56:04.9207377-03:00","8681c13dabf48031bc13f7cd75bd9edca0839f1a","f996a5c525e18b834e88d90d2799e2e76ea6baaa97c80062de0bee7ca6f82d16","69","False"," M monolito-biblioteca/pom.xml;  M monolito-biblioteca/src/main/java/tcc/legado/filter/AuthFilter.java"
