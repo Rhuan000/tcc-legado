@@ -38,6 +38,7 @@ public class AuthFilter implements Filter {
             uri.endsWith("/login.jsp") ||
             uri.endsWith("/error.jsp") ||
             uri.endsWith("/erro.jsp") ||
+            uri.equals(contextPath + "/health") ||
             uri.equals(contextPath + "/")) {
             chain.doFilter(request, response);
             return;
