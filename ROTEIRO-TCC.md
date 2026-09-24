@@ -58,6 +58,10 @@ Commit sugerido: `refactor: amplia recorte para o dominio de emprestimos`.
 ## Estado 2 — extrair políticas de empréstimo
 
 1. Implementar o cálculo de multa até os testes existentes passarem.
+   Concluído: `MultaService.calcularMulta` implementado e 40 testes de cálculo
+   aprovados, além do teste de disponibilidade HTTP (41 no total). Validação:
+   `mvnw.cmd -B test` em `tcc-moderno/emprestimo-service`. O endpoint HTTP ainda
+   verifica apenas disponibilidade; a exposição do cálculo está no item 4.
 2. Criar testes de caracterização para prazo por tipo de usuário, dias úteis,
    fins de semana, feriados e virada de ano.
 3. Migrar cálculo de prazo, calendário, cliente de feriados e cache.
