@@ -64,6 +64,18 @@ Commit sugerido: `refactor: amplia recorte para o dominio de emprestimos`.
    verifica apenas disponibilidade; a exposição do cálculo está no item 4.
 2. Criar testes de caracterização para prazo por tipo de usuário, dias úteis,
    fins de semana, feriados e virada de ano.
+   Concluído na etapa RED: `PrazoServiceTest` contém 26 testes derivados da
+   leitura do legado, com datas e resultados fixos. Contrato proposto:
+   `LocalDate PrazoService.calcularDataPrevista(LocalDate dataEmprestimo,
+   String tipoUsuario, List<LocalDate> feriados)`. Preserva-se a consulta de
+   feriados somente do ano de início do empréstimo, sem buscar o próximo ano
+   ao atravessar dezembro. Essa consulta será responsabilidade da integração;
+   os testes do núcleo fornecem a lista explicitamente.
+   Validação com `mvnw.cmd -B test`: 67 testes executados, 41 existentes
+   aprovados e 26 novos falhando pela ausência de `PrazoService`, sem testes
+   ignorados. O build permanece vermelho intencionalmente até a implementação
+   do cálculo no item 3. Esses testes não são uma comparação executada entre
+   as duas aplicações.
 3. Migrar cálculo de prazo, calendário, cliente de feriados e cache.
 4. Expor contratos para cálculo de prazo e multa.
 5. Criar no monólito uma Anti-Corruption Layer que converta seus modelos em
