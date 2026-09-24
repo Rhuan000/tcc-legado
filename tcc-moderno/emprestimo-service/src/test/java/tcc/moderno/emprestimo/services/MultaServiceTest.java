@@ -6,15 +6,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Regras extraídas de EmprestimoService.calcularMulta e isDiaUtil, em
@@ -22,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * Primeira fatia do TCC: extração incremental do domínio de empréstimos,
  * iniciada pelas regras de cálculo de multa.
  *
- * <p>Contrato proposto, ainda NÃO implementado:
+ * <p>Contrato implementado:
  * double calcularMulta(LocalDate dataPrevista, String tipoUsuario,
  *                     LocalDate dataReferencia, List<LocalDate> feriados).
  * A lista representa os feriados já obtidos para o ano do vencimento.
@@ -32,7 +29,6 @@ import static org.junit.jupiter.api.Assertions.fail;
  * <p>Testes TDD derivados da leitura do código: não constituem, por si só,
  * comparação executada entre os dois sistemas. Datas e resultados são fixos;
  * não há cópia do algoritmo, rede, banco ou dependência do relógio do sistema.
- * Devem falhar enquanto o contrato moderno não estiver implementado.
  */
 @DisplayName("Multas: regras do legado a preservar na modernização")
 class MultaServiceTest {
@@ -112,35 +108,9 @@ class MultaServiceTest {
                 Stream.of(feriados).map(LocalDate::parse).toList(), esperado);
     }
 
-    /**
-     * Ponte temporária para compilar somente os testes sem criar métodos em
-     * src/main. A ausência do contrato é falha explícita: não há skip ou cálculo
-     * simulado. Substituir pela chamada direta quando o contrato existir.
-     */
     private double calcular(MultaService service, String vencimento, String tipo,
                             String referencia, List<LocalDate> feriados) {
-        Method metodo;
-        try {
-            metodo = MultaService.class.getMethod("calcularMulta",
-                    LocalDate.class, String.class, LocalDate.class, List.class);
-        } catch (NoSuchMethodException e) {
-            return fail("Etapa RED: implementar MultaService.calcularMulta(LocalDate, String, LocalDate, List) "
-                    + "para atender às regras de multa do legado.", e);
-        }
-        assertEquals(double.class, metodo.getReturnType(), "O contrato proposto retorna double, como o legado");
-        try {
-            return (double) metodo.invoke(service, LocalDate.parse(vencimento), tipo,
-                    LocalDate.parse(referencia), feriados);
-        } catch (InvocationTargetException e) {
-            if (e.getCause() instanceof RuntimeException runtime) {
-                throw runtime;
-            }
-            if (e.getCause() instanceof Error error) {
-                throw error;
-            }
-            return fail("O cálculo lançou uma exceção inesperada", e.getCause());
-        } catch (IllegalAccessException e) {
-            return fail("O método de cálculo precisa ser público", e);
-        }
+        return service.calcularMulta(LocalDate.parse(vencimento), tipo,
+                LocalDate.parse(referencia), feriados);
     }
 }
