@@ -1,10 +1,21 @@
 # Protocolo de medicao experimental
 
-Este diretorio contem os coletores usados nos tres estados do experimento:
+Este diretorio contem os coletores usados nos dois estados quantitativos do
+experimento:
 
 - `pre-migracao`
-- `intermediario`
 - `pos-migracao`
+
+O estado intermediario da arquitetura e documentado por commits, contratos,
+testes e registros no diario de bordo. Ele nao recebe uma campanha de CBO,
+build ou inicializacao. Essa decisao permite comparar os extremos do recorte
+funcional; em contrapartida, o estudo nao quantifica os custos transitorios da
+coexistencia entre monolito e microsservico.
+
+Os coletores atuais ainda executam somente o monolito. Informar
+`-Estado pos-migracao` altera o diretorio de saida, mas nao passa a medir o
+microsservico ou o conjunto. A coleta final nao deve ser iniciada antes da
+adaptacao dos scripts para identificar separadamente os tres escopos.
 
 O protocolo usa dez repeticoes independentes para tempo de build e tempo de
 inicializacao. O CBO e coletado uma unica vez por estado, pois e uma metrica
@@ -56,7 +67,7 @@ medicao.
 
 ## CBO
 
-O CK analisa o mesmo diretorio de fontes uma vez por estado. O coletor registra
+O CK analisa o diretorio de fontes configurado uma vez por estado. O coletor registra
 o commit, a versao da ferramenta e o SHA-256 do JAR para permitir reproducao.
 
 ```powershell

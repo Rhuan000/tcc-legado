@@ -99,8 +99,10 @@ Commit sugerido: `refactor: amplia recorte para o dominio de emprestimos`.
 Critério de saída: o monólito usa o microsserviço para prazo e multa, com testes
 de contrato e comportamento preservado.
 
-Esse é o estado intermediário do experimento. Após estabilizá-lo, executar as
-dez medições de build e inicialização e uma coleta de CBO.
+Esse é o estado intermediário da arquitetura. Após estabilizá-lo, registrar os
+contratos, commits, testes e fluxos validados, sem realizar uma campanha
+quantitativa. As métricas serão comparadas somente entre os estados
+pré-migração e pós-migração.
 
 ## Estado 3 — migrar consultas e persistência
 
