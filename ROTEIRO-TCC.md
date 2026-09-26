@@ -77,6 +77,12 @@ Commit sugerido: `refactor: amplia recorte para o dominio de emprestimos`.
    do cálculo no item 3. Esses testes não são uma comparação executada entre
    as duas aplicações.
 3. Migrar cálculo de prazo, calendário, cliente de feriados e cache.
+   Cálculo de prazo concluído: `PrazoService` preserva os prazos por tipo de
+   usuário e a contagem de dias úteis do legado, recebendo data e feriados de
+   forma explícita. Os 26 testes de caracterização passaram a chamar o contrato
+   diretamente. Validação com `mvnw.cmd -B clean test`: 67 testes executados,
+   sem falhas, erros ou testes ignorados. Calendário, cliente de feriados e
+   cache permanecem pendentes.
 4. Expor contratos para cálculo de prazo e multa.
 5. Criar no monólito uma Anti-Corruption Layer que converta seus modelos em
    requisições HTTP.
