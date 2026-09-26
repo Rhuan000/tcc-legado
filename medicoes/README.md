@@ -17,6 +17,23 @@ Os coletores atuais ainda executam somente o monolito. Informar
 microsservico ou o conjunto. A coleta final nao deve ser iniciada antes da
 adaptacao dos scripts para identificar separadamente os tres escopos.
 
+Cada execucao exige `-ColetaId`, formado por letras minusculas, numeros, ponto,
+hifen ou sublinhado. Os resultados sao gravados em
+`metricas/<estado>/<coleta-id>/`. Se a pasta especifica da medicao ja existir,
+o coletor encerra sem alterar arquivos. Nao existe opcao de sobrescrita.
+
+O parametro opcional `-Repositorio` permite medir um worktree limpo diferente
+daquele que contem os scripts. `-ResultadosRaiz` permite manter os resultados
+no repositorio principal. Todos os coletores recusam alteracoes versionadas ou
+nao versionadas no POM e em `src` do monolito.
+
+Os medidores de build, inicializacao e CBO exigem que `registrar-estado.ps1`
+tenha sido executado antes com o mesmo estado, identificador e commit. Isso
+impede reunir, sob uma unica campanha, resultados produzidos por revisoes
+diferentes do codigo. O registro inicial tambem recusa um identificador cuja
+pasta de campanha ja exista e armazena sistema operacional, arquitetura,
+processador, memoria fisica e versao do PowerShell.
+
 O protocolo usa dez repeticoes independentes para tempo de build e tempo de
 inicializacao. O CBO e coletado uma unica vez por estado, pois e uma metrica
 estatica e deterministica para o mesmo codigo-fonte e a mesma versao da
@@ -49,7 +66,7 @@ proprio Maven em todas as repeticoes. Dependencias Maven devem estar resolvidas
 antes da coleta; a validacao previa nao integra as dez amostras.
 
 ```powershell
-.\medicoes\medir-build.ps1 -Estado pre-migracao -Repeticoes 10
+.\medicoes\medir-build.ps1 -Estado pre-migracao -ColetaId recoleta-20260926 -Repeticoes 10
 ```
 
 ## Tempo de inicializacao
@@ -59,32 +76,37 @@ Para cada observacao, o coletor cria uma base temporaria isolada do JBoss,
 inclui o WAR antes de iniciar o cronometro, inicia um novo processo e consulta o
 endpoint de saude a cada 100 ms. O cronometro para na primeira resposta HTTP
 200. Em seguida o servidor e encerrado; o tempo de desligamento nao integra a
-medicao.
+medicao. O SHA-256 do WAR e registrado em todas as observacoes para demonstrar
+que o mesmo artefato foi utilizado nas dez inicializacoes.
 
 ```powershell
-.\medicoes\medir-inicializacao.ps1 -Estado pre-migracao -Repeticoes 10
+.\medicoes\medir-inicializacao.ps1 -Estado pre-migracao -ColetaId recoleta-20260926 -Repeticoes 10
 ```
 
 ## CBO
 
 O CK analisa o diretorio de fontes configurado uma vez por estado. O coletor registra
 o commit, a versao da ferramenta e o SHA-256 do JAR para permitir reproducao.
+Por padrao, a execucao e recusada quando o hash do JAR difere daquele informado
+neste protocolo.
 
 ```powershell
-.\medicoes\medir-cbo.ps1 -Estado pre-migracao
+.\medicoes\medir-cbo.ps1 -Estado pre-migracao -ColetaId recoleta-20260926
 ```
 
 ## Ordem de coleta
 
-1. Confirmar que nao ha outra instancia usando as portas 18080 e 19990.
-2. Executar as dez medicoes de build.
-3. Executar as dez medicoes de inicializacao.
-4. Executar uma coleta de CBO.
-5. Registrar o hash do codigo com
-   `.\medicoes\registrar-estado.ps1 -Estado <estado>`.
-6. Nao editar manualmente os CSVs brutos.
+1. Criar um worktree no commit ou tag que representa o estado a medir.
+2. Confirmar que o POM e `src` estao limpos nesse worktree.
+3. Registrar o commit, a arvore Git e o hash fisico antes da coleta com
+   `.\medicoes\registrar-estado.ps1 -Estado <estado> -ColetaId <id>`.
+4. Confirmar que nao ha outra instancia usando as portas 18080 e 19990.
+5. Executar as dez medicoes de build.
+6. Executar as dez medicoes de inicializacao usando o WAR da ultima compilacao.
+7. Executar uma coleta de CBO.
+8. Nao editar manualmente os CSVs brutos.
 
-Os resultados sao gravados em `metricas/<estado>/`. Logs individuais ficam ao
+Os resultados sao gravados em `metricas/<estado>/<coleta-id>/`. Logs individuais ficam ao
 lado dos CSVs e permitem auditar falhas sem misturar mensagens do processo com
 os tempos registrados.
 
