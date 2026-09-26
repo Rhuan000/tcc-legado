@@ -81,8 +81,15 @@ Commit sugerido: `refactor: amplia recorte para o dominio de emprestimos`.
    usuário e a contagem de dias úteis do legado, recebendo data e feriados de
    forma explícita. Os 26 testes de caracterização passaram a chamar o contrato
    diretamente. Validação com `mvnw.cmd -B clean test`: 67 testes executados,
-   sem falhas, erros ou testes ignorados. Calendário, cliente de feriados e
-   cache permanecem pendentes.
+   sem falhas, erros ou testes ignorados.
+   Calendário, cliente e cache concluídos: `FeriadoClient` declara a integração
+   com a BrasilAPI, com timeouts de conexão e leitura de três segundos, e
+   `CalendarioService` mantém listas imutáveis por ano. Falhas não são
+   armazenadas, permitindo nova tentativa na próxima chamada. Quatro testes
+   cobrem reutilização do cache, separação por ano, nova tentativa após falha e
+   remoção de duplicatas. Validação com `mvnw.cmd -B clean test`: 71 testes
+   aprovados, sem falhas, erros ou testes ignorados. A exposição dos contratos
+   HTTP permanece no item 4.
 4. Expor contratos para cálculo de prazo e multa.
 5. Criar no monólito uma Anti-Corruption Layer que converta seus modelos em
    requisições HTTP.
