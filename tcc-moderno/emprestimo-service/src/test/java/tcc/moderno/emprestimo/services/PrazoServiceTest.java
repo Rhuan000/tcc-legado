@@ -6,15 +6,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Caracterização derivada da leitura de EmprestimoService.criarEmprestimo,
@@ -28,9 +25,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * quando o prazo atravessar o ano. O núcleo respeita somente a lista recebida.
  * Consulta externa, cache, fuso e conversão para Date ficam fora destes testes.
  *
- * <p>Etapa RED: resultados fixos, sem rede, banco, relógio ou algoritmo simulado.
- * A reflexão permite compilar antes da implementação; deve ser substituída por
- * chamada direta quando o contrato existir, preservando os cenários.
+ * <p>Resultados fixos, sem rede, banco, relógio ou algoritmo simulado.
  */
 @DisplayName("Prazos: regras do legado a preservar na modernização")
 class PrazoServiceTest {
@@ -87,24 +82,6 @@ class PrazoServiceTest {
     }
 
     private LocalDate calcular(String inicio, String tipo, List<LocalDate> feriados) {
-        try {
-            Class<?> classe = Class.forName("tcc.moderno.emprestimo.services.PrazoService");
-            Method metodo = classe.getMethod("calcularDataPrevista",
-                    LocalDate.class, String.class, List.class);
-            assertEquals(LocalDate.class, metodo.getReturnType());
-            return (LocalDate) metodo.invoke(classe.getConstructor().newInstance(),
-                    LocalDate.parse(inicio), tipo, feriados);
-        } catch (InvocationTargetException e) {
-            if (e.getCause() instanceof RuntimeException runtime) {
-                throw runtime;
-            }
-            if (e.getCause() instanceof Error error) {
-                throw error;
-            }
-            return fail("O cálculo lançou uma exceção inesperada", e.getCause());
-        } catch (ReflectiveOperationException e) {
-            return fail("Etapa RED: implementar PrazoService.calcularDataPrevista"
-                    + "(LocalDate, String, List) com retorno LocalDate e construtor público sem argumentos.", e);
-        }
+        return new PrazoService().calcularDataPrevista(LocalDate.parse(inicio), tipo, feriados);
     }
 }
