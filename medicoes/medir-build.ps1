@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('pre-migracao', 'intermediario', 'pos-migracao')]
+    [ValidateSet('pre-migracao', 'pos-migracao')]
     [string]$Estado,
 
     [ValidateRange(1, 100)]
