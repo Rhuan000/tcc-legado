@@ -7,6 +7,13 @@ param(
     [ValidateRange(1, 100)]
     [int]$Repeticoes = 10,
 
+    [Parameter(Mandatory = $true)]
+    [ValidatePattern('^[a-z0-9][a-z0-9._-]{0,63}$')]
+    [string]$ColetaId,
+
+    [string]$Repositorio,
+    [string]$ResultadosRaiz,
+
     [string]$JavaHome = 'C:\Program Files (x86)\Java\jdk1.8.0_201',
     [string]$JbossHome = 'C:\desenvolvimento\jboss-eap-7.4',
     [int]$PortaHttp = 18080,
@@ -66,16 +73,39 @@ function Obter-StatusHttp {
     }
 }
 
-$repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+$repo = if ([string]::IsNullOrWhiteSpace($Repositorio)) {
+    (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+} else {
+    (Resolve-Path -LiteralPath $Repositorio).Path
+}
+$raizResultados = if ([string]::IsNullOrWhiteSpace($ResultadosRaiz)) {
+    Join-Path $repo 'metricas'
+} else {
+    [System.IO.Path]::GetFullPath($ResultadosRaiz)
+}
 $war = Join-Path $repo 'monolito-biblioteca\target\monolito-biblioteca.war'
 $standalone = Join-Path $JbossHome 'bin\standalone.bat'
 $cli = Join-Path $JbossHome 'bin\jboss-cli.bat'
 $configuracao = Join-Path $JbossHome 'standalone\configuration'
-$saida = Join-Path $repo "metricas\$Estado\inicializacao"
+$saida = Join-Path $raizResultados "$Estado\$ColetaId\inicializacao"
 $logs = Join-Path $saida 'logs'
 $csv = Join-Path $saida 'medicoes-inicializacao.csv'
 $urlSaude = "http://127.0.0.1:$PortaHttp/monolito-biblioteca/health"
+$registroEstado = Join-Path $raizResultados "$Estado\$ColetaId\metadados-estado.csv"
 
+$statusEscopo = @(git -C $repo status --short --untracked-files=all -- 'monolito-biblioteca/pom.xml' 'monolito-biblioteca/src/**')
+if ($LASTEXITCODE -ne 0) {
+    throw "Nao foi possivel consultar o estado Git de $repo."
+}
+if ($statusEscopo.Count -gt 0) {
+    throw "A coleta exige arvore limpa no escopo do monolito: $($statusEscopo -join '; ')"
+}
+if (Test-Path -LiteralPath $saida) {
+    throw "A saida $saida ja existe. Use outro ColetaId; resultados nunca sao sobrescritos."
+}
+if (-not (Test-Path -LiteralPath $registroEstado)) {
+    throw "Metadados da campanha nao encontrados em $registroEstado. Execute registrar-estado.ps1 primeiro."
+}
 foreach ($arquivoObrigatorio in @((Join-Path $JavaHome 'bin\java.exe'), $war, $standalone, $cli, (Join-Path $configuracao 'standalone.xml'))) {
     if (-not (Test-Path -LiteralPath $arquivoObrigatorio)) {
         throw "Arquivo obrigatorio nao encontrado: $arquivoObrigatorio"
@@ -100,6 +130,17 @@ try {
     $env:Path = "$(Join-Path $JavaHome 'bin');$pathAnterior"
     $env:NOPAUSE = '1'
     $commit = (& git -C $repo rev-parse HEAD).Trim()
+    if ($LASTEXITCODE -ne 0) {
+        throw "Nao foi possivel identificar o commit de $repo."
+    }
+    $estadoRegistrado = Import-Csv -LiteralPath $registroEstado
+    if ($estadoRegistrado.estado -ne $Estado -or
+        $estadoRegistrado.coleta_id -ne $ColetaId -or
+        $estadoRegistrado.commit_base -ne $commit) {
+        throw 'Os metadados da campanha nao correspondem ao estado, ao ColetaId e ao commit atuais.'
+    }
+    $coletorSha256 = (Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash
+    $warSha256 = (Get-FileHash -LiteralPath $war -Algorithm SHA256).Hash
     $preferenciaErroAnterior = $ErrorActionPreference
     $ErrorActionPreference = 'Continue'
     $javaVersion = (& (Join-Path $JavaHome 'bin\java.exe') -version 2>&1 | Select-Object -First 1).ToString()
@@ -149,17 +190,23 @@ try {
 
             $resultado = [pscustomobject]@{
                 estado = $Estado
+                coleta_id = $ColetaId
                 repeticao = $i
                 inicio_iso = $inicio.ToString('o')
                 duracao_ms = [math]::Round($cronometro.Elapsed.TotalMilliseconds, 3)
                 duracao_s = [math]::Round($cronometro.Elapsed.TotalSeconds, 6)
                 status_http = $statusHttp
                 sucesso = $pronto
+                processo_codigo_saida = if ($processo.HasExited) { $processo.ExitCode } else { $null }
                 commit = $commit
+                coletor_sha256 = $coletorSha256
+                war_sha256 = $warSha256
                 java = $javaVersion
                 jboss = '7.4.0.GA'
+                jboss_home = $JbossHome
                 endpoint = $urlSaude
                 intervalo_consulta_ms = $IntervaloConsultaMs
+                timeout_segundos = $TimeoutSegundos
             }
             $resultados += $resultado
             $resultados | Export-Csv -LiteralPath $csv -NoTypeInformation -Encoding UTF8

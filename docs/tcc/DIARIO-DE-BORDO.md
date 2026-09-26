@@ -108,14 +108,23 @@ Cada entrada distingue fato observado, decisão e interpretação. Atividades pl
 - **Validação:** buscas textuais confirmaram que as menções remanescentes ao estado intermediário o tratam como marco arquitetural ou registram explicitamente a ausência de campanha. Os quatro scripts passaram pela análise sintática do PowerShell sem erros e deixaram de aceitar `intermediario` em `ValidateSet`.
 - **Pendências:** adaptar os coletores do estado final para medir separadamente monólito residual, microsserviço e conjunto.
 
+### 26/09/2026 Preparação para recoleta rastreável da linha de base
+
+- **Data de registro:** 26/09/2026.
+- **Tipo:** contemporâneo.
+- **Estado do experimento:** preparação; nenhuma nova observação experimental produzida.
+- **Problema:** a campanha histórica registra commit com árvore modificada e um hash físico que não pôde ser reproduzido. A alteração funcional do `AuthFilter` foi posteriormente versionada, mas a identidade byte a byte do POM medido não foi recuperada.
+- **Decisão:** preservar integralmente a campanha histórica e preparar uma recoleta em worktree limpo de um snapshot pré-migração, com outro identificador.
+- **Implementação preparada:** os coletores passaram a exigir `ColetaId`, recusam diretórios de saída existentes e alterações no POM ou em `src`, aceitam um repositório medido diferente daquele que contém os scripts e registram o hash do próprio coletor. O registro do estado acrescenta a árvore Git do monólito, um hash estável dos blobs versionados, `core.autocrlf` e identificadores da máquina ao hash físico já existente. Os medidores somente executam depois do registro da campanha no mesmo estado, identificador e commit. A inicialização registra o SHA-256 do WAR, e o CBO recusa por padrão um JAR do CK cujo hash seja diferente do fixado no protocolo.
+- **Validação:** os quatro scripts passaram pela análise sintática do PowerShell. Testes isolados em diretório temporário confirmaram os campos de identidade do código e do ambiente, a recusa de sobrescrita sem alteração do CSV existente, a exigência do registro prévio da campanha e a rejeição do CK com hash inesperado antes da criação de resultados. Um ensaio completo em cópia Git temporária e limpa executou uma repetição de build, uma inicialização com HTTP 200 e uma análise CK que retornou 41 tipos e os cinco arquivos esperados. O WAR foi identificado por SHA-256. A cópia e os resultados temporários foram removidos; essas execuções são validação dos instrumentos e não integram as amostras do experimento.
+- **Pendências:** revisar as alterações, selecionar e marcar o snapshot pré-migração, executar a campanha somente após autorização e atualizar o texto com os novos resultados.
+
 ## Próximas evidências necessárias
 
 | Pendência | Evidência esperada |
 | --- | --- |
 | Reconciliar linha de base | Arquivos medidos identificados e divergência explicada, ou nova coleta documentada |
 | Padronizar ou justificar Maven | Versão efetiva nos coletores de cada aplicação |
-| Implementar prazo | Testes aprovados mantendo os cenários |
-| Integrar feriados | Cliente e cache testados, preservando anos de consulta |
 | Expor políticas e criar ACL | Contratos e testes de integração |
 | Comparar comportamentos | Cenários equivalentes executados nas duas versões |
 | Preparar coletores | Monólito, serviço e conjunto medidos com critérios explícitos |

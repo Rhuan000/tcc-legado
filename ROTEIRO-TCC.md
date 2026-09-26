@@ -34,6 +34,10 @@ não deverá acessar diretamente as tabelas de empréstimo.
    primária.
 5. Criar uma tag como `experimento/pre-migracao` depois que o estado estiver
    limpo e reproduzível.
+6. Atribuir um identificador único a cada campanha e recusar a reutilização de
+   diretórios que já contenham resultados.
+7. Executar eventual recoleta em worktree do snapshot pré-migração, mantendo os
+   CSVs históricos separados e sem reclassificá-los como dados da nova rodada.
 
 Critério de saída: dez medições válidas de build e inicialização, uma coleta de
 CBO e nenhuma alteração de produção não documentada.
