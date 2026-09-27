@@ -5,8 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public record MultaRequestDTO(
-        @NotNull LocalDate dataPrevista,
-        @NotBlank String tipoUsuario,
-        @NotNull LocalDate dataReferencia) {
+public record PrazoRequestDTO(
+        @NotNull LocalDate dataEmprestimo,
+        @NotBlank String tipoUsuario) {
 }

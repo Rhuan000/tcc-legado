@@ -96,6 +96,18 @@ Cada entrada distingue fato observado, decisão e interpretação. Atividades pl
 - **Validação e resultado:** `mvnw.cmd -B clean test` executou 71 testes, sem falhas, erros ou testes ignorados. Quatro testes isolados verificam cache por ano, nova tentativa depois de falha e remoção de duplicatas.
 - **Limitações e pendências:** os testes do calendário substituem o cliente por uma implementação local e não validam ainda o contrato HTTP ou a desserialização da BrasilAPI. O monólito ainda não chama o serviço; não há comparação executada entre as duas aplicações.
 
+### 26/09/2026 Validação do contrato HTTP da BrasilAPI
+
+- **Data de registro:** 26/09/2026.
+- **Tipo:** contemporâneo.
+- **Estado do experimento:** extração das políticas de empréstimo.
+- **Problema:** os testes existentes validavam cache e calendário com uma implementação Java local do cliente, mas não exercitavam a montagem da requisição HTTP nem a desserialização JSON. A inspeção da documentação oficial também mostrou que a rota correta é `/feriados/v1/{ano}`, enquanto o cliente continha o prefixo indevido `/api`.
+- **Decisão:** corrigir a rota e testar o cliente REST real do Quarkus contra um servidor WireMock iniciado em porta dinâmica. O teste não consulta a internet e não altera o monólito.
+- **Justificativa:** separar a caracterização das regras de negócio da validação do contrato da dependência externa. O servidor simulado torna o teste determinístico e permite controlar respostas de sucesso, lista vazia e erro HTTP.
+- **Referências técnicas:** documentação oficial da BrasilAPI (`https://brasilapi.com.br/docs`) e guia oficial do REST Client do Quarkus (`https://quarkus.io/guides/rest-client`).
+- **Validação e resultado:** `mvnw.cmd -B test` executou 74 testes, sem falhas, erros ou testes ignorados. Três testes HTTP verificam a rota exata, a conversão dos campos `date`, `name` e `type`, a lista vazia e a propagação de status 500.
+- **Limitações:** o teste verifica o contrato documentado por meio de respostas simuladas; ele não demonstra disponibilidade da BrasilAPI real nem substitui monitoramento da integração em execução.
+
 ### 26/09/2026 Consolidação dos dois pontos de coleta quantitativa
 
 - **Data de registro:** 26/09/2026.

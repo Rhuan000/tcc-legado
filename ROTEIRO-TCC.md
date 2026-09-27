@@ -91,9 +91,13 @@ Commit sugerido: `refactor: amplia recorte para o dominio de emprestimos`.
    `CalendarioService` mantém listas imutáveis por ano. Falhas não são
    armazenadas, permitindo nova tentativa na próxima chamada. Quatro testes
    cobrem reutilização do cache, separação por ano, nova tentativa após falha e
-   remoção de duplicatas. Validação com `mvnw.cmd -B clean test`: 71 testes
+   remoção de duplicatas. O contrato HTTP da BrasilAPI também foi validado com
+   WireMock: três testes exercitam a rota documentada `/feriados/v1/{ano}`, a
+   desserialização de data e demais campos, uma lista vazia e a propagação de
+   erro HTTP. Essa validação identificou e corrigiu o prefixo indevido `/api`
+   que existia no cliente. Validação com `mvnw.cmd -B test`: 74 testes
    aprovados, sem falhas, erros ou testes ignorados. A exposição dos contratos
-   HTTP permanece no item 4.
+   HTTP próprios do microsserviço permanece no item 4.
 4. Expor contratos para cálculo de prazo e multa.
 5. Criar no monólito uma Anti-Corruption Layer que converta seus modelos em
    requisições HTTP.
