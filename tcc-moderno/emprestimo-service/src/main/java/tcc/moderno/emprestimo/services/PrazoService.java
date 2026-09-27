@@ -1,8 +1,11 @@
 package tcc.moderno.emprestimo.services;
 
+import jakarta.enterprise.context.ApplicationScoped;
+
 import java.time.LocalDate;
 import java.util.List;
 
+@ApplicationScoped
 public class PrazoService {
 
     /**

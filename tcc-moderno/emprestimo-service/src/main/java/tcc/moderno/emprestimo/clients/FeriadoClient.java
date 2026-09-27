@@ -10,7 +10,7 @@ import tcc.moderno.emprestimo.dtos.FeriadoResponseDTO;
 
 import java.util.List;
 
-@Path("/api/feriados/v1")
+@Path("/feriados/v1")
 @Produces(MediaType.APPLICATION_JSON)
 @RegisterRestClient(configKey = "feriado-api")
 public interface FeriadoClient {
