@@ -13,7 +13,6 @@ import javax.enterprise.context.ApplicationScoped;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 @ApplicationScoped
@@ -22,10 +21,10 @@ public class EmprestimoAcl {
     private static final int TIMEOUT_MILLIS = 3000;
     private static final String URL_PADRAO = "http://localhost:8081";
 
-    private final String urlCalculoPrazo;
+    private final String urlBase;
 
     public EmprestimoAcl() {
-        this.urlCalculoPrazo = resolverUrlBase() + "/prazos/calcular";
+        this.urlBase = resolverUrlBase();
     }
 
     /**
@@ -33,15 +32,49 @@ public class EmprestimoAcl {
      * serviço de empréstimos, sem compartilhar DTOs entre as aplicações.
      */
     public Date calcularDataPrevista(Date dataEmprestimo, String tipoUsuario) {
-        LocalDate dataLocal = dataEmprestimo.toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-
         JSONObject requisicao = new JSONObject()
-                .put("dataEmprestimo", dataLocal.toString())
+                .put("dataEmprestimo", paraLocalDate(dataEmprestimo).toString())
                 .put("tipoUsuario", tipoUsuario);
 
-        HttpPost post = new HttpPost(urlCalculoPrazo);
+        JSONObject resposta = executarPost(
+                "/prazos/calcular", requisicao, "calcular o prazo");
+
+        try {
+            LocalDate dataPrevista = LocalDate.parse(resposta.getString("dataPrevista"));
+            return Date.from(dataPrevista.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        } catch (RuntimeException e) {
+            throw respostaInvalida("calcular o prazo", e);
+        }
+    }
+
+    public double calcularMulta(Date dataPrevista, String tipoUsuario,
+                                Date dataReferencia) {
+        JSONObject requisicao = new JSONObject()
+                .put("dataPrevista", paraLocalDate(dataPrevista).toString())
+                .put("tipoUsuario", tipoUsuario)
+                .put("dataReferencia", paraLocalDate(dataReferencia).toString());
+
+        JSONObject resposta = executarPost(
+                "/multas/calcular", requisicao, "calcular a multa");
+
+        try {
+            Object campo = resposta.get("valor");
+            if (!(campo instanceof Number)) {
+                throw new IllegalArgumentException("valor deve ser um número JSON");
+            }
+            double valor = ((Number) campo).doubleValue();
+            if (!Double.isFinite(valor) || valor < 0) {
+                throw new IllegalArgumentException("valor deve ser finito e não negativo");
+            }
+            return valor;
+        } catch (RuntimeException e) {
+            throw respostaInvalida("calcular a multa", e);
+        }
+    }
+
+    private JSONObject executarPost(String caminho, JSONObject requisicao,
+                                    String operacao) {
+        HttpPost post = new HttpPost(urlBase + caminho);
         post.setConfig(RequestConfig.custom()
                 .setConnectTimeout(TIMEOUT_MILLIS)
                 .setConnectionRequestTimeout(TIMEOUT_MILLIS)
@@ -60,17 +93,27 @@ public class EmprestimoAcl {
                 }
                 return corpo;
             });
-
-            String dataPrevista = new JSONObject(resposta).getString("dataPrevista");
-            LocalDate dataPrevistaLocal = LocalDate.parse(dataPrevista);
-            return Date.from(dataPrevistaLocal.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        } catch (IOException | DateTimeParseException e) {
+            return new JSONObject(resposta);
+        } catch (IOException e) {
             throw new IllegalStateException(
-                    "Não foi possível calcular o prazo no serviço de empréstimos", e);
+                    "Não foi possível " + operacao + " no serviço de empréstimos", e);
         } catch (RuntimeException e) {
-            throw new IllegalStateException(
-                    "Resposta inválida do serviço de empréstimos", e);
+            throw respostaInvalida(operacao, e);
         }
+    }
+
+    private static LocalDate paraLocalDate(Date data) {
+        // JDBC devolve java.sql.Date, cujo toInstant() não é suportado.
+        if (data instanceof java.sql.Date) {
+            return ((java.sql.Date) data).toLocalDate();
+        }
+        return data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    private static IllegalStateException respostaInvalida(
+            String operacao, RuntimeException causa) {
+        return new IllegalStateException(
+                "Resposta inválida do serviço de empréstimos ao " + operacao, causa);
     }
 
     private static String resolverUrlBase() {

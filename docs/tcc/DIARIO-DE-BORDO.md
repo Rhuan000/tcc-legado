@@ -158,13 +158,32 @@ Cada entrada distingue fato observado, decisão e interpretação. Atividades pl
 - **Decisão de medição:** os estados intermediários permanecem documentados por código, commits e evidências funcionais, sem campanha quantitativa própria. A comparação principal continuará entre a linha de base pré-migração e o estado final pós-migração.
 - **Limitações e pendências:** a validação ponta a ponta com as duas aplicações em execução ainda deve ser registrada. A ACL de multa e a substituição do cálculo local correspondente permanecem para a próxima fatia.
 
+### 28/09/2026 Conclusão da ACL das políticas de empréstimo
+
+- **Data de registro:** 28/09/2026.
+- **Tipo:** contemporâneo.
+- **Estado do experimento:** extração das políticas de empréstimo.
+- **Decisão:** ampliar a mesma ACL para `POST /multas/calcular` e substituir o cálculo local tanto na devolução quanto na atualização periódica. A comunicação HTTP comum permaneceu centralizada, sem criar DTOs compartilhados, interfaces sem segunda implementação ou classes de teste no monólito.
+- **Remoções:** `EmprestimoService` deixou de conhecer calendário, dias úteis, cache de feriados e cliente da BrasilAPI. O `FeriadoClient` legado foi removido; `CacheGlobal` foi preservado porque ainda atende livros, mas perdeu os membros exclusivos de feriados.
+- **Validação e resultado:** o WAR foi gerado com sucesso pelo JDK 8 do protocolo, compilando 40 classes de produção. Os 78 testes do microsserviço passaram sem falhas, erros ou testes ignorados. Uma verificação temporária, fora da árvore de fontes, executou a ACL contra um servidor HTTP local e confirmou os JSONs e as respostas de prazo (`2026-01-12`) e multa (`4.0`).
+- **Acoplamento:** a dependência remota não foi eliminada; foi concentrada em uma fronteira explícita. A redução ou o aumento quantitativo de CBO não é inferido desta alteração e será verificado somente na campanha pós-migração.
+- **Limitações e pendências:** o smoke test valida a tradução HTTP da ACL, mas não substitui uma execução ponta a ponta pelo Struts, EJB, banco e microsserviço. Essa execução ainda é necessária antes de encerrar formalmente o Estado 2.
+
+### 28/09/2026 Revisão crítica e validação integrada das políticas
+
+- **Tipo:** contemporâneo; alterações ainda sem commit, sobre `374e7e8`.
+- **Correções:** conversão de `java.sql.Date` por `toLocalDate()`, pois `toInstant()` falha nesse tipo; rejeição de multa que não seja número JSON finito e não negativo.
+- **Validação interna:** build limpo do WAR no JDK 8 e 78 testes do serviço aprovados. Em ambiente isolado, foram conferidos criação para os três tipos de usuário, devolução, multas, estoque e atualização manual pelo EJB usado pelo job. Nos cenários de indisponibilidade do serviço, criação e devolução não foram persistidas. Nenhuma classe de teste foi adicionada ao monólito; os auxiliares temporários não integram o repositório.
+- **Limites:** calendário sintético; sem comparação executada contra a baseline. Disparo automático do Quartz, timeout de leitura e falhas intermediárias de escrita ainda não validados.
+- **Métricas:** identificada subcontagem de dependências de records no CK; ressalva e condição para a coleta final registradas em `medicoes/README.md`. Mantidas duas campanhas quantitativas.
+
 ## Próximas evidências necessárias
 
 | Pendência | Evidência esperada |
 | --- | --- |
-| Reconciliar linha de base | Arquivos medidos identificados e divergência explicada, ou nova coleta documentada |
-| Padronizar ou justificar Maven | Versão efetiva nos coletores de cada aplicação |
-| Concluir ACL de multa | Cálculo local substituído e fluxo ponta a ponta validado |
+| Resolver CK para records | Instrumento validado para os dois snapshots e mesmas regras de análise |
+| Aplicar Maven fixado às coletas finais | Maven 3.9.11 explícito e versão efetiva registrada nos três escopos |
+| Completar falhas e agendamento do Estado 2 | Timeout de leitura e disparo automático do Quartz |
 | Comparar comportamentos | Cenários equivalentes executados nas duas versões |
 | Preparar coletores | Monólito, serviço e conjunto medidos com critérios explícitos |
 | Migrar dados e consumidores | Auditoria sem acesso direto remanescente, incluindo destaques |

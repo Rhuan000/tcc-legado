@@ -7,12 +7,9 @@ import tcc.legado.dao.UsuarioDAO;
 import tcc.legado.model.Emprestimo;
 import tcc.legado.model.Livro;
 import tcc.legado.model.Usuario;
-import tcc.legado.util.CacheGlobal;
-import tcc.legado.util.FeriadoClient;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -77,16 +74,6 @@ public class EmprestimoService {
         return emp;
     }
 
-    private boolean isDiaUtil(LocalDate data, List<LocalDate> feriados) {
-        // Fim de semana (sábado = 6, domingo = 7)
-        if (data.getDayOfWeek().getValue() > 5) {
-            return false;
-        }
-        // Feriado nacional
-        return !feriados.contains(data);
-    }
-
-
     public void registrarDevolucao(Long idEmprestimo) {
         Emprestimo emp = emprestimoDAO.buscarPorId(idEmprestimo);
         if (emp == null) {
@@ -104,8 +91,8 @@ public class EmprestimoService {
         Date hoje = new Date();
         emp.setDataDevolucaoReal(hoje);
 
-        double multa = calcularMulta(emp, usuario.getTipo(),
-                new java.sql.Date(hoje.getTime()).toLocalDate());
+        double multa = emprestimoAcl.calcularMulta(
+                emp.getDataPrevistaDevolucao(), usuario.getTipo(), hoje);
         emp.setMulta(multa);
 
         emprestimoDAO.atualizarDevolucao(emp.getId(), hoje, multa);
@@ -120,76 +107,17 @@ public class EmprestimoService {
         LOG.info("Devolução registrada: Empréstimo ID " + idEmprestimo + ", Multa: R$ " + multa);
     }
 
-    // =========================================================
-    // CÁLCULO DE MULTA (considerando apenas dias úteis de atraso)
-    // =========================================================
     public void atualizarMultasAtrasadas() {
-        LocalDate hoje = LocalDate.now();
+        Date hoje = new Date();
         for (Emprestimo emp : emprestimoDAO.buscarAtrasados()) {
             Usuario usuario = usuarioDAO.buscarPorId(emp.getIdUsuario());
             if (usuario == null) {
                 throw new IllegalStateException("Usuario do emprestimo nao encontrado: " + emp.getId());
             }
-            double multa = calcularMulta(emp, usuario.getTipo(), hoje);
+            double multa = emprestimoAcl.calcularMulta(
+                    emp.getDataPrevistaDevolucao(), usuario.getTipo(), hoje);
             emprestimoDAO.atualizarMulta(emp.getId(), multa);
         }
-    }
-
-    private double calcularMulta(Emprestimo emp, String tipoUsuario, LocalDate dataReferencia) {
-
-        // Converte java.sql.Date para java.util.Date e depois para LocalDate
-        Date dataPrevistaUtil = emp.getDataPrevistaDevolucao(); // já é java.util.Date?
-
-        // Se forem java.sql.Date, converta:
-        LocalDate dataPrevista = new java.sql.Date(dataPrevistaUtil.getTime()).toLocalDate();
-        
-
-        // Se devolveu antes ou no dia, sem multa
-        if (!dataReferencia.isAfter(dataPrevista)) {
-            return 0.0;
-        }
-
-        // VENENO: busca feriados do cache para o ano da data prevista
-        int ano = dataPrevista.getYear();
-        if (CacheGlobal.getAnoCorrente() != ano || CacheGlobal.getFeriados().isEmpty()) {
-            LOG.info("Cache de feriados desatualizado. Buscando para o ano " + ano);
-            List<LocalDate> feriados = FeriadoClient.buscarFeriados(ano);
-            CacheGlobal.setAnoCorrente(ano);
-            CacheGlobal.setFeriados(feriados);
-        }
-        List<LocalDate> feriados = CacheGlobal.getFeriados();
-
-        // Conta quantos dias úteis (excluindo feriados) de atraso
-        long diasUteisAtraso = 0;
-        LocalDate cursor = dataPrevista.plusDays(1);
-        while (!cursor.isAfter(dataReferencia)) {
-            if (isDiaUtil(cursor, feriados)) {
-                diasUteisAtraso++;
-            }
-            cursor = cursor.plusDays(1);
-        }
-
-        if (diasUteisAtraso <= 0) {
-            return 0.0;
-        }
-
-        // Valor da multa por dia útil de atraso
-        double valorDia;
-        switch (tipoUsuario) {
-            case "PROFESSOR":
-                valorDia = 0.50;
-                break;
-            case "BOLSISTA":
-                valorDia = 1.00;
-                break;
-            default:
-                valorDia = 2.00;
-                break;
-        }
-
-        double multa = diasUteisAtraso * valorDia;
-        LOG.info("Multa calculada: " + multa + " (" + diasUteisAtraso + " dias úteis de atraso)");
-        return multa;
     }
 
     // =========================================================
