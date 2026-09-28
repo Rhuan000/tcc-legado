@@ -1,5 +1,6 @@
 package tcc.legado.service;
 
+import tcc.legado.acl.EmprestimoAcl;
 import tcc.legado.dao.EmprestimoDAO;
 import tcc.legado.dao.LivroDAO;
 import tcc.legado.dao.UsuarioDAO;
@@ -12,7 +13,6 @@ import tcc.legado.util.FeriadoClient;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -34,6 +34,9 @@ public class EmprestimoService {
     @Inject
     private LivroService livroService; // VENENO: dependência circular
 
+    @Inject
+    private EmprestimoAcl emprestimoAcl;
+
     public Emprestimo criarEmprestimo(Long idLivro, String matricula) {
         Livro livro = livroDAO.buscarPorId(idLivro);
         Usuario usuario = usuarioDAO.buscarPorMatricula(matricula);
@@ -51,24 +54,12 @@ public class EmprestimoService {
         Emprestimo emp = new Emprestimo();
         emp.setIdLivro(livro.getId());
         emp.setIdUsuario(usuario.getId());
-        emp.setDataEmprestimo(new Date());
+        Date dataEmprestimo = new Date();
+        emp.setDataEmprestimo(dataEmprestimo);
 
-        // Prazo em DIAS ÚTEIS: 7 para ALUNO, 14 para PROFESSOR, 10 para BOLSISTA
-        int diasUteisPrazo;
-        switch (usuario.getTipo()) {
-            case "PROFESSOR":
-                diasUteisPrazo = 14;
-                break;
-            case "BOLSISTA":
-                diasUteisPrazo = 10;
-                break;
-            default:
-                diasUteisPrazo = 7;
-                break;
-        }
-
-        // VENENO: calcula data prevista consultando API de feriados (via cache)
-        Date dataPrevista = calcularDataPrevistaComFeriados(diasUteisPrazo);
+        // A ACL mantém o modelo legado isolado do contrato HTTP do microsserviço.
+        Date dataPrevista = emprestimoAcl.calcularDataPrevista(
+                dataEmprestimo, usuario.getTipo());
         emp.setDataPrevistaDevolucao(dataPrevista);
         emp.setMulta(0.0);
 
@@ -85,36 +76,6 @@ public class EmprestimoService {
         LOG.info("Empréstimo criado com sucesso: ID " + emp.getId());
         return emp;
     }
-
-
-    private Date calcularDataPrevistaComFeriados(int diasUteis) {
-        LocalDate dataAtual = LocalDate.now();
-        int ano = dataAtual.getYear();
-
-        // VENENO: verifica se o cache está atualizado para o ano corrente
-        // Se não estiver, busca na API externa e atualiza o cache global
-        if (CacheGlobal.getAnoCorrente() != ano || CacheGlobal.getFeriados().isEmpty()) {
-            LOG.info("Cache de feriados desatualizado ou vazio. Buscando na API para o ano " + ano);
-            List<LocalDate> feriados = FeriadoClient.buscarFeriados(ano);
-            CacheGlobal.setAnoCorrente(ano);
-            CacheGlobal.setFeriados(feriados);
-        }
-
-        List<LocalDate> feriados = CacheGlobal.getFeriados();
-        LocalDate dataPrevista = dataAtual;
-
-        while (diasUteis > 0) {
-            dataPrevista = dataPrevista.plusDays(1);
-            // Verifica se é dia útil (segunda a sexta) E não é feriado
-            if (isDiaUtil(dataPrevista, feriados)) {
-                diasUteis--;
-            }
-        }
-
-        LOG.info("Data prevista calculada (com feriados): " + dataPrevista);
-        return Date.from(dataPrevista.atStartOfDay(ZoneId.systemDefault()).toInstant());
-    }
-
 
     private boolean isDiaUtil(LocalDate data, List<LocalDate> feriados) {
         // Fim de semana (sábado = 6, domingo = 7)

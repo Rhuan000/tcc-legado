@@ -146,13 +146,25 @@ Cada entrada distingue fato observado, decisão e interpretação. Atividades pl
 - **Limite:** a prontidão de inicialização continua definida como primeira resposta HTTP 200 do endpoint `/health`; ela não demonstra disponibilidade funcional do banco ou de integrações externas. Diferenças temporais entre campanhas não são efeito da migração, pois ambas representam o estado pré-migração.
 - **Pendências:** revisar e versionar os novos registros, criar a referência Git da linha de base somente após aprovação e atualizar o texto acadêmico com a distinção entre campanha histórica e recoleta.
 
+### 28/09/2026 Primeira integração do monólito pela ACL
+
+- **Data de registro:** 28/09/2026.
+- **Tipo:** contemporâneo.
+- **Estado do experimento:** extração das políticas de empréstimo.
+- **Fato observado:** o monólito calculava o prazo e consultava feriados diretamente dentro de `EmprestimoService`; o microsserviço já expunha o contrato funcional de prazo.
+- **Decisão:** criar uma Anti-Corruption Layer de produção no monólito para traduzir `Date` e o tipo do usuário para JSON, consumir `POST /prazos/calcular` e converter `dataPrevista` novamente para `Date`. O cálculo local de prazo foi removido, enquanto multa, persistência, criação e devolução permanecem no monólito nesta fatia.
+- **Configuração:** o serviço usa a porta local 8081. A URL pode ser sobrescrita pela propriedade de sistema `emprestimo.service.url` ou pela variável `EMPRESTIMO_SERVICE_URL`. Conexão, espera por conexão e leitura têm limite de três segundos; erro HTTP, indisponibilidade ou resposta inválida interrompem a operação, sem fallback silencioso.
+- **Validação e resultado:** o monólito gerou o WAR com sucesso usando o JDK 8 definido no protocolo; não foram adicionadas classes de teste ao legado. A suíte do microsserviço executou 78 testes, sem falhas, erros ou testes ignorados.
+- **Decisão de medição:** os estados intermediários permanecem documentados por código, commits e evidências funcionais, sem campanha quantitativa própria. A comparação principal continuará entre a linha de base pré-migração e o estado final pós-migração.
+- **Limitações e pendências:** a validação ponta a ponta com as duas aplicações em execução ainda deve ser registrada. A ACL de multa e a substituição do cálculo local correspondente permanecem para a próxima fatia.
+
 ## Próximas evidências necessárias
 
 | Pendência | Evidência esperada |
 | --- | --- |
 | Reconciliar linha de base | Arquivos medidos identificados e divergência explicada, ou nova coleta documentada |
 | Padronizar ou justificar Maven | Versão efetiva nos coletores de cada aplicação |
-| Expor políticas e criar ACL | Contratos e testes de integração |
+| Concluir ACL de multa | Cálculo local substituído e fluxo ponta a ponta validado |
 | Comparar comportamentos | Cenários equivalentes executados nas duas versões |
 | Preparar coletores | Monólito, serviço e conjunto medidos com critérios explícitos |
 | Migrar dados e consumidores | Auditoria sem acesso direto remanescente, incluindo destaques |
