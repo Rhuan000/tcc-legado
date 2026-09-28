@@ -34,10 +34,55 @@ diferentes do codigo. O registro inicial tambem recusa um identificador cuja
 pasta de campanha ja exista e armazena sistema operacional, arquitetura,
 processador, memoria fisica e versao do PowerShell.
 
-O protocolo usa dez repeticoes independentes para tempo de build e tempo de
+O protocolo usa dez repeticoes por estado para tempo de build e tempo de
 inicializacao. O CBO e coletado uma unica vez por estado, pois e uma metrica
 estatica e deterministica para o mesmo codigo-fonte e a mesma versao da
 ferramenta.
+
+## Interpretacao e fechamento do protocolo
+
+O estudo avalia a modernizacao deste sistema demonstrativo como um conjunto:
+extracao, refatoracao, framework e runtime mudam simultaneamente. Nao isola
+causalmente o efeito dos microsservicos nem estabelece superioridade sobre
+um monolito modularizado. Os problemas do legado foram construidos para o
+estudo; a generalizacao para sistemas industriais e limitada.
+
+As dez repeticoes descrevem variabilidade local. Nao representam dez sistemas
+independentes. Relatar amostras, mediana, media, dispersao e diferencas absolutas
+e relativas; nao inferir significancia ou independencia apenas pelo numero dez.
+
+O CBO representa dependencias estaticas entre tipos, nao todas as dependencias
+distribuidas. Documentar tambem contratos HTTP, dependencias de disponibilidade
+e propriedade dos dados. Nao escolher classes, interfaces ou DTOs para diminuir
+a metrica. Excluir testes do escopo e apresentar numero de tipos e distribuicao,
+alem da media. A media conjunta deve ser ponderada pelo numero de tipos, e nao
+a soma das medias. Antes da coleta final, verificar suporte do CK fixado a todos
+os tipos usados, incluindo records; omissoes invalidam a comparacao. Uma troca
+de ferramenta exige reanalisar os dois snapshots, preservando os dados antigos.
+
+Para as campanhas, usar Maven 3.9.11 explicitamente nas duas aplicacoes; o
+Wrapper 3.9.16 do microsservico pode continuar no desenvolvimento. Registrar o
+executavel e a versao efetiva. Manter JDK 8 no monolito e JDK 21 no servico e
+reconhecer essa diferenca como parte da modernizacao.
+
+O tempo de `clean package` inclui testes quando existentes e empacotamento.
+No servico, inclui a suite; no legado, nao existe suite interna. Relatar como
+tempo do processo de build completo, sem atribuir a diferenca apenas ao
+compilador ou a arquitetura. Dependencias devem estar previamente resolvidas.
+
+Inicializacao significa disponibilidade HTTP, sem exigir banco ou BrasilAPI
+apenas de um dos lados. Fixar antes da campanha os endpoints equivalentes e a
+ordem de partida do conjunto; medir seu tempo de parede ate ambas as aplicacoes
+responderem, sem somar tempos isolados e chama-los de medicao conjunta. Validar
+funcionamento separadamente. Os coletores finais ainda precisam implementar
+esses criterios e ser verificados antes da coleta pos-migracao.
+
+Verificação em 28/09/2026 identificou uma limitação no CK fixado: um componente
+de record com dependência de outro tipo recebeu CBO zero, enquanto o campo
+equivalente de uma classe recebeu um, em verificação interna com uma amostra
+mínima. Resolver esse ponto antes da coleta final. Caso seja necessário trocar
+o instrumento, reanalisar ambos os
+snapshots; a coleta temporal original não precisa ser descartada por esse motivo.
 
 ## Ambiente de referencia
 

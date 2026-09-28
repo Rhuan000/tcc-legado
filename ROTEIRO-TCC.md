@@ -7,6 +7,12 @@ monólito Java EE para um microsserviço Quarkus, utilizando o padrão Strangler
 Fig. Serão observados CBO, tempo de build e tempo de inicialização, sem assumir
 previamente que todas as métricas melhorarão.
 
+Trata-se de um sistema demonstrativo com características legadas construídas
+para o estudo. Os resultados descrevem a modernização nesse ambiente, incluindo
+mudanças de framework e runtime; não isolam o efeito causal dos microsserviços.
+CBO caracteriza dependências estáticas entre tipos, não todo o acoplamento
+distribuído. A comparação não estabelece superioridade sobre um monólito modular.
+
 O cálculo de multa é a primeira fatia da migração, e não o limite final do
 microsserviço.
 
@@ -105,18 +111,24 @@ Commit sugerido: `refactor: amplia recorte para o dominio de emprestimos`.
    Validação com `mvnw.cmd -B test`: 78 testes aprovados.
 5. Criar no monólito uma Anti-Corruption Layer que converta seus modelos em
    requisições HTTP.
-   Em andamento: a primeira fatia converte `Date` e o tipo do usuário para o
-   contrato de prazo e converte a resposta novamente para o modelo legado. O
-   cálculo local de prazo foi removido; a multa permanece local até a próxima
-   fatia.
+   Implementação concluída: a ACL converte `Date` e o tipo do usuário para os
+   contratos de prazo e multa e traduz as respostas para os tipos esperados
+   pelo legado. Criação, devolução e atualização periódica continuam sendo
+   orquestradas pelo monólito, mas seus cálculos usam o microsserviço.
 6. Manter persistência, criação e devolução no monólito nesta etapa.
 7. Prever timeout, indisponibilidade e respostas inválidas do serviço.
-   Em andamento: a chamada de prazo limita conexão, espera por conexão e
-   leitura a três segundos e converte falhas HTTP ou respostas inválidas em
-   erro da integração. A mesma política ainda será aplicada à multa.
+   Concluído para as políticas: prazo e multa limitam conexão, espera por
+   conexão e leitura a três segundos e convertem falhas HTTP ou respostas
+   inválidas em erro da integração, sem fallback silencioso.
 
 Critério de saída: o monólito usa o microsserviço para prazo e multa, com testes
 de contrato e comportamento preservado.
+
+Evidência em 28/09/2026: criação e devolução por Struts/EJB/banco/serviço e o
+método de atualização usado pelo job foram exercitados em ambiente isolado.
+Registro resumido: `docs/tcc/DIARIO-DE-BORDO.md`, entrada de validação integrada.
+O cron automático e timeout de leitura ainda não foram exercitados. A evidência
+não é uma comparação executada entre as duas versões nem equivalência irrestrita.
 
 Esse é o estado intermediário da arquitetura. Após estabilizá-lo, registrar os
 contratos, commits, testes e fluxos validados, sem realizar uma campanha
@@ -152,6 +164,11 @@ Critério de saída: toda a capacidade de empréstimos é atendida pelo novo
 serviço, e o monólito não possui lógica nem acesso direto aos seus dados.
 
 ## Estado 5 — fechar o experimento
+
+Pré-condição: resolver a limitação de CBO em componentes de records observada
+no CK fixado. Validar instrumento e coletores dos três escopos antes da coleta.
+Se mudar o CK, reanalisar os dois snapshots com o mesmo instrumento e preservar
+os resultados anteriores. Não adaptar o código de produção para favorecer CBO.
 
 1. Executar dez builds limpos do monólito residual.
 2. Executar dez builds limpos do microsserviço.
