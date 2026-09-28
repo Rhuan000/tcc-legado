@@ -139,3 +139,13 @@ Table "emprestimo" {
 
 Ref "fk_emprestimo_livro" : "livro"."id" < "emprestimo"."id_livro"
 Ref "fk_emprestimo_usuario" : "usuario"."id" < "emprestimo"."id_usuario"
+```
+
+## Integração com o serviço de empréstimos
+
+O cálculo de prazo é consumido do `emprestimo-service` pela Anti-Corruption
+Layer do monólito. Por padrão, o serviço é procurado em
+`http://localhost:8081`. A URL pode ser alterada por uma destas configurações:
+
+- variável de ambiente `EMPRESTIMO_SERVICE_URL`;
+- propriedade da JVM `-Demprestimo.service.url=http://host:porta`.

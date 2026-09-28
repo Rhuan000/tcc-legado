@@ -99,10 +99,21 @@ Commit sugerido: `refactor: amplia recorte para o dominio de emprestimos`.
    aprovados, sem falhas, erros ou testes ignorados. A exposição dos contratos
    HTTP próprios do microsserviço permanece no item 4.
 4. Expor contratos para cálculo de prazo e multa.
+   Concluído: `POST /prazos/calcular` e `POST /multas/calcular` recebem contratos
+   JSON próprios, validam os campos obrigatórios, consultam o calendário no ano
+   preservado do legado e delegam as regras aos serviços já caracterizados.
+   Validação com `mvnw.cmd -B test`: 78 testes aprovados.
 5. Criar no monólito uma Anti-Corruption Layer que converta seus modelos em
    requisições HTTP.
+   Em andamento: a primeira fatia converte `Date` e o tipo do usuário para o
+   contrato de prazo e converte a resposta novamente para o modelo legado. O
+   cálculo local de prazo foi removido; a multa permanece local até a próxima
+   fatia.
 6. Manter persistência, criação e devolução no monólito nesta etapa.
 7. Prever timeout, indisponibilidade e respostas inválidas do serviço.
+   Em andamento: a chamada de prazo limita conexão, espera por conexão e
+   leitura a três segundos e converte falhas HTTP ou respostas inválidas em
+   erro da integração. A mesma política ainda será aplicada à multa.
 
 Critério de saída: o monólito usa o microsserviço para prazo e multa, com testes
 de contrato e comportamento preservado.
@@ -117,12 +128,14 @@ pré-migração e pós-migração.
 1. Implementar entidade e repositório de empréstimos no novo serviço.
 2. Migrar busca por identificador, listagem e consulta de atrasados.
 3. Fazer o `EmprestimoAction` consultar a API em vez do EJB.
-4. Impedir novos acessos do monólito à tabela de empréstimos.
-5. Manter o banco na mesma instância, atribuindo propriedade lógica exclusiva
-   da tabela ao microsserviço.
+4. Redirecionar as leituras do monólito para a API, mantendo temporariamente as
+   escritas legadas necessárias à criação e devolução até o Estado 4.
+5. Manter o banco na mesma instância e preparar a propriedade lógica exclusiva
+   da tabela pelo microsserviço após a migração dos comandos.
 
-Critério de saída: leituras e persistência de empréstimos pertencem ao serviço;
-o monólito atua como cliente e adaptador da interface legada.
+Critério de saída: consultas e seu acesso à persistência pertencem ao serviço;
+o monólito atua como cliente para leituras, com as escritas remanescentes
+explicitamente transitórias até o Estado 4.
 
 ## Estado 4 — migrar criação, devolução e job
 
