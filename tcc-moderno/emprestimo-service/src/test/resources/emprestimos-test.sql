@@ -9,3 +9,12 @@ CREATE TABLE emprestimo (
     data_devolucao_real DATE,
     multa DECIMAL(10,2) DEFAULT 0.00
 );
+
+CREATE TABLE emprestimo_operacao (
+    chave VARCHAR(100) PRIMARY KEY,
+    tipo VARCHAR(12) NOT NULL CHECK (tipo IN ('CRIAR','DEVOLVER')),
+    id_emprestimo BIGINT NOT NULL,
+    dados TEXT NOT NULL,
+    estado VARCHAR(12) NOT NULL CHECK (estado IN ('PENDENTE','CONCLUIDA','REJEITADA')),
+    criado_em TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
