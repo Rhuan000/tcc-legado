@@ -34,7 +34,7 @@ public class CalendarioService {
 
     private List<LocalDate> consultarFeriados(int ano) {
         return feriadoClient.buscarFeriados(ano).stream()
-                .map(FeriadoResponseDTO::date)
+                .map(FeriadoResponseDTO::getDate)
                 .distinct()
                 .toList();
     }
