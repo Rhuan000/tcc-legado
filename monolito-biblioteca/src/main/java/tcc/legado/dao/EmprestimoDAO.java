@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.util.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 public class EmprestimoDAO {
 
@@ -66,74 +64,5 @@ public class EmprestimoDAO {
         } catch (SQLException e) {
             throw new IllegalStateException("Falha ao atualizar multa do emprestimo " + idEmprestimo, e);
         }
-    }
-
-    public List<Emprestimo> listarTodos() {
-        List<Emprestimo> lista = new ArrayList<>();
-        String sql = "SELECT * FROM emprestimo ORDER BY id";
-        try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                Emprestimo e = new Emprestimo();
-                e.setId(rs.getLong("id"));
-                e.setIdLivro(rs.getLong("id_livro"));
-                e.setIdUsuario(rs.getLong("id_usuario"));
-                e.setDataEmprestimo(rs.getDate("data_emprestimo"));
-                e.setDataPrevistaDevolucao(rs.getDate("data_prevista_devolucao"));
-                e.setDataDevolucaoReal(rs.getDate("data_devolucao_real"));
-                e.setMulta(rs.getDouble("multa"));
-                lista.add(e);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return lista;
-    }
-
-    public Emprestimo buscarPorId(Long id) {
-        String sql = "SELECT * FROM emprestimo WHERE id = ?";
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setLong(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Emprestimo e = new Emprestimo();
-                e.setId(rs.getLong("id"));
-                e.setIdLivro(rs.getLong("id_livro"));
-                e.setIdUsuario(rs.getLong("id_usuario"));
-                e.setDataEmprestimo(rs.getDate("data_emprestimo"));
-                e.setDataPrevistaDevolucao(rs.getDate("data_prevista_devolucao"));
-                e.setDataDevolucaoReal(rs.getDate("data_devolucao_real"));
-                e.setMulta(rs.getDouble("multa"));
-                return e;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public List<Emprestimo> buscarAtrasados() {
-        List<Emprestimo> atrasados = new ArrayList<>();
-        String sql = "SELECT * FROM emprestimo WHERE data_devolucao_real IS NULL AND data_prevista_devolucao < CURRENT_DATE";
-        try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                Emprestimo e = new Emprestimo();
-                e.setId(rs.getLong("id"));
-                e.setIdLivro(rs.getLong("id_livro"));
-                e.setIdUsuario(rs.getLong("id_usuario"));
-                e.setDataEmprestimo(rs.getDate("data_emprestimo"));
-                e.setDataPrevistaDevolucao(rs.getDate("data_prevista_devolucao"));
-                e.setDataDevolucaoReal(rs.getDate("data_devolucao_real"));
-                e.setMulta(rs.getDouble("multa"));
-                atrasados.add(e);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return atrasados;
     }
 }

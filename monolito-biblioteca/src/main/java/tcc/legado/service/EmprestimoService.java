@@ -75,7 +75,7 @@ public class EmprestimoService {
     }
 
     public void registrarDevolucao(Long idEmprestimo) {
-        Emprestimo emp = emprestimoDAO.buscarPorId(idEmprestimo);
+        Emprestimo emp = emprestimoAcl.buscarPorId(idEmprestimo);
         if (emp == null) {
             throw new RuntimeException("Empréstimo não encontrado");
         }
@@ -109,7 +109,7 @@ public class EmprestimoService {
 
     public void atualizarMultasAtrasadas() {
         Date hoje = new Date();
-        for (Emprestimo emp : emprestimoDAO.buscarAtrasados()) {
+        for (Emprestimo emp : emprestimoAcl.buscarAtrasados()) {
             Usuario usuario = usuarioDAO.buscarPorId(emp.getIdUsuario());
             if (usuario == null) {
                 throw new IllegalStateException("Usuario do emprestimo nao encontrado: " + emp.getId());
@@ -124,14 +124,14 @@ public class EmprestimoService {
     // MÉTODOS DE CONSULTA (CRUD básico)
     // =========================================================
     public List<Emprestimo> listarTodos() {
-        return emprestimoDAO.listarTodos();
+        return emprestimoAcl.listarTodos();
     }
 
     public Emprestimo buscarPorId(Long id) {
-        return emprestimoDAO.buscarPorId(id);
+        return emprestimoAcl.buscarPorId(id);
     }
 
     public List<Emprestimo> buscarAtrasados() {
-        return emprestimoDAO.buscarAtrasados();
+        return emprestimoAcl.buscarAtrasados();
     }
 }
