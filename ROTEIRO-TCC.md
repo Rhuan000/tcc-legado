@@ -137,6 +137,11 @@ pré-migração e pós-migração.
 
 ## Estado 3 — migrar consultas e persistência
 
+Primeira fatia implementada: modelo de leitura, repositório JDBC e endpoints
+de listagem, busca por ID e atrasados no microsserviço. O redirecionamento dos
+consumidores legados, incluindo destaques, permanece pendente; esta fatia não
+conclui o Estado 3 nem transfere a propriedade exclusiva dos dados.
+
 1. Implementar entidade e repositório de empréstimos no novo serviço.
 2. Migrar busca por identificador, listagem e consulta de atrasados.
 3. Fazer o `EmprestimoAction` consultar a API em vez do EJB.
@@ -165,10 +170,11 @@ serviço, e o monólito não possui lógica nem acesso direto aos seus dados.
 
 ## Estado 5 — fechar o experimento
 
-Pré-condição: resolver a limitação de CBO em componentes de records observada
-no CK fixado. Validar instrumento e coletores dos três escopos antes da coleta.
+Compatibilidade: os records foram substituídos por classes convencionais,
+reconhecidas pelo CK fixado. Validar instrumento e coletores dos três escopos antes da coleta.
 Se mudar o CK, reanalisar os dois snapshots com o mesmo instrumento e preservar
-os resultados anteriores. Não adaptar o código de produção para favorecer CBO.
+os resultados anteriores. A escolha por compatibilidade deve ser declarada;
+não adaptar o código de produção para obter valores menores de CBO.
 
 1. Executar dez builds limpos do monólito residual.
 2. Executar dez builds limpos do microsserviço.
