@@ -42,13 +42,13 @@ class EmprestimoResourceTest {
 
     @Test
     void deveListarOrdenadoPorId() {
-        given().when().get("/emprestimos").then().statusCode(200)
+        given().header("X-Integration-Token", "token-exclusivo-teste").when().get("/emprestimos").then().statusCode(200)
                 .body("id", contains(10, 20, 30, 40));
     }
 
     @Test
     void devePreservarCamposDatasEValorPersistido() {
-        given().when().get("/emprestimos/10").then().statusCode(200)
+        given().header("X-Integration-Token", "token-exclusivo-teste").when().get("/emprestimos/10").then().statusCode(200)
                 .body("id", is(10), "idLivro", is(7), "idUsuario", is(9),
                         "dataEmprestimo", is("2026-01-01"),
                         "dataPrevistaDevolucao", is(hoje.minusDays(1).toString()),
@@ -57,31 +57,31 @@ class EmprestimoResourceTest {
 
     @Test
     void devePreservarDataDeDevolucao() {
-        given().when().get("/emprestimos/40").then().statusCode(200)
+        given().header("X-Integration-Token", "token-exclusivo-teste").when().get("/emprestimos/40").then().statusCode(200)
                 .body("dataDevolucaoReal", is(hoje.toString()), "multa", is(2.0f));
     }
 
     @Test
     void deveInterpretarMultaNulaComoZeroAssimComoLegado() {
-        given().when().get("/emprestimos/20").then().statusCode(200)
+        given().header("X-Integration-Token", "token-exclusivo-teste").when().get("/emprestimos/20").then().statusCode(200)
                 .body("multa", is(0));
     }
 
     @Test
     void deveExcluirDevolvidosVencimentoHojeEFuturosDosAtrasados() {
-        given().when().get("/emprestimos/atrasados").then().statusCode(200)
+        given().header("X-Integration-Token", "token-exclusivo-teste").when().get("/emprestimos/atrasados").then().statusCode(200)
                 .body("id", contains(10));
     }
 
     @Test
     void deveRetornar404ParaIdInexistente() {
-        given().when().get("/emprestimos/999").then().statusCode(404);
+        given().header("X-Integration-Token", "token-exclusivo-teste").when().get("/emprestimos/999").then().statusCode(404);
     }
 
     @Test
     void deveRejeitarIdNaoPositivo() {
-        given().when().get("/emprestimos/0").then().statusCode(400);
-        given().when().get("/emprestimos/-1").then().statusCode(400);
+        given().header("X-Integration-Token", "token-exclusivo-teste").when().get("/emprestimos/0").then().statusCode(400);
+        given().header("X-Integration-Token", "token-exclusivo-teste").when().get("/emprestimos/-1").then().statusCode(400);
     }
 
     @Test
@@ -89,9 +89,9 @@ class EmprestimoResourceTest {
         try (var connection = dataSource.getConnection(); var statement = connection.createStatement()) {
             statement.executeUpdate("ALTER TABLE emprestimo RENAME TO emprestimo_indisponivel");
             try {
-                given().when().get("/emprestimos").then().statusCode(500);
-                given().when().get("/emprestimos/10").then().statusCode(500);
-                given().when().get("/emprestimos/atrasados").then().statusCode(500);
+                given().header("X-Integration-Token", "token-exclusivo-teste").when().get("/emprestimos").then().statusCode(500);
+                given().header("X-Integration-Token", "token-exclusivo-teste").when().get("/emprestimos/10").then().statusCode(500);
+                given().header("X-Integration-Token", "token-exclusivo-teste").when().get("/emprestimos/atrasados").then().statusCode(500);
             } finally {
                 statement.executeUpdate("ALTER TABLE emprestimo_indisponivel RENAME TO emprestimo");
             }
@@ -103,7 +103,7 @@ class EmprestimoResourceTest {
         try (var connection = dataSource.getConnection(); var statement = connection.createStatement()) {
             statement.executeUpdate("DELETE FROM emprestimo");
         }
-        given().when().get("/emprestimos").then().statusCode(200).body("size()", is(0));
-        given().when().get("/emprestimos/atrasados").then().statusCode(200).body("size()", is(0));
+        given().header("X-Integration-Token", "token-exclusivo-teste").when().get("/emprestimos").then().statusCode(200).body("size()", is(0));
+        given().header("X-Integration-Token", "token-exclusivo-teste").when().get("/emprestimos/atrasados").then().statusCode(200).body("size()", is(0));
     }
 }

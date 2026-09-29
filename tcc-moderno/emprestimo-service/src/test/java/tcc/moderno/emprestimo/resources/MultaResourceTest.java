@@ -14,7 +14,7 @@ class MultaResourceTest {
 
     @Test
     void deveCalcularMultaComFeriadosDoAnoDoVencimento() {
-        given()
+        given().header("X-Integration-Token", "token-exclusivo-teste")
                 .contentType("application/json")
                 .body("""
                         {
@@ -32,7 +32,7 @@ class MultaResourceTest {
 
     @Test
     void deveRejeitarRequisicaoSemCamposObrigatorios() {
-        given()
+        given().header("X-Integration-Token", "token-exclusivo-teste")
                 .contentType("application/json")
                 .body("{}")
                 .when()
@@ -43,7 +43,7 @@ class MultaResourceTest {
 
     @Test
     void naoDeveConsultarCalendarioQuandoNaoHaAtraso() {
-        given()
+        given().header("X-Integration-Token", "token-exclusivo-teste")
                 .contentType("application/json")
                 .body("""
                         {

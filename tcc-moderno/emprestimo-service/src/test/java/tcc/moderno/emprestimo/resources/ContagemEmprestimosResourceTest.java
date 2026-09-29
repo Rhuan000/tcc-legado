@@ -42,7 +42,7 @@ class ContagemEmprestimosResourceTest {
 
     @Test
     void deveContarMesDoBancoIncluindoDevolvidosEDesempatarPorId() {
-        given().queryParam("limite", 100).when().get(ROTA).then().statusCode(200)
+        given().header("X-Integration-Token", "token-exclusivo-teste").queryParam("limite", 100).when().get(ROTA).then().statusCode(200)
                 .body("idLivro", contains(7, 8, 9, 10, 11, 12))
                 .body("totalEmprestimos", contains(2, 2, 1, 1, 1, 1))
                 .body("[0].keySet()", containsInAnyOrder("idLivro", "totalEmprestimos"));
@@ -50,20 +50,20 @@ class ContagemEmprestimosResourceTest {
 
     @Test
     void deveUsarCincoResultadosPorPadrao() {
-        given().when().get(ROTA).then().statusCode(200)
+        given().header("X-Integration-Token", "token-exclusivo-teste").when().get(ROTA).then().statusCode(200)
                 .body("idLivro", contains(7, 8, 9, 10, 11));
     }
 
     @Test
     void deveRespeitarLimiteInformado() {
-        given().queryParam("limite", 1).when().get(ROTA).then().statusCode(200)
+        given().header("X-Integration-Token", "token-exclusivo-teste").queryParam("limite", 1).when().get(ROTA).then().statusCode(200)
                 .body("idLivro", contains(7)).body("totalEmprestimos", contains(2));
     }
 
     @Test
     void deveRejeitarLimiteInvalido() {
         for (String limite : new String[]{"0", "-1", "101"}) {
-            given().queryParam("limite", limite).when().get(ROTA).then().statusCode(400);
+            given().header("X-Integration-Token", "token-exclusivo-teste").queryParam("limite", limite).when().get(ROTA).then().statusCode(400);
         }
     }
 
@@ -72,7 +72,7 @@ class ContagemEmprestimosResourceTest {
         try (var connection = dataSource.getConnection(); var statement = connection.createStatement()) {
             statement.executeUpdate("DELETE FROM emprestimo WHERE id_livro <> 99");
         }
-        given().when().get(ROTA).then().statusCode(200).body("size()", is(0));
+        given().header("X-Integration-Token", "token-exclusivo-teste").when().get(ROTA).then().statusCode(200).body("size()", is(0));
     }
 
     @Test
@@ -80,7 +80,7 @@ class ContagemEmprestimosResourceTest {
         try (var connection = dataSource.getConnection(); var statement = connection.createStatement()) {
             statement.executeUpdate("ALTER TABLE emprestimo RENAME TO emprestimo_indisponivel");
             try {
-                given().when().get(ROTA).then().statusCode(500);
+                given().header("X-Integration-Token", "token-exclusivo-teste").when().get(ROTA).then().statusCode(500);
             } finally {
                 statement.executeUpdate("ALTER TABLE emprestimo_indisponivel RENAME TO emprestimo");
             }

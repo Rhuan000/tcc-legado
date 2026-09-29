@@ -101,4 +101,11 @@ class ComandosEmprestimoResourceTest {
         chamada().body(dados).post("/emprestimos").then().statusCode(200)
                 .body("dataPrevistaDevolucao",is("2026-09-30"));
     }
+    @Test void exigeAutenticacaoNaEntrada(){
+        given().get("/emprestimos").then().statusCode(401);
+        given().header("X-Integration-Token","incorreto").get("/emprestimos").then().statusCode(401);
+        given().contentType("application/json").body(criarDados(UUID.randomUUID().toString())).post("/emprestimos").then().statusCode(401);
+        given().contentType("application/json").body("{}").post("/prazos/calcular").then().statusCode(401);
+        given().get("/q/health/live").then().statusCode(200);
+    }
 }
