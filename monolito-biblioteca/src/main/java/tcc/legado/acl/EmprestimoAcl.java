@@ -83,6 +83,28 @@ public class EmprestimoAcl {
         return consultarLista("/emprestimos", "listar empréstimos");
     }
 
+    public Emprestimo criarEmprestimo(JSONObject requisicao) {
+        JSONObject resposta = executarPost("/emprestimos", requisicao, "criar empréstimo");
+        try { return converterEmprestimo(resposta); }
+        catch (RuntimeException e) { throw respostaInvalida("criar empréstimo", e); }
+    }
+
+    public Emprestimo registrarDevolucao(Long id, JSONObject contexto) {
+        if (id == null || id <= 0) throw new IllegalArgumentException("ID do empréstimo deve ser positivo");
+        JSONObject resposta = executarPost("/emprestimos/" + id + "/devolucao", contexto, "devolver empréstimo");
+        try {
+            Emprestimo emprestimo = converterEmprestimo(resposta);
+            if (!id.equals(emprestimo.getId()) || emprestimo.getDataDevolucaoReal() == null) {
+                throw new IllegalArgumentException("Devolução não confirmada");
+            }
+            return emprestimo;
+        } catch (RuntimeException e) { throw respostaInvalida("devolver empréstimo", e); }
+    }
+
+    public void atualizarMulta(Long id, JSONObject contexto) {
+        executarPost("/emprestimos/"+id+"/multa",contexto,"atualizar multa");
+    }
+
     public List<Emprestimo> buscarAtrasados() {
         return consultarLista("/emprestimos/atrasados", "consultar empréstimos atrasados");
     }
@@ -207,6 +229,10 @@ public class EmprestimoAcl {
                 .setSocketTimeout(TIMEOUT_MILLIS)
                 .build());
         requisicao.setHeader("Accept", "application/json");
+        String token=System.getProperty("emprestimo.integracao.token");
+        if(token==null || token.trim().isEmpty()) token=System.getenv("EMPRESTIMO_INTEGRATION_TOKEN");
+        if(token==null || token.trim().isEmpty()) throw new IllegalStateException("Token de integracao nao configurado");
+        requisicao.setHeader("X-Integration-Token",token);
 
         try (CloseableHttpClient cliente = HttpClients.createDefault()) {
             return cliente.execute(requisicao, httpResponse -> {
