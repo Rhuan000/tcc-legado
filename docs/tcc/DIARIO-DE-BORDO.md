@@ -195,6 +195,13 @@ Cada entrada distingue fato observado, decisão e interpretação. Atividades pl
 - **Validação interna:** WAR gerado com JDK 8. Verificação temporária da ACL com 43 checagens de tradução, rotas, contratos inválidos, erros HTTP, indisponibilidade e regressão dos POSTs de prazo e multa. Integração da ACL compilada com Quarkus e PostgreSQL isolado confirmou listagem, ordenação, multa, datas de devolução, ausência e filtro de atrasados. Auxiliares mantidos apenas em `target`; nenhuma suíte adicionada ao legado.
 - **Limites:** não foram exercitados nesta rodada o fluxo completo das telas em JBoss nem o agendamento automático. A consulta de destaques ainda acessa empréstimos por `JOIN`; o Estado 3 permanece em andamento. Sem nova campanha quantitativa.
 
+### 29/09/2026 Retirada do acesso a empréstimos na consulta de destaques
+
+- **Fronteira:** o serviço fornece apenas IDs dos livros e contagens mensais. Dados de livros, seleção de cinco destaques e sua atualização permanecem no monólito. Removido o `JOIN` de `LivroDestaqueDAO`; auditoria das fontes Java não encontrou leituras SQL remanescentes de empréstimos no legado.
+- **Comportamento:** mês definido pelo banco e contagem incluindo devolvidos, como antes. Empates agora usam ID crescente, antes sem ordem definida. O job consulta a API e carrega os livros antes de apagar destaques; falhas nessa fase preservam os registros existentes.
+- **Validação:** microsserviço empacotado com 93 testes aprovados (seis novos) e WAR compilado com JDK 8. Execução manual do job com API real e PostgreSQL isolado reproduziu o ranking esperado do SQL legado nos dados do ensaio e criou os cinco destaques com dados locais. Verificação temporária totalizou 22 checagens, incluindo preservação dos registros sob erro HTTP, JSON inválido, indisponibilidade e livro ausente.
+- **Limites:** ensaio manual, sem disparo automático do Quartz; substituição dos destaques continua sem transação única, sujeita a falhas parciais nas escritas. Nenhuma nova campanha quantitativa; auxiliares somente em `target`.
+
 ## Próximas evidências necessárias
 
 | Pendência | Evidência esperada |

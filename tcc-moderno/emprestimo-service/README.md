@@ -14,13 +14,17 @@ as tabelas de empréstimo; o monólito deverá usar a API HTTP.
 - `GET /emprestimos`: lista ordenada por ID.
 - `GET /emprestimos/{id}`: consulta individual; 404 para ID inexistente e 400 para ID não positivo.
 - `GET /emprestimos/atrasados`: empréstimos sem devolução e com vencimento anterior a `CURRENT_DATE` do PostgreSQL.
+- `GET /emprestimos/mais-emprestados-mes?limite=5`: IDs dos livros e total de empréstimos no mês do banco; limite de 1 a 100, padrão 5.
 
 As respostas contêm IDs de livro e usuário, datas ISO (`yyyy-MM-dd`) e a multa
 persistida. As consultas não recalculam multas. Multa nula é apresentada como
 zero, preservando a leitura do legado. Falha no banco resulta em erro HTTP 500.
 O acesso usa JDBC e pool de conexões, sem criação ou alteração automática de
-tabelas. O monólito consome estas consultas pela ACL, mantendo temporariamente
-as escritas e a consulta indireta de livros em destaque.
+tabelas. O monólito consome estas consultas pela ACL e mantém temporariamente
+as escritas. A contagem mensal inclui devolvidos, como no legado, e ordena por
+total decrescente e ID crescente nos empates. Somente `idLivro` e
+`totalEmprestimos` compõem essa resposta; dados de livros e gestão de destaques
+permanecem no monólito.
 
 Em desenvolvimento, a conexão aponta para `localhost:5432/biblioteca`, com
 as credenciais locais do legado. Para executar o JAR, configurar
