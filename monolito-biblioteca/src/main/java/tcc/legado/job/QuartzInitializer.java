@@ -41,18 +41,12 @@ public class QuartzInitializer {
     }
 
     private void agendarJobs(Scheduler scheduler) throws Exception {
-        // --- Job 1: MultaDiariaJob (diário à meia-noite) ---
-        JobDetail multaJob = newJob(MultaDiariaJob.class)
-                .withIdentity("MultaDiariaJob", "Sistema")
-                .build();
-
-        Trigger multaTrigger = newTrigger()
-                .withIdentity("triggerMultaDiaria", "Sistema")
-                .withSchedule(cronSchedule("0 0 0 * * ?")) // todo dia à meia-noite
-                .build();
-
-        scheduler.scheduleJob(multaJob, multaTrigger);
-
+        scheduler.scheduleJob(newJob(CoordenacaoEmprestimoJob.class).withIdentity("Multas", "Sistema")
+                .usingJobData("multas",true).build(), newTrigger().withIdentity("Multas", "Sistema")
+                .withSchedule(cronSchedule(System.getProperty("emprestimo.multas.cron","0 0 0 * * ?"))).build());
+        scheduler.scheduleJob(newJob(CoordenacaoEmprestimoJob.class).withIdentity("Recuperacao", "Sistema")
+                .usingJobData("multas",false).build(), newTrigger().withIdentity("Recuperacao", "Sistema")
+                .withSchedule(cronSchedule("0/30 * * * * ?")).build());
         // --- Job 2: AtualizarMaisEmprestadosJob (a cada 5 minutos) ---
         JobDetail destaqueJob = newJob(AtualizarMaisEmprestadosJob.class)
                 .withIdentity("AtualizarMaisEmprestadosJob", "Sistema")

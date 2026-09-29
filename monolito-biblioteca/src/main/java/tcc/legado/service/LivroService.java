@@ -1,13 +1,13 @@
 package tcc.legado.service;
 
 import tcc.legado.dao.LivroDAO;
+import tcc.legado.acl.EmprestimoAcl;
 import tcc.legado.model.Livro;
 import tcc.legado.model.Emprestimo;
 import tcc.legado.util.CacheGlobal;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import javax.naming.InitialContext;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -19,15 +19,8 @@ public class LivroService {
     @Inject
     private LivroDAO livroDAO;
 
-    private EmprestimoService getEmprestimoService() {
-        try {
-            InitialContext ctx = new InitialContext();
-            return (EmprestimoService) ctx.lookup("java:global/monolito-biblioteca/EmprestimoService");
-        } catch (Exception e) {
-            LOG.severe("Erro ao obter EmprestimoService via JNDI: " + e.getMessage());
-            throw new RuntimeException("Erro ao obter EmprestimoService via JNDI", e);
-        }
-    }
+    @Inject
+    private EmprestimoAcl emprestimoAcl;
 
     public List<Livro> listarTodos() {
         List<Livro> livros = livroDAO.listarTodos();
@@ -78,8 +71,7 @@ public class LivroService {
             throw new RuntimeException("Não é possível excluir um livro com estoque disponível");
         }
 
-        EmprestimoService empService = getEmprestimoService();
-        List<Emprestimo> emprestimos = empService.listarTodos(); // obtém todos os empréstimos
+        List<Emprestimo> emprestimos = emprestimoAcl.listarTodos();
         for (Emprestimo e : emprestimos) {
             if (e.getIdLivro().equals(id) && e.getDataDevolucaoReal() == null) {
                 throw new RuntimeException("Livro está em empréstimo ativo, não pode ser excluído");

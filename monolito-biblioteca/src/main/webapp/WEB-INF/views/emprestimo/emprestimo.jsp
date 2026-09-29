@@ -20,6 +20,7 @@
 
         <div class="content">
             <form action="emprestimo.do?metodo=realizar" method="post" class="form-container">
+                <input type="hidden" name="chave" value="<%= request.getAttribute("chaveEmprestimo") %>" />
                 <div class="form-group">
                     <label for="idLivro">Livro</label>
                     <select id="idLivro" name="idLivro" class="form-control" required>
