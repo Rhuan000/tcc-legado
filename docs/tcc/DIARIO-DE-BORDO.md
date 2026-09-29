@@ -189,6 +189,12 @@ Cada entrada distingue fato observado, decisão e interpretação. Atividades pl
 - **Verificação:** `mvnw.cmd -B package` concluiu com 87 testes aprovados. O CK com hash fixado reconheceu as seis classes e seus campos; uma amostra de controle com uma dependência obteve CBO 1. Resultados temporários em `target`, sem nova campanha quantitativa ou alteração da baseline.
 - **Banco:** o `CREATE TABLE` pertence exclusivamente ao preparo do PostgreSQL isolado dos testes. O script não está no JAR de produção; a aplicação consulta a tabela existente.
 
+### 29/09/2026 Consultas do monólito pela ACL
+
+- **Implementação:** listagem, busca por ID e atrasados redirecionados pela ACL, incluindo leituras da devolução e do job de multas. Removidas as três consultas de `EmprestimoDAO`; escritas preservadas. O EJB continua como fachada para Struts. A tela de detalhes passa a encaminhar falhas de consulta à página de erro.
+- **Validação interna:** WAR gerado com JDK 8. Verificação temporária da ACL com 43 checagens de tradução, rotas, contratos inválidos, erros HTTP, indisponibilidade e regressão dos POSTs de prazo e multa. Integração da ACL compilada com Quarkus e PostgreSQL isolado confirmou listagem, ordenação, multa, datas de devolução, ausência e filtro de atrasados. Auxiliares mantidos apenas em `target`; nenhuma suíte adicionada ao legado.
+- **Limites:** não foram exercitados nesta rodada o fluxo completo das telas em JBoss nem o agendamento automático. A consulta de destaques ainda acessa empréstimos por `JOIN`; o Estado 3 permanece em andamento. Sem nova campanha quantitativa.
+
 ## Próximas evidências necessárias
 
 | Pendência | Evidência esperada |

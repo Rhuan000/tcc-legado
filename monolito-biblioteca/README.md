@@ -143,9 +143,16 @@ Ref "fk_emprestimo_usuario" : "usuario"."id" < "emprestimo"."id_usuario"
 
 ## Integração com o serviço de empréstimos
 
-Os cálculos de prazo e multa são consumidos do `emprestimo-service` pela
+Os cálculos de prazo e multa e as consultas de empréstimos são consumidos do `emprestimo-service` pela
 Anti-Corruption Layer do monólito. Por padrão, o serviço é procurado em
 `http://localhost:8081`. A URL pode ser alterada por uma destas configurações:
 
 - variável de ambiente `EMPRESTIMO_SERVICE_URL`;
 - propriedade da JVM `-Demprestimo.service.url=http://host:porta`.
+
+Listagem, busca por ID e atrasados passam pela ACL, inclusive as leituras da
+devolução e da atualização de multas. A interface mantém o EJB como fachada.
+HTTP 404 na busca individual representa empréstimo inexistente; falhas HTTP,
+indisponibilidade e respostas inválidas interrompem a consulta.
+As escritas permanecem no DAO legado. O `JOIN` usado para livros em destaque
+ainda precisa ser migrado antes de encerrar a etapa de consultas.
