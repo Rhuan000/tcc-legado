@@ -87,6 +87,39 @@ public class EmprestimoAcl {
         return consultarLista("/emprestimos/atrasados", "consultar empréstimos atrasados");
     }
 
+    public List<Long> buscarIdsMaisEmprestadosNoMes(int limite) {
+        if (limite < 1 || limite > 100) {
+            throw new IllegalArgumentException("Limite deve estar entre 1 e 100");
+        }
+        String operacao = "consultar contagem mensal de empréstimos";
+        String corpo = executar(new HttpGet(urlBase + "/emprestimos/mais-emprestados-mes?limite=" + limite),
+                operacao, false);
+        try {
+            JSONArray resposta = new JSONArray(corpo);
+            if (resposta.length() > limite) {
+                throw new IllegalArgumentException("Quantidade de resultados excede o limite");
+            }
+            List<Long> ids = new ArrayList<>();
+            long totalAnterior = Long.MAX_VALUE;
+            long idAnterior = 0;
+            for (int i = 0; i < resposta.length(); i++) {
+                JSONObject item = resposta.getJSONObject(i);
+                long id = lerId(item, "idLivro");
+                long total = lerId(item, "totalEmprestimos");
+                if (ids.contains(id) || total > totalAnterior
+                        || (total == totalAnterior && id < idAnterior)) {
+                    throw new IllegalArgumentException("Contagem mensal duplicada ou fora de ordem");
+                }
+                ids.add(id);
+                totalAnterior = total;
+                idAnterior = id;
+            }
+            return ids;
+        } catch (RuntimeException e) {
+            throw respostaInvalida(operacao, e);
+        }
+    }
+
     public Emprestimo buscarPorId(Long id) {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("ID do empréstimo deve ser positivo");
