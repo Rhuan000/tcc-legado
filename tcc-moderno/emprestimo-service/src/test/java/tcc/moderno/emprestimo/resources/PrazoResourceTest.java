@@ -14,7 +14,7 @@ class PrazoResourceTest {
 
     @Test
     void deveCalcularPrazoComFeriadosDoAnoDoEmprestimo() {
-        given()
+        given().header("X-Integration-Token", "token-exclusivo-teste")
                 .contentType("application/json")
                 .body("""
                         {
@@ -31,7 +31,7 @@ class PrazoResourceTest {
 
     @Test
     void deveRejeitarRequisicaoSemCamposObrigatorios() {
-        given()
+        given().header("X-Integration-Token", "token-exclusivo-teste")
                 .contentType("application/json")
                 .body("{}")
                 .when()
