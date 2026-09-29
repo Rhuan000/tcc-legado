@@ -132,6 +132,7 @@ public class EmprestimoAction extends DispatchAction {
     
 	public ActionForward detalhar(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		try {
 		String idStr = request.getParameter("id");
 		if (idStr == null || idStr.trim().isEmpty()) {
 			request.setAttribute("erro", "ID do empréstimo não informado");
@@ -155,5 +156,9 @@ public class EmprestimoAction extends DispatchAction {
 		request.setAttribute("livro", livro);
 		request.setAttribute("usuario", usuario);
 		return mapping.findForward("detalhar");
+		} catch (Exception e) {
+			request.setAttribute("erro", "Erro ao consultar empréstimo: " + e.getMessage());
+			return mapping.findForward("erro");
+		}
 	}
 }
