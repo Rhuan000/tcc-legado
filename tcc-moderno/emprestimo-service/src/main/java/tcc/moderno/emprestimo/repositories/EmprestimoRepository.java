@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import tcc.moderno.emprestimo.models.Emprestimo;
+import tcc.moderno.emprestimo.dtos.ContagemEmprestimosDTO;
 
 @ApplicationScoped
 public class EmprestimoRepository {
@@ -50,6 +51,32 @@ public class EmprestimoRepository {
                    AND data_prevista_devolucao < CURRENT_DATE
                  ORDER BY id
                 """);
+    }
+
+    public List<ContagemEmprestimosDTO> buscarMaisEmprestadosNoMes(int limite) {
+        String sql = """
+                SELECT id_livro, COUNT(*) AS total_emprestimos
+                FROM emprestimo
+                WHERE data_emprestimo >= date_trunc('month', CURRENT_DATE)::date
+                  AND data_emprestimo < (date_trunc('month', CURRENT_DATE) + INTERVAL '1 month')::date
+                GROUP BY id_livro
+                ORDER BY total_emprestimos DESC, id_livro ASC
+                LIMIT ?
+                """;
+        try (var connection = dataSource.getConnection();
+             var statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, limite);
+            try (var result = statement.executeQuery()) {
+                List<ContagemEmprestimosDTO> contagens = new ArrayList<>();
+                while (result.next()) {
+                    contagens.add(new ContagemEmprestimosDTO(
+                            result.getLong("id_livro"), result.getLong("total_emprestimos")));
+                }
+                return contagens;
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException("Falha ao consultar contagem mensal de emprestimos", e);
+        }
     }
 
     private List<Emprestimo> consultar(String sql) {

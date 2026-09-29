@@ -2,6 +2,9 @@ package tcc.moderno.emprestimo.resources;
 
 import jakarta.inject.Inject;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Max;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.Path;
@@ -10,6 +13,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 import tcc.moderno.emprestimo.models.Emprestimo;
+import tcc.moderno.emprestimo.dtos.ContagemEmprestimosDTO;
 import tcc.moderno.emprestimo.repositories.EmprestimoRepository;
 
 @Path("/emprestimos")
@@ -38,5 +42,12 @@ public class EmprestimoResource {
     @Path("/atrasados")
     public List<Emprestimo> buscarAtrasados() {
         return repository.buscarAtrasados();
+    }
+
+    @GET
+    @Path("/mais-emprestados-mes")
+    public List<ContagemEmprestimosDTO> buscarMaisEmprestadosNoMes(
+            @QueryParam("limite") @DefaultValue("5") @Positive @Max(100) int limite) {
+        return repository.buscarMaisEmprestadosNoMes(limite);
     }
 }
