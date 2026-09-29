@@ -1,6 +1,10 @@
 package tcc.moderno.emprestimo.resources;
 
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Consumes;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Max;
 import jakarta.ws.rs.DefaultValue;
@@ -15,12 +19,35 @@ import java.util.List;
 import tcc.moderno.emprestimo.models.Emprestimo;
 import tcc.moderno.emprestimo.dtos.ContagemEmprestimosDTO;
 import tcc.moderno.emprestimo.repositories.EmprestimoRepository;
+import tcc.moderno.emprestimo.dtos.CriarEmprestimoDTO;
+import tcc.moderno.emprestimo.services.ComandosEmprestimoService;
 
 @Path("/emprestimos")
 @Produces(MediaType.APPLICATION_JSON)
 public class EmprestimoResource {
 
     private final EmprestimoRepository repository;
+    @Inject ComandosEmprestimoService comandos;
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Emprestimo criar(@NotNull @Valid CriarEmprestimoDTO requisicao) {
+        return comandos.criar(requisicao);
+    }
+
+    @POST
+    @Path("/{id}/devolucao")
+    public Emprestimo devolver(@PathParam("id") @Positive long id, @NotNull @Valid tcc.moderno.emprestimo.dtos.ContextoUsuarioDTO contexto) {
+        return comandos.devolver(id, contexto);
+    }
+
+    @POST
+    @Path("/{id}/multa")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Emprestimo atualizarMulta(@PathParam("id") @Positive long id,
+            @NotNull @Valid tcc.moderno.emprestimo.dtos.ContextoUsuarioDTO contexto) {
+        return comandos.atualizarMulta(id, contexto);
+    }
 
     @Inject
     public EmprestimoResource(EmprestimoRepository repository) {
