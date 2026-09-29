@@ -202,16 +202,42 @@ Cada entrada distingue fato observado, decisão e interpretação. Atividades pl
 - **Validação:** microsserviço empacotado com 93 testes aprovados (seis novos) e WAR compilado com JDK 8. Execução manual do job com API real e PostgreSQL isolado reproduziu o ranking esperado do SQL legado nos dados do ensaio e criou os cinco destaques com dados locais. Verificação temporária totalizou 22 checagens, incluindo preservação dos registros sob erro HTTP, JSON inválido, indisponibilidade e livro ausente.
 - **Limites:** ensaio manual, sem disparo automático do Quartz; substituição dos destaques continua sem transação única, sujeita a falhas parciais nas escritas. Nenhuma nova campanha quantitativa; auxiliares somente em `target`.
 
+### 29/09/2026 Comandos e processamento de empréstimos no serviço
+
+- **Situação:** protótipo não commitado, posteriormente substituído pela coordenação unidirecional descrita abaixo. As evidências desta entrada referem-se àquele desenho, não à versão revisada.
+- **Implementação:** criação e devolução no microsserviço; Struts redirecionado pela ACL; referências de usuários e estoque fornecidos por API interna autenticada do legado. Retirados DAO, service, EJB/interface e job antigos de empréstimos. Livros, usuários e destaques não foram migrados.
+- **Consistência:** registro durável dos comandos, movimentação atômica e deduplicada do estoque no legado e retomada periódica no serviço. Repetições de devolução passam a retornar sucesso sem nova movimentação, uma mudança deliberada em relação ao erro anterior. Há consistência eventual entre duas transações locais, não atomicidade distribuída.
+- **Dados:** script de corte preserva empréstimos e remove as duas cascatas entre domínios. Banco físico e credenciais permanecem compartilhados; propriedade lógica é uma restrição das aplicações, não isolamento por permissões. Script aplicado somente ao banco isolado do ensaio.
+- **Validação:** primeira execução dos dez testes de comandos, antes da implementação HTTP, teve nove falhas esperadas. Após implementação e ampliação dos cenários, 107 testes do serviço passaram. Build limpo do legado compilou 37 classes, sem testes internos. No JBoss/Struts com PostgreSQL isolado, criação e devolução repetidas preservaram um único efeito no estoque. Uma falha SQL após confirmação do estoque foi recuperada automaticamente pelo agendamento sem novo desconto. Calendário sintético no ensaio; nenhuma coleta quantitativa final realizada.
+- **Agendamento e corte:** no WAR sem os componentes antigos, criação e devolução pelo Struts passaram novamente. Cron de multas acelerado apenas no ensaio atualizou um atraso para R$ 10,00 e preservou R$ 99,00 de um empréstimo já devolvido. Auditoria textual não encontrou SQL de empréstimos no legado nem SQL de livros/usuários no serviço.
+- **Limitações:** indisponibilidade persistente pode manter operações pendentes; não há prazo garantido de recuperação. Exclusão de referências e edição concorrente de estoque continuam exigindo cuidado operacional. Não foi criada pasta versionada de validação nem suíte no legado.
+
+### 29/09/2026 Coletores dos escopos finais
+
+- **Versionamento:** preparação mantida apenas na árvore de trabalho, fora da sequência de commits da aplicação, por decisão do autor. A campanha final aguarda revisão do histórico, testes manuais e eventuais ajustes.
+- **Preparação:** coletor pós-migração com registro do snapshot, build e inicialização de monólito, serviço e conjunto; CK separado por aplicação e união identificada por tipo. Coletas antigas preservadas. Scripts da baseline recusam uso como coleta final.
+- **Verificação interna:** em cópia temporária com histórico próprio, passaram registro, CK das duas aplicações, uma execução do build conjunto e uma inicialização de cada escopo. Confirmadas recusas de árvore suja e sobrescrita. Essas execuções são diagnósticas, não uma terceira campanha nem resultados finais do TCC.
+- **Pendência:** revisão e commits antes das dez observações por escopo e da análise quantitativa. Nenhum commit foi criado no histórico principal nesta etapa.
+
+### 29/09/2026 Revisão da direção das dependências
+
+- **Decisão:** após revisão com o autor, manter no legado a coordenação entre empréstimos, usuários e estoque. Removidos o cliente de retorno, a API interna do legado e o agendador do Quarkus. Login e permissões continuam locais; o serviço autentica o sistema chamador por segredo de integração.
+- **Fronteira:** o legado consulta os cadastros e envia IDs, tipo e datas; regras e persistência de empréstimos continuam no serviço. O Quartz local solicita atualização de multas usando o tipo atual do usuário. A consulta dos mais emprestados permanece inalterada e não depende de usuários.
+- **Recuperação:** diário local do coordenador, reserva de estoque atômica com o registro da criação e retomada por Quartz. O serviço deduplica os comandos em transação local. Não há atomicidade distribuída, compensação automática ou garantia de tempo de recuperação.
+- **Validação:** 107 testes do serviço aprovados; WAR com 38 classes de produção compilado, sem suíte interna. Ensaio temporário com Struts/JBoss e PostgreSQL isolado confirmou criação/devolução repetidas, retomada automática após falha de criação remota e após devolução remota com falha local, além do uso do tipo atualizado pelo job de multas. API recusou chamadas sem token ou com token incorreto. Teste adicional confirmou rejeição quando o serviço está sem segredo configurado, mantendo health público.
+- **Compatibilidade:** preservada a regra padrão para tipos adicionais do cadastro legado, como ADMIN; os tipos não foram restritos artificialmente aos três descritos nos requisitos. Teste de regressão acrescentado.
+- **Limites:** calendário sintético; nenhum commit ou coleta quantitativa final. O texto deve descrever extração de regras e dados de empréstimos, não extração integral da coordenação de todos os domínios. Script de banco revisado e aplicado apenas em novo banco de ensaio.
+
 ## Próximas evidências necessárias
 
 | Pendência | Evidência esperada |
 | --- | --- |
 | Conferir instrumento e escopos finais | Classes convencionais reconhecidas; manter mesmas regras de análise nos dois snapshots |
 | Aplicar Maven fixado às coletas finais | Maven 3.9.11 explícito e versão efetiva registrada nos três escopos |
-| Completar falhas e agendamento do Estado 2 | Timeout de leitura e disparo automático do Quartz |
+| Completar cenários adversos | Timeout de leitura e indisponibilidade prolongada; recuperação e multas disparadas pelo Quartz legado já exercitadas em ensaio isolado |
 | Comparar comportamentos | Cenários equivalentes executados nas duas versões |
-| Preparar coletores | Monólito, serviço e conjunto medidos com critérios explícitos |
-| Migrar dados e consumidores | Auditoria sem acesso direto remanescente, incluindo destaques |
+| Executar campanha final após revisão e commits | Coletores com monólito, serviço e conjunto identificados; dez observações de tempos por escopo |
+| Aplicar corte no ambiente de apresentação | Backup, script de migração e implantação coordenada; ensaio isolado já realizado |
 | Atualizar o texto | Markdown aplicado ao DOCX, referências conferidas e revisão visual |
 
 ## Modelo para novas entradas

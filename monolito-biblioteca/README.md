@@ -28,6 +28,9 @@ O objetivo principal é extrair incrementalmente a gestão de empréstimos para 
 
 ## 🧱 Arquitetura (Camadas)
 
+Esta descrição e os requisitos abaixo registram a arquitetura de origem.
+O estado atual da extração está descrito na seção de integração ao final.
+
 A aplicação segue uma arquitetura em camadas:
 
 1. **Struts Action** – Recebe requisições HTTP, faz lookup JNDI.
@@ -143,19 +146,53 @@ Ref "fk_emprestimo_usuario" : "usuario"."id" < "emprestimo"."id_usuario"
 
 ## Integração com o serviço de empréstimos
 
-Os cálculos de prazo e multa e as consultas de empréstimos são consumidos do `emprestimo-service` pela
+As consultas, a criação e a devolução de empréstimos são consumidas do `emprestimo-service` pela
 Anti-Corruption Layer do monólito. Por padrão, o serviço é procurado em
 `http://localhost:8081`. A URL pode ser alterada por uma destas configurações:
 
 - variável de ambiente `EMPRESTIMO_SERVICE_URL`;
 - propriedade da JVM `-Demprestimo.service.url=http://host:porta`.
 
-Listagem, busca por ID e atrasados passam pela ACL, inclusive as leituras da
-devolução e da atualização de multas. A interface mantém o EJB como fachada.
-HTTP 404 na busca individual representa empréstimo inexistente; falhas HTTP,
-indisponibilidade e respostas inválidas interrompem a consulta.
-As escritas permanecem no DAO legado. O job de destaques recebe da ACL os IDs
-dos mais emprestados no mês e busca os dados dos livros localmente, sem `JOIN`
-com empréstimos. Consulta e carregamento dos livros precedem a exclusão dos
-destaques antigos; uma falha nessa fase preserva os registros existentes.
-A substituição dos destaques ainda usa as escritas legadas sem transação única.
+O Struts delega os comandos ao `CoordenadorEmprestimo`. Ele consulta os
+cadastros locais e chama a ACL com IDs, tipo do usuário e datas. Não calcula
+prazo/multa e não acessa a tabela de empréstimos. Consultas das telas continuam
+pela ACL. O DAO e o EJB antigos de empréstimos foram retirados.
+
+O Quartz coordena a atualização diária das multas e retoma fluxos pendentes
+a cada 30 segundos. O tipo do usuário é consultado novamente a cada execução
+do job de multas e enviado ao serviço; a regra e a escrita continuam remotas.
+O cron de multas pode ser alterado com a propriedade `emprestimo.multas.cron`.
+O experimento usa uma instância do legado e o fuso da JVM deve ser
+`America/Sao_Paulo`.
+
+O job de destaques permanece no legado: recebe IDs e contagens pela ACL e
+consulta os livros localmente, sem usuários nem JOIN com empréstimos.
+Consulta e carregamento precedem a exclusão dos destaques existentes;
+a substituição ainda usa escritas legadas sem transação única.
+
+### Coordenação e recuperação
+
+Na criação, reserva de estoque e registro em `fluxo_emprestimo` são confirmados
+na mesma transação local antes da chamada HTTP. Na devolução, o serviço confirma
+o empréstimo primeiro; depois, estoque e conclusão do fluxo são gravados juntos.
+A reserva anterior à chamada evita aceitar mais empréstimos que exemplares
+disponíveis. Uma falha posterior pode manter o exemplar reservado até a retomada.
+
+Não há transação distribuída: estoque e empréstimo podem divergir temporariamente.
+Em timeout, a mesma chave é reenviada; o serviço deduplica o comando. O Quartz
+retoma operações pendentes mesmo sem nova ação do operador. Falhas persistentes
+ou rejeições definitivas exigem inspeção e correção operacional; não há prazo
+garantido nem compensação automática. Não apagar os diários de deduplicação.
+
+A chave é gerada pelo formulário. Reenviar o mesmo formulário preserva a chave;
+abrir outro representa uma nova solicitação. Tipo e ID de usuário vêm do
+cadastro consultado no servidor, nunca de campos aceitos diretamente do navegador.
+
+A ACL envia `X-Integration-Token`, obtido da propriedade
+`emprestimo.integracao.token` ou da variável `EMPRESTIMO_INTEGRATION_TOKEN`.
+Configurar o mesmo segredo no serviço. Não existe mais
+`/integracao/emprestimos`: a comunicação de negócio segue apenas do legado
+para o microsserviço. Login, sessão e permissões dos operadores permanecem locais.
+
+Aplicar o script de corte conforme o
+[README do serviço](../tcc-moderno/emprestimo-service/README.md#comandos-recebidos-do-legado).
