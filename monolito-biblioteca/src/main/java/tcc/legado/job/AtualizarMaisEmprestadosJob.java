@@ -4,10 +4,13 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import tcc.legado.dao.LivroDestaqueDAO;
+import tcc.legado.dao.LivroDAO;
+import tcc.legado.acl.EmprestimoAcl;
 import tcc.legado.model.Livro;
 import tcc.legado.model.LivroDestaque;
 
 import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -23,12 +26,22 @@ public class AtualizarMaisEmprestadosJob implements Job {
         try {
             LivroDestaqueDAO dao = new LivroDestaqueDAO();
 
-            // 1. Remove os antigos destaques automáticos
+            // Quartz instancia este job fora do CDI, como os DAOs já usados aqui.
+            EmprestimoAcl emprestimoAcl = new EmprestimoAcl();
+            LivroDAO livroDAO = new LivroDAO();
+            List<Livro> topLivros = new ArrayList<>();
+            for (Long idLivro : emprestimoAcl.buscarIdsMaisEmprestadosNoMes(5)) {
+                Livro livro = livroDAO.buscarPorId(idLivro);
+                if (livro == null) {
+                    throw new IllegalStateException("Não foi possível carregar o livro " + idLivro);
+                }
+                topLivros.add(livro);
+            }
+
+            // Só substitui destaques após obter a contagem e os dados locais dos livros.
             dao.excluirPorCategoria("MAIS_EMPRESTADO");
             LOG.info("Destaques antigos da categoria 'MAIS_EMPRESTADO' removidos.");
 
-            // 2. Busca os 5 livros mais emprestados do mês
-            List<Livro> topLivros = dao.buscarTopLivrosMes(5);
             LOG.info("Encontrados " + topLivros.size() + " livros para destacar.");
 
             if (topLivros.isEmpty()) {
