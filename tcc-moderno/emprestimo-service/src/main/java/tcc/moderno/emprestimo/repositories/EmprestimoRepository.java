@@ -33,6 +33,16 @@ public class EmprestimoRepository {
         return consultar(SELECT + " ORDER BY id");
     }
 
+    public void atualizarMulta(long id, BigDecimal multa) {
+        try (var c = dataSource.getConnection(); var s = c.prepareStatement("""
+                UPDATE emprestimo SET multa=? WHERE id=? AND data_devolucao_real IS NULL
+                AND NOT EXISTS (SELECT 1 FROM emprestimo_operacao o
+                                WHERE o.id_emprestimo=emprestimo.id AND o.tipo='DEVOLVER' AND o.estado='PENDENTE')
+                """)) {
+            s.setBigDecimal(1, multa); s.setLong(2, id); s.executeUpdate();
+        } catch (SQLException e) { throw new IllegalStateException("Falha ao atualizar multa", e); }
+    }
+
     public Optional<Emprestimo> buscarPorId(long id) {
         try (var connection = dataSource.getConnection();
              var statement = connection.prepareStatement(SELECT + " WHERE id = ?")) {
