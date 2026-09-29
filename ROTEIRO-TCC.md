@@ -137,14 +137,16 @@ pré-migração e pós-migração.
 
 ## Estado 3 — migrar consultas e persistência
 
-Primeira fatia implementada: modelo de leitura, repositório JDBC e endpoints
-de listagem, busca por ID e atrasados no microsserviço. O redirecionamento dos
-consumidores legados, incluindo destaques, permanece pendente; esta fatia não
-conclui o Estado 3 nem transfere a propriedade exclusiva dos dados.
+Implementados modelo de leitura, repositório JDBC e endpoints de listagem,
+busca por ID e atrasados. As consultas de `EmprestimoService`, incluindo as
+leituras usadas pela devolução e pelo job de multas, passam pela ACL.
+A consulta de destaques permanece pendente; a propriedade exclusiva dos dados
+depende também da migração das escritas no Estado 4.
 
 1. Implementar entidade e repositório de empréstimos no novo serviço.
 2. Migrar busca por identificador, listagem e consulta de atrasados.
-3. Fazer o `EmprestimoAction` consultar a API em vez do EJB.
+3. Redirecionar as consultas de `EmprestimoAction` à API pela ACL. Nesta fatia,
+   o EJB permanece como fachada, delegando ao serviço e à ACL gerenciada por CDI.
 4. Redirecionar as leituras do monólito para a API, mantendo temporariamente as
    escritas legadas necessárias à criação e devolução até o Estado 4.
 5. Manter o banco na mesma instância e preparar a propriedade lógica exclusiva

@@ -19,7 +19,8 @@ As respostas contêm IDs de livro e usuário, datas ISO (`yyyy-MM-dd`) e a multa
 persistida. As consultas não recalculam multas. Multa nula é apresentada como
 zero, preservando a leitura do legado. Falha no banco resulta em erro HTTP 500.
 O acesso usa JDBC e pool de conexões, sem criação ou alteração automática de
-tabelas. Nesta fatia, o monólito ainda mantém suas leituras e escritas.
+tabelas. O monólito consome estas consultas pela ACL, mantendo temporariamente
+as escritas e a consulta indireta de livros em destaque.
 
 Em desenvolvimento, a conexão aponta para `localhost:5432/biblioteca`, com
 as credenciais locais do legado. Para executar o JAR, configurar
