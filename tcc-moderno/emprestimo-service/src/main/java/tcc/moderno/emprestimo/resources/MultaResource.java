@@ -32,13 +32,13 @@ public class MultaResource {
     @POST
     @Path("/calcular")
     public MultaResponseDTO calcular(@Valid MultaRequestDTO requisicao) {
-        List<LocalDate> feriados = requisicao.dataReferencia().isAfter(requisicao.dataPrevista())
-                ? calendarioService.buscarFeriados(requisicao.dataPrevista().getYear())
+        List<LocalDate> feriados = requisicao.getDataReferencia().isAfter(requisicao.getDataPrevista())
+                ? calendarioService.buscarFeriados(requisicao.getDataPrevista().getYear())
                 : List.of();
         double valor = multaService.calcularMulta(
-                requisicao.dataPrevista(),
-                requisicao.tipoUsuario(),
-                requisicao.dataReferencia(),
+                requisicao.getDataPrevista(),
+                requisicao.getTipoUsuario(),
+                requisicao.getDataReferencia(),
                 feriados);
         return new MultaResponseDTO(valor);
     }
