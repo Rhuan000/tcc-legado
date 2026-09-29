@@ -154,5 +154,8 @@ Listagem, busca por ID e atrasados passam pela ACL, inclusive as leituras da
 devolução e da atualização de multas. A interface mantém o EJB como fachada.
 HTTP 404 na busca individual representa empréstimo inexistente; falhas HTTP,
 indisponibilidade e respostas inválidas interrompem a consulta.
-As escritas permanecem no DAO legado. O `JOIN` usado para livros em destaque
-ainda precisa ser migrado antes de encerrar a etapa de consultas.
+As escritas permanecem no DAO legado. O job de destaques recebe da ACL os IDs
+dos mais emprestados no mês e busca os dados dos livros localmente, sem `JOIN`
+com empréstimos. Consulta e carregamento dos livros precedem a exclusão dos
+destaques antigos; uma falha nessa fase preserva os registros existentes.
+A substituição dos destaques ainda usa as escritas legadas sem transação única.

@@ -140,8 +140,10 @@ pré-migração e pós-migração.
 Implementados modelo de leitura, repositório JDBC e endpoints de listagem,
 busca por ID e atrasados. As consultas de `EmprestimoService`, incluindo as
 leituras usadas pela devolução e pelo job de multas, passam pela ACL.
-A consulta de destaques permanece pendente; a propriedade exclusiva dos dados
-depende também da migração das escritas no Estado 4.
+A leitura indireta dos destaques também usa a API: contagem mensal de
+empréstimos por livro no serviço e dados dos livros no monólito. Não restam
+consultas SQL de empréstimos nas fontes Java do legado. A propriedade exclusiva
+dos dados depende também da migração das escritas no Estado 4.
 
 1. Implementar entidade e repositório de empréstimos no novo serviço.
 2. Migrar busca por identificador, listagem e consulta de atrasados.
