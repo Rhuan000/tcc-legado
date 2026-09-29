@@ -1,6 +1,6 @@
 package tcc.legado.action;
 
-import tcc.legado.ejb.emprestimo.IEmprestimoEJB;
+import tcc.legado.acl.EmprestimoAcl;
 import tcc.legado.model.Emprestimo;
 import tcc.legado.model.Livro;
 import tcc.legado.model.Usuario;
@@ -13,17 +13,14 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class EmprestimoAction extends DispatchAction {
 
-    private IEmprestimoEJB getEmprestimoEJB() throws Exception {
-        InitialContext ctx = new InitialContext();
-        return (IEmprestimoEJB) ctx.lookup("java:global/monolito-biblioteca/EmprestimoEJB!tcc.legado.ejb.emprestimo.IEmprestimoEJB");
-    }
+    private final tcc.legado.service.CoordenadorEmprestimo coordenador = new tcc.legado.service.CoordenadorEmprestimo();
+    private final EmprestimoAcl emprestimoAcl = new EmprestimoAcl();
 
     // Exibe formulário para novo empréstimo
     public ActionForward novo(ActionMapping mapping, ActionForm form,
@@ -33,6 +30,7 @@ public class EmprestimoAction extends DispatchAction {
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             request.setAttribute("livros", livroDAO.listarTodos());
             request.setAttribute("usuarios", usuarioDAO.listarTodos());
+            request.setAttribute("chaveEmprestimo", java.util.UUID.randomUUID().toString());
             return mapping.findForward("novo");
         } catch (Exception e) {
             request.setAttribute("erro", "Erro ao carregar dados: " + e.getMessage());
@@ -57,16 +55,19 @@ public class EmprestimoAction extends DispatchAction {
 
         try {
             Long idLivro = Long.parseLong(idLivroStr);
-            IEmprestimoEJB ejb = getEmprestimoEJB();
-            Emprestimo emp = ejb.criarEmprestimo(idLivro, matricula);
+            String chave = request.getParameter("chave");
+            if (chave == null) throw new IllegalArgumentException("Abra o formulario de emprestimo novamente");
+            java.util.UUID.fromString(chave);
+            Emprestimo emp = coordenador.criar(idLivro, matricula, chave);
             request.setAttribute("mensagem", "Empréstimo realizado com sucesso! ID: " + emp.getId());
             return listar(mapping, form, request, response);
         } catch (NumberFormatException e) {
             request.setAttribute("erro", "ID do livro inválido");
             return mapping.findForward("erro");
         } catch (Exception e) {
-            // Captura qualquer exceção da camada de negócio (ex: Usuário não encontrado)
-            request.setAttribute("erro", e.getMessage());
+            request.setAttribute("erro", e.getMessage()
+                    + ". Em caso de falha de comunicacao, a operacao pode estar pendente. "
+                    + "Consulte a lista antes de abrir outro formulario; para repetir, reenvie o mesmo formulario.");
             return mapping.findForward("erro");
         }
     }
@@ -75,8 +76,7 @@ public class EmprestimoAction extends DispatchAction {
     public ActionForward listar(ActionMapping mapping, ActionForm form,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
-            IEmprestimoEJB ejb = getEmprestimoEJB();
-            List<Emprestimo> lista = ejb.listarTodos();
+            List<Emprestimo> lista = emprestimoAcl.listarTodos();
             request.setAttribute("lista", lista);
             return mapping.findForward("listarSucesso");
         } catch (Exception e) {
@@ -89,8 +89,7 @@ public class EmprestimoAction extends DispatchAction {
     public ActionForward devolverForm(ActionMapping mapping, ActionForm form,
                                       HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
-            IEmprestimoEJB ejb = getEmprestimoEJB();
-            List<Emprestimo> ativos = ejb.listarTodos().stream()
+            List<Emprestimo> ativos = emprestimoAcl.listarTodos().stream()
                     .filter(e -> e.getDataDevolucaoReal() == null)
                     .collect(java.util.stream.Collectors.toList());
             request.setAttribute("emprestimos", ativos);
@@ -112,8 +111,7 @@ public class EmprestimoAction extends DispatchAction {
 
         try {
             Long id = Long.parseLong(idStr);
-            IEmprestimoEJB ejb = getEmprestimoEJB();
-            ejb.registrarDevolucao(id);
+            coordenador.devolver(id);
             request.setAttribute("mensagem", "Devolução registrada com sucesso!");
             return listar(mapping, form, request, response);
         } catch (NumberFormatException e) {
@@ -139,8 +137,7 @@ public class EmprestimoAction extends DispatchAction {
 			return mapping.findForward("erro");
 		}
 		Long id = Long.parseLong(idStr);
-		IEmprestimoEJB ejb = getEmprestimoEJB();
-		Emprestimo emp = ejb.buscarPorId(id);
+		Emprestimo emp = emprestimoAcl.buscarPorId(id);
 		if (emp == null) {
 			request.setAttribute("erro", "Empréstimo não encontrado");
 			return mapping.findForward("erro");

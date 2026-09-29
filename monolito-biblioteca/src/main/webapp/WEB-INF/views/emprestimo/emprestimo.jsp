@@ -1,4 +1,4 @@
-<%@ page import="java.util.List, tcc.legado.model.Livro, tcc.legado.model.Usuario" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.List, tcc.legado.model.Livro, tcc.legado.model.Usuario" %>
 <%
     List<Livro> livros = (List<Livro>) request.getAttribute("livros");
     List<Usuario> usuarios = (List<Usuario>) request.getAttribute("usuarios");
@@ -6,19 +6,20 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Novo EmprÈstimo</title>
+    <title>Novo Empr√©stimo</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>? Realizar EmprÈstimo</h1>
-            <p class="subtitle">Associe um livro a um usu·rio pela matrÌcula</p>
+            <h1>? Realizar Empr√©stimo</h1>
+            <p class="subtitle">Associe um livro a um usu√°rio pela matr√≠cula</p>
         </div>
 
         <div class="content">
             <form action="emprestimo.do?metodo=realizar" method="post" class="form-container">
+                <input type="hidden" name="chave" value="<%= request.getAttribute("chaveEmprestimo") %>" />
                 <div class="form-group">
                     <label for="idLivro">Livro</label>
                     <select id="idLivro" name="idLivro" class="form-control" required>
@@ -30,14 +31,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="matricula">Usu·rio</label>
-                    <input type="text" id="matricula" name="matricula" class="form-control" list="usuarios-lista" autocomplete="off" placeholder="Digite a matrÌcula" required />
+                    <label for="matricula">Usu√°rio</label>
+                    <input type="text" id="matricula" name="matricula" class="form-control" list="usuarios-lista" autocomplete="off" placeholder="Digite a matr√≠cula" required />
                     <datalist id="usuarios-lista">
                         <% if (usuarios != null) { for (Usuario u : usuarios) { %>
                             <option value="<%= u.getMatricula() %>"><%= u.getNome() %></option>
                         <% } } %>
                     </datalist>
-                    <small class="form-hint">Digite a matrÌcula e selecione o usu·rio correspondente.</small>
+                    <small class="form-hint">Digite a matr√≠cula e selecione o usu√°rio correspondente.</small>
                     <div id="usuario-preview" class="alert alert-info" style="display:none; margin-top:10px;"></div>
                 </div>
 
@@ -75,10 +76,10 @@
                 var usuario = usuarios.find(function (u) { return u.matricula === value; });
                 if (usuario) {
                     preview.style.display = 'block';
-                    preview.textContent = 'Usu·rio encontrado: ' + usuario.nome + ' (' + usuario.tipo + ')';
+                    preview.textContent = 'Usu√°rio encontrado: ' + usuario.nome + ' (' + usuario.tipo + ')';
                 } else {
                     preview.style.display = 'block';
-                    preview.textContent = 'MatrÌcula n„o localizada na lista carregada.';
+                    preview.textContent = 'Matr√≠cula n√£o localizada na lista carregada.';
                 }
             });
         })();

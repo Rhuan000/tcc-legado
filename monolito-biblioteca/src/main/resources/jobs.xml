@@ -6,23 +6,6 @@
     version="2.0">
 
     <schedule>
-        <!-- Job diário (00:00) -->
-        <job>
-            <name>MultaDiariaJob</name>
-            <group>Sistema</group>
-            <description>Recalcula multas de empréstimos atrasados (diário)</description>
-            <job-class>tcc.legado.job.MultaDiariaJob</job-class>
-        </job>
-        <trigger>
-            <cron>
-                <name>triggerMultaDiaria</name>
-                <group>Sistema</group>
-                <job-name>MultaDiariaJob</job-name>
-                <job-group>Sistema</job-group>
-                <cron-expression>0 0 0 * * ?</cron-expression> <!-- todo dia à meia-noite -->
-            </cron>
-        </trigger>
-
         <!-- Job de Mais Emprestados (diário, 01:00) -->
 		<job>
 		    <name>AtualizarMaisEmprestadosJob</name>
