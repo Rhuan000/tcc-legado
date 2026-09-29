@@ -177,11 +177,23 @@ Cada entrada distingue fato observado, decisão e interpretação. Atividades pl
 - **Limites:** calendário sintético; sem comparação executada contra a baseline. Disparo automático do Quartz, timeout de leitura e falhas intermediárias de escrita ainda não validados.
 - **Métricas:** identificada subcontagem de dependências de records no CK; ressalva e condição para a coleta final registradas em `medicoes/README.md`. Mantidas duas campanhas quantitativas.
 
+### 28/09/2026 Primeira fatia das consultas de empréstimos
+
+- **Implementação:** modelo de leitura, repositório JDBC com pool e API para listagem, busca por ID e atrasados. Consultas derivadas do DAO legado; multa SQL nula continua representada como zero. Falhas SQL passam a resultar em erro HTTP, em vez de lista vazia ou ausência aparente.
+- **Validação:** `mvnw.cmd -B package` no JDK 21 concluiu com 87 testes aprovados, incluindo nove novos testes HTTP com PostgreSQL 14 isolado. Cobertura de ordenação, datas, multa, devolvidos, vencimento hoje, futuros, ausência, ID inválido, lista vazia e falha SQL. O esquema reduzido de testes não valida as chaves estrangeiras entre domínios.
+- **Limites:** leituras e escritas do monólito permanecem locais; redirecionamento pela ACL e consulta de destaques ainda pendentes. Nenhuma campanha quantitativa executada. A extensão JDBC acrescenta readiness do banco, cujo escopo deverá ser considerado na definição do endpoint da coleta final.
+
+### 29/09/2026 Compatibilidade dos modelos com o CK
+
+- **Decisão:** substituir os seis records do microsserviço por classes imutáveis com getters e igualdade por valor, preservando contratos JSON e validações. Escolha motivada pela limitação do instrumento, sem expectativa de reduzir CBO.
+- **Verificação:** `mvnw.cmd -B package` concluiu com 87 testes aprovados. O CK com hash fixado reconheceu as seis classes e seus campos; uma amostra de controle com uma dependência obteve CBO 1. Resultados temporários em `target`, sem nova campanha quantitativa ou alteração da baseline.
+- **Banco:** o `CREATE TABLE` pertence exclusivamente ao preparo do PostgreSQL isolado dos testes. O script não está no JAR de produção; a aplicação consulta a tabela existente.
+
 ## Próximas evidências necessárias
 
 | Pendência | Evidência esperada |
 | --- | --- |
-| Resolver CK para records | Instrumento validado para os dois snapshots e mesmas regras de análise |
+| Conferir instrumento e escopos finais | Classes convencionais reconhecidas; manter mesmas regras de análise nos dois snapshots |
 | Aplicar Maven fixado às coletas finais | Maven 3.9.11 explícito e versão efetiva registrada nos três escopos |
 | Completar falhas e agendamento do Estado 2 | Timeout de leitura e disparo automático do Quartz |
 | Comparar comportamentos | Cenários equivalentes executados nas duas versões |

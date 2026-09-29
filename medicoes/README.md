@@ -80,9 +80,13 @@ esses criterios e ser verificados antes da coleta pos-migracao.
 Verificação em 28/09/2026 identificou uma limitação no CK fixado: um componente
 de record com dependência de outro tipo recebeu CBO zero, enquanto o campo
 equivalente de uma classe recebeu um, em verificação interna com uma amostra
-mínima. Resolver esse ponto antes da coleta final. Caso seja necessário trocar
-o instrumento, reanalisar ambos os
-snapshots; a coleta temporal original não precisa ser descartada por esse motivo.
+mínima. Em 29/09/2026, os seis records do serviço foram substituídos por classes
+convencionais imutáveis, por compatibilidade com o instrumento. O mesmo CK
+reconheceu os seis tipos e seus campos; uma classe de controle com uma dependência
+obteve CBO 1. Essa verificação não integra a campanha quantitativa final.
+A escolha muda a representação do código e será declarada na análise; não
+constitui evidência de redução de acoplamento. O JAR do CK e a baseline foram
+preservados. Se o instrumento mudar futuramente, reanalisar ambos os snapshots.
 
 ## Ambiente de referencia
 
