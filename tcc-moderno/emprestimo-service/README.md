@@ -9,6 +9,32 @@ O banco PostgreSQL pode permanecer fisicamente compartilhado durante o
 experimento. No estado final, somente este serviço deverá acessar diretamente
 as tabelas de empréstimo; o monólito deverá usar a API HTTP.
 
+## Consultas de empréstimos
+
+- `GET /emprestimos`: lista ordenada por ID.
+- `GET /emprestimos/{id}`: consulta individual; 404 para ID inexistente e 400 para ID não positivo.
+- `GET /emprestimos/atrasados`: empréstimos sem devolução e com vencimento anterior a `CURRENT_DATE` do PostgreSQL.
+
+As respostas contêm IDs de livro e usuário, datas ISO (`yyyy-MM-dd`) e a multa
+persistida. As consultas não recalculam multas. Multa nula é apresentada como
+zero, preservando a leitura do legado. Falha no banco resulta em erro HTTP 500.
+O acesso usa JDBC e pool de conexões, sem criação ou alteração automática de
+tabelas. Nesta fatia, o monólito ainda mantém suas leituras e escritas.
+
+Em desenvolvimento, a conexão aponta para `localhost:5432/biblioteca`, com
+as credenciais locais do legado. Para executar o JAR, configurar
+`EMPRESTIMO_DB_URL` (URL JDBC), `EMPRESTIMO_DB_USERNAME` e `EMPRESTIMO_DB_PASSWORD`.
+Os endpoints são internos ao experimento e devem permanecer em rede restrita.
+
+Os testes usam PostgreSQL 14 isolado via Dev Services e precisam de Docker
+ativo (`./mvnw test`). O esquema reduzido de teste valida as consultas; não
+representa a migração das chaves estrangeiras de livros e usuários.
+Configuração de referência: [datasources do Quarkus](https://quarkus.io/guides/datasource/).
+
+A extensão JDBC acrescenta a verificação do banco ao health check de readiness.
+Para a futura medição de disponibilidade HTTP, o endpoint e seu escopo ainda
+devem ser alinhados ao protocolo do experimento.
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
