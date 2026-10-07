@@ -228,13 +228,51 @@ Cada entrada distingue fato observado, decisão e interpretação. Atividades pl
 - **Compatibilidade:** preservada a regra padrão para tipos adicionais do cadastro legado, como ADMIN; os tipos não foram restritos artificialmente aos três descritos nos requisitos. Teste de regressão acrescentado.
 - **Limites:** calendário sintético; nenhum commit ou coleta quantitativa final. O texto deve descrever extração de regras e dados de empréstimos, não extração integral da coordenação de todos os domínios. Script de banco revisado e aplicado apenas em novo banco de ensaio.
 
+### 2026-10-06 Processamento periódico no serviço e contexto de usuário por API
+
+- **Tipo:** registro contemporâneo; revisão da fronteira acordada com o autor.
+- **Decisão:** manter cadastro de usuários e coordenação de estoque no legado,
+  transferindo identificação e processamento periódico de multas ao serviço.
+  A consulta remota preserva o tipo atual, sem congelá-lo no empréstimo.
+- **Implementação:** servlet `GET /integracao/usuarios/{id}/contexto`, com consulta
+  mínima de ID/tipo; cliente HTTP e adaptador de contexto no serviço; job Quarkus
+  diário no fuso `America/Sao_Paulo`. Retirado o job de multas do Quartz legado;
+  recuperação de fluxos e destaques permanecem locais. Não houve migração de tabela.
+- **Segurança:** credencial exclusiva de leitura com mínimo de 32 caracteres,
+  HTTPS por padrão, exceção de HTTP restrita a loopback e habilitação explícita,
+  ausência de cache, comparação constante do token no legado, rejeição de tokens
+  duplicados e métodos diferentes de GET. Cliente sem redirects, com timeout de
+  três segundos e validação do contexto. A rota não aceita sessão como credencial.
+- **Falhas:** uma consulta inválida não atualiza a multa nem inventa tipo padrão;
+  outros empréstimos continuam sendo processados. O ciclo informa falha e a
+  execução seguinte consulta novamente o cadastro. Não há atomicidade distribuída.
+- **Validação:** `mvnw.cmd -B test` no microsserviço: **153 testes aprovados**, sem
+  falhas, erros ou testes ignorados. Inclui 18 cenários novos com PostgreSQL 14
+  isolado, 15 de cliente HTTP, 11 de proteção do envio e dois de coordenação.
+  Verificados mudança de tipo, recalcular sem acumular, retomada após erro HTTP,
+  timeout, contexto inválido, redirects, continuidade após falha individual,
+  proteção de devolução e disparo real do agendador. Usuários/feriados simulados.
+- **Ambiente:** Docker Desktop recuperado após preservar pastas contendo apenas
+  sockets temporários travados e reiniciar seus processos. Imagens/volumes não
+  foram apagados. A JVM dos testes precisou de fallback TCP para sockets locais:
+  variável apenas do processo `JDK_JAVA_OPTIONS` com
+  `-Djdk.net.unixdomain.tmpdir=<diretorio-inexistente-em-target>`. Confirmado no
+  JDK local que falha de bind Unix ativa o fallback TCP; sem alteração de produção.
+- **Legado:** WAR compilado e empacotado com JDK 8 usando
+  `mvn -B "-Dmaven.test.skip=true" package`. Não foram criados nem executados
+  testes do legado, conforme solicitação do autor. Servlet não foi exercitada
+  em JBoss nesta rodada; testes do serviço usam contrato simulado do legado.
+- **Limites:** sem deployment, configuração de segredos reais, commits ou coleta
+  de métricas. Operação pressupõe uma instância do agendador. Disponibilidade do
+  contexto ainda depende do legado; esse acoplamento HTTP não é capturado pelo CBO.
+
 ## Próximas evidências necessárias
 
 | Pendência | Evidência esperada |
 | --- | --- |
 | Conferir instrumento e escopos finais | Classes convencionais reconhecidas; manter mesmas regras de análise nos dois snapshots |
 | Aplicar Maven fixado às coletas finais | Maven 3.9.11 explícito e versão efetiva registrada nos três escopos |
-| Completar cenários adversos | Timeout de leitura e indisponibilidade prolongada; recuperação e multas disparadas pelo Quartz legado já exercitadas em ensaio isolado |
+| Completar cenários adversos | Timeout/erros e cron Quarkus verificados com legado simulado; falta validação da nova servlet em JBoss e indisponibilidade prolongada no ambiente integrado |
 | Comparar comportamentos | Cenários equivalentes executados nas duas versões |
 | Executar campanha final após revisão e commits | Coletores com monólito, serviço e conjunto identificados; dez observações de tempos por escopo |
 | Aplicar corte no ambiente de apresentação | Backup, script de migração e implantação coordenada; ensaio isolado já realizado |
