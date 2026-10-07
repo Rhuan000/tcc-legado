@@ -24,6 +24,13 @@ public class AuthFilter implements Filter {
         String uri = request.getRequestURI();
         String contextPath = request.getContextPath();
 
+        // Esta servlet autentica TODOS os métodos com credencial de integração.
+        // Usar o mapeamento resolvido pelo container, não substrings da URI.
+        if ("/integracao/usuarios".equals(request.getServletPath())) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         // 1. Ignorar recursos estáticos
         if (uri.endsWith(".css") || uri.endsWith(".js") ||
             uri.endsWith(".png") || uri.endsWith(".jpg") || uri.endsWith(".gif") ||

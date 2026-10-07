@@ -7,6 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO {
+
+    /** Consulta mínima para integração; falha SQL não significa usuário inexistente. */
+    public Usuario buscarContextoPorId(long id) {
+        String sql = "SELECT id, tipo FROM usuario WHERE id = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setQueryTimeout(3);
+            ps.setLong(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (!rs.next()) return null;
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getLong("id"));
+                usuario.setTipo(rs.getString("tipo"));
+                return usuario;
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException("Falha ao consultar contexto de usuario", e);
+        }
+    }
     
     private Connection getConnection() throws SQLException {
         try {

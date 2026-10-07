@@ -101,10 +101,6 @@ public class EmprestimoAcl {
         } catch (RuntimeException e) { throw respostaInvalida("devolver empréstimo", e); }
     }
 
-    public void atualizarMulta(Long id, JSONObject contexto) {
-        executarPost("/emprestimos/"+id+"/multa",contexto,"atualizar multa");
-    }
-
     public List<Emprestimo> buscarAtrasados() {
         return consultarLista("/emprestimos/atrasados", "consultar empréstimos atrasados");
     }

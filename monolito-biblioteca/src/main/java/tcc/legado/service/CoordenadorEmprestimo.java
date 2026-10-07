@@ -58,14 +58,6 @@ public class CoordenadorEmprestimo {
             catch(RuntimeException e){java.util.logging.Logger.getLogger(getClass().getName()).warning("Fluxo pendente: "+chave);}
         }
     }
-    public void atualizarMultas() {
-        LocalDate referencia=LocalDate.now();
-        for(Emprestimo emp:acl.buscarAtrasados()) {
-            Usuario usuario=usuarios.buscarPorId(emp.getIdUsuario());
-            validarUsuario(usuario);
-            acl.atualizarMulta(emp.getId(),contexto(usuario,referencia));
-        }
-    }
     private JSONObject contexto(Usuario usuario,LocalDate referencia) {
         return new JSONObject().put("tipoUsuario",usuario.getTipo()).put("dataReferencia",referencia.toString());
     }

@@ -3,8 +3,8 @@
 Microsserviço criado para receber, de forma incremental, a capacidade de
 gestão de empréstimos do monólito. A migração começa pelas regras de multa,
 prazo e calendário e avança até consultas, criação, devolução e propriedade
-lógica dos dados de empréstimo. A coordenação entre domínios e o disparo dos
-processamentos periódicos permanecem no legado.
+lógica dos dados de empréstimo. O processamento periódico de multas pertence
+ao serviço. A coordenação de criação/devolução com o estoque permanece no legado.
 
 O banco PostgreSQL pode permanecer fisicamente compartilhado durante o
 experimento. No estado final, somente este serviço deverá acessar diretamente
@@ -52,8 +52,8 @@ Respostas de sucesso: 200.
 
 O legado autentica o operador, verifica suas permissões, consulta seus cadastros
 e envia os dados. O serviço valida o contrato, aplica as regras e persiste
-empréstimos. Não há cliente HTTP, consulta de usuário/estoque ou agendamento
-voltado ao legado dentro deste serviço. A consulta dos mais emprestados continua
+empréstimos. Para o job de multas, o serviço consulta o contexto atual do usuário
+pela API interna do legado. Não consulta estoque. A consulta dos mais emprestados continua
 usando somente a tabela de empréstimos.
 
 Toda API de negócio exige `X-Integration-Token`, comparado com
@@ -68,7 +68,7 @@ conteúdo diferente resulta em 409. Devolução repetida preserva a primeira
 conclusão sem novo efeito. O serviço mantém um registro local de comandos
 para retomar falhas SQL, mas quem repete a chamada é o coordenador no legado.
 Os dados de cada comando ficam fixos durante sua recuperação. Na atualização
-periódica, o legado consulta novamente o tipo atual do usuário.
+periódica, o serviço consulta novamente o tipo atual do usuário no legado.
 
 Antes do primeiro deploy, parar ambas as aplicações, fazer backup e executar
 uma vez `migracoes/001-comandos-emprestimo.sql` da raiz com
@@ -85,6 +85,65 @@ O banco físico e as credenciais permanecem compartilhados. A exclusividade
 dos dados é lógica e auditada nas fontes, não imposta por permissões do banco.
 A remoção das cascatas preserva históricos; referências ausentes exigem
 correção operacional. Consulte o README do legado para recuperação de fluxos.
+
+## Processamento periódico de multas e integração de usuários
+
+`AtualizacaoMultasJob` identifica atrasados pelo repositório do serviço, consulta
+`GET /integracao/usuarios/{id}/contexto` no legado e aplica as regras e a escrita
+locais. O contrato retorna somente `idUsuario` e `tipoUsuario`. Não há cache do
+tipo, cópia da tabela de usuários nem uso do tipo congelado na criação.
+
+Configuração da nova integração (independente do token de comandos existente):
+
+| Variável | Onde configurar | Finalidade |
+| --- | --- | --- |
+| `LEGADO_USUARIOS_URL` | Serviço | URL base com contexto, por exemplo `https://legado:8443/monolito-biblioteca` |
+| `LEGADO_USUARIOS_INTEGRATION_TOKEN` | Ambas as aplicações | Mesmo segredo aleatório exclusivo, com pelo menos 32 caracteres, fora do Git |
+| `LEGADO_USUARIOS_ALLOW_LOCAL_HTTP` | Ambas, somente em ensaio local | `true` permite HTTP de loopback; padrão `false` |
+| `EMPRESTIMO_MULTAS_CRON` | Serviço | Padrão `0 0 0 * * ?`; `off` desativa; `0 */5 * * * ?` permite ensaio a cada cinco minutos |
+
+A URL inclui o contexto de implantação do WAR; a rota acima é anexada a ela.
+O segredo segue no header `X-Integration-Token`, nunca na URL. O cliente exige
+HTTPS, valida o certificado normalmente, não segue redirecionamentos e limita
+conexão/leitura a três segundos. HTTP local só é aceito com a exceção explícita
+e URL de loopback (`localhost`, `127.0.0.1` ou `::1`). No legado, a exceção também
+exige que a conexão venha de loopback. Não habilitar essa exceção atrás de proxy
+acessível remotamente. Não desabilitar a verificação TLS; configurar certificado
+confiável e restringir a rota à rede dos serviços no firewall/proxy.
+
+Sem segredo válido (mínimo 32 caracteres), a integração falha fechada. O token
+autentica o serviço para leitura do contexto, não operadores nem comandos de
+empréstimo. Configurar/rotacionar os segredos nas duas aplicações de forma
+coordenada. Não reutilizar `EMPRESTIMO_INTEGRATION_TOKEN` para essa leitura.
+
+O agendador usa `America/Sao_Paulo`, configurável por `emprestimo.multas.time-zone`.
+Alinhar o fuso da JVM do legado e do PostgreSQL com esse fuso: a seleção de
+atrasados preserva `CURRENT_DATE` do banco. Há proteção contra sobreposição na
+mesma instância; este experimento pressupõe **uma instância ativa do serviço**.
+Não há coordenação de agendadores entre réplicas nem execução retroativa garantida
+de disparos perdidos durante indisponibilidade.
+
+Falha HTTP, timeout ou contexto inválido preserva a multa daquele empréstimo,
+registra a falha sem corpo/credencial e permite processar os demais. O ciclo é
+reportado como falho e a próxima execução volta a consultar o contexto e recalcula
+o valor integral (não soma novamente). Usuário excluído ou cadastro inválido exige
+correção operacional. Devoluções concluídas ou pendentes continuam protegidas
+pela escrita condicional do repositório. Não há transação distribuída nem snapshot
+atômico entre o cadastro remoto e a atualização da multa.
+
+Para o corte, implantar a rota e configurar os segredos, retirar o job antigo do
+legado e só então ativar o cron no serviço. O Quartz legado mantém recuperação de
+fluxos e destaques, sem atualização de multas. Criação e devolução continuam
+recebendo contexto do coordenador legado. O endpoint autenticado de atualização
+individual de multa permanece compatível, mas não é mais usado pelo job legado.
+
+Os testes novos ficam somente no microsserviço: cliente HTTP com legado simulado,
+segurança do envio, regras de falha e processamento com PostgreSQL isolado,
+incluindo disparo real do agendador. Eles não certificam o deployment da servlet
+no JBoss; a validação integrada com o legado real permanece separada.
+
+Referências: [REST Client](https://quarkus.io/guides/rest-client/) e
+[Scheduler](https://quarkus.io/guides/scheduler-reference/).
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 

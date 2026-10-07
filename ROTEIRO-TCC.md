@@ -161,16 +161,23 @@ explicitamente transitórias até o Estado 4.
 ## Estado 4 — migrar criação, devolução e job
 
 1. Migrar criação e devolução de empréstimos.
-2. Definir contratos para validar usuário, consultar livro e alterar estoque.
+2. Expor contexto atual do usuário por API interna autenticada do legado para o
+   processamento de multas. Manter consulta de livro e alteração de estoque no
+   coordenador legado de criação/devolução.
 3. Definir comportamento de compensação quando uma operação distribuída falhar.
 4. Migrar o processamento periódico de multas para o agendador do serviço.
 5. Remover `EmprestimoService`, `EmprestimoDAO`, EJB e interface EJB quando não
-   houver consumidores remanescentes.
+   houver consumidores remanescentes. Preservar o coordenador dos fluxos de
+   criação/devolução e sua recuperação no legado.
 6. Manter temporariamente o `EmprestimoAction` como fachada Struts que chama a
    API, caracterizando o Strangler Fig.
 
-Critério de saída: toda a capacidade de empréstimos é atendida pelo novo
-serviço, e o monólito não possui lógica nem acesso direto aos seus dados.
+Critério de saída: regras, persistência e processamento periódico de empréstimos
+pertencem ao serviço, sem acesso direto do monólito às suas tabelas. A coordenação
+com estoque na criação/devolução permanece no legado; o job consulta usuários
+por contrato HTTP. Essa dependência operacional não representa autonomia total
+nem é medida integralmente pelo CBO. A preservação do tipo atual deve ser
+verificada, assim como falha de consulta e retomada do processamento.
 
 ## Estado 5 — fechar o experimento
 

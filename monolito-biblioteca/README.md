@@ -158,10 +158,10 @@ cadastros locais e chama a ACL com IDs, tipo do usuário e datas. Não calcula
 prazo/multa e não acessa a tabela de empréstimos. Consultas das telas continuam
 pela ACL. O DAO e o EJB antigos de empréstimos foram retirados.
 
-O Quartz coordena a atualização diária das multas e retoma fluxos pendentes
-a cada 30 segundos. O tipo do usuário é consultado novamente a cada execução
-do job de multas e enviado ao serviço; a regra e a escrita continuam remotas.
-O cron de multas pode ser alterado com a propriedade `emprestimo.multas.cron`.
+O Quartz retoma fluxos pendentes a cada 30 segundos. O processamento periódico
+de multas foi transferido para o agendador do microsserviço, que consulta o
+tipo atual do usuário pela API interna descrita abaixo. O cron agora é configurado
+no serviço com `EMPRESTIMO_MULTAS_CRON`.
 O experimento usa uma instância do legado e o fuso da JVM deve ser
 `America/Sao_Paulo`.
 
@@ -191,8 +191,37 @@ cadastro consultado no servidor, nunca de campos aceitos diretamente do navegado
 A ACL envia `X-Integration-Token`, obtido da propriedade
 `emprestimo.integracao.token` ou da variável `EMPRESTIMO_INTEGRATION_TOKEN`.
 Configurar o mesmo segredo no serviço. Não existe mais
-`/integracao/emprestimos`: a comunicação de negócio segue apenas do legado
-para o microsserviço. Login, sessão e permissões dos operadores permanecem locais.
+`/integracao/emprestimos`. Login, sessão e permissões dos operadores permanecem locais.
+
+### API interna de contexto do usuário
+
+`GET /monolito-biblioteca/integracao/usuarios/{id}/contexto` retorna somente
+`{"idUsuario":9,"tipoUsuario":"ALUNO"}`. A consulta SQL lê apenas ID e tipo;
+não expõe nome, matrícula, email, senha ou sessão. O contexto do WAR pode variar.
+
+A servlet exige `X-Integration-Token`, comparado em tempo constante com o segredo
+exclusivo `LEGADO_USUARIOS_INTEGRATION_TOKEN` (ou propriedade JVM
+`legado.usuarios.integracao.token`, que tem precedência). Configurar um segredo
+aleatório com pelo menos 32 caracteres, também no serviço. Não reutilizar o token
+de comandos. Ausência/configuração curta: 503; token ausente/incorreto/duplicado:
+401; transporte sem HTTPS: 403; método diferente de GET autenticado: 405;
+ID inválido: 400; usuário inexistente: 404; banco/cadastro indisponível: 503.
+Respostas não permitem cache e erros não incluem detalhes internos.
+
+A rota é autenticada pela própria servlet em todos os métodos. A exceção ao filtro
+de sessão usa somente o caminho da servlet resolvido pelo container. Sessão de
+operador não substitui o token, e o token não libera as telas Struts.
+
+HTTPS é obrigatório. Somente para ensaio na mesma máquina, definir
+`LEGADO_USUARIOS_ALLOW_LOCAL_HTTP=true` (ou `legado.usuarios.allow-local-http=true`)
+nas duas aplicações e `LEGADO_USUARIOS_URL=http://localhost:8080/monolito-biblioteca`
+no serviço. O legado exige conexão de loopback nessa exceção; não habilitá-la atrás
+de proxy acessível remotamente. Cabeçalhos `X-Forwarded-*` não são usados pela
+servlet para liberar HTTP. Em implantação, usar TLS configurado no servidor ou
+conector seguro corretamente configurado e restringir a rota na rede/firewall.
+
+Detalhes de cron, falhas, corte e limitações no
+[README do serviço](../tcc-moderno/emprestimo-service/README.md#processamento-periódico-de-multas-e-integração-de-usuários).
 
 Aplicar o script de corte conforme o
 [README do serviço](../tcc-moderno/emprestimo-service/README.md#comandos-recebidos-do-legado).
