@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List, tcc.legado.model.Emprestimo" %>
 <%
     List<Emprestimo> emprestimos = (List<Emprestimo>) request.getAttribute("emprestimos");
@@ -5,24 +6,24 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Devolução</title>
+    <title>DevoluÃ§Ã£o</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>? Registrar Devolução</h1>
-            <p class="subtitle">Selecione o empréstimo para registrar a devolução</p>
+            <h1>? Registrar DevoluÃ§Ã£o</h1>
+            <p class="subtitle">Selecione o emprÃ©stimo para registrar a devoluÃ§Ã£o</p>
         </div>
 
         <div class="content">
             <form action="emprestimo.do?metodo=devolver" method="post" class="form-container">
                 <div class="form-group">
-                    <label for="idEmprestimo">Empréstimo</label>
-                    <select id="idEmprestimo" name="idEmprestimo" class="form-control">
+                    <label for="idEmprestimo">EmprÃ©stimo</label>
+                    <select id="idEmprestimo" name="id" class="form-control" required>
                         <% if (emprestimos != null) { for (Emprestimo e : emprestimos) { %>
-                            <option value="<%= e.getId() %>">ID <%= e.getId() %> - Livro <%= e.getIdLivro() %></option>
+                            <option value="<%= e.getId() %>" <%= String.valueOf(e.getId()).equals(request.getParameter("id")) ? "selected" : "" %>>ID <%= e.getId() %> - Livro <%= e.getIdLivro() %></option>
                         <% } } %>
                     </select>
                 </div>
