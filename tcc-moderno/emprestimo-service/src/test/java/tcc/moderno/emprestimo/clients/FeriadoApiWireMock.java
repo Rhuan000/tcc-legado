@@ -20,7 +20,7 @@ public class FeriadoApiWireMock implements QuarkusTestResourceLifecycleManager {
         servidor = new WireMockServer(wireMockConfig().dynamicPort());
         servidor.start();
 
-        servidor.stubFor(get(urlEqualTo("/feriados/v1/2026"))
+        servidor.stubFor(get(urlEqualTo("/api/feriados/v1/2026"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
                         .withBody("""
@@ -33,12 +33,12 @@ public class FeriadoApiWireMock implements QuarkusTestResourceLifecycleManager {
                                 ]
                                 """)));
 
-        servidor.stubFor(get(urlEqualTo("/feriados/v1/2027"))
+        servidor.stubFor(get(urlEqualTo("/api/feriados/v1/2027"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
                         .withBody("[]")));
 
-        servidor.stubFor(get(urlEqualTo("/feriados/v1/2099"))
+        servidor.stubFor(get(urlEqualTo("/api/feriados/v1/2099"))
                 .willReturn(aResponse()
                         .withStatus(500)
                         .withHeader("Content-Type", "application/json")
@@ -48,7 +48,7 @@ public class FeriadoApiWireMock implements QuarkusTestResourceLifecycleManager {
     }
 
     static void verificarConsulta(int ano) {
-        servidor.verify(1, getRequestedFor(urlEqualTo("/feriados/v1/" + ano)));
+        servidor.verify(1, getRequestedFor(urlEqualTo("/api/feriados/v1/" + ano)));
     }
 
     @Override
