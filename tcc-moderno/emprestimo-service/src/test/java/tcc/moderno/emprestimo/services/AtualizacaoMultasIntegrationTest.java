@@ -40,7 +40,7 @@ class AtualizacaoMultasIntegrationTest {
     @BeforeEach void preparar() throws Exception {
         scheduler.pause();
         servidor.resetAll();
-        servidor.stubFor(get(urlPathMatching("/feriados/v1/[0-9]+"))
+        servidor.stubFor(get(urlPathMatching("/api/feriados/v1/[0-9]+"))
                 .willReturn(okJson("[]")));
         try (var c = banco.getConnection(); var s = c.createStatement()) {
             s.executeUpdate("DELETE FROM emprestimo_operacao");
