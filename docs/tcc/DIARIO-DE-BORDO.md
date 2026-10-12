@@ -266,6 +266,47 @@ Cada entrada distingue fato observado, decisão e interpretação. Atividades pl
   de métricas. Operação pressupõe uma instância do agendador. Disponibilidade do
   contexto ainda depende do legado; esse acoplamento HTTP não é capturado pelo CBO.
 
+### 2026-10-12 Revisao dos snapshots e exclusao das campanhas preliminares
+
+- **Tipo:** contemporaneo; revisao acordada com o autor.
+- **Fato:** formulario enviava `idEmprestimo`, mas a Action esperava `id`;
+  navegacao executava devolucao antes de abrir formulario. Tres JSPs tinham
+  bytes Windows-1252 apesar de declarar UTF-8.
+- **Correcoes:** `48aad74` alinha formulario/navegacao; `a95c2dc` corrige
+  codificacao/titulos. Legado em `experimento/pre-migracao-revisada`.
+- **Historico:** migracao reaplicada ate `562c074`, integrada a main pelo merge
+  local `d5d7507`. Historico e tags anteriores preservados; nenhum push.
+- **Validacao executada:** WAR legado gerado, 16 JSPs verificadas como UTF-8.
+  Na main integrada, Maven 3.9.11/JDK 21 executou 153 testes do servico, sem
+  falhas, erros ou ignorados, com PostgreSQL temporario via Testcontainers.
+  Isso nao substitui validacao ponta a ponta com JBoss.
+- **Negocio:** preservar tipo atual do usuario nas multas. Congelar tipo na
+  contratacao mudaria a regra; declarar dependencia HTTP residual na analise.
+- **Medicao:** excluir todas as campanhas anteriores, inclusive a recoleta de
+  26/09. Esta decisao substitui sua adocao como baseline sem apagar registros.
+  Somente pre e pos recebem medicoes; intermediarios permanecem qualitativos.
+- **Instrumento:** preparar `campanha-v2.ps1` para monolito, servico e conjunto,
+  com pilotos separados e evidencia funcional vinculada ao commit final.
+- **Pendencias:** ensaiar instrumento, validar snapshots em ambiente isolado,
+  fixar tags e executar campanhas. Nao ha novas metricas finais aprovadas.
+
+### 2026-10-12 Pilotos do instrumento revisado
+
+- **Tipo:** contemporaneo, posterior ao registro de integracao acima.
+- **Evidencias:** `metricas/pilotos/revisao-20261012/` e
+  `docs/tcc/ESTADO-DA-CAMPANHA.md`; comandos e hashes constam nos manifestos.
+- **Resultado:** build piloto aprovado no pre e nos tres escopos pos; CK
+  reconheceu 40 arquivos/tipos no pre, 39 no monolito pos e 26 no servico.
+  Recusas de sobrescrita, arvore suja e campanha final sem evidencia verificadas.
+- **Ajustes do instrumento:** separacao de stderr do CK, retencao do handle
+  para obter ExitCode no PowerShell e identidade estavel dos executaveis Java.
+  Tentativas falhas foram preservadas, sem correcao de CSVs.
+- **Limite:** pilotos de desenvolvimento, com tarefas concorrentes em alguns
+  momentos; tempos nao sao resultados experimentais. Inicializacao nao foi
+  ensaiada para evitar acesso ao banco existente enquanto se define isolamento.
+- **Pendencia:** escolha do ambiente de ensaio pelo autor, validacao funcional,
+  piloto de inicializacao e campanhas finais. Nao criar tags finais antecipadas.
+
 ## Próximas evidências necessárias
 
 | Pendência | Evidência esperada |

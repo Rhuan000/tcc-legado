@@ -1,0 +1,3 @@
+*.log -text -whitespace
+*.csv -text -whitespace
+*.json -text -whitespace

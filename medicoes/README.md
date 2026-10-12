@@ -1,165 +1,120 @@
-# Protocolo de medicao experimental
+# Campanha revisada: pre e pos-migracao
 
-Este diretorio contem os coletores usados nos dois estados quantitativos do
-experimento:
+Status: instrumento em validacao. Build e CBO foram ensaiados; inicializacao
+e validacao funcional integrada ainda estao pendentes. Nao iniciar uma campanha
+final antes de concluir essas etapas e revisar `docs/tcc/ESTADO-DA-CAMPANHA.md`.
 
-- `pre-migracao`
-- `pos-migracao`
+O instrumento revisado e `campanha-v2.ps1`. Os coletores anteriores e
+`PROTOCOLO-V1.md` permanecem para reproducao historica. O intermediario tem
+documentacao qualitativa, sem coleta quantitativa.
 
-O estado intermediario da arquitetura e documentado por commits, contratos,
-testes e registros no diario de bordo. Ele nao recebe uma campanha de CBO,
-build ou inicializacao. Essa decisao permite comparar os extremos do recorte
-funcional; em contrapartida, o estudo nao quantifica os custos transitorios da
-coexistencia entre monolito e microsservico.
+## Codigo e evidencias
 
-Os coletores atuais ainda executam somente o monolito. Informar
-`-Estado pos-migracao` altera o diretorio de saida, mas nao passa a medir o
-microsservico ou o conjunto. A coleta final nao deve ser iniciada antes da
-adaptacao dos scripts para identificar separadamente os tres escopos.
+- Legado corrigido: `experimento/pre-migracao-revisada`, commit `a95c2dc`.
+- Pos integrado: merge `d5d7507` na main, com conteudo de `562c074`.
+- Main original: primeiro pai do merge, `cc01568`, preservado no historico.
+- Correcoes de interface: `48aad74` e `a95c2dc`.
 
-Cada execucao exige `-ColetaId`, formado por letras minusculas, numeros, ponto,
-hifen ou sublinhado. Os resultados sao gravados em
-`metricas/<estado>/<coleta-id>/`. Se a pasta especifica da medicao ja existir,
-o coletor encerra sem alterar arquivos. Nao existe opcao de sobrescrita.
+Sao candidatos a snapshots finais. Antes de fixar tags imutaveis
+`experimento/pre-migracao-v2` e `experimento/pos-migracao-v2`, validar os mesmos
+cenarios de criacao, devolucao, estoque, prazos, multas e mudanca de tipo nos
+dois estados. Validar tambem integracao e job do moderno no JBoss real.
+Registrar entradas, resultados esperados/observados, ambiente e limitacoes.
+Build e health nao demonstram equivalencia funcional.
 
-O parametro opcional `-Repositorio` permite medir um worktree limpo diferente
-daquele que contem os scripts. `-ResultadosRaiz` permite manter os resultados
-no repositorio principal. Todos os coletores recusam alteracoes versionadas ou
-nao versionadas no POM e em `src` do monolito.
+Usar worktrees limpos e a mesma revisao do coletor nos dois snapshots. O
+registro final exige `-EvidenciaFuncional <arquivo.json>` contendo `estado`,
+`commit` completo, `resultado: "aprovado"` e `evidencias` identificando registros
+reais de execucao. O coletor confere identidade e arquiva o JSON; isso nao
+substitui a revisao humana das evidencias. Nao declarar aprovado antecipadamente.
 
-Os medidores de build, inicializacao e CBO exigem que `registrar-estado.ps1`
-tenha sido executado antes com o mesmo estado, identificador e commit. Isso
-impede reunir, sob uma unica campanha, resultados produzidos por revisoes
-diferentes do codigo. O registro inicial tambem recusa um identificador cuja
-pasta de campanha ja exista e armazena sistema operacional, arquitetura,
-processador, memoria fisica e versao do PowerShell.
+## Escopos
 
-O protocolo usa dez repeticoes por estado para tempo de build e tempo de
-inicializacao. O CBO e coletado uma unica vez por estado, pois e uma metrica
-estatica e deterministica para o mesmo codigo-fonte e a mesma versao da
-ferramenta.
+| Estado | Escopo | Build | Inicializacao | CBO |
+| --- | --- | --- | --- | --- |
+| Pre | monolito | 10 | 10 | 1 analise |
+| Pos | monolito remanescente | 10 | 10 | 1 analise |
+| Pos | servico | 10 | 10 | 1 analise |
+| Pos | conjunto | 10 | 10 | consolidacao das duas analises |
 
-## Interpretacao e fechamento do protocolo
+Build: `mvn -B -o clean package`, com dependencias e imagens Docker previamente
+carregadas. Inclui testes existentes e empacotamento. O conjunto mede tempo de
+parede do monolito seguido do servico, incluindo orquestracao; nao soma medias.
+A suite do servico e a ausencia de suite interna do legado devem ser declaradas.
 
-O estudo avalia a modernizacao deste sistema demonstrativo como um conjunto:
-extracao, refatoracao, framework e runtime mudam simultaneamente. Nao isola
-causalmente o efeito dos microsservicos nem estabelece superioridade sobre
-um monolito modularizado. Os problemas do legado foram construidos para o
-estudo; a generalizacao para sistemas industriais e limitada.
+Inicializacao: processos novos a cada repeticao. No conjunto, iniciar servico
+e depois JBoss sem esperar health entre as partidas; cronometrar desde antes
+da primeira partida ate ambos retornarem HTTP 200 na mesma rodada. Endpoints:
+`/monolito-biblioteca/health` e `/q/health/live`. Ambos medem disponibilidade
+HTTP, sem exigir banco ou BrasilAPI apenas de um lado. Intervalo solicitado:
+100 ms; timeout por consulta: 500 ms. O custo das consultas sequenciais integra
+o tempo observado. Nao e garantia de prontidao funcional completa.
 
-As dez repeticoes descrevem variabilidade local. Nao representam dez sistemas
-independentes. Relatar amostras, mediana, media, dispersao e diferencas absolutas
-e relativas; nao inferir significancia ou independencia apenas pelo numero dez.
+O JBoss recebe base temporaria e WAR antes do cronometro. Artefatos sao
+reutilizados entre repeticoes e seus hashes registrados em `artefatos.json`.
+Encerramento forcado das arvores criadas pelo coletor ocorre fora do tempo
+medido. Bases temporarias sao preservadas para auditoria. Instancias existentes
+nao sao encerradas; portas ocupadas impedem a coleta.
 
-O CBO representa dependencias estaticas entre tipos, nao todas as dependencias
-distribuidas. Documentar tambem contratos HTTP, dependencias de disponibilidade
-e propriedade dos dados. Nao escolher classes, interfaces ou DTOs para diminuir
-a metrica. Excluir testes do escopo e apresentar numero de tipos e distribuicao,
-alem da media. A media conjunta deve ser ponderada pelo numero de tipos, e nao
-a soma das medias. Antes da coleta final, verificar suporte do CK fixado a todos
-os tipos usados, incluindo records; omissoes invalidam a comparacao. Uma troca
-de ferramenta exige reanalisar os dois snapshots, preservando os dados antigos.
+Agendadores conservam suas configuracoes. Usar banco de ensaio isolado,
+registrar dados iniciais e efeitos dos jobs. Nunca apontar a campanha ao banco
+de apresentacao. Configurar conexoes e integracao sem versionar segredos.
 
-Para as campanhas, usar Maven 3.9.11 explicitamente nas duas aplicacoes; o
-Wrapper 3.9.16 do microsservico pode continuar no desenvolvimento. Registrar o
-executavel e a versao efetiva. Manter JDK 8 no monolito e JDK 21 no servico e
-reconhecer essa diferenca como parte da modernizacao.
+## Ambiente e execucao
 
-O tempo de `clean package` inclui testes quando existentes e empacotamento.
-No servico, inclui a suite; no legado, nao existe suite interna. Relatar como
-tempo do processo de build completo, sem atribuir a diferenca apenas ao
-compilador ou a arquitetura. Dependencias devem estar previamente resolvidas.
+Mesma maquina Windows, sem ensaios/builds concorrentes; Maven 3.9.11; monolito
+com JDK 1.8.0_201 e JBoss EAP 7.4.0.GA; servico e analisador com JDK 21.
+CK 0.7.1-SNAPSHOT, SHA-256
+`2F32FA347EF739E97152741828675A9939AEAFE61BEE3F196EE5AF264E612162`.
 
-Inicializacao significa disponibilidade HTTP, sem exigir banco ou BrasilAPI
-apenas de um dos lados. Fixar antes da campanha os endpoints equivalentes e a
-ordem de partida do conjunto; medir seu tempo de parede ate ambas as aplicacoes
-responderem, sem somar tempos isolados e chama-los de medicao conjunta. Validar
-funcionamento separadamente. Os coletores finais ainda precisam implementar
-esses criterios e ser verificados antes da coleta pos-migracao.
+O instrumento registra versoes, hash da configuracao JBoss, codigo fisico,
+arvore Git e hash do proprio script. Remove opcoes JVM herdadas e restaura o
+ambiente ao terminar. No build do servico aplica o fallback de sockets do
+diario: `-Djdk.net.unixdomain.tmpdir=<target>/sockets-nao-existentes`, caminho
+que deve permanecer inexistente. Registrar tambem o commit dos coletores.
 
-Verificação em 28/09/2026 identificou uma limitação no CK fixado: um componente
-de record com dependência de outro tipo recebeu CBO zero, enquanto o campo
-equivalente de uma classe recebeu um, em verificação interna com uma amostra
-mínima. Em 29/09/2026, os seis records do serviço foram substituídos por classes
-convencionais imutáveis, por compatibilidade com o instrumento. O mesmo CK
-reconheceu os seis tipos e seus campos; uma classe de controle com uma dependência
-obteve CBO 1. Essa verificação não integra a campanha quantitativa final.
-A escolha muda a representação do código e será declarada na análise; não
-constitui evidência de redução de acoplamento. O JAR do CK e a baseline foram
-preservados. Se o instrumento mudar futuramente, reanalisar ambos os snapshots.
-
-## Ambiente de referencia
-
-- Sistema operacional: Windows 11
-- JDK do monolito: Oracle JDK 1.8.0_201, 32 bits
-- Maven: 3.9.11
-- Servidor: JBoss EAP 7.4.0.GA
-- CK: 0.7.1-SNAPSHOT
-- JAR local do CK: `metricas/ck.jar` (nao versionado)
-- SHA-256 esperado do CK:
-  `2F32FA347EF739E97152741828675A9939AEAFE61BEE3F196EE5AF264E612162`
-- Endpoint de prontidao do monolito:
-  `http://127.0.0.1:18080/monolito-biblioteca/health`
-- Codigo HTTP exigido para prontidao: 200
-
-O caminho de Java 8 descrito anteriormente no texto do TCC como
-`jdk1.8.0_411` nao existe nesta maquina. As medicoes usam a instalacao real em
-`C:\Program Files (x86)\Java\jdk1.8.0_201` e essa versao deve ser refletida no
-texto final.
-
-## Tempo de build
-
-Cada observacao mede o tempo de parede do comando `mvn clean package`, desde a
-criacao do processo ate seu encerramento. O diretorio `target` e removido pelo
-proprio Maven em todas as repeticoes. Dependencias Maven devem estar resolvidas
-antes da coleta; a validacao previa nao integra as dez amostras.
+Executar um piloto antes da campanha final. Os comandos abaixo sao um modelo;
+substituir os caminhos e a evidencia pelos registros reais.
 
 ```powershell
-.\medicoes\medir-build.ps1 -Estado pre-migracao -ColetaId recoleta-20260926 -Repeticoes 10
+$parametros = @{
+    Estado = 'pre-migracao'
+    ColetaId = 'final-v2-pre-01'
+    Repositorio = 'C:\caminho\worktree-pre'
+    ResultadosRaiz = 'C:\desenvolvimento\tcc-legado\metricas'
+    CkJar = 'C:\desenvolvimento\ck\target\ck-0.7.1-SNAPSHOT-jar-with-dependencies.jar'
+}
+.\medicoes\campanha-v2.ps1 @parametros -Etapa registrar -EvidenciaFuncional 'C:\caminho\validacao-pre.json'
+.\medicoes\campanha-v2.ps1 @parametros -Etapa build
+.\medicoes\campanha-v2.ps1 @parametros -Etapa inicializacao
+.\medicoes\campanha-v2.ps1 @parametros -Etapa cbo
+.\medicoes\campanha-v2.ps1 @parametros -Etapa conferir
 ```
 
-## Tempo de inicializacao
+No pos, mudar estado, identificador e worktree. Para piloto, adicionar `-Piloto`
+em todas as etapas: uma repeticao, identificada no manifesto e fora da analise.
+Cada etapa recusa sobrescrita. Apos falha, preservar a campanha incompleta,
+documentar a causa e usar outro identificador, sem selecionar amostras.
 
-O WAR e construido antes das repeticoes e nao integra o tempo de inicializacao.
-Para cada observacao, o coletor cria uma base temporaria isolada do JBoss,
-inclui o WAR antes de iniciar o cronometro, inicia um novo processo e consulta o
-endpoint de saude a cada 100 ms. O cronometro para na primeira resposta HTTP
-200. Em seguida o servidor e encerrado; o tempo de desligamento nao integra a
-medicao. O SHA-256 do WAR e registrado em todas as observacoes para demonstrar
-que o mesmo artefato foi utilizado nas dez inicializacoes.
+## Analise e limites
 
-```powershell
-.\medicoes\medir-inicializacao.ps1 -Estado pre-migracao -ColetaId recoleta-20260926 -Repeticoes 10
-```
+Relatar observacoes, media, mediana, dispersao e diferencas absolutas/relativas.
+Dez repeticoes locais nao sao dez sistemas independentes nem demonstram
+significancia estatistica por si mesmas. Arquitetura, refatoracao, runtime,
+framework e testes mudam simultaneamente; nao isolar causalmente microsservicos.
 
-## CBO
+CBO analisa `src/main/java`, sem testes. Apresentar numero de tipos, distribuicao
+e media; consolidar as linhas dos dois componentes identificando sua origem.
+A media conjunta e ponderada pelo numero de tipos, nao a soma das medias.
+O coletor verifica cobertura dos arquivos; isso nao garante correcao semantica
+do CK. Preservar o instrumento e reanalisar ambos os snapshots se ele mudar.
 
-O CK analisa o diretorio de fontes configurado uma vez por estado. O coletor registra
-o commit, a versao da ferramenta e o SHA-256 do JAR para permitir reproducao.
-Por padrao, a execucao e recusada quando o hash do JAR difere daquele informado
-neste protocolo.
+Contratos HTTP, disponibilidade e propriedade dos dados nao sao integralmente
+capturados pelo CBO. A regra de tipo atual do usuario conserva dependencia do
+legado no job moderno e deve ser declarada na analise.
 
-```powershell
-.\medicoes\medir-cbo.ps1 -Estado pre-migracao -ColetaId recoleta-20260926
-```
-
-## Ordem de coleta
-
-1. Criar um worktree no commit ou tag que representa o estado a medir.
-2. Confirmar que o POM e `src` estao limpos nesse worktree.
-3. Registrar o commit, a arvore Git e o hash fisico antes da coleta com
-   `.\medicoes\registrar-estado.ps1 -Estado <estado> -ColetaId <id>`.
-4. Confirmar que nao ha outra instancia usando as portas 18080 e 19990.
-5. Executar as dez medicoes de build.
-6. Executar as dez medicoes de inicializacao usando o WAR da ultima compilacao.
-7. Executar uma coleta de CBO.
-8. Nao editar manualmente os CSVs brutos.
-
-Os resultados sao gravados em `metricas/<estado>/<coleta-id>/`. Logs individuais ficam ao
-lado dos CSVs e permitem auditar falhas sem misturar mensagens do processo com
-os tempos registrados.
-
-Os CSVs sao os dados primarios do experimento. A planilha XLSX e um artefato
-derivado para inspecao e apresentacao; sua geracao nao faz parte da coleta e
-nao exige Node.js. Os resultados publicados devem sempre poder ser conferidos
-diretamente nos CSVs brutos.
+Todas as campanhas anteriores em `metricas/pre-migracao/`, inclusive a recoleta
+de 26/09, estao excluidas da nova analise. Preservar pastas e tags historicas.
+Somente campanhas finais identificadas e aprovadas entram nas tabelas.
+CSV/logs sao dados primarios; planilha e graficos sao derivados. Commitar os
+resultados depois do codigo medido, sem editar manualmente amostras.

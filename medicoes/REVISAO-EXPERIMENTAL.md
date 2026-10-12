@@ -37,8 +37,9 @@ Preservar a main original. Reaplicar os commits de migracao em uma branch
 derivada do legado corrigido, sem importar os resultados antigos como novas
 medicoes. O reparo de interface equivale a `cc01568` e nao precisa ser duplicado.
 O reparo `c854586` e do cliente de feriados moderno e deve permanecer na linha
-moderna. Cada marco intermediario e final exige validacao funcional e coleta
-proprias, com commit, ambiente e protocolo registrados.
+moderna. A main local incorporou a linha revisada pelo merge `d5d7507`.
+Somente pre e pos recebem campanhas quantitativas; os intermediarios ficam
+documentados qualitativamente. Usar o README e `campanha-v2.ps1` na revisao.
 
 ## Texto para o TCC apos concluir a revisao
 

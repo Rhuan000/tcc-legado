@@ -1,0 +1,38 @@
+﻿{
+    "protocolo":  "v2",
+    "estado":  "pos-migracao",
+    "coleta_id":  "piloto-v2-pos-03",
+    "piloto":  true,
+    "repeticoes":  1,
+    "registro_iso":  "2026-10-12T04:01:24.3950655-03:00",
+    "codigo":  {
+                   "commit":  "d5d75071d68e12d7006826a5305685cd3d139f32",
+                   "arvore":  "ea2d57441a201cdaf63ae6d95aa7e1600a919ab4",
+                   "hash_fisico":  "829A7A3FCEA5C38E34AA5A5CF686F64348F7399BFB9E68DE0928F154ED778616",
+                   "arquivos":  118
+               },
+    "ambiente":  {
+                     "java_legado":  "java version \"1.8.0_201\"",
+                     "java_servico_analisador":  "java version \"21.0.8\" 2025-07-15 LTS",
+                     "java_legado_sha256":  "69DF943991C7F2A6B750A5E515EAAE013043D70230716D67DD426D51FB4FFBAC",
+                     "java_servico_sha256":  "F3D26E4F17C45DA613A4676B5B0C6A387BF36D990BE0835D60A177234B2F28BA",
+                     "maven":  "Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)\nMaven home: C:\\Program Files\\Maven\\apache-maven-3.9.11-bin\\apache-maven-3.9.11\nJava version: 1.8.0_201, vendor: Oracle Corporation, runtime: C:\\Program Files (x86)\\Java\\jdk1.8.0_201\\jre\nDefault locale: en_US, platform encoding: Cp1252\nOS name: \"windows 10\", version: \"10.0\", arch: \"x86\", family: \"windows\"",
+                     "maven_executavel":  "C:\\Program Files\\Maven\\apache-maven-3.9.11-bin\\apache-maven-3.9.11\\bin\\mvn.cmd",
+                     "jboss_home":  "C:\\desenvolvimento\\jboss-eap-7.4",
+                     "jboss_config_sha256":  "07141FF10A4D96A8044AD10B81F38495459E5ED6560B790D76CB66D8FAA029CD",
+                     "ck_sha256":  "2F32FA347EF739E97152741828675A9939AEAFE61BEE3F196EE5AF264E612162",
+                     "sistema":  "Microsoft Windows NT 10.0.26300.0",
+                     "processador":  "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+                     "processadores_logicos":  12,
+                     "powershell":  "5.1.26100.9444",
+                     "fuso":  "E. South America Standard Time"
+                 },
+    "coletor_sha256":  "CF3A00827DE23BA64D6057BDD6F881D166AC62ABECA3254866F8EAB01737C111",
+    "validacao_sha256":  null,
+    "portas":  [
+                   18080,
+                   18081,
+                   19990
+               ],
+    "timeout_inicializacao":  120
+}
