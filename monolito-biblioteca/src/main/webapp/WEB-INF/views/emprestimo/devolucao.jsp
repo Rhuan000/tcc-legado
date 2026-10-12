@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ page import="java.util.List, tcc.legado.model.Emprestimo" %>
 <%
     List<Emprestimo> emprestimos = (List<Emprestimo>) request.getAttribute("emprestimos");
@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>? Registrar Devolução</h1>
+            <h1>Registrar Devolução</h1>
             <p class="subtitle">Selecione o empréstimo para registrar a devolução</p>
         </div>
 

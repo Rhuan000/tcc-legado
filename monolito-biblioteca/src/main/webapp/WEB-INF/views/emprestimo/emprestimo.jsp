@@ -1,4 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.List, tcc.legado.model.Livro, tcc.legado.model.Usuario" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page import="java.util.List, tcc.legado.model.Livro, tcc.legado.model.Usuario" %>
 <%
     List<Livro> livros = (List<Livro>) request.getAttribute("livros");
     List<Usuario> usuarios = (List<Usuario>) request.getAttribute("usuarios");
@@ -13,7 +14,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>? Realizar Empréstimo</h1>
+            <h1>Realizar Empréstimo</h1>
             <p class="subtitle">Associe um livro a um usuário pela matrícula</p>
         </div>
 
