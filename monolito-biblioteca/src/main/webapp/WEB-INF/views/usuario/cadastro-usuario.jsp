@@ -1,9 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ page import="tcc.legado.model.Usuario" %>
 <%
     Usuario usuario = (Usuario) request.getAttribute("usuario");
     boolean editando = (usuario != null && usuario.getId() != null);
-    String titulo = editando ? "Editar Usu·rio" : "Cadastrar Usu·rio";
+    String titulo = editando ? "Editar Usu√°rio" : "Cadastrar Usu√°rio";
     String submitText = editando ? "Atualizar" : "Cadastrar";
 %>
 <html>
@@ -16,8 +16,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>? <%= titulo %></h1>
-            <p class="subtitle">Cadastro e ediÁ„o de usu·rios</p>
+            <h1><%= titulo %></h1>
+            <p class="subtitle">Cadastro e edi√ß√£o de usu√°rios</p>
         </div>
 
         <div class="content">
@@ -32,9 +32,9 @@
                     <input type="text" id="nome" name="nome" class="form-control" required value="<%= editando ? usuario.getNome() : "" %>" />
                 </div>
                 <div class="form-group">
-                    <label for="matricula">MatrÌcula *</label>
+                    <label for="matricula">Matr√≠cula *</label>
                     <input type="text" id="matricula" name="matricula" class="form-control" required value="<%= editando ? usuario.getMatricula() : "" %>" <%= editando ? "readonly" : "" %> />
-                    <% if (editando) { %><small class="form-hint">A matrÌcula n„o pode ser alterada</small><% } %>
+                    <% if (editando) { %><small class="form-hint">A matr√≠cula n√£o pode ser alterada</small><% } %>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>

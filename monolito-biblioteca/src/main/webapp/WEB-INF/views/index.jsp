@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ page import="tcc.legado.model.Usuario" %>
 <%
     Usuario user = (Usuario) session.getAttribute("usuarioLogado");
@@ -18,32 +19,32 @@
 
         <div class="content">
             <div style="margin-bottom: 30px;">
-                <h2 style="color: #2c3e50; margin-bottom: 20px;">DomÌnios do Sistema</h2>
+                <h2 style="color: #2c3e50; margin-bottom: 20px;">Dom√≠nios do Sistema</h2>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 40px;">
                 <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 4px solid #16a085;">
-                    <h3 style="color: #16a085; margin-bottom: 15px;"><i class="fa-solid fa-book page-icon"></i>DomÌnio: Livros</h3>
+                    <h3 style="color: #16a085; margin-bottom: 15px;"><i class="fa-solid fa-book page-icon"></i>Dom√≠nio: Livros</h3>
                     <p style="color: #7f8c8d; margin-bottom: 15px;">Gerenciamento do acervo da biblioteca.</p>
                     <a href="livro.do?metodo=listar" class="btn btn-primary" style="display: block; text-align: center; margin: 0;"><i class="fa-solid fa-rectangle-list"></i> Gerenciar Livros</a>
                 </div>
 
                 <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 4px solid #c0392b;">
-                    <h3 style="color: #c0392b; margin-bottom: 15px;"><i class="fa-solid fa-arrow-right-arrow-left page-icon"></i>DomÌnio: EmprÈstimos</h3>
-                    <p style="color: #7f8c8d; margin-bottom: 15px;">RealizaÁ„o de emprÈstimos, devoluÁıes e c·lculo de multas.</p>
-                    <a href="emprestimo.do?metodo=listar" class="btn btn-secondary" style="display: block; text-align: center; margin: 0;"><i class="fa-solid fa-hand-holding-book"></i> Gerenciar EmprÈstimos</a>
+                    <h3 style="color: #c0392b; margin-bottom: 15px;"><i class="fa-solid fa-arrow-right-arrow-left page-icon"></i>Dom√≠nio: Empr√©stimos</h3>
+                    <p style="color: #7f8c8d; margin-bottom: 15px;">Realiza√ß√£o de empr√©stimos, devolu√ß√µes e c√°lculo de multas.</p>
+                    <a href="emprestimo.do?metodo=listar" class="btn btn-secondary" style="display: block; text-align: center; margin: 0;"><i class="fa-solid fa-hand-holding-book"></i> Gerenciar Empr√©stimos</a>
                 </div>
 
                 <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 4px solid #667eea;">
-                    <h3 style="color: #667eea; margin-bottom: 15px;"><i class="fa-solid fa-star page-icon"></i>DomÌnio: Livros em Destaque</h3>
-                    <p style="color: #7f8c8d; margin-bottom: 15px;">PromoÁıes, lanÁamentos e recomendaÁıes especiais.</p>
+                    <h3 style="color: #667eea; margin-bottom: 15px;"><i class="fa-solid fa-star page-icon"></i>Dom√≠nio: Livros em Destaque</h3>
+                    <p style="color: #7f8c8d; margin-bottom: 15px;">Promo√ß√µes, lan√ßamentos e recomenda√ß√µes especiais.</p>
                     <a href="destaque.do?metodo=listar" class="btn btn-info" style="display: block; text-align: center; margin: 0;"><i class="fa-solid fa-bullhorn"></i> Gerenciar Destaques</a>
                 </div>
 
                 <div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-top: 4px solid #2980b9;">
-                    <h3 style="color: #2980b9; margin-bottom: 15px;"><i class="fa-solid fa-users page-icon"></i>Gerenciamento: Usu·rios</h3>
-                    <p style="color: #7f8c8d; margin-bottom: 15px;">Cadastro e administraÁ„o de usu·rios.</p>
-                    <a href="usuario.do?metodo=listar" class="btn btn-primary" style="display: block; text-align: center; margin: 0;"><i class="fa-solid fa-user-gear"></i> Gerenciar Usu·rios</a>
+                    <h3 style="color: #2980b9; margin-bottom: 15px;"><i class="fa-solid fa-users page-icon"></i>Gerenciamento: Usu√°rios</h3>
+                    <p style="color: #7f8c8d; margin-bottom: 15px;">Cadastro e administra√ß√£o de usu√°rios.</p>
+                    <a href="usuario.do?metodo=listar" class="btn btn-primary" style="display: block; text-align: center; margin: 0;"><i class="fa-solid fa-user-gear"></i> Gerenciar Usu√°rios</a>
                 </div>
             </div>
 
@@ -53,7 +54,7 @@
         </div>
 
         <div class="footer">
-            <p>Sistema de Biblioteca Legada - Monolito preparado para migraÁ„o em microsserviÁos</p>
+            <p>Sistema de Biblioteca Legada - Monolito preparado para migra√ß√£o em microsservi√ßos</p>
         </div>
     </div>
 </body>
