@@ -21,3 +21,4 @@ gerar-projeto.ps1
 projeto.md
 # Logs
 *.log
+/bin/
