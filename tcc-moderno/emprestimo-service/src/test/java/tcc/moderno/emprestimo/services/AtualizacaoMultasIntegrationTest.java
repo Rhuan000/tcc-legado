@@ -142,6 +142,51 @@ class AtualizacaoMultasIntegrationTest {
         assertEquals(new BigDecimal("7.00"), multa(100));
     }
 
+    @Test void agendadorProcessaMassaMistaComValoresExatos() throws Exception {
+        usuario("ALUNO");
+        servidor.stubFor(get(urlEqualTo(ROTA.replace("/9/", "/10/")))
+                .willReturn(okJson("{\"idUsuario\":10,\"tipoUsuario\":\"PROFESSOR\"}")));
+        servidor.stubFor(get(urlEqualTo(ROTA.replace("/9/", "/11/")))
+                .willReturn(okJson("{\"idUsuario\":11,\"tipoUsuario\":\"BOLSISTA\"}")));
+        LocalDate hoje = LocalDate.now(ZoneId.of("America/Sao_Paulo"));
+        try (var conexao = banco.getConnection(); var comando = conexao.prepareStatement(
+                "UPDATE emprestimo SET data_prevista_devolucao=?, multa=0 WHERE id=100")) {
+            comando.setObject(1, hoje.minusDays(14));
+            comando.executeUpdate();
+            try (var insercao = conexao.createStatement()) {
+                insercao.executeUpdate("INSERT INTO emprestimo(id,id_livro,id_usuario,data_emprestimo,data_prevista_devolucao,data_devolucao_real,multa) "
+                        + "VALUES(101,7,10,CURRENT_DATE-21,DATE '" + hoje.minusDays(14) + "',NULL,0),"
+                        + "(102,7,11,CURRENT_DATE-21,DATE '" + hoje.minusDays(14) + "',NULL,0),"
+                        + "(103,7,12,CURRENT_DATE,CURRENT_DATE+7,NULL,0),"
+                        + "(104,7,13,CURRENT_DATE-21,CURRENT_DATE-14,CURRENT_DATE-7,19.50),"
+                        + "(105,7,9,CURRENT_DATE-21,CURRENT_DATE-14,NULL,7),"
+                        + "(106,7,14,CURRENT_DATE-7,CURRENT_DATE,NULL,0)");
+                insercao.executeUpdate("INSERT INTO emprestimo_operacao(chave,tipo,id_emprestimo,dados,estado) "
+                        + "VALUES('devolucao-105','DEVOLVER',105,'{}','PENDENTE')");
+            }
+        }
+        try {
+            scheduler.resume();
+            long limite = System.nanoTime() + java.util.concurrent.TimeUnit.SECONDS.toNanos(10);
+            while ((multa(100).compareTo(new BigDecimal("20.00")) != 0
+                    || multa(101).compareTo(new BigDecimal("5.00")) != 0
+                    || multa(102).compareTo(new BigDecimal("10.00")) != 0)
+                    && System.nanoTime() < limite) Thread.sleep(100);
+            assertEquals(new BigDecimal("20.00"), multa(100));
+            assertEquals(new BigDecimal("5.00"), multa(101));
+            assertEquals(new BigDecimal("10.00"), multa(102));
+            assertEquals(new BigDecimal("0.00"), multa(103));
+            assertEquals(new BigDecimal("19.50"), multa(104));
+            assertEquals(new BigDecimal("7.00"), multa(105));
+            assertEquals(new BigDecimal("0.00"), multa(106));
+            for (long usuarioIgnorado : new long[]{12, 13, 14}) {
+                servidor.verify(0, getRequestedFor(urlEqualTo(ROTA.replace("/9/", "/" + usuarioIgnorado + "/"))));
+            }
+        } finally {
+            scheduler.pause();
+        }
+    }
+
     @Test void agendadorRealDisparaConsultaEAtualizaBanco() throws Exception {
         usuario("ALUNO");
         LocalDate hoje = LocalDate.now(ZoneId.of("America/Sao_Paulo"));

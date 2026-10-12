@@ -98,10 +98,12 @@ Commit sugerido: `refactor: amplia recorte para o dominio de emprestimos`.
    armazenadas, permitindo nova tentativa na próxima chamada. Quatro testes
    cobrem reutilização do cache, separação por ano, nova tentativa após falha e
    remoção de duplicatas. O contrato HTTP da BrasilAPI também foi validado com
-   WireMock: três testes exercitam a rota documentada `/feriados/v1/{ano}`, a
+   WireMock: três testes exercitavam a rota simulada `/feriados/v1/{ano}`, a
    desserialização de data e demais campos, uma lista vazia e a propagação de
-   erro HTTP. Essa validação identificou e corrigiu o prefixo indevido `/api`
-   que existia no cliente. Validação com `mvnw.cmd -B test`: 74 testes
+   erro HTTP. A simulação inicial reproduzia um contrato incorreto: o prefixo
+   `/api` é necessário na BrasilAPI. Cliente e teste foram corrigidos depois,
+   no commit `562c074`, para `/api/feriados/v1/{ano}`. A suíte daquela etapa
+   não comprovava o contrato externo real. Validação histórica: 74 testes
    aprovados, sem falhas, erros ou testes ignorados. A exposição dos contratos
    HTTP próprios do microsserviço permanece no item 4.
 4. Expor contratos para cálculo de prazo e multa.

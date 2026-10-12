@@ -56,9 +56,11 @@ Encerramento forcado das arvores criadas pelo coletor ocorre fora do tempo
 medido. Bases temporarias sao preservadas para auditoria. Instancias existentes
 nao sao encerradas; portas ocupadas impedem a coleta.
 
-Agendadores conservam suas configuracoes. Usar banco de ensaio isolado,
-registrar dados iniciais e efeitos dos jobs. Nunca apontar a campanha ao banco
-de apresentacao. Configurar conexoes e integracao sem versionar segredos.
+Agendadores conservam suas configuracoes. Usar banco descartavel de ensaio,
+registrar dados iniciais e efeitos dos jobs. Pode-se reutilizar um unico banco,
+recriando-o entre estados e sem uso concorrente: isolamento temporal, nao uma
+exigencia de tres containers. Nao preservar dados de apresentacao nessa base
+durante a campanha. Configurar conexoes e integracao sem versionar segredos.
 
 ## Ambiente e execucao
 

@@ -307,6 +307,45 @@ Cada entrada distingue fato observado, decisão e interpretação. Atividades pl
 - **Pendencia:** escolha do ambiente de ensaio pelo autor, validacao funcional,
   piloto de inicializacao e campanhas finais. Nao criar tags finais antecipadas.
 
+### 2026-10-12 Massa de jobs e plano de fechamento
+
+- **Tipo:** contemporâneo; mudanças desta entrada ainda sem commit no momento
+  do registro. Não representa campanha quantitativa final.
+- **Decisão do autor:** reutilizar um banco descartável, recriado a partir de
+  init-db e da migração no pós. Não há exigência de três containers permanentes.
+  O autor informou validação da integração antes e depois dos consertos;
+  esse relato não substitui os registros pareados ainda a organizar.
+- **Diagnóstico:** o init-db contém datas fixas e não garante ranking mensal
+  útil ao longo do tempo. A suíte já testava o agendador Quarkus com PostgreSQL
+  real e dependências HTTP simuladas, mas isso não prova os jobs no JBoss real.
+- **Implementação:** `validacao/jobs/` adiciona três usuários, seis livros e
+  216 empréstimos identificados, conferência independente de multas com
+  calendário arquivado, consultas de ranking e injeção de pendência no pós.
+  A massa é funcional, separada da carga das medições. Nenhum Java de produção
+  nem init-db foi alterado nesta revisão.
+- **Teste novo:** o disparo real do agendador processa massa mista e verifica
+  valores exatos por tipo, vencimento futuro/hoje, devolvido e devolução pendente.
+  Maven 3.9.11/JDK 21: 154 testes, zero falhas/erros/ignorados. Log local em
+  `.experimento/testes-jobs-20261012.log`; relatórios em target/surefire-reports.
+- **Verificação dos scripts:** PostgreSQL 14 em container temporário sem porta
+  publicada, criado e removido nesta tarefa, sem modificar o banco do autor.
+  Massa padrão e data parametrizada verificadas; segunda aplicação recusada;
+  migração e pendência persistida verificadas. Conferidor rejeitou sentinelas
+  não processadas e aceitou controle sintético com valores esperados gravados
+  diretamente no banco temporário. Esse controle valida o conferidor, NÃO o job.
+- **Revisão documental:** o TCC mais recente localizado em Downloads foi
+  `TCC_II_RHUAN_ELIAS_REVISAO_BANCA.pdf`, modificado em 24/09/2026. Não foi
+  localizado outro com data posterior; avaliação condicionada a esse arquivo.
+  Há divergência entre as rodadas de build prometidas na seção 2.4 e as séries
+  separadas do coletor atual. Resolver antes de medir, conforme o plano.
+- **Entregável:** `docs/tcc/PLANO-DE-FECHAMENTO.md`, com capturas identificadas,
+  ajustes por seção do PDF, sequência semanal, protocolo e limites.
+- **Git:** remoto consultado diretamente em cc01568, ancestral da main local
+  7c42be8; cabe push normal, sem force. Nenhum push realizado nesta revisão.
+- **Pendências:** registrar jobs reais pré/pós, consolidar evidências funcionais,
+  concluir piloto de inicialização, fixar snapshots e executar novas campanhas.
+  O novo teste altera o custo do build pós: não reutilizar tempos anteriores.
+
 ## Próximas evidências necessárias
 
 | Pendência | Evidência esperada |

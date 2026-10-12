@@ -6,12 +6,13 @@ Registro: 12/10/2026. Este documento separa implementacao, validacao e medicao.
 | --- | --- | --- |
 | Legado corrigido | Commitado | `a95c2dc` e `48aad74` |
 | Pos integrado na main | Concluido localmente | Merge `d5d7507` |
-| Suite do servico | Aprovada | 153 testes, sem falhas/erros/ignorados |
+| Suite do servico | Aprovada | 154 testes, sem falhas/erros/ignorados; inclui massa mista no agendador real |
 | Compilacao e codificacao do legado | Aprovadas | WAR gerado; 16 JSPs UTF-8 |
 | Piloto CBO | Cobertura conferida | 40 arquivos/tipos pre; 39+26 pos |
 | Piloto build | Aprovado nos quatro escopos | Pre monolito; pos monolito, servico e conjunto |
 | Coletores v2 | Em validacao | Pilotos locais, sem resultados finais |
-| Funcionamento pre/pos em JBoss | Pendente | Executar cenarios equivalentes |
+| Funcionamento pre/pos em JBoss | Informado pelo autor | Integracao conferida antes/depois das correcoes; falta consolidar evidencias pareadas |
+| Jobs integrados | Pendente | Massa reproduzivel em `validacao/jobs/`; disparo Quarkus testado com dependencias HTTP simuladas |
 | Tags finais v2 | Pendentes | Criar somente apos validacao |
 | Campanhas quantitativas finais | Nao iniciadas | Exigem evidencias e ambiente fixado |
 | Tabelas e conclusoes revisadas | Pendentes | Derivar das novas campanhas |
@@ -19,10 +20,13 @@ Registro: 12/10/2026. Este documento separa implementacao, validacao e medicao.
 ## Ambiente de ensaio
 
 Existe um PostgreSQL `biblioteca-postgres` publicado na porta 5432. Os DAOs do
-legado fixam `localhost:5432/biblioteca`. Nao iniciar ensaios com escrita nesse
-banco nem aplicar migracao nele sem definir o isolamento. Foi solicitada ao
-autor a escolha entre parametrizar a conexao de ambas as versoes para banco
-isolado ou realizar a validacao funcional manualmente. A decisao esta pendente.
+legado fixam `localhost:5432/biblioteca`. O autor escolheu reutilizar um banco
+descartavel, recriado entre pre e pos a partir de init-db e, no pos, migracao.
+Isolamento temporal substitui containers permanentes separados. Parar aplicacoes
+antes do reset e nao preservar dados de apresentacao nesse banco durante ensaios.
+Reexecutar somente init-db nao basta para remover journals criados pela migracao.
+Os testes dos novos scripts usaram outro container temporario, sem alterar o
+banco do autor. Os comandos destrutivos do roteiro nao foram executados nele.
 
 ## Ensaios do instrumento
 
@@ -47,7 +51,7 @@ nao campanhas de desempenho comparaveis; houve tarefas de verificacao em paralel
 
 ## Sequencia restante
 
-1. Definir o banco de ensaio e registrar a configuracao dos dois estados.
+1. Registrar a configuracao e o reset do banco descartavel em cada estado.
 2. Validar funcionalidades equivalentes e corrigir/revalidar defeitos encontrados.
 3. Concluir o piloto de inicializacao e revisar o instrumento final.
 4. Fixar tags e commit do instrumento; registrar evidencias por snapshot.
@@ -57,3 +61,8 @@ nao campanhas de desempenho comparaveis; houve tarefas de verificacao em paralel
 As campanhas antigas, inclusive a recoleta de 26/09, estao excluidas da nova
 comparacao. Permanecem como registros historicos. Nenhuma afirmacao de reducao
 de CBO, build ou inicializacao e sustentada pelos pilotos deste documento.
+
+Roteiro detalhado, revisao documental e capturas: `PLANO-DE-FECHAMENTO.md`.
+Antes de coletar, reconciliar a Tabela 1/secao 2.4 do PDF com o coletor: o PDF
+descreve tempos por componente dentro de dez rodadas conjuntas; o instrumento
+atual realiza series individuais e uma serie conjunta separada.
