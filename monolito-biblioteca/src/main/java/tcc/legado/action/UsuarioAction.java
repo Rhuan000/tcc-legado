@@ -68,12 +68,22 @@ public class UsuarioAction extends DispatchAction {
         usuario.setTipo(tipo);
         
         IUsuarioEJB ejb = getUsuarioEJB();
-        if (usuario.getId() != null) {
-            ejb.atualizar(usuario);
-            request.setAttribute("mensagem", "Usuário atualizado!");
-        } else {
-            ejb.salvar(usuario);
-            request.setAttribute("mensagem", "Usuário cadastrado!");
+        try {
+            if (usuario.getId() != null) {
+                ejb.atualizar(usuario);
+                request.setAttribute("mensagem", "Usuário atualizado!");
+            } else {
+                ejb.salvar(usuario, request.getParameter("senha"));
+                request.setAttribute("mensagem", "Usuário cadastrado com acesso de consulta!");
+            }
+        } catch (RuntimeException falha) {
+            Throwable causa = falha;
+            while (!(causa instanceof IllegalArgumentException) && causa.getCause() != null) {
+                causa = causa.getCause();
+            }
+            request.setAttribute("erro", causa instanceof IllegalArgumentException
+                    ? causa.getMessage() : "Não foi possível salvar o usuário.");
+            return mapping.findForward("erro");
         }
         return listar(mapping, form, request, response);
     }

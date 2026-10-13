@@ -3,6 +3,7 @@ package tcc.legado.service;
 
 import tcc.legado.dao.UsuarioDAO;
 import tcc.legado.model.Usuario;
+import tcc.legado.util.HashUtil;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -28,15 +29,21 @@ public class UsuarioService {
         return usuarioDAO.buscarPorMatricula(matricula);
     }
     
-    public void salvar(Usuario usuario) {
+    public void salvar(Usuario usuario, String senha) {
+        if (usuario.getMatricula() == null || !usuario.getMatricula().matches("[0-9]{7}")) {
+            throw new IllegalArgumentException("A matrícula deve conter exatamente 7 dígitos.");
+        }
+        if (senha == null || senha.trim().isEmpty() || senha.length() < 8 || senha.length() > 128) {
+            throw new IllegalArgumentException("A senha deve conter entre 8 e 128 caracteres.");
+        }
         if (usuarioDAO.buscarPorMatricula(usuario.getMatricula()) != null) {
-            throw new RuntimeException("Matrícula já cadastrada");
+            throw new IllegalArgumentException("Matrícula já cadastrada");
         }
         if (usuario.getTipo() == null || 
-            !usuario.getTipo().matches("ALUNO|PROFESSOR|BOLSISTA")) {
-            throw new RuntimeException("Tipo inválido");
+            !usuario.getTipo().matches("ALUNO|PROFESSOR|BOLSISTA|BIBLIOTECARIO")) {
+            throw new IllegalArgumentException("Tipo inválido");
         }
-        usuarioDAO.salvar(usuario);
+        usuarioDAO.salvar(usuario, HashUtil.sha256(senha));
     }
     
     public void atualizar(Usuario usuario) {
@@ -46,6 +53,9 @@ public class UsuarioService {
         }
         if (!existente.getMatricula().equals(usuario.getMatricula())) {
             throw new RuntimeException("Matrícula não pode ser alterada");
+        }
+        if (usuario.getTipo() == null || !usuario.getTipo().matches("ALUNO|PROFESSOR|BOLSISTA|BIBLIOTECARIO")) {
+            throw new IllegalArgumentException("Tipo inválido");
         }
         usuarioDAO.atualizar(usuario);
     }

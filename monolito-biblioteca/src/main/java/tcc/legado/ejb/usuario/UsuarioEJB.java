@@ -17,11 +17,11 @@ public class UsuarioEJB implements IUsuarioEJB {
     
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void salvar(Usuario usuario) {
+    public void salvar(Usuario usuario, String senha) {
         if (usuario.getNome() == null || usuario.getNome().trim().isEmpty()) {
             throw new RuntimeException("Nome obrigatório");
         }
-        usuarioService.salvar(usuario);
+        usuarioService.salvar(usuario, senha);
     }
     
     @Override

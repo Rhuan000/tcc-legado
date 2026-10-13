@@ -20,9 +20,9 @@ DROP TABLE IF EXISTS usuario CASCADE;
 CREATE TABLE usuario (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    matricula VARCHAR(20) UNIQUE NOT NULL,
+    matricula VARCHAR(20) UNIQUE NOT NULL CHECK (matricula ~ '^[0-9]{7}$'),
     email VARCHAR(100),
-    tipo VARCHAR(20) NOT NULL CHECK (tipo IN ('ALUNO', 'PROFESSOR', 'BOLSISTA', 'ADMIN', 'BIBLIOTECARIO', 'CONSULTA'))
+    tipo VARCHAR(20) NOT NULL CHECK (tipo IN ('ALUNO', 'PROFESSOR', 'BOLSISTA', 'BIBLIOTECARIO'))
 );
 
 -- Livros
@@ -73,55 +73,53 @@ CREATE TABLE usuario_auth (
 );
 
 -- =====================================================
--- 3. DADOS MOCK - USUÁRIOS (30 registros + 3 para login)
+-- 3. DADOS MOCK - LEITORES (30 registros com acesso de consulta)
 -- =====================================================
 INSERT INTO usuario (nome, matricula, email, tipo) VALUES
-('Ana Paula Silva', 'mat001', 'ana.silva@email.com', 'ALUNO'),
-('Bruno Costa', 'mat002', 'bruno.costa@email.com', 'PROFESSOR'),
-('Carla Santos', 'mat003', 'carla.santos@email.com', 'ADMIN'),
-('Daniel Oliveira', 'mat004', 'daniel.oliveira@email.com', 'ALUNO'),
-('Elena Rodrigues', 'mat005', 'elena.rodrigues@email.com', 'PROFESSOR'),
-('Fábio Almeida', 'mat006', 'fabio.almeida@email.com', 'ADMIN'),
-('Gabriela Lima', 'mat007', 'gabriela.lima@email.com', 'ALUNO'),
-('Henrique Ferreira', 'mat008', 'henrique.ferreira@email.com', 'PROFESSOR'),
-('Isabela Pereira', 'mat009', 'isabela.pereira@email.com', 'ADMIN'),
-('João Paulo Souza', 'mat010', 'joao.souza@email.com', 'ALUNO'),
-('Karina Mendes', 'mat011', 'karina.mendes@email.com', 'PROFESSOR'),
-('Leonardo Rocha', 'mat012', 'leonardo.rocha@email.com', 'ADMIN'),
-('Mariana Nunes', 'mat013', 'mariana.nunes@email.com', 'ALUNO'),
-('Nelson Barros', 'mat014', 'nelson.barros@email.com', 'PROFESSOR'),
-('Olivia Cardoso', 'mat015', 'olivia.cardoso@email.com', 'ADMIN'),
-('Paulo Henrique', 'mat016', 'paulo.henrique@email.com', 'ALUNO'),
-('Renata Alves', 'mat017', 'renata.alves@email.com', 'PROFESSOR'),
-('Sandro Moreira', 'mat018', 'sandro.moreira@email.com', 'ADMIN'),
-('Tatiana Gonçalves', 'mat019', 'tatiana.goncalves@email.com', 'ALUNO'),
-('Ubirajara Freitas', 'mat020', 'ubirajara.freitas@email.com', 'PROFESSOR'),
-('Valentina Castro', 'mat021', 'valentina.castro@email.com', 'ADMIN'),
-('William Torres', 'mat022', 'william.torres@email.com', 'ALUNO'),
-('Ximena Cordeiro', 'mat023', 'ximena.cordeiro@email.com', 'PROFESSOR'),
-('Yuri Lopes', 'mat024', 'yuri.lopes@email.com', 'ADMIN'),
-('Zuleica Marques', 'mat025', 'zuleica.marques@email.com', 'ALUNO'),
-('Adriano Machado', 'mat026', 'adriano.machado@email.com', 'PROFESSOR'),
-('Bianca Fonseca', 'mat027', 'bianca.fonseca@email.com', 'ADMIN'),
-('César Rangel', 'mat028', 'cesar.rangel@email.com', 'ALUNO'),
-('Debora Viana', 'mat029', 'debora.viana@email.com', 'PROFESSOR'),
-('Edson Guimarães', 'mat030', 'edson.guimaraes@email.com', 'ADMIN');
+('Ana Paula Silva', '2024005', 'ana.silva@email.com', 'ALUNO'),
+('Bruno Costa', '2024006', 'bruno.costa@email.com', 'PROFESSOR'),
+('Carla Santos', '2024007', 'carla.santos@email.com', 'BOLSISTA'),
+('Daniel Oliveira', '2024008', 'daniel.oliveira@email.com', 'ALUNO'),
+('Elena Rodrigues', '2024009', 'elena.rodrigues@email.com', 'PROFESSOR'),
+('Fábio Almeida', '2024010', 'fabio.almeida@email.com', 'BOLSISTA'),
+('Gabriela Lima', '2024011', 'gabriela.lima@email.com', 'ALUNO'),
+('Henrique Ferreira', '2024012', 'henrique.ferreira@email.com', 'PROFESSOR'),
+('Isabela Pereira', '2024013', 'isabela.pereira@email.com', 'BOLSISTA'),
+('João Paulo Souza', '2024014', 'joao.souza@email.com', 'ALUNO'),
+('Karina Mendes', '2024015', 'karina.mendes@email.com', 'PROFESSOR'),
+('Leonardo Rocha', '2024016', 'leonardo.rocha@email.com', 'BOLSISTA'),
+('Mariana Nunes', '2024017', 'mariana.nunes@email.com', 'ALUNO'),
+('Nelson Barros', '2024018', 'nelson.barros@email.com', 'PROFESSOR'),
+('Olivia Cardoso', '2024019', 'olivia.cardoso@email.com', 'BOLSISTA'),
+('Paulo Henrique', '2024020', 'paulo.henrique@email.com', 'ALUNO'),
+('Renata Alves', '2024021', 'renata.alves@email.com', 'PROFESSOR'),
+('Sandro Moreira', '2024022', 'sandro.moreira@email.com', 'BOLSISTA'),
+('Tatiana Gonçalves', '2024023', 'tatiana.goncalves@email.com', 'ALUNO'),
+('Ubirajara Freitas', '2024024', 'ubirajara.freitas@email.com', 'PROFESSOR'),
+('Valentina Castro', '2024025', 'valentina.castro@email.com', 'BOLSISTA'),
+('William Torres', '2024026', 'william.torres@email.com', 'ALUNO'),
+('Ximena Cordeiro', '2024027', 'ximena.cordeiro@email.com', 'PROFESSOR'),
+('Yuri Lopes', '2024028', 'yuri.lopes@email.com', 'BOLSISTA'),
+('Zuleica Marques', '2024029', 'zuleica.marques@email.com', 'ALUNO'),
+('Adriano Machado', '2024030', 'adriano.machado@email.com', 'PROFESSOR'),
+('Bianca Fonseca', '2024031', 'bianca.fonseca@email.com', 'BOLSISTA'),
+('César Rangel', '2024032', 'cesar.rangel@email.com', 'ALUNO'),
+('Debora Viana', '2024033', 'debora.viana@email.com', 'PROFESSOR'),
+('Edson Guimarães', '2024034', 'edson.guimaraes@email.com', 'BOLSISTA');
 
 -- =====================================================
--- 4. DADOS DE AUTENTICAÇÃO (3 usuários com login)
--- Hashes gerados pelo HashUtil.main()
+-- 4. DADOS DE AUTENTICAÇÃO (34 usuários com login)
 -- =====================================================
 INSERT INTO usuario (nome, matricula, email, tipo) VALUES
-('Administrador', '2024001', 'admin@biblioteca.com', 'ADMIN'),
+('Administrador da Biblioteca', '2024001', 'admin@biblioteca.com', 'BIBLIOTECARIO'),
 ('Professor Numero 1', '2024002', 'professor@biblioteca.com', 'PROFESSOR'),
 ('Usuario Consulta', '2024003', 'aluno@biblioteca.com', 'ALUNO'),
-('Professor Administrador', '2024004', 'professor.admin@biblioteca.com', 'PROFESSOR');
+('Professor Consulta', '2024004', 'professor.consulta@biblioteca.com', 'PROFESSOR');
 
-INSERT INTO usuario_auth (matricula, senha_hash, perfil) VALUES
-('2024001', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'ADMIN'), -- senha: admin
-('2024002', '17c1532ca6cff8f6a3a8200028af6c2580bf37f39e10cb0966e8a573e3b24a1f', 'CONSULTA'), -- senha: professor
-('2024003', 'a21d6f3803f0491c32444ef91a0836be243cc4da5186357e805b7009a5b0669b', 'CONSULTA'), -- senha: aluno
-('2024004', '59fcda8f840d58d5cd74ba26fdd2ac3f2ce31cc8bb9c88511905a0b9fe919d9a', 'ADMIN'); -- senha: professoradmin
+INSERT INTO usuario_auth (matricula, senha_hash, perfil)
+SELECT matricula, '0f74ff3c49990ac2093828e43bebbafd8e7ebd5f0483ef340ab9cc779f2e709a',
+       CASE WHEN matricula = '2024001' THEN 'ADMIN' ELSE 'CONSULTA' END
+FROM usuario;
 
 -- =====================================================
 -- 5. DADOS MOCK - LIVROS (30 registros)

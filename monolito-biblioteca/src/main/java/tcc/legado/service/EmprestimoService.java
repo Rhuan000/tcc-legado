@@ -62,6 +62,8 @@ public class EmprestimoService {
             case "BOLSISTA":
                 diasUteisPrazo = 10;
                 break;
+            case "ALUNO":
+            case "BIBLIOTECARIO":
             default:
                 diasUteisPrazo = 7;
                 break;
@@ -221,6 +223,8 @@ public class EmprestimoService {
             case "BOLSISTA":
                 valorDia = 1.00;
                 break;
+            case "ALUNO":
+            case "BIBLIOTECARIO":
             default:
                 valorDia = 2.00;
                 break;
