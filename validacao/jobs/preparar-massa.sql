@@ -14,9 +14,13 @@ BEGIN
 END $$;
 
 INSERT INTO usuario(id,nome,matricula,email,tipo) VALUES
-(910001,'TCC JOB ALUNO','tcc-job-aluno','aluno@example.invalid','ALUNO'),
-(910002,'TCC JOB PROFESSOR','tcc-job-professor','professor@example.invalid','PROFESSOR'),
-(910003,'TCC JOB BOLSISTA','tcc-job-bolsista','bolsista@example.invalid','BOLSISTA');
+(910001,'TCC JOB ALUNO','2091001','aluno@example.invalid','ALUNO'),
+(910002,'TCC JOB PROFESSOR','2091002','professor@example.invalid','PROFESSOR'),
+(910003,'TCC JOB BOLSISTA','2091003','bolsista@example.invalid','BOLSISTA');
+
+INSERT INTO usuario_auth(matricula,senha_hash,perfil)
+SELECT matricula, '0f74ff3c49990ac2093828e43bebbafd8e7ebd5f0483ef340ab9cc779f2e709a', 'CONSULTA'
+FROM usuario WHERE id BETWEEN 910001 AND 910003;
 
 INSERT INTO livro(id,titulo,autor,isbn,ano,editora,quantidade)
 SELECT 910100 + posicao, 'TCC JOB Livro ' || posicao, 'Autor de ensaio',

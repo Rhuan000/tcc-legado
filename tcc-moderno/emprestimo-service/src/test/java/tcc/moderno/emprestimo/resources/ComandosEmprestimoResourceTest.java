@@ -108,4 +108,15 @@ class ComandosEmprestimoResourceTest {
         given().contentType("application/json").body("{}").post("/prazos/calcular").then().statusCode(401);
         given().get("/q/health/live").then().statusCode(200);
     }
+    @Test void permiteEmprestimoEDevolucaoParaBibliotecario(){
+        Map<String,Object> dados=new HashMap<>(criarDados(UUID.randomUUID().toString()));
+        dados.put("tipoUsuario","BIBLIOTECARIO");
+        long id=chamada().body(dados).post("/emprestimos").then().statusCode(200)
+                .body("dataPrevistaDevolucao",is("2026-09-30"),"multa",is(0.0f))
+                .extract().jsonPath().getLong("id");
+        chamada().body(Map.of("tipoUsuario","BIBLIOTECARIO","dataReferencia","2026-10-01"))
+                .post("/emprestimos/"+id+"/devolucao").then().statusCode(200)
+                .body("dataDevolucaoReal",is("2026-10-01"),"multa",is(2.0f));
+        chamada().get("/emprestimos").then().body("size()",is(1));
+    }
 }

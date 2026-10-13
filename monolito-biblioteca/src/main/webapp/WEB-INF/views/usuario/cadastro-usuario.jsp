@@ -33,19 +33,27 @@
                 </div>
                 <div class="form-group">
                     <label for="matricula">Matrícula *</label>
-                    <input type="text" id="matricula" name="matricula" class="form-control" required value="<%= editando ? usuario.getMatricula() : "" %>" <%= editando ? "readonly" : "" %> />
+                    <input type="text" id="matricula" name="matricula" class="form-control" required pattern="[0-9]{7}" minlength="7" maxlength="7" inputmode="numeric" title="Informe exatamente 7 dígitos" value="<%= editando ? usuario.getMatricula() : "" %>" <%= editando ? "readonly" : "" %> />
                     <% if (editando) { %><small class="form-hint">A matrícula não pode ser alterada</small><% } %>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" class="form-control" value="<%= editando ? usuario.getEmail() : "" %>" />
                 </div>
+                <% if (!editando) { %>
+                <div class="form-group">
+                    <label for="senha">Senha de acesso *</label>
+                    <input type="password" id="senha" name="senha" class="form-control" required minlength="8" maxlength="128" autocomplete="new-password" />
+                    <small class="form-hint">Entre 8 e 128 caracteres. O novo usuário terá perfil de consulta.</small>
+                </div>
+                <% } %>
                 <div class="form-group">
                     <label for="tipo">Tipo</label>
                     <select id="tipo" name="tipo" class="form-control">
                         <option value="ALUNO" <%= editando && "ALUNO".equals(usuario.getTipo()) ? "selected" : "" %>>Aluno</option>
                         <option value="PROFESSOR" <%= editando && "PROFESSOR".equals(usuario.getTipo()) ? "selected" : "" %>>Professor</option>
                         <option value="BOLSISTA" <%= editando && "BOLSISTA".equals(usuario.getTipo()) ? "selected" : "" %>>Bolsista</option>
+                        <option value="BIBLIOTECARIO" <%= editando && "BIBLIOTECARIO".equals(usuario.getTipo()) ? "selected" : "" %>>Bibliotecário</option>
                     </select>
                 </div>
 

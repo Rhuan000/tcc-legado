@@ -17,6 +17,7 @@ public class PrazoService {
         int diasUteis = switch (tipoUsuario) {
             case "PROFESSOR" -> 14;
             case "BOLSISTA" -> 10;
+            case "ALUNO", "BIBLIOTECARIO" -> 7;
             default -> 7;
         };
 

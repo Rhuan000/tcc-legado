@@ -346,6 +346,83 @@ Cada entrada distingue fato observado, decisão e interpretação. Atividades pl
   concluir piloto de inicialização, fixar snapshots e executar novas campanhas.
   O novo teste altera o custo do build pós: não reutilizar tempos anteriores.
 
+### 2026-10-13 Credenciais e matrículas equivalentes no pré e no pós
+
+- **Tipo:** contemporâneo; alterações ainda sem commit no momento do registro.
+- **Solicitação:** permitir acesso aos usuários da massa, padronizar matrículas,
+  reduzir administradores e completar o cadastro de novos leitores nas duas versões.
+- **Diagnóstico:** o cadastro inseria somente usuario. A carga misturava mat001
+  a mat030 com matrículas numéricas e tinha 11 usuários de tipo ADMIN, mas apenas
+  quatro credenciais, das quais duas com perfil ADMIN.
+- **Implementação:** matrículas com sete dígitos no banco, serviço e formulário;
+  34 credenciais com senha pública de ensaio Desenvolvedores, no SHA-256 compatível
+  com o login existente; somente 2024001 mantém tipo/perfil ADMIN. Os dez ADMIN
+  da massa de leitores passaram a BOLSISTA e a segunda credencial administrativa
+  passou a CONSULTA. IDs e vínculos dos empréstimos foram preservados.
+- **Cadastro:** exige senha de 8 a 128 caracteres. Usuário e credencial CONSULTA
+  são inseridos em transação JDBC única, com rollback e propagação de falhas.
+  Editar dados do leitor preserva sua senha e seu perfil de acesso.
+- **Paridade:** mesmos ajustes no pré corrigido e no monólito remanescente da
+  main. A massa dos jobs também passou a matrículas de sete dígitos e credenciais
+  de consulta. A consulta mínima do usuário usada pela integração foi preservada.
+- **Validação executada:** builds Maven 3.9.11/JDK 8 das duas versões aprovados;
+  ensaio Java/JDBC sobre as classes compiladas, redirecionando a conexão somente
+  no processo de validação para PostgreSQL 14 temporário em porta local aleatória.
+  Foram 97 verificações aprovadas por versão: 34 logins iniciais/perfis, senha
+  incorreta, cadastro dos três tipos, zeros à esquerda, entradas inválidas,
+  duplicidade, edição sem elevação de perfil e rollback por falha injetada na
+  inserção da credencial. Não são testes HTTP nem validação da interface no JBoss.
+- **Massa adicional:** init-db validado no pré e com migração no pós; massa dos
+  jobs aplicada nos dois bancos; preparação de pendência pós aplicada. Esse último
+  teste confirma a preparação SQL, não o processamento real do job de recuperação.
+- **Evidências locais:** `.experimento/ValidarCredenciais.java`,
+  `verificacao-credenciais-pre.log`, `verificacao-credenciais-pos.log`,
+  `build-credenciais-pre.log` e `build-credenciais-pos.log`, todos em `.experimento/`.
+- **Impacto experimental:** a mudança de tipos altera prazos/multas de parte da
+  massa; restaurar a mesma carga revisada nos dois estados e refazer evidências
+  funcionais antes de congelar snapshots. Não reutilizar métricas antigas.
+- **Limites:** hash e senha públicos são restritos ao ambiente descartável, não
+  um mecanismo recomendado para produção. O banco do autor não foi recriado.
+  As senhas passam a valer nesse banco somente após a restauração da carga nova.
+
+### 2026-10-13 Bibliotecário como vínculo e integração das branches revisadas
+
+- **Tipo:** contemporâneo. Complementa a entrada de credenciais desta data.
+- **Decisão final do autor:** BIBLIOTECARIO é vínculo e pode receber empréstimos,
+  inclusive a conta administrativa. Não se adotou bloqueio de empréstimo próprio,
+  pois não havia requisito institucional que justificasse essa restrição.
+- **Regra do cenário:** bibliotecário segue sete dias úteis de prazo e R$ 2 por
+  dia útil de atraso, com o mesmo calendário já utilizado por aluno. A política
+  foi explicitada no legado e no microsserviço antes da nova coleta.
+- **Separação:** ADMIN/CONSULTA ficam restritos aos perfis. O cadastro e o banco
+  aceitam ALUNO, PROFESSOR, BOLSISTA e BIBLIOTECARIO como vínculos. A conta 2024001
+  tem vínculo BIBLIOTECARIO e perfil ADMIN. Novos bibliotecários recebem CONSULTA;
+  alterar vínculo não promove permissões.
+- **Validação:** builds dos dois monólitos aprovados; 101 verificações de cadastro
+  por versão, incluindo todos os 34 logins; oito verificações adicionais sobre
+  as classes reais do legado com PostgreSQL temporário, incluindo empréstimo
+  para a conta administrativa, prazo, devolução, estoque e multas com calendário
+  controlado. Esses ensaios não exercitam a interface no JBoss.
+- **Microsserviço:** 161 testes aprovados, sem falhas/erros/ignorados. Novos casos
+  cobrem prazo/multa do bibliotecário, criação e devolução HTTP com PostgreSQL
+  e processamento da multa a partir do contexto retornado por legado simulado.
+  Não representam, isoladamente, execução integrada com o JBoss real.
+- **Evidências locais:** `.experimento/testes-bibliotecario-moderno.log`,
+  `build-bibliotecario-pre.log`, `build-bibliotecario-pos.log`,
+  `verificacao-bibliotecario-credenciais-pre.log`,
+  `verificacao-bibliotecario-credenciais-pos.log` e
+  `verificacao-bibliotecario-emprestimo-pre.log`, todos em `.experimento/`.
+  As verificações JDBC usam ValidarCredenciais.java e
+  ValidarEmprestimoBibliotecario.java na mesma pasta local.
+- **Git:** baseline corrigida registrada em `c643e44`, na branch
+  experimento/pre-migracao-revisada. A main recebe a implementação pós e a
+  integração dessa baseline sem restaurar EmprestimoService no monólito
+  remanescente: prazo/multa continuam no microsserviço. A referência
+  experimento/migracao-revisada acompanhará o estado pós integrado.
+- **Impacto:** snapshots anteriores não incluem esta preparação. Recriar banco,
+  publicar artefatos atualizados e realizar evidências funcionais nas novas
+  revisões antes das tags finais. O banco do autor não foi alterado nestes ensaios.
+
 ## Próximas evidências necessárias
 
 | Pendência | Evidência esperada |

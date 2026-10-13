@@ -35,6 +35,7 @@ public class MultaService {
         double valorDia = switch (tipoUsuario) {
             case "PROFESSOR" -> 0.50;
             case "BOLSISTA" -> 1.00;
+            case "ALUNO", "BIBLIOTECARIO" -> 2.00;
             default -> 2.00;
         };
         return diasUteisAtraso * valorDia;

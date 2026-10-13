@@ -7,7 +7,7 @@ public interface IUsuarioEJB {
     List<Usuario> listarTodos();
     Usuario buscarPorId(Long id);
     Usuario buscarPorMatricula(String matricula);
-    void salvar(Usuario usuario);
+    void salvar(Usuario usuario, String senha);
     void atualizar(Usuario usuario);
     void excluir(Long id);
 }

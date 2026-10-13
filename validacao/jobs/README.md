@@ -15,7 +15,8 @@ O novo teste `agendadorProcessaMassaMistaComValoresExatos` confere sete casos em
 uma rodada do agendador real. Com calendario simulado sem feriados e atraso de
 14 dias corridos, exige 20,00 para aluno, 5,00 para professor e 10,00 para
 bolsista. Preserva o devolvido e a devolucao pendente, e nao consulta usuarios
-de emprestimos nao vencidos. Suite completa verificada: 154 testes aprovados.
+de emprestimos nao vencidos. Suite completa verificada: 161 testes aprovados,
+incluindo os novos casos de bibliotecario em prazo, multa, API e contexto legado.
 
 O `init-db.sql` tem datas fixas entre junho e setembro de 2026. Ha atrasados,
 mas o ranking usa o mes atual e pode ficar vazio posteriormente. Esta massa
@@ -58,8 +59,9 @@ Para fixar outra data, acrescentar `-v data_referencia=AAAA-MM-DD` antes de `-f`
 Nao executar a massa duas vezes: ela recusa IDs ocupados. Restaurar a base
 para repetir. Sao adicionados tres usuarios, seis livros e 216 emprestimos;
 as sequencias sao alinhadas para permitir operacoes posteriores pela interface.
-Usuarios de teste nao recebem credenciais; entrar pela conta de ensaio ja
-existente no init-db, sem capturar senha ou token nas imagens.
+Usuarios de teste usam matriculas 2091001, 2091002 e 2091003 e recebem perfil
+CONSULTA com a senha de ensaio Desenvolvedores. Para operacoes administrativas,
+entrar com 2024001. Nao capturar senha ou token nas imagens.
 
 ## 2. Multas antes e depois do disparo
 
@@ -106,7 +108,7 @@ esperado/calendario em ensaio separado, sem chamar este conferidor com a massa
 do dia anterior. Nao reutilizar pasta de saida.
 Datas de fronteira de ano seguem a regra atual: feriados do ano do vencimento.
 
-Prova adicional do tipo atual: alterar o usuario `tcc-job-aluno` para PROFESSOR
+Prova adicional do tipo atual: alterar o usuario `2091001` para PROFESSOR
 pela tela Editar Usuario, aguardar outro ciclo e conferir novamente. Arquivar
 esse ensaio separadamente; nao reutilizar essa base como estado inicial do pre.
 

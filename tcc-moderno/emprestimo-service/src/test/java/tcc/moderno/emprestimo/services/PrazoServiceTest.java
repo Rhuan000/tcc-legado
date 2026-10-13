@@ -42,6 +42,8 @@ class PrazoServiceTest {
                 caso("Aluno: sete dias úteis, excluindo o início", "2026-03-09", "ALUNO", "2026-03-18"),
                 caso("Professor: quatorze dias úteis", "2026-03-09", "PROFESSOR", "2026-03-27"),
                 caso("Bolsista: dez dias úteis", "2026-03-09", "BOLSISTA", "2026-03-23"),
+                caso("Bibliotecário: sete dias úteis", "2026-03-09", "BIBLIOTECARIO", "2026-03-18"),
+                caso("Bibliotecário: feriado durante o prazo", "2026-03-09", "BIBLIOTECARIO", "2026-03-19", "2026-03-10"),
                 caso("Início na sexta atravessa dois fins de semana", "2026-03-06", "ALUNO", "2026-03-17"),
                 caso("Início no sábado", "2026-03-07", "ALUNO", "2026-03-17"),
                 caso("Início no domingo", "2026-03-08", "ALUNO", "2026-03-17"),

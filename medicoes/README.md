@@ -10,8 +10,10 @@ documentacao qualitativa, sem coleta quantitativa.
 
 ## Codigo e evidencias
 
-- Legado corrigido: `experimento/pre-migracao-revisada`, commit `a95c2dc`.
-- Pos integrado: merge `d5d7507` na main, com conteudo de `562c074`.
+- Legado corrigido: `experimento/pre-migracao-revisada`, commit `c643e44`.
+- Pos integrado: main e `experimento/migracao-revisada`, apos a integracao
+  de credenciais e bibliotecario registrada no diario em 13/10/2026.
+- Merge anterior: `d5d7507`, com conteudo de `562c074`; nao inclui esses ajustes.
 - Main original: primeiro pai do merge, `cc01568`, preservado no historico.
 - Correcoes de interface: `48aad74` e `a95c2dc`.
 

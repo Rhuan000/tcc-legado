@@ -75,6 +75,15 @@ class AtualizacaoMultasIntegrationTest {
                 .withHeader("X-Integration-Token", matching(".*")));
     }
 
+    @Test void calculaMultaComContextoDeBibliotecarioDoLegado() throws Exception {
+        usuario("BIBLIOTECARIO");
+        multas.atualizar(REFERENCIA);
+        assertEquals(new BigDecimal("4.00"), multa(100));
+        multas.atualizar(REFERENCIA);
+        assertEquals(new BigDecimal("4.00"), multa(100));
+        servidor.verify(2, getRequestedFor(urlEqualTo(ROTA)).withHeader("X-Integration-Token", equalTo(TOKEN)));
+    }
+
     @ParameterizedTest
     @ValueSource(ints = {401, 403, 404, 500, 503})
     void preservaMultaSobErroHttpERetomaNoProximoCiclo(int status) throws Exception {

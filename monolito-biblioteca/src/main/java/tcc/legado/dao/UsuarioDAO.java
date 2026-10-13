@@ -100,21 +100,43 @@ public class UsuarioDAO {
         return null;
     }
 
-    public void salvar(Usuario usuario) {
+    public void salvar(Usuario usuario, String senhaHash) {
         String sql = "INSERT INTO usuario (nome, matricula, email, tipo) VALUES (?, ?, ?, ?)";
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, usuario.getNome());
-            ps.setString(2, usuario.getMatricula());
-            ps.setString(3, usuario.getEmail());
-            ps.setString(4, usuario.getTipo());
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                usuario.setId(rs.getLong(1));
+        try (Connection conexao = getConnection()) {
+            conexao.setAutoCommit(false);
+            try (PreparedStatement cadastro = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                 PreparedStatement credencial = conexao.prepareStatement(
+                         "INSERT INTO usuario_auth (matricula, senha_hash, perfil) VALUES (?, ?, 'CONSULTA')")) {
+                cadastro.setString(1, usuario.getNome());
+                cadastro.setString(2, usuario.getMatricula());
+                cadastro.setString(3, usuario.getEmail());
+                cadastro.setString(4, usuario.getTipo());
+                cadastro.executeUpdate();
+                long idGerado;
+                try (ResultSet resultado = cadastro.getGeneratedKeys()) {
+                    if (!resultado.next()) {
+                        throw new SQLException("Cadastro não retornou o ID do usuário.");
+                    }
+                    idGerado = resultado.getLong(1);
+                }
+                credencial.setString(1, usuario.getMatricula());
+                credencial.setString(2, senhaHash);
+                credencial.executeUpdate();
+                conexao.commit();
+                usuario.setId(idGerado);
+            } catch (SQLException falha) {
+                try {
+                    conexao.rollback();
+                } catch (SQLException falhaRollback) {
+                    falha.addSuppressed(falhaRollback);
+                }
+                if ("23505".equals(falha.getSQLState())) {
+                    throw new IllegalArgumentException("Matrícula já cadastrada", falha);
+                }
+                throw falha;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException falha) {
+            throw new IllegalStateException("Não foi possível cadastrar o usuário e suas credenciais.", falha);
         }
     }
 
