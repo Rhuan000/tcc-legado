@@ -6,7 +6,7 @@
 
 ## 📌 Visão Geral
 
-O sistema simula uma aplicação corporativa legada com **alto acoplamento**, **baixa coesão** e **ausência de testes automatizados**, características típicas de sistemas que evoluíram organicamente. A arquitetura foi propositalmente construída com **"venenos"** para representar um cenário real de modernização.
+O sistema simula uma aplicação corporativa legada com **alto acoplamento**, **baixa coesão** e **cobertura limitada de testes automatizados**, características típicas de sistemas que evoluíram organicamente. A arquitetura foi propositalmente construída com **"venenos"** para representar um cenário real de modernização.
 
 O objetivo principal é extrair incrementalmente a gestão de empréstimos para um microsserviço independente, começando pelas regras de prazo e multa e avançando até consultas, persistência, criação, devolução e processamento agendado. O impacto é avaliado por CBO, tempo de build e tempo de inicialização, sem pressupor melhora em todas as métricas.
 
@@ -40,8 +40,9 @@ A aplicação segue uma arquitetura em camadas:
 5. **PostgreSQL** – Banco de dados relacional.
 
 **Componentes paralelos:**
-- **Quartz Scheduler** – Lê configuração do `jobs.xml`.
-- **Job (MultaDiariaJob)** – Processo agendado (00:00 e a cada 5 min).
+- **Quartz Scheduler** – Agendamento efetivo definido em `QuartzInitializer`.
+- **Multas** – Agendamento diário à meia-noite; no pré, `MultaDiariaJob`, e na migração, agendador do serviço de empréstimos.
+- **Ranking de livros** – `AtualizarMaisEmprestadosJob` a cada 5 minutos.
 - **EmprestimoEJB** – Reutiliza a lógica de negócio existente.
 
 ---
@@ -101,11 +102,11 @@ A aplicação segue uma arquitetura em camadas:
 - **RF12 – Job Diário de Multa**  
   Processo agendado (00:00) que atualiza multas de empréstimos atrasados.  
   *Regras:* Busca empréstimos com `data_devolucao_real IS NULL` e `data_prevista_devolucao < CURRENT_DATE`; recalcula e atualiza multa.  
-  ⚠️ **VENENO:** Configurado via `jobs.xml` (Quartz) e depende do EJB.
+  No pré, o agendamento efetivo está em `QuartzInitializer`; na migração, no serviço de empréstimos (`EMPRESTIMO_MULTAS_CRON`).
 
-- **RF13 – Job de Teste (5 min)**  
-  Versão do Job que roda a cada 5 minutos para testes.  
-  *Regra:* Configurado no mesmo `jobs.xml`; útil para validação sem esperar a meia-noite.
+- **RF13 – Atualização do ranking (5 min)**
+  Atualiza os destaques de livros mais emprestados a cada 5 minutos.
+  *Regra:* Agendado em `QuartzInitializer`; não recalcula multas.
 
 ---
 
@@ -225,3 +226,10 @@ Detalhes de cron, falhas, corte e limitações no
 
 Aplicar o script de corte conforme o
 [README do serviço](../tcc-moderno/emprestimo-service/README.md#comandos-recebidos-do-legado).
+
+
+## Regressões funcionais F01–F05
+
+Correções, testes automatizados e limites do reteste estão em
+[REGRESSOES-F01-F05.md](REGRESSOES-F01-F05.md). A coleta funcional histórica
+e a aprovação da matriz pós permanecem separadas desses testes.

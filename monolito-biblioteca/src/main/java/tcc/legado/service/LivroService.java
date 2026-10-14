@@ -1,9 +1,10 @@
 package tcc.legado.service;
 
 import tcc.legado.dao.LivroDAO;
-import tcc.legado.acl.EmprestimoAcl;
 import tcc.legado.model.Livro;
+import tcc.legado.acl.EmprestimoAcl;
 import tcc.legado.model.Emprestimo;
+import tcc.legado.exception.ValidacaoException;
 import tcc.legado.util.CacheGlobal;
 
 import javax.enterprise.context.Dependent;
@@ -32,31 +33,31 @@ public class LivroService {
         return livroDAO.buscarPorId(id);
     }
 
-    public void salvar(Livro livro) {
+    private void validar(Livro livro) {
+        if (livro.getTitulo() == null || livro.getTitulo().trim().isEmpty()) {
+            throw new ValidacaoException("Título é obrigatório");
+        }
         if (livro.getQuantidade() == null || livro.getQuantidade() < 0) {
-            throw new RuntimeException("Quantidade inválida");
+            throw new ValidacaoException("Quantidade inválida: informe zero ou um valor positivo");
         }
-        // Valida ISBN (se existir)
-        if (livro.getIsbn() != null && !livro.getIsbn().isEmpty()) {
-            if (!livro.getIsbn().matches("^[0-9-]+$")) {
-                throw new RuntimeException("ISBN inválido");
-            }
+        String isbn = livro.getIsbn();
+        if (isbn == null || isbn.trim().isEmpty()) {
+            livro.setIsbn(null);
+        } else if (!isbn.matches("^[0-9-]+$")) {
+            throw new ValidacaoException("ISBN inválido");
         }
+    }
+
+    public void salvar(Livro livro) {
+        validar(livro);
         livroDAO.salvar(livro);
         LOG.info("Livro salvo: " + livro.getTitulo());
     }
 
     public void atualizar(Livro livro) {
-        Livro existente = livroDAO.buscarPorId(livro.getId());
-        if (existente == null) {
-            throw new RuntimeException("Livro não encontrado");
-        }
-
-        // VENENO: verifica se o ISBN foi alterado e se já existe outro com o mesmo ISBN
-        if (!existente.getIsbn().equals(livro.getIsbn()) && livro.getIsbn() != null) {
-            // Simula uma verificação de duplicidade (na prática, poderia chamar o DAO)
-            // Aqui apenas forçamos um conflito para demonstrar acoplamento
-            LOG.warning("ISBN alterado de " + existente.getIsbn() + " para " + livro.getIsbn());
+        validar(livro);
+        if (livro.getId() == null || livroDAO.buscarPorId(livro.getId()) == null) {
+            throw new ValidacaoException("Livro não encontrado");
         }
         livroDAO.atualizar(livro);
         LOG.info("Livro atualizado: " + livro.getTitulo());
@@ -65,24 +66,23 @@ public class LivroService {
     public void excluir(Long id) {
         Livro livro = livroDAO.buscarPorId(id);
         if (livro == null) {
-            throw new RuntimeException("Livro não encontrado");
+            throw new ValidacaoException("Livro não encontrado");
         }
         if (livro.getQuantidade() > 0) {
-            throw new RuntimeException("Não é possível excluir um livro com estoque disponível");
+            throw new ValidacaoException("Não é possível excluir um livro com estoque disponível");
         }
 
-        List<Emprestimo> emprestimos = emprestimoAcl.listarTodos();
-        for (Emprestimo e : emprestimos) {
-            if (e.getIdLivro().equals(id) && e.getDataDevolucaoReal() == null) {
-                throw new RuntimeException("Livro está em empréstimo ativo, não pode ser excluído");
+        for (Emprestimo emprestimo : emprestimoAcl.listarTodos()) {
+            if (id.equals(emprestimo.getIdLivro()) && emprestimo.getDataDevolucaoReal() == null) {
+                throw new ValidacaoException("Livro está em empréstimo ativo, não pode ser excluído");
             }
         }
 
+        livroDAO.excluir(id);
         Integer totalExcluidos = (Integer) CacheGlobal.get("totalLivrosExcluidos");
         if (totalExcluidos == null) totalExcluidos = 0;
         CacheGlobal.put("totalLivrosExcluidos", totalExcluidos + 1);
 
-        livroDAO.excluir(id);
-        LOG.info("Livro excluído (simulado): " + livro.getTitulo() + " (ID " + id + ")");
+        LOG.info("Livro excluído: " + livro.getTitulo() + " (ID " + id + ")");
     }
 }

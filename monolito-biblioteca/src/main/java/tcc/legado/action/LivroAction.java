@@ -2,6 +2,9 @@ package tcc.legado.action;
 
 import tcc.legado.ejb.livro.ILivroEJB;
 import tcc.legado.model.Livro;
+import tcc.legado.exception.ValidacaoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.struts.actions.DispatchAction;
 import org.apache.struts.action.ActionForm;
@@ -17,7 +20,9 @@ import java.util.List;
 
 public class LivroAction extends DispatchAction {
 
-    private ILivroEJB getLivroEJB() throws Exception {
+    private static final Logger LOG = Logger.getLogger(LivroAction.class.getName());
+
+    protected ILivroEJB getLivroEJB() throws Exception {
         InitialContext ctx = new InitialContext();
         String jndiName = "java:global/monolito-biblioteca/LivroEJB!tcc.legado.ejb.livro.ILivroEJB";
         return (ILivroEJB) ctx.lookup(jndiName);
@@ -55,42 +60,44 @@ public class LivroAction extends DispatchAction {
         }
 
         String idStr = request.getParameter("id");
-        String titulo = request.getParameter("titulo");
-        String autor = request.getParameter("autor");
-        String isbn = request.getParameter("isbn");
-        String anoStr = request.getParameter("ano");
-        String editora = request.getParameter("editora");
-        String quantidadeStr = request.getParameter("quantidade");
-        
-        if (titulo == null || titulo.trim().isEmpty()) {
-            request.setAttribute("erro", "Título é obrigatório");
-            return mapping.findForward("erro");
-        }
-        
         Livro livro = new Livro();
-        if (idStr != null && !idStr.isEmpty()) {
-            livro.setId(Long.parseLong(idStr));
+        livro.setTitulo(request.getParameter("titulo"));
+        livro.setAutor(request.getParameter("autor"));
+        livro.setIsbn(request.getParameter("isbn"));
+        livro.setEditora(request.getParameter("editora"));
+        request.setAttribute("livro", livro);
+        // A JSP usa os parâmetros originais ao reapresentar erros de conversão.
+        request.setAttribute("reapresentar", true);
+        try {
+            if (idStr != null && !idStr.trim().isEmpty()) {
+                livro.setId(Long.valueOf(idStr.trim()));
+            }
+            String ano = request.getParameter("ano");
+            livro.setAno(ano == null || ano.trim().isEmpty() ? null : Integer.valueOf(ano.trim()));
+            String quantidade = request.getParameter("quantidade");
+            livro.setQuantidade(quantidade == null || quantidade.trim().isEmpty()
+                    ? 0 : Integer.valueOf(quantidade.trim()));
+
+            ILivroEJB livroEJB = getLivroEJB();
+            if (livro.getId() != null) {
+                livroEJB.atualizar(livro);
+                request.setAttribute("mensagem", "Livro atualizado com sucesso!");
+            } else {
+                livroEJB.salvar(livro);
+                request.setAttribute("mensagem", "Livro cadastrado com sucesso!");
+            }
+        } catch (NumberFormatException e) {
+            request.setAttribute("erro", "Ano, quantidade e ID devem ser números inteiros válidos");
+            return mapping.findForward("novo");
+        } catch (ValidacaoException e) {
+            request.setAttribute("erro", e.getMessage());
+            return mapping.findForward("novo");
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, "Falha ao gravar livro", e);
+            request.setAttribute("erro", "Não foi possível gravar o livro. Tente novamente.");
+            return mapping.findForward("novo");
         }
-        livro.setTitulo(titulo);
-        livro.setAutor(autor);
-        livro.setIsbn(isbn);
-        if (anoStr != null && !anoStr.isEmpty()) {
-            livro.setAno(Integer.parseInt(anoStr));
-        }
-        livro.setEditora(editora);
-        if (quantidadeStr != null && !quantidadeStr.isEmpty()) {
-            livro.setQuantidade(Integer.parseInt(quantidadeStr));
-        }
-        
-        ILivroEJB livroEJB = getLivroEJB();
-        if (livro.getId() != null) {
-            livroEJB.atualizar(livro);
-            request.setAttribute("mensagem", "Livro atualizado com sucesso!");
-        } else {
-            livroEJB.salvar(livro);
-            request.setAttribute("mensagem", "Livro cadastrado com sucesso!");
-        }
-        
+
         return listar(mapping, form, request, response);
     }
 
@@ -126,11 +133,22 @@ public class LivroAction extends DispatchAction {
             return mapping.findForward("erro");
         }
         
-        Long id = Long.parseLong(idStr);
-        ILivroEJB livroEJB = getLivroEJB();
-        livroEJB.excluir(id);
-        request.setAttribute("mensagem", "Livro excluído com sucesso!");
-        
+        try {
+            Long id = Long.valueOf(idStr);
+            getLivroEJB().excluir(id);
+            request.setAttribute("mensagem", "Livro excluído com sucesso!");
+        } catch (NumberFormatException e) {
+            request.setAttribute("erro", "ID do livro inválido");
+            return mapping.findForward("erro");
+        } catch (ValidacaoException e) {
+            request.setAttribute("erro", e.getMessage());
+            return mapping.findForward("erro");
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, "Falha ao excluir livro", e);
+            request.setAttribute("erro", "Não foi possível excluir o livro. Tente novamente.");
+            return mapping.findForward("erro");
+        }
+
         return listar(mapping, form, request, response);
     }
 

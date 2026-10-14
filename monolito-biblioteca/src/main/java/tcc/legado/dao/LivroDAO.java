@@ -1,6 +1,7 @@
 package tcc.legado.dao;
 
 import tcc.legado.model.Livro;
+import tcc.legado.exception.ValidacaoException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +12,21 @@ import javax.enterprise.context.Dependent;
 public class LivroDAO {
     
     // Conexão hardcoded (isso é propositalmente ruim para gerar acoplamento)
-    private Connection getConnection() throws SQLException {
+    protected Connection getConnection() throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Não foi possível consultar os livros", e);
         }
         return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/biblioteca", "postgres", "postgres");
+    }
+
+    private RuntimeException erroGravacao(SQLException e) {
+        if ("23505".equals(e.getSQLState())) {
+            return new ValidacaoException("Já existe um livro com este ISBN", e);
+        }
+        return new IllegalStateException("Não foi possível gravar o livro", e);
     }
 
     public List<Livro> listarTodos() {
@@ -33,13 +41,13 @@ public class LivroDAO {
                 l.setTitulo(rs.getString("titulo"));
                 l.setAutor(rs.getString("autor"));
                 l.setIsbn(rs.getString("isbn"));
-                l.setAno(rs.getInt("ano"));
+                l.setAno(rs.getObject("ano", Integer.class));
                 l.setEditora(rs.getString("editora"));
                 l.setQuantidade(rs.getInt("quantidade"));
                 livros.add(l);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Não foi possível consultar os livros", e);
         }
         return livros;
     }
@@ -56,13 +64,13 @@ public class LivroDAO {
                 l.setTitulo(rs.getString("titulo"));
                 l.setAutor(rs.getString("autor"));
                 l.setIsbn(rs.getString("isbn"));
-                l.setAno(rs.getInt("ano"));
+                l.setAno(rs.getObject("ano", Integer.class));
                 l.setEditora(rs.getString("editora"));
                 l.setQuantidade(rs.getInt("quantidade"));
                 return l;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Não foi possível consultar os livros", e);
         }
         return null;
     }
@@ -74,16 +82,18 @@ public class LivroDAO {
             ps.setString(1, livro.getTitulo());
             ps.setString(2, livro.getAutor());
             ps.setString(3, livro.getIsbn());
-            ps.setInt(4, livro.getAno());
+            ps.setObject(4, livro.getAno(), Types.INTEGER);
             ps.setString(5, livro.getEditora());
             ps.setInt(6, livro.getQuantidade());
-            ps.executeUpdate();
+            if (ps.executeUpdate() != 1) {
+                throw new ValidacaoException("Livro não encontrado para gravação");
+            }
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 livro.setId(rs.getLong(1));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw erroGravacao(e);
         }
     }
 
@@ -94,13 +104,15 @@ public class LivroDAO {
             ps.setString(1, livro.getTitulo());
             ps.setString(2, livro.getAutor());
             ps.setString(3, livro.getIsbn());
-            ps.setInt(4, livro.getAno());
+            ps.setObject(4, livro.getAno(), Types.INTEGER);
             ps.setString(5, livro.getEditora());
             ps.setInt(6, livro.getQuantidade());
             ps.setLong(7, livro.getId());
-            ps.executeUpdate();
+            if (ps.executeUpdate() != 1) {
+                throw new ValidacaoException("Livro não encontrado para gravação");
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw erroGravacao(e);
         }
     }
     
@@ -111,11 +123,10 @@ public class LivroDAO {
             ps.setLong(1, id);
             int affected = ps.executeUpdate();
             if (affected == 0) {
-                throw new RuntimeException("Livro com ID " + id + " não encontrado para exclusão");
+                throw new ValidacaoException("Livro com ID " + id + " não encontrado para exclusão");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Erro ao excluir livro: " + e.getMessage(), e);
+            throw new IllegalStateException("Não foi possível excluir o livro", e);
         }
     }
 }

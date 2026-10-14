@@ -21,7 +21,7 @@
         </div>
 
         <div class="content">
-            <form method="POST" action="destaque.do?metodo=salvar" class="form-container">
+            <form method="POST" accept-charset="UTF-8" action="destaque.do?metodo=salvar" class="form-container">
                 <% if (destaque != null) { %>
                     <input type="hidden" name="id" value="<%= destaque.getId() %>">
                 <% } %>
