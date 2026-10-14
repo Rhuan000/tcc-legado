@@ -16,8 +16,12 @@ import org.apache.struts.action.ActionMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import tcc.legado.exception.ValidacaoException;
 
 public class EmprestimoAction extends DispatchAction {
+    private static final Logger LOG = Logger.getLogger(EmprestimoAction.class.getName());
 
     private final tcc.legado.service.CoordenadorEmprestimo coordenador = new tcc.legado.service.CoordenadorEmprestimo();
     private final EmprestimoAcl emprestimoAcl = new EmprestimoAcl();
@@ -33,7 +37,8 @@ public class EmprestimoAction extends DispatchAction {
             request.setAttribute("chaveEmprestimo", java.util.UUID.randomUUID().toString());
             return mapping.findForward("novo");
         } catch (Exception e) {
-            request.setAttribute("erro", "Erro ao carregar dados: " + e.getMessage());
+            LOG.log(Level.SEVERE, "Não foi possível carregar os dados. Tente novamente.", e);
+            request.setAttribute("erro", "Não foi possível carregar os dados. Tente novamente.");
             return mapping.findForward("erro");
         }
     }
@@ -56,18 +61,24 @@ public class EmprestimoAction extends DispatchAction {
         try {
             Long idLivro = Long.parseLong(idLivroStr);
             String chave = request.getParameter("chave");
-            if (chave == null) throw new IllegalArgumentException("Abra o formulario de emprestimo novamente");
-            java.util.UUID.fromString(chave);
+            try {
+                java.util.UUID.fromString(chave);
+            } catch (IllegalArgumentException | NullPointerException e) {
+                throw new ValidacaoException("Abra o formulário de empréstimo novamente");
+            }
             Emprestimo emp = coordenador.criar(idLivro, matricula, chave);
             request.setAttribute("mensagem", "Empréstimo realizado com sucesso! ID: " + emp.getId());
             return listar(mapping, form, request, response);
         } catch (NumberFormatException e) {
             request.setAttribute("erro", "ID do livro inválido");
             return mapping.findForward("erro");
+        } catch (ValidacaoException e) {
+            request.setAttribute("erro", e.getMessage());
+            return mapping.findForward("erro");
         } catch (Exception e) {
-            request.setAttribute("erro", e.getMessage()
-                    + ". Em caso de falha de comunicacao, a operacao pode estar pendente. "
-                    + "Consulte a lista antes de abrir outro formulario; para repetir, reenvie o mesmo formulario.");
+            LOG.log(Level.SEVERE, "Falha ao realizar empréstimo", e);
+            request.setAttribute("erro", "Não foi possível confirmar o empréstimo. A operação pode estar pendente. "
+                    + "Consulte a lista antes de abrir outro formulário; para repetir, reenvie o mesmo formulário.");
             return mapping.findForward("erro");
         }
     }
@@ -80,7 +91,8 @@ public class EmprestimoAction extends DispatchAction {
             request.setAttribute("lista", lista);
             return mapping.findForward("listarSucesso");
         } catch (Exception e) {
-            request.setAttribute("erro", "Erro ao listar empréstimos: " + e.getMessage());
+            LOG.log(Level.SEVERE, "Não foi possível listar os empréstimos. Tente novamente.", e);
+            request.setAttribute("erro", "Não foi possível listar os empréstimos. Tente novamente.");
             return mapping.findForward("erro");
         }
     }
@@ -95,7 +107,8 @@ public class EmprestimoAction extends DispatchAction {
             request.setAttribute("emprestimos", ativos);
             return mapping.findForward("devolver");
         } catch (Exception e) {
-            request.setAttribute("erro", "Erro ao carregar empréstimos ativos: " + e.getMessage());
+            LOG.log(Level.SEVERE, "Não foi possível carregar os empréstimos ativos. Tente novamente.", e);
+            request.setAttribute("erro", "Não foi possível carregar os empréstimos ativos. Tente novamente.");
             return mapping.findForward("erro");
         }
     }
@@ -117,8 +130,12 @@ public class EmprestimoAction extends DispatchAction {
         } catch (NumberFormatException e) {
             request.setAttribute("erro", "ID do empréstimo inválido");
             return mapping.findForward("erro");
-        } catch (Exception e) {
+        } catch (ValidacaoException e) {
             request.setAttribute("erro", e.getMessage());
+            return mapping.findForward("erro");
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, "Falha ao registrar devolução", e);
+            request.setAttribute("erro", "Não foi possível confirmar a devolução. Consulte a lista e tente novamente.");
             return mapping.findForward("erro");
         }
     }
@@ -154,7 +171,8 @@ public class EmprestimoAction extends DispatchAction {
 		request.setAttribute("usuario", usuario);
 		return mapping.findForward("detalhar");
 		} catch (Exception e) {
-			request.setAttribute("erro", "Erro ao consultar empréstimo: " + e.getMessage());
+			LOG.log(Level.SEVERE, "Não foi possível consultar o empréstimo. Tente novamente.", e);
+            request.setAttribute("erro", "Não foi possível consultar o empréstimo. Tente novamente.");
 			return mapping.findForward("erro");
 		}
 	}

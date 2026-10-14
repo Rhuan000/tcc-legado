@@ -39,8 +39,8 @@ CREATE TABLE livro (
 -- Empréstimos
 CREATE TABLE emprestimo (
     id SERIAL PRIMARY KEY,
-    id_livro INT NOT NULL REFERENCES livro(id) ON DELETE CASCADE,
-    id_usuario INT NOT NULL REFERENCES usuario(id) ON DELETE CASCADE,
+    id_livro INT NOT NULL REFERENCES livro(id) ON DELETE RESTRICT,
+    id_usuario INT NOT NULL REFERENCES usuario(id) ON DELETE RESTRICT,
     data_emprestimo DATE NOT NULL DEFAULT CURRENT_DATE,
     data_prevista_devolucao DATE NOT NULL,
     data_devolucao_real DATE,

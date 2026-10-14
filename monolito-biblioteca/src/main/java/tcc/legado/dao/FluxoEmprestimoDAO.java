@@ -5,10 +5,11 @@ import java.util.*;
 import java.util.function.Function;
 import org.json.JSONObject;
 import tcc.legado.model.Emprestimo;
+import tcc.legado.exception.ValidacaoException;
 
 /** Diario do coordenador e estoque locais; nunca acessa a tabela emprestimo. */
 public class FluxoEmprestimoDAO {
-    private Connection conectar() throws SQLException {
+    protected Connection conectar() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://localhost:5432/biblioteca","postgres","postgres");
     }
     public JSONObject buscar(String chave) {
@@ -36,7 +37,7 @@ public class FluxoEmprestimoDAO {
                 if(novo==1 && delta==-1) {
                     try(PreparedStatement s=c.prepareStatement("UPDATE livro SET quantidade=quantidade-1 WHERE id=? AND quantidade>0")) {
                         s.setLong(1,livro);
-                        if(s.executeUpdate()!=1) throw new IllegalStateException("Livro inexistente ou indisponivel");
+                        if(s.executeUpdate()!=1) throw new ValidacaoException("Livro indisponível");
                     }
                 }
                 c.commit();

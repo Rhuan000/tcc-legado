@@ -73,8 +73,10 @@ public class LivroService {
         }
 
         for (Emprestimo emprestimo : emprestimoAcl.listarTodos()) {
-            if (id.equals(emprestimo.getIdLivro()) && emprestimo.getDataDevolucaoReal() == null) {
-                throw new ValidacaoException("Livro está em empréstimo ativo, não pode ser excluído");
+            if (id.equals(emprestimo.getIdLivro())) {
+                throw new ValidacaoException(emprestimo.getDataDevolucaoReal() == null
+                        ? "Livro está em empréstimo ativo, não pode ser excluído"
+                        : "Livro possui histórico de empréstimos e não pode ser excluído.");
             }
         }
 

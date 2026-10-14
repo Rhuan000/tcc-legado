@@ -17,8 +17,8 @@ CREATE INDEX emprestimo_operacao_pendentes ON emprestimo_operacao(criado_em) WHE
 -- Diario local do coordenador; nao e persistencia de emprestimos.
 CREATE TABLE fluxo_emprestimo (
     chave VARCHAR(100) PRIMARY KEY,
-    id_livro BIGINT NOT NULL,
-    matricula VARCHAR(100) NOT NULL,
+    id_livro BIGINT NOT NULL CONSTRAINT fluxo_livro_fkey REFERENCES livro(id) ON DELETE RESTRICT,
+    matricula VARCHAR(100) NOT NULL CONSTRAINT fluxo_usuario_fkey REFERENCES usuario(matricula) ON DELETE RESTRICT,
     delta SMALLINT NOT NULL CHECK (delta IN (-1,1)),
     dados TEXT NOT NULL,
     estado VARCHAR(12) NOT NULL DEFAULT 'PENDENTE' CHECK (estado IN ('PENDENTE','CONCLUIDA')),
