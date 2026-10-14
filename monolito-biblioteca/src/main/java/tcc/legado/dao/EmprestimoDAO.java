@@ -14,7 +14,7 @@ import java.util.List;
 
 public class EmprestimoDAO {
 
-    private Connection getConnection() throws SQLException {
+    protected Connection getConnection() throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -22,6 +22,20 @@ public class EmprestimoDAO {
         }
         return DriverManager.getConnection(
             "jdbc:postgresql://localhost:5432/biblioteca", "postgres", "postgres");
+    }
+
+    public boolean existeAtivoPorLivro(Long idLivro) {
+        String sql = "SELECT 1 FROM emprestimo WHERE id_livro = ? AND data_devolucao_real IS NULL";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, idLivro);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            // Uma consulta indisponível não pode autorizar a exclusão.
+            throw new IllegalStateException("Não foi possível verificar empréstimos ativos", e);
+        }
     }
 
     public void salvar(Emprestimo emprestimo) {

@@ -15,7 +15,7 @@ import javax.enterprise.context.Dependent;
 public class LivroDestaqueDAO {
     
     // Conexão hardcoded (mesmo padrão do projeto)
-    private Connection getConnection() throws SQLException {
+    protected Connection getConnection() throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {

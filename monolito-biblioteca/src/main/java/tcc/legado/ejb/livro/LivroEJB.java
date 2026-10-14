@@ -3,6 +3,7 @@ package tcc.legado.ejb.livro;
 
 import tcc.legado.service.LivroService;
 import tcc.legado.model.Livro;
+import tcc.legado.exception.ValidacaoException;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -20,7 +21,7 @@ public class LivroEJB implements ILivroEJB {
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void salvar(Livro livro) {
         if (livro.getTitulo() == null || livro.getTitulo().trim().isEmpty()) {
-            throw new RuntimeException("Título é obrigatório");
+            throw new ValidacaoException("Título é obrigatório");
         }
         livroService.salvar(livro);
     }
@@ -29,7 +30,7 @@ public class LivroEJB implements ILivroEJB {
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void atualizar(Livro livro) {
         if (livro.getId() == null) {
-            throw new RuntimeException("ID do livro é obrigatório para atualização");
+            throw new ValidacaoException("ID do livro é obrigatório para atualização");
         }
         livroService.atualizar(livro);
     }
@@ -38,7 +39,7 @@ public class LivroEJB implements ILivroEJB {
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void excluir(Long id) {
         if (id == null) {
-            throw new RuntimeException("ID não informado");
+            throw new ValidacaoException("ID não informado");
         }
         // Poderia verificar se o livro está em um empréstimo ativo
         livroService.excluir(id);

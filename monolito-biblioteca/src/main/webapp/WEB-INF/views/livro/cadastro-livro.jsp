@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="tcc.legado.model.Livro" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     Livro livro = (Livro) request.getAttribute("livro");
     boolean editando = (livro != null && livro.getId() != null);
@@ -22,7 +23,10 @@
         </div>
 
         <div class="content">
-            <form action="livro.do" method="post" class="livro-form">
+            <c:if test="${not empty erro}">
+                <div class="alert alert-danger" role="alert"><c:out value="${erro}" /></div>
+            </c:if>
+            <form action="livro.do" method="post" accept-charset="UTF-8" class="livro-form">
                 <input type="hidden" name="metodo" value="salvar" />
                 <% if (editando) { %>
                     <input type="hidden" name="id" value="<%= livro.getId() %>" />
@@ -31,35 +35,35 @@
                 <div class="form-group">
                     <label for="titulo">Título *</label>
                     <input id="titulo" type="text" name="titulo" class="form-control" required
-                           value="<%= editando ? livro.getTitulo() : "" %>">
+                           value="<c:out value="${reapresentar ? param.titulo : (livro != null ? livro.titulo : '')}" />">
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="autor">Autor</label>
-                        <input id="autor" type="text" name="autor" class="form-control" value="<%= editando ? livro.getAutor() : "" %>">
+                        <input id="autor" type="text" name="autor" class="form-control" value="<c:out value="${reapresentar ? param.autor : (livro != null ? livro.autor : '')}" />">
                     </div>
 
                     <div class="form-group">
                         <label for="isbn">ISBN</label>
-                        <input id="isbn" type="text" name="isbn" class="form-control" value="<%= editando ? livro.getIsbn() : "" %>">
+                        <input id="isbn" type="text" name="isbn" class="form-control" value="<c:out value="${reapresentar ? param.isbn : (livro != null ? livro.isbn : '')}" />">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="ano">Ano</label>
-                        <input id="ano" type="number" name="ano" class="form-control" value="<%= editando && livro.getAno() != null ? livro.getAno() : "" %>">
+                        <input id="ano" type="number" name="ano" class="form-control" value="<c:out value="${reapresentar ? param.ano : (livro != null ? livro.ano : '')}" />">
                     </div>
 
                     <div class="form-group">
                         <label for="editora">Editora</label>
-                        <input id="editora" type="text" name="editora" class="form-control" value="<%= editando ? livro.getEditora() : "" %>">
+                        <input id="editora" type="text" name="editora" class="form-control" value="<c:out value="${reapresentar ? param.editora : (livro != null ? livro.editora : '')}" />">
                     </div>
 
                     <div class="form-group">
                         <label for="quantidade">Quantidade</label>
-                        <input id="quantidade" type="number" name="quantidade" class="form-control" value="<%= editando && livro.getQuantidade() != null ? livro.getQuantidade() : "0" %>">
+                        <input id="quantidade" type="number" name="quantidade" min="0" class="form-control" value="<c:out value="${reapresentar ? param.quantidade : (livro != null ? livro.quantidade : '0')}" />">
                     </div>
                 </div>
 
