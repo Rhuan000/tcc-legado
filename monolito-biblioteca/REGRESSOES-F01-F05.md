@@ -3,6 +3,11 @@
 Revisão aplicada às branches `experimento/pre-migracao-revisada` e
 `experimento/migracao-revisada`. A coleta funcional anterior permanece histórica.
 
+Atualização posterior: [FAL-01, OBS-01, OBS-02 e PEN-01](../validacao/REGRESSOES-FAL-01.md)
+registra as novas correções e evidências. Empréstimos devolvidos agora também
+impedem exclusão para preservar histórico; as pendências ao final deste documento
+descrevem a coleta F01–F05 original e devem ser lidas junto à atualização.
+
 | Falha | Confirmação por inspeção | Correção |
 | --- | --- | --- |
 | F01 | No pré, o lookup usa um nome JNDI de um serviço CDI. Na migração esse lookup já havia sido substituído pela ACL. | No pré, consultar empréstimo ativo pelo DAO injetado, sem dependência circular de serviços. Na migração, preservar a ACL. Manter bloqueios por estoque e empréstimo ativo; falha de consulta impede excluir. Atualizar contador somente após exclusão efetiva. |

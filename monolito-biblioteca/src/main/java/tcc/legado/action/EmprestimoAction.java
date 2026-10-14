@@ -17,10 +17,14 @@ import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import tcc.legado.exception.ValidacaoException;
 
 public class EmprestimoAction extends DispatchAction {
+    private static final Logger LOG = Logger.getLogger(EmprestimoAction.class.getName());
 
-    private IEmprestimoEJB getEmprestimoEJB() throws Exception {
+    protected IEmprestimoEJB getEmprestimoEJB() throws Exception {
         InitialContext ctx = new InitialContext();
         return (IEmprestimoEJB) ctx.lookup("java:global/monolito-biblioteca/EmprestimoEJB!tcc.legado.ejb.emprestimo.IEmprestimoEJB");
     }
@@ -35,7 +39,8 @@ public class EmprestimoAction extends DispatchAction {
             request.setAttribute("usuarios", usuarioDAO.listarTodos());
             return mapping.findForward("novo");
         } catch (Exception e) {
-            request.setAttribute("erro", "Erro ao carregar dados: " + e.getMessage());
+            LOG.log(Level.SEVERE, "Não foi possível carregar os dados. Tente novamente.", e);
+            request.setAttribute("erro", "Não foi possível carregar os dados. Tente novamente.");
             return mapping.findForward("erro");
         }
     }
@@ -64,9 +69,12 @@ public class EmprestimoAction extends DispatchAction {
         } catch (NumberFormatException e) {
             request.setAttribute("erro", "ID do livro inválido");
             return mapping.findForward("erro");
-        } catch (Exception e) {
-            // Captura qualquer exceção da camada de negócio (ex: Usuário não encontrado)
+        } catch (ValidacaoException e) {
             request.setAttribute("erro", e.getMessage());
+            return mapping.findForward("erro");
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, "Falha ao realizar empréstimo", e);
+            request.setAttribute("erro", "Não foi possível realizar o empréstimo. Tente novamente.");
             return mapping.findForward("erro");
         }
     }
@@ -80,7 +88,8 @@ public class EmprestimoAction extends DispatchAction {
             request.setAttribute("lista", lista);
             return mapping.findForward("listarSucesso");
         } catch (Exception e) {
-            request.setAttribute("erro", "Erro ao listar empréstimos: " + e.getMessage());
+            LOG.log(Level.SEVERE, "Não foi possível listar os empréstimos. Tente novamente.", e);
+            request.setAttribute("erro", "Não foi possível listar os empréstimos. Tente novamente.");
             return mapping.findForward("erro");
         }
     }
@@ -96,7 +105,8 @@ public class EmprestimoAction extends DispatchAction {
             request.setAttribute("emprestimos", ativos);
             return mapping.findForward("devolver");
         } catch (Exception e) {
-            request.setAttribute("erro", "Erro ao carregar empréstimos ativos: " + e.getMessage());
+            LOG.log(Level.SEVERE, "Não foi possível carregar os empréstimos ativos. Tente novamente.", e);
+            request.setAttribute("erro", "Não foi possível carregar os empréstimos ativos. Tente novamente.");
             return mapping.findForward("erro");
         }
     }
@@ -119,8 +129,12 @@ public class EmprestimoAction extends DispatchAction {
         } catch (NumberFormatException e) {
             request.setAttribute("erro", "ID do empréstimo inválido");
             return mapping.findForward("erro");
-        } catch (Exception e) {
+        } catch (ValidacaoException e) {
             request.setAttribute("erro", e.getMessage());
+            return mapping.findForward("erro");
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, "Falha ao registrar devolução", e);
+            request.setAttribute("erro", "Não foi possível registrar a devolução. Tente novamente.");
             return mapping.findForward("erro");
         }
     }

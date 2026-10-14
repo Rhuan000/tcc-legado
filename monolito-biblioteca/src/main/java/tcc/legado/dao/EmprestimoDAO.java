@@ -38,6 +38,25 @@ public class EmprestimoDAO {
         }
     }
 
+    public boolean existePorUsuario(Long idUsuario) {
+        return existeVinculo("SELECT 1 FROM emprestimo WHERE id_usuario = ?", idUsuario);
+    }
+
+    public boolean existePorLivro(Long idLivro) {
+        return existeVinculo("SELECT 1 FROM emprestimo WHERE id_livro = ?", idLivro);
+    }
+
+    private boolean existeVinculo(String sql, Long id) {
+        try (Connection conn = getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException("Não foi possível verificar o histórico de empréstimos", e);
+        }
+    }
+
     public void salvar(Emprestimo emprestimo) {
         String sql = "INSERT INTO emprestimo (id_livro, id_usuario, data_emprestimo, data_prevista_devolucao, multa) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = getConnection();
@@ -146,7 +165,7 @@ public class EmprestimoDAO {
                 atrasados.add(e);
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            throw new IllegalStateException("Não foi possível consultar empréstimos atrasados", ex);
         }
         return atrasados;
     }

@@ -1,6 +1,7 @@
 package tcc.legado.dao;
 
 import tcc.legado.model.Usuario;
+import tcc.legado.exception.ValidacaoException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class UsuarioDAO {
     
-    private Connection getConnection() throws SQLException {
+    protected Connection getConnection() throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -140,9 +141,14 @@ public class UsuarioDAO {
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, id);
-            ps.executeUpdate();
+            if (ps.executeUpdate() != 1) {
+                throw new ValidacaoException("Usuário não encontrado para exclusão");
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            if ("23503".equals(e.getSQLState())) {
+                throw new ValidacaoException("Usuário possui vínculos que impedem a exclusão. O histórico deve ser preservado.", e);
+            }
+            throw new IllegalStateException("Não foi possível excluir o usuário", e);
         }
     }
 }

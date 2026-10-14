@@ -1,6 +1,7 @@
 package tcc.legado.ejb.emprestimo;
 
 import tcc.legado.model.Emprestimo;
+import tcc.legado.exception.ValidacaoException;
 import tcc.legado.service.EmprestimoService;
 
 import javax.ejb.Stateless;
@@ -20,10 +21,10 @@ public class EmprestimoEJB implements IEmprestimoEJB {
     public Emprestimo criarEmprestimo(Long idLivro, String matricula) {
         // VENENO: validação extra no EJB (duplicada)
         if (idLivro == null || idLivro <= 0) {
-            throw new RuntimeException("ID do livro inválido");
+            throw new ValidacaoException("ID do livro inválido");
         }
         if (matricula == null || matricula.trim().isEmpty()) {
-            throw new RuntimeException("Matrícula é obrigatória");
+            throw new ValidacaoException("Matrícula é obrigatória");
         }
         return emprestimoService.criarEmprestimo(idLivro, matricula);
     }
@@ -32,7 +33,7 @@ public class EmprestimoEJB implements IEmprestimoEJB {
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void registrarDevolucao(Long idEmprestimo) {
         if (idEmprestimo == null || idEmprestimo <= 0) {
-            throw new RuntimeException("ID do empréstimo inválido");
+            throw new ValidacaoException("ID do empréstimo inválido");
         }
         emprestimoService.registrarDevolucao(idEmprestimo);
     }

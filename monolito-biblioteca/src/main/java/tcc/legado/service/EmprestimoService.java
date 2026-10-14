@@ -4,6 +4,7 @@ import tcc.legado.dao.EmprestimoDAO;
 import tcc.legado.dao.LivroDAO;
 import tcc.legado.dao.UsuarioDAO;
 import tcc.legado.model.Emprestimo;
+import tcc.legado.exception.ValidacaoException;
 import tcc.legado.model.Livro;
 import tcc.legado.model.Usuario;
 import tcc.legado.util.CacheGlobal;
@@ -39,13 +40,13 @@ public class EmprestimoService {
         Usuario usuario = usuarioDAO.buscarPorMatricula(matricula);
 
         if (livro == null) {
-            throw new RuntimeException("Livro não encontrado");
+            throw new ValidacaoException("Livro não encontrado");
         }
         if (usuario == null) {
-            throw new RuntimeException("Usuário não encontrado");
+            throw new ValidacaoException("Usuário não encontrado");
         }
         if (livro.getQuantidade() <= 0) {
-            throw new RuntimeException("Livro indisponível");
+            throw new ValidacaoException("Livro indisponível");
         }
 
         Emprestimo emp = new Emprestimo();
@@ -131,15 +132,15 @@ public class EmprestimoService {
     public void registrarDevolucao(Long idEmprestimo) {
         Emprestimo emp = emprestimoDAO.buscarPorId(idEmprestimo);
         if (emp == null) {
-            throw new RuntimeException("Empréstimo não encontrado");
+            throw new ValidacaoException("Empréstimo não encontrado");
         }
         if (emp.getDataDevolucaoReal() != null) {
-            throw new RuntimeException("Empréstimo já devolvido");
+            throw new ValidacaoException("Empréstimo já devolvido");
         }
 
         Usuario usuario = usuarioDAO.buscarPorId(emp.getIdUsuario());
         if (usuario == null) {
-            throw new RuntimeException("Usuário do empréstimo não encontrado");
+            throw new ValidacaoException("Usuário do empréstimo não encontrado");
         }
 
         Date hoje = new Date();

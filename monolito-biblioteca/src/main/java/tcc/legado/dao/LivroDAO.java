@@ -126,6 +126,9 @@ public class LivroDAO {
                 throw new ValidacaoException("Livro com ID " + id + " não encontrado para exclusão");
             }
         } catch (SQLException e) {
+            if ("23503".equals(e.getSQLState())) {
+                throw new ValidacaoException("Livro possui vínculos que impedem a exclusão. O histórico deve ser preservado.", e);
+            }
             throw new IllegalStateException("Não foi possível excluir o livro", e);
         }
     }

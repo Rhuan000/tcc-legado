@@ -75,6 +75,9 @@ public class LivroService {
             throw new ValidacaoException("Livro está em empréstimo ativo, não pode ser excluído");
         }
 
+        if (emprestimoDAO.existePorLivro(id)) {
+            throw new ValidacaoException("Livro possui histórico de empréstimos e não pode ser excluído.");
+        }
         livroDAO.excluir(id);
         Integer totalExcluidos = (Integer) CacheGlobal.get("totalLivrosExcluidos");
         if (totalExcluidos == null) totalExcluidos = 0;

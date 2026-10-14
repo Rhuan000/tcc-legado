@@ -263,14 +263,14 @@ public class RegressaoLivrosTest {
         assertNull(attrs.get("mensagem"));
     }
 
-    @Test public void emprestimoDevolvidoNaoBloqueiaExclusao() throws Exception {
+    @Test public void emprestimoDevolvidoPreservaHistorico() throws Exception {
         Livro saved = livro(null);
         service.salvar(saved);
         try (Connection c = connection()) {
             c.createStatement().execute("INSERT INTO emprestimo(id_livro, data_devolucao_real) VALUES (" + saved.getId() + ", DATE '2026-10-14')");
         }
-        service.excluir(saved.getId());
-        assertNull(dao.buscarPorId(saved.getId()));
+        assertThrows(ValidacaoException.class, () -> service.excluir(saved.getId()));
+        assertNotNull(dao.buscarPorId(saved.getId()));
     }
 
     @Test public void falhaAoConsultarEmprestimosImpedeExclusao() throws Exception {
