@@ -30,6 +30,23 @@ class PrazoResourceTest {
     }
 
     @Test
+    void deveCalcularPrazoComFeriadosDosDoisAnos() {
+        given().header("X-Integration-Token", "token-exclusivo-teste")
+                .contentType("application/json")
+                .body("""
+                        {
+                          "dataEmprestimo": "2026-12-24",
+                          "tipoUsuario": "ALUNO"
+                        }
+                        """)
+                .when()
+                .post("/prazos/calcular")
+                .then()
+                .statusCode(200)
+                .body("dataPrevista", is("2027-01-05"));
+    }
+
+    @Test
     void deveRejeitarRequisicaoSemCamposObrigatorios() {
         given().header("X-Integration-Token", "token-exclusivo-teste")
                 .contentType("application/json")

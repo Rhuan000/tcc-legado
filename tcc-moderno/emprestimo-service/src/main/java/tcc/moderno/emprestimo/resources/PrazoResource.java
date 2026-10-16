@@ -29,11 +29,10 @@ public class PrazoResource {
     @POST
     @Path("/calcular")
     public PrazoResponseDTO calcular(@Valid PrazoRequestDTO requisicao) {
-        var feriados = calendarioService.buscarFeriados(requisicao.getDataEmprestimo().getYear());
         var dataPrevista = prazoService.calcularDataPrevista(
                 requisicao.getDataEmprestimo(),
                 requisicao.getTipoUsuario(),
-                feriados);
+                calendarioService::buscarFeriados);
         return new PrazoResponseDTO(dataPrevista);
     }
 }

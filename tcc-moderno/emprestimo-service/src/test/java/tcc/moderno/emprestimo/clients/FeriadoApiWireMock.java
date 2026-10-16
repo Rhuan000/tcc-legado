@@ -36,6 +36,19 @@ public class FeriadoApiWireMock implements QuarkusTestResourceLifecycleManager {
         servidor.stubFor(get(urlEqualTo("/api/feriados/v1/2027"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
+                        .withBody("""
+                                [
+                                  {
+                                    "date": "2027-01-01",
+                                    "name": "Confraternização mundial",
+                                    "type": "national"
+                                  }
+                                ]
+                                """)));
+
+        servidor.stubFor(get(urlEqualTo("/api/feriados/v1/2028"))
+                .willReturn(aResponse()
+                        .withHeader("Content-Type", "application/json")
                         .withBody("[]")));
 
         servidor.stubFor(get(urlEqualTo("/api/feriados/v1/2099"))

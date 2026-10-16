@@ -12,9 +12,6 @@ import tcc.moderno.emprestimo.dtos.MultaResponseDTO;
 import tcc.moderno.emprestimo.services.CalendarioService;
 import tcc.moderno.emprestimo.services.MultaService;
 
-import java.time.LocalDate;
-import java.util.List;
-
 @Path("/multas")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -32,14 +29,11 @@ public class MultaResource {
     @POST
     @Path("/calcular")
     public MultaResponseDTO calcular(@Valid MultaRequestDTO requisicao) {
-        List<LocalDate> feriados = requisicao.getDataReferencia().isAfter(requisicao.getDataPrevista())
-                ? calendarioService.buscarFeriados(requisicao.getDataPrevista().getYear())
-                : List.of();
         double valor = multaService.calcularMulta(
                 requisicao.getDataPrevista(),
                 requisicao.getTipoUsuario(),
                 requisicao.getDataReferencia(),
-                feriados);
+                calendarioService::buscarFeriados);
         return new MultaResponseDTO(valor);
     }
 }
