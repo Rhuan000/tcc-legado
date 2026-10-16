@@ -2,19 +2,19 @@ package tcc.legado.util;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.function.IntFunction;
 
 public class CacheGlobal {
 
     private static final Map<String, Object> CACHE = new HashMap<>();
-
-    static {
-        // Inicializa com lista vazia (isso faz o sistema tentar buscar na API ao primeiro uso)
-        CACHE.put("feriados", new ArrayList<LocalDate>());
-        CACHE.put("anoCorrente", LocalDate.now().getYear());
-    }
+    private static final ConcurrentMap<Integer, List<LocalDate>> FERIADOS_POR_ANO =
+            new ConcurrentHashMap<>();
 
     public static void put(String key, Object value) {
         synchronized (CACHE) {
@@ -28,20 +28,24 @@ public class CacheGlobal {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    public static List<LocalDate> getFeriados() {
-        return (List<LocalDate>) get("feriados");
+    public static List<LocalDate> getFeriados(int ano) {
+        return FERIADOS_POR_ANO.get(ano);
     }
 
-    public static void setFeriados(List<LocalDate> feriados) {
-        put("feriados", feriados);
+    public static List<LocalDate> getFeriados(int ano,
+                                               IntFunction<List<LocalDate>> carregador) {
+        return FERIADOS_POR_ANO.computeIfAbsent(ano, chave -> copiar(carregador.apply(chave)));
     }
 
-    public static int getAnoCorrente() {
-        return (int) get("anoCorrente");
+    public static void setFeriados(int ano, List<LocalDate> feriados) {
+        FERIADOS_POR_ANO.put(ano, copiar(feriados));
     }
 
-    public static void setAnoCorrente(int ano) {
-        put("anoCorrente", ano);
+    public static void clearFeriados() {
+        FERIADOS_POR_ANO.clear();
+    }
+
+    private static List<LocalDate> copiar(List<LocalDate> feriados) {
+        return Collections.unmodifiableList(new ArrayList<>(feriados));
     }
 }

@@ -91,25 +91,16 @@ public class EmprestimoService {
 
 
     private Date calcularDataPrevistaComFeriados(int diasUteis) {
-        LocalDate dataAtual = LocalDate.now();
-        int ano = dataAtual.getYear();
+        return calcularDataPrevistaComFeriados(LocalDate.now(), diasUteis);
+    }
 
-        // VENENO: verifica se o cache está atualizado para o ano corrente
-        // Se não estiver, busca na API externa e atualiza o cache global
-        if (CacheGlobal.getAnoCorrente() != ano || CacheGlobal.getFeriados().isEmpty()) {
-            LOG.info("Cache de feriados desatualizado ou vazio. Buscando na API para o ano " + ano);
-            List<LocalDate> feriados = FeriadoClient.buscarFeriados(ano);
-            CacheGlobal.setAnoCorrente(ano);
-            CacheGlobal.setFeriados(feriados);
-        }
-
-        List<LocalDate> feriados = CacheGlobal.getFeriados();
+    Date calcularDataPrevistaComFeriados(LocalDate dataAtual, int diasUteis) {
         LocalDate dataPrevista = dataAtual;
 
         while (diasUteis > 0) {
             dataPrevista = dataPrevista.plusDays(1);
             // Verifica se é dia útil (segunda a sexta) E não é feriado
-            if (isDiaUtil(dataPrevista, feriados)) {
+            if (isDiaUtil(dataPrevista)) {
                 diasUteis--;
             }
         }
@@ -119,13 +110,20 @@ public class EmprestimoService {
     }
 
 
-    private boolean isDiaUtil(LocalDate data, List<LocalDate> feriados) {
+    private boolean isDiaUtil(LocalDate data) {
         // Fim de semana (sábado = 6, domingo = 7)
         if (data.getDayOfWeek().getValue() > 5) {
             return false;
         }
         // Feriado nacional
-        return !feriados.contains(data);
+        return !buscarFeriados(data.getYear()).contains(data);
+    }
+
+    private List<LocalDate> buscarFeriados(int ano) {
+        return CacheGlobal.getFeriados(ano, chave -> {
+            LOG.info("Buscando feriados na API para o ano " + chave);
+            return FeriadoClient.buscarFeriados(chave);
+        });
     }
 
 
@@ -191,21 +189,11 @@ public class EmprestimoService {
             return 0.0;
         }
 
-        // VENENO: busca feriados do cache para o ano da data prevista
-        int ano = dataPrevista.getYear();
-        if (CacheGlobal.getAnoCorrente() != ano || CacheGlobal.getFeriados().isEmpty()) {
-            LOG.info("Cache de feriados desatualizado. Buscando para o ano " + ano);
-            List<LocalDate> feriados = FeriadoClient.buscarFeriados(ano);
-            CacheGlobal.setAnoCorrente(ano);
-            CacheGlobal.setFeriados(feriados);
-        }
-        List<LocalDate> feriados = CacheGlobal.getFeriados();
-
         // Conta quantos dias úteis (excluindo feriados) de atraso
         long diasUteisAtraso = 0;
         LocalDate cursor = dataPrevista.plusDays(1);
         while (!cursor.isAfter(dataReferencia)) {
-            if (isDiaUtil(cursor, feriados)) {
+            if (isDiaUtil(cursor)) {
                 diasUteisAtraso++;
             }
             cursor = cursor.plusDays(1);

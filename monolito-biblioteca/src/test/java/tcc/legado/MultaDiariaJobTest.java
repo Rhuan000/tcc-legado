@@ -25,17 +25,15 @@ public class MultaDiariaJobTest {
     }
     private final String schema = "multas_" + UUID.randomUUID().toString().replace("-", "");
     private final String url = System.getProperty("test.jdbc.url", "jdbc:h2:mem:multas;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1");
-    private Object feriadosAnteriores;
-    private int anoAnterior;
     private Connection base() throws SQLException {
         return DriverManager.getConnection(url, System.getProperty("test.jdbc.user", "postgres"), System.getProperty("test.jdbc.password", "postgres"));
     }
     private Connection connection() throws SQLException { Connection c=base(); c.setSchema(schema); return c; }
     @Before public void setup() throws Exception {
-        feriadosAnteriores = CacheGlobal.get("feriados"); anoAnterior = CacheGlobal.getAnoCorrente();
         LocalDate hoje=LocalDate.now();
-        CacheGlobal.setAnoCorrente(hoje.minusDays(14).getYear());
-        CacheGlobal.setFeriados(Collections.singletonList(hoje.minusDays(60)));
+        CacheGlobal.clearFeriados();
+        for(int ano=hoje.minusDays(14).getYear();ano<=hoje.getYear();ano++)
+            CacheGlobal.setFeriados(ano,Collections.singletonList(hoje.minusDays(60)));
         try(Connection c=base()) { c.createStatement().execute("CREATE SCHEMA " + schema); }
         try(Connection c=connection(); Statement s=c.createStatement()) {
             s.execute("CREATE TABLE emprestimo(id INT PRIMARY KEY,id_livro INT,id_usuario INT,data_emprestimo DATE,data_prevista_devolucao DATE,data_devolucao_real DATE,multa DECIMAL(10,2))");
@@ -56,7 +54,7 @@ public class MultaDiariaJobTest {
         EmprestimoEJB real=new EmprestimoEJB(); RegressaoLivrosTest.inject(real,"emprestimoService",service); ejb=real;
     }
     @After public void cleanup() throws Exception {
-        CacheGlobal.put("feriados",feriadosAnteriores); CacheGlobal.setAnoCorrente(anoAnterior);
+        CacheGlobal.clearFeriados();
         try(Connection c=base()) { c.createStatement().execute("DROP SCHEMA IF EXISTS "+schema+" CASCADE"); }
         ejb=null;
     }
