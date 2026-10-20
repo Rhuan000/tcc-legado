@@ -7,7 +7,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,10 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * Não é uma comparação executada entre as duas aplicações.
  *
  * <p>Contrato proposto: LocalDate PrazoService.calcularDataPrevista(
- * LocalDate dataEmprestimo, String tipoUsuario, List<LocalDate> feriados).
+ * LocalDate dataEmprestimo, String tipoUsuario,
+ * IntFunction&lt;List&lt;LocalDate&gt;&gt; feriadosPorAno).
  * A data explícita substitui LocalDate.now() para permitir testes determinísticos.
- * A integração fornecerá os feriados do ano de início, como no legado, mesmo
- * quando o prazo atravessar o ano. O núcleo respeita somente a lista recebida.
+ * A integração fornece os feriados de cada ano atravessado pelo prazo.
  * Consulta externa, cache, fuso e conversão para Date ficam fora destes testes.
  *
  * <p>Resultados fixos, sem rede, banco, relógio ou algoritmo simulado.
@@ -59,8 +61,7 @@ class PrazoServiceTest {
                 caso("Feriado informado é excluído", "2026-04-20", "ALUNO", "2026-04-30", "2026-04-21"),
                 caso("Virada do mês", "2026-03-31", "ALUNO", "2026-04-09"),
                 caso("Ano bissexto conta 29 de fevereiro útil", "2024-02-28", "ALUNO", "2024-03-08"),
-                // Sem feriados do novo ano na lista, 01/01/2027 é contado.
-                caso("Virada do ano preserva consulta apenas do ano inicial", "2026-12-24", "ALUNO", "2027-01-05", "2026-01-01", "2026-12-25"),
+                caso("Virada do ano sem feriados informados para o novo ano", "2026-12-24", "ALUNO", "2027-01-05", "2026-01-01", "2026-12-25"),
                 caso("Início no último dia do ano", "2026-12-31", "ALUNO", "2027-01-11", "2026-01-01", "2026-12-25"),
                 caso("Núcleo respeita feriado do próximo ano se fornecido", "2026-12-31", "ALUNO", "2027-01-12", "2027-01-01"),
                 caso("Tipo desconhecido usa sete dias", "2026-03-09", "VISITANTE", "2026-03-18"),
@@ -77,6 +78,25 @@ class PrazoServiceTest {
                 () -> calcular("2026-03-09", null, List.of()));
     }
 
+    @Test
+    @DisplayName("Consulta os feriados de cada ano atravessado pelo prazo")
+    void deveConsultarFeriadosDeCadaAnoPercorrido() {
+        Map<Integer, List<LocalDate>> feriados = Map.of(
+                2026, List.of(LocalDate.of(2026, 12, 25)),
+                2027, List.of(LocalDate.of(2027, 1, 1)));
+        LinkedHashSet<Integer> anosConsultados = new LinkedHashSet<>();
+
+        LocalDate dataPrevista = new PrazoService().calcularDataPrevista(
+                LocalDate.of(2026, 12, 22), "ALUNO",
+                ano -> {
+                    anosConsultados.add(ano);
+                    return feriados.getOrDefault(ano, List.of());
+                });
+
+        assertEquals(LocalDate.of(2027, 1, 4), dataPrevista);
+        assertEquals(List.of(2026, 2027), anosConsultados.stream().toList());
+    }
+
     private static Arguments caso(String nome, String inicio, String tipo,
                                   String esperado, String... feriados) {
         return Arguments.of(nome, inicio, tipo,
@@ -84,6 +104,9 @@ class PrazoServiceTest {
     }
 
     private LocalDate calcular(String inicio, String tipo, List<LocalDate> feriados) {
-        return new PrazoService().calcularDataPrevista(LocalDate.parse(inicio), tipo, feriados);
+        return new PrazoService().calcularDataPrevista(LocalDate.parse(inicio), tipo,
+                ano -> feriados.stream()
+                        .filter(feriado -> feriado.getYear() == ano)
+                        .toList());
     }
 }

@@ -1,0 +1,347 @@
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+Oct 20, 2026 4:38:45 AM tcc.legado.job.MultaDiariaJob execute
+INFO: Iniciando MultaDiariaJob...
+Oct 20, 2026 4:38:45 AM tcc.legado.service.EmprestimoService calcularMulta
+INFO: Multa calculada: 20.0 (10 dias úteis de atraso)
+Oct 20, 2026 4:38:45 AM tcc.legado.service.EmprestimoService calcularMulta
+INFO: Multa calculada: 5.0 (10 dias úteis de atraso)
+Oct 20, 2026 4:38:45 AM tcc.legado.service.EmprestimoService calcularMulta
+INFO: Multa calculada: 10.0 (10 dias úteis de atraso)
+Oct 20, 2026 4:38:45 AM tcc.legado.service.EmprestimoService calcularMulta
+INFO: Multa calculada: 20.0 (10 dias úteis de atraso)
+Oct 20, 2026 4:38:45 AM tcc.legado.job.MultaDiariaJob execute
+INFO: MultaDiariaJob concluído.
+Oct 20, 2026 4:38:45 AM tcc.legado.service.EmprestimoService calcularMulta
+INFO: Multa calculada: 20.0 (10 dias úteis de atraso)
+Oct 20, 2026 4:38:45 AM tcc.legado.service.EmprestimoService calcularMulta
+INFO: Multa calculada: 5.0 (10 dias úteis de atraso)
+Oct 20, 2026 4:38:45 AM tcc.legado.service.EmprestimoService calcularMulta
+INFO: Multa calculada: 10.0 (10 dias úteis de atraso)
+Oct 20, 2026 4:38:45 AM tcc.legado.service.EmprestimoService calcularMulta
+INFO: Multa calculada: 20.0 (10 dias úteis de atraso)
+Oct 20, 2026 4:38:45 AM tcc.legado.job.MultaDiariaJob execute
+INFO: Iniciando MultaDiariaJob...
+Oct 20, 2026 4:38:45 AM tcc.legado.job.MultaDiariaJob execute
+SEVERE: Erro no job de multas
+java.lang.IllegalStateException: Não foi possível consultar empréstimos atrasados
+	at tcc.legado.dao.EmprestimoDAO.buscarAtrasados(EmprestimoDAO.java:168)
+	at tcc.legado.service.EmprestimoService.atualizarMultasAtrasadas(EmprestimoService.java:168)
+	at tcc.legado.ejb.emprestimo.EmprestimoEJB.atualizarMultasAtrasadas(EmprestimoEJB.java:58)
+	at tcc.legado.job.MultaDiariaJob.execute(MultaDiariaJob.java:30)
+	at tcc.legado.MultaDiariaJobTest.lambda$falhaNaConsultaNaoConcluiJobComFalsoSucesso$0(MultaDiariaJobTest.java:95)
+	at org.junit.Assert.assertThrows(Assert.java:1001)
+	at org.junit.Assert.assertThrows(Assert.java:981)
+	at tcc.legado.MultaDiariaJobTest.falhaNaConsultaNaoConcluiJobComFalsoSucesso(MultaDiariaJobTest.java:95)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "emprestimo" not found (this database is empty); SQL statement:
+SELECT * FROM emprestimo WHERE data_devolucao_real IS NULL AND data_prevista_devolucao < CURRENT_DATE [42104-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.getTableOrViewNotFoundDbException(Parser.java:8051)
+	at org.h2.command.Parser.getTableOrViewNotFoundDbException(Parser.java:8035)
+	at org.h2.command.Parser.readTableOrView(Parser.java:8024)
+	at org.h2.command.Parser.readTablePrimary(Parser.java:1788)
+	at org.h2.command.Parser.readTableReference(Parser.java:2268)
+	at org.h2.command.Parser.parseSelectFromPart(Parser.java:2718)
+	at org.h2.command.Parser.parseSelect(Parser.java:2824)
+	at org.h2.command.Parser.parseQueryPrimary(Parser.java:2708)
+	at org.h2.command.Parser.parseQueryTerm(Parser.java:2564)
+	at org.h2.command.Parser.parseQueryExpressionBody(Parser.java:2543)
+	at org.h2.command.Parser.parseQueryExpressionBodyAndEndOfQuery(Parser.java:2536)
+	at org.h2.command.Parser.parseQueryExpression(Parser.java:2529)
+	at org.h2.command.Parser.parseQuery(Parser.java:2498)
+	at org.h2.command.Parser.parsePrepared(Parser.java:627)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:94)
+	at tcc.legado.dao.EmprestimoDAO.buscarAtrasados(EmprestimoDAO.java:155)
+	... 37 more
+
+Oct 20, 2026 4:38:45 AM tcc.legado.action.EmprestimoAction realizar
+SEVERE: Falha ao realizar empréstimo
+javax.ejb.EJBException: java.lang.RuntimeException: jdbc:senha privada
+	at tcc.legado.RegressaoEmprestimosTest$5.criarEmprestimo(RegressaoEmprestimosTest.java:51)
+	at tcc.legado.action.EmprestimoAction.realizar(EmprestimoAction.java:66)
+	at tcc.legado.RegressaoEmprestimosTest.falhaTecnicaFicaForaDaTela(RegressaoEmprestimosTest.java:54)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: java.lang.RuntimeException: jdbc:senha privada
+	... 31 more
+
+Oct 20, 2026 4:38:45 AM tcc.legado.action.EmprestimoAction devolver
+SEVERE: Falha ao registrar devolução
+javax.ejb.EJBException: java.lang.RuntimeException: SQL privado
+	at tcc.legado.RegressaoEmprestimosTest$5.registrarDevolucao(RegressaoEmprestimosTest.java:52)
+	at tcc.legado.action.EmprestimoAction.devolver(EmprestimoAction.java:126)
+	at tcc.legado.RegressaoEmprestimosTest.falhaTecnicaFicaForaDaTela(RegressaoEmprestimosTest.java:56)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: java.lang.RuntimeException: SQL privado
+	... 31 more
+
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio ação, validação, João e Promoção
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio
+Oct 20, 2026 4:38:46 AM tcc.legado.action.LivroAction salvar
+SEVERE: Falha ao gravar livro
+java.lang.IllegalStateException: Não foi possível gravar o livro
+	at tcc.legado.dao.LivroDAO.erroGravacao(LivroDAO.java:29)
+	at tcc.legado.dao.LivroDAO.salvar(LivroDAO.java:96)
+	at tcc.legado.service.LivroService.salvar(LivroService.java:52)
+	at tcc.legado.ejb.livro.LivroEJB.salvar(LivroEJB.java:26)
+	at tcc.legado.action.LivroAction.salvar(LivroAction.java:86)
+	at tcc.legado.RegressaoLivrosTest.salvar(RegressaoLivrosTest.java:122)
+	at tcc.legado.RegressaoLivrosTest.falhaDeBancoNaoInformaSucessoNemExibeDetalhesTecnicos(RegressaoLivrosTest.java:286)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "livro" not found; SQL statement:
+INSERT INTO livro (titulo, autor, isbn, ano, editora, quantidade) VALUES (?, ?, ?, ?, ?, ?) [42102-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.getTableOrViewNotFoundDbException(Parser.java:8064)
+	at org.h2.command.Parser.getTableOrViewNotFoundDbException(Parser.java:8035)
+	at org.h2.command.Parser.readTableOrView(Parser.java:8024)
+	at org.h2.command.Parser.readTableOrView(Parser.java:7990)
+	at org.h2.command.Parser.parseInsert(Parser.java:1540)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:1094)
+	at tcc.legado.dao.LivroDAO.salvar(LivroDAO.java:81)
+	... 35 more
+
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio ação, validação, João e Promoção
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio ação, validação, João e Promoção
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService atualizar
+INFO: Livro atualizado: Ensaio ação, validação, João e Promoção
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio ação, validação, João e Promoção
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio ação, validação, João e Promoção
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio ação, validação, João e Promoção
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService atualizar
+INFO: Livro atualizado: Ensaio
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio ação, validação, João e Promoção
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio ação, validação, João e Promoção
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio ação, validação, João e Promoção
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService excluir
+INFO: Livro excluído: Ensaio (ID 1)
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio
+Oct 20, 2026 4:38:46 AM tcc.legado.service.LivroService salvar
+INFO: Livro salvo: Ensaio
+Oct 20, 2026 4:38:46 AM tcc.legado.action.UsuarioAction excluir
+SEVERE: Falha ao excluir usuário
+java.lang.IllegalStateException: Não foi possível verificar o histórico de empréstimos
+	at tcc.legado.dao.EmprestimoDAO.existeVinculo(EmprestimoDAO.java:56)
+	at tcc.legado.dao.EmprestimoDAO.existePorUsuario(EmprestimoDAO.java:42)
+	at tcc.legado.service.UsuarioService.excluir(UsuarioService.java:73)
+	at tcc.legado.ejb.usuario.UsuarioEJB.excluir(UsuarioEJB.java:42)
+	at tcc.legado.action.UsuarioAction.excluir(UsuarioAction.java:128)
+	at tcc.legado.RegressaoUsuariosTest.consultaIndisponivelBloqueiaExclusaoSemDetalheTecnico(RegressaoUsuariosTest.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:316)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeWithRerun(JUnit4Provider.java:240)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:214)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:155)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "emprestimo" not found; SQL statement:
+SELECT 1 FROM emprestimo WHERE id_usuario = ? [42102-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.getTableOrViewNotFoundDbException(Parser.java:8064)
+	at org.h2.command.Parser.getTableOrViewNotFoundDbException(Parser.java:8035)
+	at org.h2.command.Parser.readTableOrView(Parser.java:8024)
+	at org.h2.command.Parser.readTablePrimary(Parser.java:1788)
+	at org.h2.command.Parser.readTableReference(Parser.java:2268)
+	at org.h2.command.Parser.parseSelectFromPart(Parser.java:2718)
+	at org.h2.command.Parser.parseSelect(Parser.java:2824)
+	at org.h2.command.Parser.parseQueryPrimary(Parser.java:2708)
+	at org.h2.command.Parser.parseQueryTerm(Parser.java:2564)
+	at org.h2.command.Parser.parseQueryExpressionBody(Parser.java:2543)
+	at org.h2.command.Parser.parseQueryExpressionBodyAndEndOfQuery(Parser.java:2536)
+	at org.h2.command.Parser.parseQueryExpression(Parser.java:2529)
+	at org.h2.command.Parser.parseQuery(Parser.java:2498)
+	at org.h2.command.Parser.parsePrepared(Parser.java:627)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:316)
+	at tcc.legado.dao.EmprestimoDAO.existeVinculo(EmprestimoDAO.java:50)
+	... 35 more
+
+Oct 20, 2026 4:38:46 AM tcc.legado.service.EmprestimoService calcularDataPrevistaComFeriados
+INFO: Data prevista calculada (com feriados): 2027-01-04
+Oct 20, 2026 4:38:46 AM tcc.legado.service.EmprestimoService calcularMulta
+INFO: Multa calculada: 2.0 (1 dias úteis de atraso)

@@ -4,16 +4,17 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.function.IntFunction;
 
 @ApplicationScoped
 public class PrazoService {
 
     /**
      * Calcula o vencimento contando apenas dias úteis posteriores ao empréstimo.
-     * Os feriados são fornecidos pela integração, sem consulta externa aqui.
+     * Os feriados de cada ano percorrido são fornecidos pela integração.
      */
     public LocalDate calcularDataPrevista(LocalDate dataEmprestimo, String tipoUsuario,
-                                          List<LocalDate> feriados) {
+                                          IntFunction<List<LocalDate>> feriadosPorAno) {
         int diasUteis = switch (tipoUsuario) {
             case "PROFESSOR" -> 14;
             case "BOLSISTA" -> 10;
@@ -25,7 +26,7 @@ public class PrazoService {
         while (diasUteis > 0) {
             dataPrevista = dataPrevista.plusDays(1);
             if (dataPrevista.getDayOfWeek().getValue() <= 5
-                    && !feriados.contains(dataPrevista)) {
+                    && !feriadosPorAno.apply(dataPrevista.getYear()).contains(dataPrevista)) {
                 diasUteis--;
             }
         }

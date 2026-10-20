@@ -87,6 +87,9 @@ $parametros = @{
     Repositorio = 'C:\caminho\worktree-pre'
     ResultadosRaiz = 'C:\desenvolvimento\tcc-legado\metricas'
     CkJar = 'C:\desenvolvimento\ck\target\ck-0.7.1-SNAPSHOT-jar-with-dependencies.jar'
+    ServicoDbUrl = 'jdbc:postgresql://localhost:5432/biblioteca'
+    ServicoDbUsuario = 'postgres'
+    ServicoDbSenha = $env:TCC_SERVICO_DB_SENHA
 }
 .\medicoes\campanha-v2.ps1 @parametros -Etapa registrar -EvidenciaFuncional 'C:\caminho\validacao-pre.json'
 .\medicoes\campanha-v2.ps1 @parametros -Etapa build

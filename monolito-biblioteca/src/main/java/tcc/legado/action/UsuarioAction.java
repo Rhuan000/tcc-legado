@@ -15,10 +15,14 @@ import javax.servlet.http.HttpSession;
 
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import tcc.legado.exception.ValidacaoException;
 
 public class UsuarioAction extends DispatchAction {
+    private static final Logger LOG = Logger.getLogger(UsuarioAction.class.getName());
     
-    private IUsuarioEJB getUsuarioEJB() throws Exception {
+    protected IUsuarioEJB getUsuarioEJB() throws Exception {
         InitialContext ctx = new InitialContext();
         return (IUsuarioEJB) ctx.lookup("java:global/monolito-biblioteca/UsuarioEJB!tcc.legado.ejb.usuario.IUsuarioEJB");
     }
@@ -119,11 +123,20 @@ public class UsuarioAction extends DispatchAction {
             request.setAttribute("erro", "ID não informado");
             return mapping.findForward("erro");
         }
-        Long id = Long.parseLong(idStr);
-        IUsuarioEJB ejb = getUsuarioEJB();
-        ejb.excluir(id);
-        request.setAttribute("mensagem", "Usuário excluído!");
-        return listar(mapping, form, request, response);
+        try {
+            Long id = Long.parseLong(idStr);
+            getUsuarioEJB().excluir(id);
+            request.setAttribute("mensagem", "Usuário excluído!");
+            return listar(mapping, form, request, response);
+        } catch (NumberFormatException e) {
+            request.setAttribute("erro", "ID do usuário inválido");
+        } catch (ValidacaoException e) {
+            request.setAttribute("erro", e.getMessage());
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, "Falha ao excluir usuário", e);
+            request.setAttribute("erro", "Não foi possível excluir o usuário. Tente novamente.");
+        }
+        return mapping.findForward("erro");
     }
 
     public ActionForward buscarPorMatricula(ActionMapping mapping, ActionForm form,

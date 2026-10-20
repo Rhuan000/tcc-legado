@@ -7,7 +7,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,8 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  *
  * <p>Contrato implementado:
  * double calcularMulta(LocalDate dataPrevista, String tipoUsuario,
- *                     LocalDate dataReferencia, List<LocalDate> feriados).
- * A lista representa os feriados já obtidos para o ano do vencimento.
+ *                     LocalDate dataReferencia, IntFunction&lt;List&lt;LocalDate&gt;&gt; feriadosPorAno).
+ * O provedor entrega os feriados correspondentes ao ano de cada data percorrida.
  * Consulta externa, cache, conversão de Date e persistência são responsabilidades
  * da integração e não são exercitadas por estes testes do núcleo de cálculo.
  *
@@ -74,9 +76,7 @@ class MultaServiceTest {
                 caso("Lista vazia não presume feriados nacionais", "2026-04-20", "ALUNO", "2026-04-22", 4),
                 caso("Virada do mês", "2026-03-31", "ALUNO", "2026-04-02", 4),
                 caso("29 de fevereiro útil é cobrado", "2024-02-28", "ALUNO", "2024-03-01", 4),
-                // O legado consulta só o ano do vencimento. Sem 2027 na lista,
-                // 01/01/2027 (sexta) é cobrado apesar de ser feriado nacional.
-                caso("Virada do ano preserva limitação do legado", "2026-12-31", "ALUNO", "2027-01-04", 4, "2026-01-01", "2026-12-25"),
+                caso("Virada do ano sem feriados informados para o novo ano", "2026-12-31", "ALUNO", "2027-01-04", 4, "2026-01-01", "2026-12-25"),
                 caso("Feriado do ano seguinte respeitado se constar na lista", "2026-12-31", "ALUNO", "2027-01-04", 2, "2027-01-01"),
                 caso("Tipo desconhecido usa tarifa padrão", "2026-03-09", "VISITANTE", "2026-03-10", 2),
                 caso("Tipo vazio usa tarifa padrão", "2026-03-09", "", "2026-03-10", 2),
@@ -105,6 +105,25 @@ class MultaServiceTest {
         assertEquals(10.0, calcular(service, "2026-03-09", "ALUNO", "2026-03-16", List.of()), 0.0);
     }
 
+    @Test
+    @DisplayName("Consulta os feriados de cada ano atravessado pelo atraso")
+    void deveConsultarFeriadosDeCadaAnoPercorrido() {
+        Map<Integer, List<LocalDate>> feriados = Map.of(
+                2026, List.of(LocalDate.of(2026, 12, 31)),
+                2027, List.of(LocalDate.of(2027, 1, 1)));
+        LinkedHashSet<Integer> anosConsultados = new LinkedHashSet<>();
+
+        double multa = new MultaService().calcularMulta(
+                LocalDate.of(2026, 12, 30), "ALUNO", LocalDate.of(2027, 1, 4),
+                ano -> {
+                    anosConsultados.add(ano);
+                    return feriados.getOrDefault(ano, List.of());
+                });
+
+        assertEquals(2.0, multa, 0.0);
+        assertEquals(List.of(2026, 2027), anosConsultados.stream().toList());
+    }
+
     private static Arguments caso(String nome, String vencimento, String tipo,
                                   String referencia, double esperado, String... feriados) {
         return Arguments.of(nome, vencimento, tipo, referencia,
@@ -114,6 +133,8 @@ class MultaServiceTest {
     private double calcular(MultaService service, String vencimento, String tipo,
                             String referencia, List<LocalDate> feriados) {
         return service.calcularMulta(LocalDate.parse(vencimento), tipo,
-                LocalDate.parse(referencia), feriados);
+                LocalDate.parse(referencia), ano -> feriados.stream()
+                        .filter(feriado -> feriado.getYear() == ano)
+                        .toList());
     }
 }

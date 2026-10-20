@@ -2,6 +2,8 @@
 package tcc.legado.service;
 
 import tcc.legado.dao.UsuarioDAO;
+import tcc.legado.acl.EmprestimoAcl;
+import tcc.legado.exception.ValidacaoException;
 import tcc.legado.model.Usuario;
 import tcc.legado.util.HashUtil;
 
@@ -49,7 +51,7 @@ public class UsuarioService {
     public void atualizar(Usuario usuario) {
         Usuario existente = usuarioDAO.buscarPorId(usuario.getId());
         if (existente == null) {
-            throw new RuntimeException("Usuário não encontrado");
+            throw new ValidacaoException("Usuário não encontrado");
         }
         if (!existente.getMatricula().equals(usuario.getMatricula())) {
             throw new RuntimeException("Matrícula não pode ser alterada");
@@ -60,10 +62,16 @@ public class UsuarioService {
         usuarioDAO.atualizar(usuario);
     }
     
+    @Inject
+    private EmprestimoAcl emprestimoAcl;
+
     public void excluir(Long id) {
         Usuario usuario = usuarioDAO.buscarPorId(id);
         if (usuario == null) {
-            throw new RuntimeException("Usuário não encontrado");
+            throw new ValidacaoException("Usuário não encontrado");
+        }
+        if (emprestimoAcl.listarTodos().stream().anyMatch(e -> id.equals(e.getIdUsuario()))) {
+            throw new ValidacaoException("Usuário possui empréstimos ativos ou histórico de empréstimos e não pode ser excluído.");
         }
         usuarioDAO.excluir(id);
     }

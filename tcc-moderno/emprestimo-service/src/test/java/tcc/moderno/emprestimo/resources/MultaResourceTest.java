@@ -31,6 +31,24 @@ class MultaResourceTest {
     }
 
     @Test
+    void deveCalcularMultaComFeriadosDosDoisAnos() {
+        given().header("X-Integration-Token", "token-exclusivo-teste")
+                .contentType("application/json")
+                .body("""
+                        {
+                          "dataPrevista": "2026-12-30",
+                          "tipoUsuario": "ALUNO",
+                          "dataReferencia": "2027-01-04"
+                        }
+                        """)
+                .when()
+                .post("/multas/calcular")
+                .then()
+                .statusCode(200)
+                .body("valor", is(4.0f));
+    }
+
+    @Test
     void deveRejeitarRequisicaoSemCamposObrigatorios() {
         given().header("X-Integration-Token", "token-exclusivo-teste")
                 .contentType("application/json")

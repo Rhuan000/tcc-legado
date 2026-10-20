@@ -39,8 +39,8 @@ class FeriadoClientHttpTest {
     @Test
     @DisplayName("Desserializa uma resposta sem feriados")
     void deveDesserializarListaVazia() {
-        assertEquals(List.of(), cliente.buscarFeriados(2027));
-        FeriadoApiWireMock.verificarConsulta(2027);
+        assertEquals(List.of(), cliente.buscarFeriados(2028));
+        FeriadoApiWireMock.verificarConsulta(2028);
     }
 
     @Test

@@ -4,16 +4,18 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.function.IntFunction;
 
 @ApplicationScoped
 public class MultaService {
 
     /**
      * Calcula a multa nos dias úteis após o vencimento, incluindo a referência.
-     * Os feriados são fornecidos pela integração, sem consulta externa aqui.
+     * Os feriados de cada ano percorrido são fornecidos pela integração.
      */
     public double calcularMulta(LocalDate dataPrevista, String tipoUsuario,
-                                LocalDate dataReferencia, List<LocalDate> feriados) {
+                                LocalDate dataReferencia,
+                                IntFunction<List<LocalDate>> feriadosPorAno) {
         if (!dataReferencia.isAfter(dataPrevista)) {
             return 0.0;
         }
@@ -22,7 +24,8 @@ public class MultaService {
         LocalDate cursor = dataPrevista;
         while (cursor.isBefore(dataReferencia)) {
             cursor = cursor.plusDays(1);
-            if (cursor.getDayOfWeek().getValue() <= 5 && !feriados.contains(cursor)) {
+            if (cursor.getDayOfWeek().getValue() <= 5
+                    && !feriadosPorAno.apply(cursor.getYear()).contains(cursor)) {
                 diasUteisAtraso++;
             }
         }

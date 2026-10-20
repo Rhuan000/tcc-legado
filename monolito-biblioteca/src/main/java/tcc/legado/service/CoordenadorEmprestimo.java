@@ -8,6 +8,7 @@ import tcc.legado.dao.FluxoEmprestimoDAO;
 import tcc.legado.dao.UsuarioDAO;
 import tcc.legado.model.Emprestimo;
 import tcc.legado.model.Usuario;
+import tcc.legado.exception.ValidacaoException;
 
 /** Coordena dominios locais e API; nao calcula prazo/multa nem persiste emprestimos. */
 public class CoordenadorEmprestimo {
@@ -35,7 +36,7 @@ public class CoordenadorEmprestimo {
         String chave="devolucao-"+id;
         if(fluxos.buscar(chave)==null) {
             Emprestimo emp=acl.buscarPorId(id);
-            if(emp==null)throw new IllegalArgumentException("Emprestimo inexistente");
+            if(emp==null)throw new ValidacaoException("Empréstimo não encontrado");
             if(emp.getDataDevolucaoReal()!=null)return emp;
             Usuario usuario=usuarios.buscarPorId(emp.getIdUsuario());
             validarUsuario(usuario);
@@ -63,6 +64,6 @@ public class CoordenadorEmprestimo {
     }
     private void validarUsuario(Usuario usuario) {
         if(usuario==null || usuario.getTipo()==null || usuario.getTipo().trim().isEmpty())
-            throw new IllegalArgumentException("Usuario inexistente ou tipo invalido");
+            throw new ValidacaoException("Usuário não encontrado ou com tipo inválido");
     }
 }

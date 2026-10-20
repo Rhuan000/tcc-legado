@@ -54,7 +54,7 @@
                                     <td><strong><%= l.getTitulo() %></strong></td>
                                     <td><%= l.getAutor() %></td>
                                     <td><%= l.getIsbn() %></td>
-                                    <td><%= l.getAno() %></td>
+                                    <td><%= l.getAno() != null ? l.getAno() : "-" %></td>
                                     <td><%= l.getEditora() %></td>
                                     <td>
                                         <span class="quantidade-badge <%= l.getQuantidade() > 0 ? "quantidade-disponivel" : "quantidade-indisponivel" %>"><%= l.getQuantidade() %></span>

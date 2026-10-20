@@ -5,7 +5,6 @@ import jakarta.ws.rs.NotFoundException;
 import jakarta.ws.rs.WebApplicationException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 import tcc.moderno.emprestimo.dtos.CriarEmprestimoDTO;
 import tcc.moderno.emprestimo.dtos.ContextoUsuarioDTO;
@@ -30,7 +29,7 @@ public class ComandosEmprestimoService {
             op.chave=chave; op.tipo="CRIAR"; op.idLivro=r.getIdLivro(); op.idUsuario=r.getIdUsuario();
             op.tipoUsuario=r.getTipoUsuario(); op.dataEmprestimo=r.getDataEmprestimo();
             op.dataPrevista=prazos.calcularDataPrevista(op.dataEmprestimo,op.tipoUsuario,
-                    calendario.buscarFeriados(op.dataEmprestimo.getYear()));
+                    calendario::buscarFeriados);
             op.multa=BigDecimal.ZERO;
             op=operacoes.registrar(op);
         }
@@ -70,8 +69,7 @@ public class ComandosEmprestimoService {
     }
 
     private BigDecimal calcularMulta(Emprestimo emp,String tipo,LocalDate referencia) {
-        List<LocalDate> feriados=referencia.isAfter(emp.getDataPrevistaDevolucao())
-                ? calendario.buscarFeriados(emp.getDataPrevistaDevolucao().getYear()):List.of();
-        return BigDecimal.valueOf(multas.calcularMulta(emp.getDataPrevistaDevolucao(),tipo,referencia,feriados));
+        return BigDecimal.valueOf(multas.calcularMulta(
+                emp.getDataPrevistaDevolucao(),tipo,referencia,calendario::buscarFeriados));
     }
 }
