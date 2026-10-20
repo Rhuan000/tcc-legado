@@ -12,6 +12,9 @@ param(
     [string]$Maven = 'C:\Program Files\Maven\apache-maven-3.9.11-bin\apache-maven-3.9.11\bin\mvn.cmd',
     [string]$JbossHome = 'C:\desenvolvimento\jboss-eap-7.4',
     [string]$CkJar = (Join-Path $PSScriptRoot '..\metricas\ck.jar'),
+    [string]$ServicoDbUrl = 'jdbc:postgresql://localhost:5432/biblioteca',
+    [string]$ServicoDbUsuario = 'postgres',
+    [string]$ServicoDbSenha = 'postgres',
     [int]$PortaMonolito = 18080,
     [int]$PortaServico = 18081,
     [int]$PortaGerenciamento = 19990,
@@ -93,6 +96,8 @@ function Obter-Ambiente {
         jboss_home = $JbossHome
         jboss_config_sha256 = (Get-FileHash -LiteralPath $config -Algorithm SHA256).Hash
         ck_sha256 = (Get-FileHash -LiteralPath $CkJar -Algorithm SHA256).Hash
+        servico_db_url = $ServicoDbUrl
+        servico_db_usuario = $ServicoDbUsuario
         sistema = [Environment]::OSVersion.VersionString
         processador = $env:PROCESSOR_IDENTIFIER
         processadores_logicos = [Environment]::ProcessorCount
@@ -117,6 +122,21 @@ function Confirmar-PortaLivre {
             throw "Porta $Porta ocupada; nenhuma instancia existente sera encerrada."
         }
     } finally { $cliente.Dispose() }
+}
+
+function Aguardar-PortaLivre {
+    param([int]$Porta)
+    $limite = [Diagnostics.Stopwatch]::StartNew()
+    while ($limite.Elapsed.TotalSeconds -lt 10) {
+        $cliente = New-Object Net.Sockets.TcpClient
+        try {
+            $tentativa = $cliente.BeginConnect('127.0.0.1', $Porta, $null, $null)
+            if (-not $tentativa.AsyncWaitHandle.WaitOne(100)) { return }
+            try { $cliente.EndConnect($tentativa) } catch { return }
+        } finally { $cliente.Dispose() }
+        Start-Sleep -Milliseconds 100
+    }
+    throw "Porta $Porta permaneceu ocupada apos o encerramento da instancia medida."
 }
 
 function Obter-Http {
@@ -218,6 +238,9 @@ function Medir-Inicializacao {
         try {
             $env:JDK_JAVA_OPTIONS = $null
             if ($usaServico) {
+                $env:EMPRESTIMO_DB_URL = $ServicoDbUrl
+                $env:EMPRESTIMO_DB_USERNAME = $ServicoDbUsuario
+                $env:EMPRESTIMO_DB_PASSWORD = $ServicoDbSenha
                 $argumentos = @("-Dquarkus.http.port=$PortaServico", '-jar', ('"' + $jar + '"'))
                 $processos += Start-Process -FilePath "$JavaServico\bin\java.exe" -ArgumentList $argumentos -RedirectStandardOutput (Join-Path $Saida "servico-$repeticao.stdout.log") -RedirectStandardError (Join-Path $Saida "servico-$repeticao.stderr.log") -WindowStyle Hidden -PassThru
             }
@@ -240,6 +263,8 @@ function Medir-Inicializacao {
             $resultados += [pscustomobject]@{ estado = $Estado; coleta_id = $ColetaId; escopo = $Escopo; repeticao = $repeticao; inicio_iso = $inicio; duracao_ms = $cronometro.Elapsed.TotalMilliseconds; sucesso = $pronto; endpoints = ($urls -join ';'); commit = $codigo.commit; coletor_sha256 = $hashColetor; artefatos_sha256 = $hashArtefatos; base_jboss = $base }
             $resultados | Export-Csv -LiteralPath (Join-Path $Saida 'medicoes.csv') -NoTypeInformation -Encoding UTF8
             foreach ($processo in $processos) { Encerrar-Processo $processo }
+            if ($usaServico) { Aguardar-PortaLivre $PortaServico }
+            if ($usaMonolito) { Aguardar-PortaLivre $PortaMonolito; Aguardar-PortaLivre $PortaGerenciamento }
         }
         if (-not $pronto) { throw "Inicializacao falhou: $Escopo, repeticao $repeticao. Consulte $Saida." }
     }
@@ -264,7 +289,7 @@ function Medir-Cbo {
 }
 
 $envAnterior = @{}
-foreach ($nome in @('JAVA_HOME', 'Path', 'JDK_JAVA_OPTIONS', 'JAVA_TOOL_OPTIONS', '_JAVA_OPTIONS', 'NOPAUSE')) { $envAnterior[$nome] = [Environment]::GetEnvironmentVariable($nome, 'Process') }
+foreach ($nome in @('JAVA_HOME', 'Path', 'JDK_JAVA_OPTIONS', 'JAVA_TOOL_OPTIONS', '_JAVA_OPTIONS', 'NOPAUSE', 'EMPRESTIMO_DB_URL', 'EMPRESTIMO_DB_USERNAME', 'EMPRESTIMO_DB_PASSWORD')) { $envAnterior[$nome] = [Environment]::GetEnvironmentVariable($nome, 'Process') }
 $pathAnterior = $env:Path
 try {
     $env:JAVA_HOME = $JavaLegado

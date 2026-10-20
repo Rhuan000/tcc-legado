@@ -1,0 +1,2 @@
+﻿"estado","coleta_id","escopo","repeticao","inicio_iso","duracao_ms","sucesso","codigo_saida","commit","coletor_sha256"
+"pos-migracao","piloto-v2-pos-atual-04","conjunto","1","2026-10-20T04:37:13.8166622-03:00","54639.5678","True","0","45ff20b3d68ff484143a7b28e35b7c1d93fc361b","95BBBF25447BC3D8DAB9CEF5B3285D31C1F0A3E2FF01DE0547B528AB05A18085"

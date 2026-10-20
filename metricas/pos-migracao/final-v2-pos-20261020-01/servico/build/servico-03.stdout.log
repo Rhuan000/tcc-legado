@@ -1,0 +1,407 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< tcc.moderno:emprestimo-service >-------------------
+[INFO] Building emprestimo-service 1.0.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] ------------------------------[ quarkus ]-------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ emprestimo-service ---
+[INFO] Deleting C:\desenvolvimento\tcc-legado\tcc-moderno\emprestimo-service\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ emprestimo-service ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- quarkus:3.39.4:generate-code (default-generate-code) @ emprestimo-service ---
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ emprestimo-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 26 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ emprestimo-service ---
+[INFO] Copying 2 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- quarkus:3.39.4:generate-code-tests (default-generate-code-tests) @ emprestimo-service ---
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ emprestimo-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 16 source files with javac [debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ emprestimo-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+2026-10-20 04:45:57,314 INFO  [org.testcontainers.DockerClientFactory] (build-9) Testcontainers version: 2.0.5
+2026-10-20 04:45:57,683 INFO  [org.testcontainers.dockerclient.DockerClientProviderStrategy] (build-9) Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2026-10-20 04:45:58,524 INFO  [org.testcontainers.dockerclient.DockerClientProviderStrategy] (build-9) Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2026-10-20 04:45:58,542 INFO  [org.testcontainers.images.PullPolicy] (build-9) Image pull policy will be performed by: DefaultPullPolicy()
+2026-10-20 04:45:58,544 INFO  [org.testcontainers.utility.ImageNameSubstitutor] (build-9) Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2026-10-20 04:46:05,218 INFO  [org.testcontainers.DockerClientFactory] (build-6) Testcontainers version: 2.0.5
+2026-10-20 04:46:05,544 INFO  [org.testcontainers.dockerclient.DockerClientProviderStrategy] (build-6) Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2026-10-20 04:46:05,991 INFO  [org.testcontainers.dockerclient.DockerClientProviderStrategy] (build-6) Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2026-10-20 04:46:06,032 INFO  [org.testcontainers.images.PullPolicy] (build-6) Image pull policy will be performed by: DefaultPullPolicy()
+2026-10-20 04:46:06,034 INFO  [org.testcontainers.utility.ImageNameSubstitutor] (build-6) Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2026-10-20 04:46:07,734 INFO  [org.testcontainers.DockerClientFactory] (build-7) Testcontainers version: 2.0.5
+2026-10-20 04:46:08,106 INFO  [org.testcontainers.dockerclient.DockerClientProviderStrategy] (build-7) Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2026-10-20 04:46:08,558 INFO  [org.testcontainers.dockerclient.DockerClientProviderStrategy] (build-7) Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+2026-10-20 04:46:08,595 INFO  [org.testcontainers.images.PullPolicy] (build-7) Image pull policy will be performed by: DefaultPullPolicy()
+2026-10-20 04:46:08,597 INFO  [org.testcontainers.utility.ImageNameSubstitutor] (build-7) Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+[INFO] Running Cliente HTTP da BrasilAPI
+2026-10-20 04:46:09,243 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-1) Docker host IP address is localhost
+2026-10-20 04:46:09,259 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-1) Connected to docker: 
+  Server Version: 29.8.2
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 11813 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2026-10-20 04:46:09,649 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-1) Creating container for image: testcontainers/ryuk:0.14.0
+2026-10-20 04:46:09,911 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-1) Container testcontainers/ryuk:0.14.0 is starting: a971bf90f8767c3a9b2ae35208ba0331dcf4f9db27c6f71d73fb6ab318e3d76f
+2026-10-20 04:46:10,382 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-1) Container testcontainers/ryuk:0.14.0 started in PT0.7332616S
+2026-10-20 04:46:10,391 INFO  [org.testcontainers.utility.RyukResourceReaper] (ForkJoinPool.commonPool-worker-1) Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2026-10-20 04:46:10,392 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-1) Checking the system...
+2026-10-20 04:46:10,393 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-1) ?? Docker server version should be at least 1.6.0
+2026-10-20 04:46:10,393 INFO  [tc.postgres:14-alpine] (ForkJoinPool.commonPool-worker-1) Creating container for image: postgres:14-alpine
+2026-10-20 04:46:10,522 INFO  [tc.postgres:14-alpine] (ForkJoinPool.commonPool-worker-1) Container postgres:14-alpine is starting: 0c61abd30d8a32a30239e900cf7ab8319c72fa106dcf0db51dd64ead076fa327
+2026-10-20 04:46:12,216 INFO  [tc.postgres:14-alpine] (ForkJoinPool.commonPool-worker-1) Container postgres:14-alpine started in PT1.8223372S
+2026-10-20 04:46:12,216 INFO  [tc.postgres:14-alpine] (ForkJoinPool.commonPool-worker-1) Container is started (JDBC URL: jdbc:postgresql://localhost:17648/quarkus?loggerLevel=OFF)
+2026-10-20 04:46:12,223 INFO  [org.testcontainers.ext.ScriptUtils] (ForkJoinPool.commonPool-worker-1) Executing database script from emprestimos-test.sql
+2026-10-20 04:46:12,436 INFO  [org.testcontainers.ext.ScriptUtils] (ForkJoinPool.commonPool-worker-1) Executed database script from emprestimos-test.sql in 212 ms.
+2026-10-20 04:46:12,438 INFO  [io.quarkus.datasource.deployment.devservices.DevServicesDatasourceProcessor] (ForkJoinPool.commonPool-worker-1) Dev Services for default datasource (postgresql) started - container ID is 0c61abd30d8a
+2026-10-20 04:46:12,934 INFO  [org.eclipse.jetty.server.Server] (pool-10-thread-1) jetty-11.0.26; built: 2025-08-14T18:03:14.457Z; git: 7559873b6e46eea7c2c6da2b58327ea2ecf941f4; jvm 21.0.8+12-LTS-250
+2026-10-20 04:46:12,959 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (pool-10-thread-1) Started o.e.j.s.ServletContextHandler@4dda5b33{/__admin,null,AVAILABLE}
+2026-10-20 04:46:12,970 INFO  [org.eclipse.jetty.server.handler.ContextHandler.ROOT] (pool-10-thread-1) RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+2026-10-20 04:46:12,971 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (pool-10-thread-1) Started o.e.j.s.ServletContextHandler@2d2a0d74{/,null,AVAILABLE}
+2026-10-20 04:46:12,993 INFO  [org.eclipse.jetty.server.AbstractConnector] (pool-10-thread-1) Started NetworkTrafficServerConnector@1dcbbefd{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:17652}
+2026-10-20 04:46:12,995 INFO  [org.eclipse.jetty.server.Server] (pool-10-thread-1) Started Server@c687087{STARTING}[11.0.26,sto=1000] @18150ms
+2026-10-20 04:46:13,270 INFO  [org.hibernate.validator.internal.util.Version] (main) HV000001: Hibernate Validator 9.1.3.Final
+2026-10-20 04:46:13,949 INFO  [io.quarkus] (main) emprestimo-service 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.39.4) started in 17.981s. Listening on: http://localhost:8081
+2026-10-20 04:46:13,949 INFO  [io.quarkus] (main) Profile test activated. 
+2026-10-20 04:46:13,949 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, compose, hibernate-validator, jdbc-postgresql, narayana-jta, rest, rest-client, rest-client-jackson, rest-jackson, scheduler, smallrye-context-propagation, smallrye-health, vertx]
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.372 s -- in Cliente HTTP da BrasilAPI
+[INFO] Running tcc.moderno.emprestimo.clients.UsuarioLegadoClientHttpTest
+2026-10-20 04:46:14,767 INFO  [io.quarkus] (main) emprestimo-service stopped in 0.028s
+2026-10-20 04:46:14,769 INFO  [org.eclipse.jetty.server.Server] (main) Stopped Server@c687087{STOPPING}[11.0.26,sto=1000]
+2026-10-20 04:46:14,769 INFO  [org.eclipse.jetty.server.Server] (main) Shutdown Server@c687087{STOPPING}[11.0.26,sto=1000]
+2026-10-20 04:46:14,771 INFO  [org.eclipse.jetty.server.AbstractConnector] (main) Stopped NetworkTrafficServerConnector@1dcbbefd{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:0}
+2026-10-20 04:46:14,773 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (main) Stopped o.e.j.s.ServletContextHandler@2d2a0d74{/,null,STOPPED}
+2026-10-20 04:46:14,773 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (main) Stopped o.e.j.s.ServletContextHandler@4dda5b33{/__admin,null,STOPPED}
+2026-10-20 04:46:15,218 INFO  [org.eclipse.jetty.server.Server] (pool-16-thread-1) jetty-11.0.26; built: 2025-08-14T18:03:14.457Z; git: 7559873b6e46eea7c2c6da2b58327ea2ecf941f4; jvm 21.0.8+12-LTS-250
+2026-10-20 04:46:15,233 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (pool-16-thread-1) Started o.e.j.s.ServletContextHandler@20c5c3c{/__admin,null,AVAILABLE}
+2026-10-20 04:46:15,239 INFO  [org.eclipse.jetty.server.handler.ContextHandler.ROOT] (pool-16-thread-1) RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+2026-10-20 04:46:15,239 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (pool-16-thread-1) Started o.e.j.s.ServletContextHandler@3028c2e2{/,null,AVAILABLE}
+2026-10-20 04:46:15,248 INFO  [org.eclipse.jetty.server.AbstractConnector] (pool-16-thread-1) Started NetworkTrafficServerConnector@640c78e7{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:17685}
+2026-10-20 04:46:15,248 INFO  [org.eclipse.jetty.server.Server] (pool-16-thread-1) Started Server@19feada4{STARTING}[11.0.26,sto=1000] @20404ms
+2026-10-20 04:46:16,137 INFO  [io.quarkus] (main) emprestimo-service 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.39.4) started in 0.883s. Listening on: http://localhost:8081
+2026-10-20 04:46:16,137 INFO  [io.quarkus] (main) Profile test activated. 
+2026-10-20 04:46:16,137 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, compose, hibernate-validator, jdbc-postgresql, narayana-jta, rest, rest-client, rest-client-jackson, rest-jackson, scheduler, smallrye-context-propagation, smallrye-health, vertx]
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.087 s -- in tcc.moderno.emprestimo.clients.UsuarioLegadoClientHttpTest
+[INFO] Running tcc.moderno.emprestimo.resources.ComandosEmprestimoResourceTest
+2026-10-20 04:46:16,856 INFO  [io.quarkus] (main) emprestimo-service stopped in 0.022s
+2026-10-20 04:46:16,858 INFO  [org.eclipse.jetty.server.Server] (main) Stopped Server@19feada4{STOPPING}[11.0.26,sto=1000]
+2026-10-20 04:46:16,858 INFO  [org.eclipse.jetty.server.Server] (main) Shutdown Server@19feada4{STOPPING}[11.0.26,sto=1000]
+2026-10-20 04:46:16,861 INFO  [org.eclipse.jetty.server.AbstractConnector] (main) Stopped NetworkTrafficServerConnector@640c78e7{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:0}
+2026-10-20 04:46:16,862 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (main) Stopped o.e.j.s.ServletContextHandler@3028c2e2{/,null,STOPPED}
+2026-10-20 04:46:16,862 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (main) Stopped o.e.j.s.ServletContextHandler@20c5c3c{/__admin,null,STOPPED}
+2026-10-20 04:46:17,373 INFO  [org.eclipse.jetty.server.Server] (pool-22-thread-1) jetty-11.0.26; built: 2025-08-14T18:03:14.457Z; git: 7559873b6e46eea7c2c6da2b58327ea2ecf941f4; jvm 21.0.8+12-LTS-250
+2026-10-20 04:46:17,375 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (pool-22-thread-1) Started o.e.j.s.ServletContextHandler@5f4688c3{/__admin,null,AVAILABLE}
+2026-10-20 04:46:17,375 INFO  [org.eclipse.jetty.server.handler.ContextHandler.ROOT] (pool-22-thread-1) RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+2026-10-20 04:46:17,375 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (pool-22-thread-1) Started o.e.j.s.ServletContextHandler@6518d013{/,null,AVAILABLE}
+2026-10-20 04:46:17,378 INFO  [org.eclipse.jetty.server.AbstractConnector] (pool-22-thread-1) Started NetworkTrafficServerConnector@76344fd2{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:17718}
+2026-10-20 04:46:17,378 INFO  [org.eclipse.jetty.server.Server] (pool-22-thread-1) Started Server@3e866047{STARTING}[11.0.26,sto=1000] @22534ms
+2026-10-20 04:46:17,510 INFO  [io.quarkus] (main) emprestimo-service 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.39.4) started in 0.129s. Listening on: http://localhost:8081
+2026-10-20 04:46:17,511 INFO  [io.quarkus] (main) Profile test activated. 
+2026-10-20 04:46:17,511 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, compose, hibernate-validator, jdbc-postgresql, narayana-jta, rest, rest-client, rest-client-jackson, rest-jackson, scheduler, smallrye-context-propagation, smallrye-health, vertx]
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.345 s -- in tcc.moderno.emprestimo.resources.ComandosEmprestimoResourceTest
+[INFO] Running tcc.moderno.emprestimo.resources.ContagemEmprestimosResourceTest
+2026-10-20 04:46:21,204 INFO  [io.quarkus] (main) emprestimo-service stopped in 0.016s
+2026-10-20 04:46:21,205 INFO  [org.eclipse.jetty.server.Server] (main) Stopped Server@3e866047{STOPPING}[11.0.26,sto=1000]
+2026-10-20 04:46:21,205 INFO  [org.eclipse.jetty.server.Server] (main) Shutdown Server@3e866047{STOPPING}[11.0.26,sto=1000]
+2026-10-20 04:46:21,207 INFO  [org.eclipse.jetty.server.AbstractConnector] (main) Stopped NetworkTrafficServerConnector@76344fd2{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:0}
+2026-10-20 04:46:21,207 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (main) Stopped o.e.j.s.ServletContextHandler@6518d013{/,null,STOPPED}
+2026-10-20 04:46:21,207 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (main) Stopped o.e.j.s.ServletContextHandler@5f4688c3{/__admin,null,STOPPED}
+2026-10-20 04:46:21,373 INFO  [io.quarkus] (main) emprestimo-service 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.39.4) started in 0.150s. Listening on: http://localhost:8081
+2026-10-20 04:46:21,373 INFO  [io.quarkus] (main) Profile test activated. 
+2026-10-20 04:46:21,374 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, compose, hibernate-validator, jdbc-postgresql, narayana-jta, rest, rest-client, rest-client-jackson, rest-jackson, scheduler, smallrye-context-propagation, smallrye-health, vertx]
+2026-10-20 04:46:21,712 ERROR [io.quarkus.vertx.http.runtime.QuarkusErrorHandler] (executor-thread-1) HTTP Request to /emprestimos/mais-emprestados-mes failed, error id: 49fce833-252f-4613-ba1c-bb0d0ec228c4-1: java.lang.IllegalStateException: Falha ao consultar contagem mensal de emprestimos
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository.buscarMaisEmprestadosNoMes(EmprestimoRepository.java:88)
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository_ClientProxy.buscarMaisEmprestadosNoMes(Unknown Source)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource.buscarMaisEmprestadosNoMes(EmprestimoResource.java:78)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource_Subclass.buscarMaisEmprestadosNoMes$$superforward(Unknown Source)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource_Subclass$0.apply(Unknown Source)
+	at io.quarkus.arc.impl.AroundInvokeInvocationContext.proceed(AroundInvokeInvocationContext.java:73)
+	at io.quarkus.arc.impl.AroundInvokeInvocationContext.proceed(AroundInvokeInvocationContext.java:62)
+	at io.quarkus.hibernate.validator.runtime.interceptor.AbstractMethodValidationInterceptor.validateMethodInvocation(AbstractMethodValidationInterceptor.java:73)
+	at io.quarkus.hibernate.validator.runtime.jaxrs.ResteasyReactiveEndPointValidationInterceptor.validateMethodInvocation(ResteasyReactiveEndPointValidationInterceptor.java:21)
+	at io.quarkus.hibernate.validator.runtime.jaxrs.ResteasyReactiveEndPointValidationInterceptor_Bean.intercept(Unknown Source)
+	at io.quarkus.arc.impl.InterceptorInvocation.invoke(InterceptorInvocation.java:42)
+	at io.quarkus.arc.impl.AroundInvokeInvocationContext.perform(AroundInvokeInvocationContext.java:30)
+	at io.quarkus.arc.impl.InvocationContexts.performAroundInvoke(InvocationContexts.java:27)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource_Subclass.buscarMaisEmprestadosNoMes(Unknown Source)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource$quarkusrestinvoker$buscarMaisEmprestadosNoMes_5d498d96c7bb2562b3830ab36be6e2590c48e264.invoke(Unknown Source)
+	at org.jboss.resteasy.reactive.server.handlers.InvocationHandler.handle(InvocationHandler.java:29)
+	at io.quarkus.resteasy.reactive.server.runtime.QuarkusResteasyReactiveRequestContext.invokeHandler(QuarkusResteasyReactiveRequestContext.java:195)
+	at org.jboss.resteasy.reactive.common.core.AbstractResteasyReactiveContext.run(AbstractResteasyReactiveContext.java:150)
+	at io.quarkus.vertx.core.runtime.VertxCoreRecorder$15.runWith(VertxCoreRecorder.java:695)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.doRunWith(EnhancedQueueExecutor.java:2651)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2630)
+	at org.jboss.threads.EnhancedQueueExecutor.runThreadBody(EnhancedQueueExecutor.java:1622)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1589)
+	at org.jboss.threads.DelegatingRunnable.run(DelegatingRunnable.java:11)
+	at org.jboss.threads.ThreadLocalResettingRunnable.run(ThreadLocalResettingRunnable.java:11)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.postgresql.util.PSQLException: ERROR: relation "emprestimo" does not exist
+  Position: 53
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2993)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2656)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:446)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:533)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:449)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:197)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:140)
+	at io.agroal.pool.wrapper.PreparedStatementWrapper.executeQuery(PreparedStatementWrapper.java:76)
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository.buscarMaisEmprestadosNoMes(EmprestimoRepository.java:79)
+	... 26 more
+
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.535 s -- in tcc.moderno.emprestimo.resources.ContagemEmprestimosResourceTest
+[INFO] Running tcc.moderno.emprestimo.resources.EmprestimoResourceTest
+2026-10-20 04:46:21,932 ERROR [io.quarkus.vertx.http.runtime.QuarkusErrorHandler] (executor-thread-1) HTTP Request to /emprestimos failed, error id: 49fce833-252f-4613-ba1c-bb0d0ec228c4-2: java.lang.IllegalStateException: Falha ao consultar emprestimos
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository.consultar(EmprestimoRepository.java:102)
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository.listarTodos(EmprestimoRepository.java:33)
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository_ClientProxy.listarTodos(Unknown Source)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource.listarTodos(EmprestimoResource.java:59)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource$quarkusrestinvoker$listarTodos_5f764671a27908c50a4e4d990467c96f40ba0a4b.invoke(Unknown Source)
+	at org.jboss.resteasy.reactive.server.handlers.InvocationHandler.handle(InvocationHandler.java:29)
+	at io.quarkus.resteasy.reactive.server.runtime.QuarkusResteasyReactiveRequestContext.invokeHandler(QuarkusResteasyReactiveRequestContext.java:195)
+	at org.jboss.resteasy.reactive.common.core.AbstractResteasyReactiveContext.run(AbstractResteasyReactiveContext.java:150)
+	at io.quarkus.vertx.core.runtime.VertxCoreRecorder$15.runWith(VertxCoreRecorder.java:695)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.doRunWith(EnhancedQueueExecutor.java:2651)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2630)
+	at org.jboss.threads.EnhancedQueueExecutor.runThreadBody(EnhancedQueueExecutor.java:1622)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1589)
+	at org.jboss.threads.DelegatingRunnable.run(DelegatingRunnable.java:11)
+	at org.jboss.threads.ThreadLocalResettingRunnable.run(ThreadLocalResettingRunnable.java:11)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.postgresql.util.PSQLException: ERROR: relation "emprestimo" does not exist
+  Position: 115
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2993)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2656)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:446)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:533)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:449)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:197)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:140)
+	at io.agroal.pool.wrapper.PreparedStatementWrapper.executeQuery(PreparedStatementWrapper.java:76)
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository.consultar(EmprestimoRepository.java:95)
+	... 16 more
+
+2026-10-20 04:46:21,951 ERROR [io.quarkus.vertx.http.runtime.QuarkusErrorHandler] (executor-thread-1) HTTP Request to /emprestimos/10 failed, error id: 49fce833-252f-4613-ba1c-bb0d0ec228c4-3: java.lang.IllegalStateException: Falha ao consultar emprestimo
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository.buscarPorId(EmprestimoRepository.java:54)
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository_ClientProxy.buscarPorId(Unknown Source)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource.buscarPorId(EmprestimoResource.java:65)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource_Subclass.buscarPorId$$superforward(Unknown Source)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource_Subclass$2.apply(Unknown Source)
+	at io.quarkus.arc.impl.AroundInvokeInvocationContext.proceed(AroundInvokeInvocationContext.java:73)
+	at io.quarkus.arc.impl.AroundInvokeInvocationContext.proceed(AroundInvokeInvocationContext.java:62)
+	at io.quarkus.hibernate.validator.runtime.interceptor.AbstractMethodValidationInterceptor.validateMethodInvocation(AbstractMethodValidationInterceptor.java:73)
+	at io.quarkus.hibernate.validator.runtime.jaxrs.ResteasyReactiveEndPointValidationInterceptor.validateMethodInvocation(ResteasyReactiveEndPointValidationInterceptor.java:21)
+	at io.quarkus.hibernate.validator.runtime.jaxrs.ResteasyReactiveEndPointValidationInterceptor_Bean.intercept(Unknown Source)
+	at io.quarkus.arc.impl.InterceptorInvocation.invoke(InterceptorInvocation.java:42)
+	at io.quarkus.arc.impl.AroundInvokeInvocationContext.perform(AroundInvokeInvocationContext.java:30)
+	at io.quarkus.arc.impl.InvocationContexts.performAroundInvoke(InvocationContexts.java:27)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource_Subclass.buscarPorId(Unknown Source)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource$quarkusrestinvoker$buscarPorId_cc060606dad776a4b5e71ef5ed6cd22be910ace6.invoke(Unknown Source)
+	at org.jboss.resteasy.reactive.server.handlers.InvocationHandler.handle(InvocationHandler.java:29)
+	at io.quarkus.resteasy.reactive.server.runtime.QuarkusResteasyReactiveRequestContext.invokeHandler(QuarkusResteasyReactiveRequestContext.java:195)
+	at org.jboss.resteasy.reactive.common.core.AbstractResteasyReactiveContext.run(AbstractResteasyReactiveContext.java:150)
+	at io.quarkus.vertx.core.runtime.VertxCoreRecorder$15.runWith(VertxCoreRecorder.java:695)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.doRunWith(EnhancedQueueExecutor.java:2651)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2630)
+	at org.jboss.threads.EnhancedQueueExecutor.runThreadBody(EnhancedQueueExecutor.java:1622)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1589)
+	at org.jboss.threads.DelegatingRunnable.run(DelegatingRunnable.java:11)
+	at org.jboss.threads.ThreadLocalResettingRunnable.run(ThreadLocalResettingRunnable.java:11)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.postgresql.util.PSQLException: ERROR: relation "emprestimo" does not exist
+  Position: 115
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2993)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2656)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:446)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:533)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:449)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:197)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:140)
+	at io.agroal.pool.wrapper.PreparedStatementWrapper.executeQuery(PreparedStatementWrapper.java:76)
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository.buscarPorId(EmprestimoRepository.java:50)
+	... 26 more
+
+2026-10-20 04:46:21,972 ERROR [io.quarkus.vertx.http.runtime.QuarkusErrorHandler] (executor-thread-1) HTTP Request to /emprestimos/atrasados failed, error id: 49fce833-252f-4613-ba1c-bb0d0ec228c4-4: java.lang.IllegalStateException: Falha ao consultar emprestimos
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository.consultar(EmprestimoRepository.java:102)
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository.buscarAtrasados(EmprestimoRepository.java:59)
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository_ClientProxy.buscarAtrasados(Unknown Source)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource.buscarAtrasados(EmprestimoResource.java:71)
+	at tcc.moderno.emprestimo.resources.EmprestimoResource$quarkusrestinvoker$buscarAtrasados_31580dbb820b441bb8679a355b5ddd99b9709a22.invoke(Unknown Source)
+	at org.jboss.resteasy.reactive.server.handlers.InvocationHandler.handle(InvocationHandler.java:29)
+	at io.quarkus.resteasy.reactive.server.runtime.QuarkusResteasyReactiveRequestContext.invokeHandler(QuarkusResteasyReactiveRequestContext.java:195)
+	at org.jboss.resteasy.reactive.common.core.AbstractResteasyReactiveContext.run(AbstractResteasyReactiveContext.java:150)
+	at io.quarkus.vertx.core.runtime.VertxCoreRecorder$15.runWith(VertxCoreRecorder.java:695)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.doRunWith(EnhancedQueueExecutor.java:2651)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2630)
+	at org.jboss.threads.EnhancedQueueExecutor.runThreadBody(EnhancedQueueExecutor.java:1622)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1589)
+	at org.jboss.threads.DelegatingRunnable.run(DelegatingRunnable.java:11)
+	at org.jboss.threads.ThreadLocalResettingRunnable.run(ThreadLocalResettingRunnable.java:11)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.postgresql.util.PSQLException: ERROR: relation "emprestimo" does not exist
+  Position: 115
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2993)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2656)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:446)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:533)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:449)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:197)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:140)
+	at io.agroal.pool.wrapper.PreparedStatementWrapper.executeQuery(PreparedStatementWrapper.java:76)
+	at tcc.moderno.emprestimo.repositories.EmprestimoRepository.consultar(EmprestimoRepository.java:95)
+	... 16 more
+
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.468 s -- in tcc.moderno.emprestimo.resources.EmprestimoResourceTest
+[INFO] Running tcc.moderno.emprestimo.resources.MultaResourceTest
+2026-10-20 04:46:22,225 INFO  [io.quarkus] (main) emprestimo-service stopped in 0.011s
+2026-10-20 04:46:22,249 INFO  [org.eclipse.jetty.server.Server] (pool-31-thread-1) jetty-11.0.26; built: 2025-08-14T18:03:14.457Z; git: 7559873b6e46eea7c2c6da2b58327ea2ecf941f4; jvm 21.0.8+12-LTS-250
+2026-10-20 04:46:22,252 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (pool-31-thread-1) Started o.e.j.s.ServletContextHandler@1565ef8e{/__admin,null,AVAILABLE}
+2026-10-20 04:46:22,252 INFO  [org.eclipse.jetty.server.handler.ContextHandler.ROOT] (pool-31-thread-1) RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+2026-10-20 04:46:22,252 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (pool-31-thread-1) Started o.e.j.s.ServletContextHandler@79fefd72{/,null,AVAILABLE}
+2026-10-20 04:46:22,256 INFO  [org.eclipse.jetty.server.AbstractConnector] (pool-31-thread-1) Started NetworkTrafficServerConnector@5c44abb2{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:17846}
+2026-10-20 04:46:22,256 INFO  [org.eclipse.jetty.server.Server] (pool-31-thread-1) Started Server@21130cf{STARTING}[11.0.26,sto=1000] @27412ms
+2026-10-20 04:46:22,417 INFO  [io.quarkus] (main) emprestimo-service 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.39.4) started in 0.158s. Listening on: http://localhost:8081
+2026-10-20 04:46:22,417 INFO  [io.quarkus] (main) Profile test activated. 
+2026-10-20 04:46:22,418 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, compose, hibernate-validator, jdbc-postgresql, narayana-jta, rest, rest-client, rest-client-jackson, rest-jackson, scheduler, smallrye-context-propagation, smallrye-health, vertx]
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.331 s -- in tcc.moderno.emprestimo.resources.MultaResourceTest
+[INFO] Running tcc.moderno.emprestimo.resources.PrazoResourceTest
+2026-10-20 04:46:22,566 INFO  [io.quarkus] (main) emprestimo-service stopped in 0.011s
+2026-10-20 04:46:22,567 INFO  [org.eclipse.jetty.server.Server] (main) Stopped Server@21130cf{STOPPING}[11.0.26,sto=1000]
+2026-10-20 04:46:22,567 INFO  [org.eclipse.jetty.server.Server] (main) Shutdown Server@21130cf{STOPPING}[11.0.26,sto=1000]
+2026-10-20 04:46:22,569 INFO  [org.eclipse.jetty.server.AbstractConnector] (main) Stopped NetworkTrafficServerConnector@5c44abb2{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:0}
+2026-10-20 04:46:22,569 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (main) Stopped o.e.j.s.ServletContextHandler@79fefd72{/,null,STOPPED}
+2026-10-20 04:46:22,569 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (main) Stopped o.e.j.s.ServletContextHandler@1565ef8e{/__admin,null,STOPPED}
+2026-10-20 04:46:22,591 INFO  [org.eclipse.jetty.server.Server] (pool-36-thread-1) jetty-11.0.26; built: 2025-08-14T18:03:14.457Z; git: 7559873b6e46eea7c2c6da2b58327ea2ecf941f4; jvm 21.0.8+12-LTS-250
+2026-10-20 04:46:22,594 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (pool-36-thread-1) Started o.e.j.s.ServletContextHandler@519f0e18{/__admin,null,AVAILABLE}
+2026-10-20 04:46:22,594 INFO  [org.eclipse.jetty.server.handler.ContextHandler.ROOT] (pool-36-thread-1) RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+2026-10-20 04:46:22,594 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (pool-36-thread-1) Started o.e.j.s.ServletContextHandler@717b13c6{/,null,AVAILABLE}
+2026-10-20 04:46:22,597 INFO  [org.eclipse.jetty.server.AbstractConnector] (pool-36-thread-1) Started NetworkTrafficServerConnector@4a460b00{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:17882}
+2026-10-20 04:46:22,597 INFO  [org.eclipse.jetty.server.Server] (pool-36-thread-1) Started Server@791702a{STARTING}[11.0.26,sto=1000] @27753ms
+2026-10-20 04:46:22,714 INFO  [io.quarkus] (main) emprestimo-service 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.39.4) started in 0.113s. Listening on: http://localhost:8081
+2026-10-20 04:46:22,714 INFO  [io.quarkus] (main) Profile test activated. 
+2026-10-20 04:46:22,714 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, compose, hibernate-validator, jdbc-postgresql, narayana-jta, rest, rest-client, rest-client-jackson, rest-jackson, scheduler, smallrye-context-propagation, smallrye-health, vertx]
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.269 s -- in tcc.moderno.emprestimo.resources.PrazoResourceTest
+[INFO] Running tcc.moderno.emprestimo.resources.TokenAusenteTest
+2026-10-20 04:46:22,953 INFO  [io.quarkus] (main) emprestimo-service stopped in 0.009s
+2026-10-20 04:46:22,954 INFO  [org.eclipse.jetty.server.Server] (main) Stopped Server@791702a{STOPPING}[11.0.26,sto=1000]
+2026-10-20 04:46:22,954 INFO  [org.eclipse.jetty.server.Server] (main) Shutdown Server@791702a{STOPPING}[11.0.26,sto=1000]
+2026-10-20 04:46:22,954 INFO  [org.eclipse.jetty.server.AbstractConnector] (main) Stopped NetworkTrafficServerConnector@4a460b00{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:0}
+2026-10-20 04:46:22,955 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (main) Stopped o.e.j.s.ServletContextHandler@717b13c6{/,null,STOPPED}
+2026-10-20 04:46:22,955 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (main) Stopped o.e.j.s.ServletContextHandler@519f0e18{/__admin,null,STOPPED}
+2026-10-20 04:46:23,329 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-6) Docker host IP address is localhost
+2026-10-20 04:46:23,348 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-6) Connected to docker: 
+  Server Version: 29.8.2
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 11813 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2026-10-20 04:46:23,707 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-6) Creating container for image: testcontainers/ryuk:0.14.0
+2026-10-20 04:46:23,962 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-6) Container testcontainers/ryuk:0.14.0 is starting: ccf494985b42bd03434176a88bf02d3838376110b5bc1597a2a84c52b44202d2
+2026-10-20 04:46:24,414 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-6) Container testcontainers/ryuk:0.14.0 started in PT0.7067656S
+2026-10-20 04:46:24,418 INFO  [org.testcontainers.utility.RyukResourceReaper] (ForkJoinPool.commonPool-worker-6) Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2026-10-20 04:46:24,418 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-6) Checking the system...
+2026-10-20 04:46:24,418 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-6) ?? Docker server version should be at least 1.6.0
+2026-10-20 04:46:24,418 INFO  [tc.postgres:14-alpine] (ForkJoinPool.commonPool-worker-6) Creating container for image: postgres:14-alpine
+2026-10-20 04:46:24,534 INFO  [tc.postgres:14-alpine] (ForkJoinPool.commonPool-worker-6) Container postgres:14-alpine is starting: b0ae6e05da1174f7f7dbeaf4f2bab83df5f124bda72f6239a7e78c3f5479d935
+2026-10-20 04:46:26,134 INFO  [tc.postgres:14-alpine] (ForkJoinPool.commonPool-worker-6) Container postgres:14-alpine started in PT1.7152395S
+2026-10-20 04:46:26,134 INFO  [tc.postgres:14-alpine] (ForkJoinPool.commonPool-worker-6) Container is started (JDBC URL: jdbc:postgresql://localhost:17922/quarkus?loggerLevel=OFF)
+2026-10-20 04:46:26,141 INFO  [org.testcontainers.ext.ScriptUtils] (ForkJoinPool.commonPool-worker-6) Executing database script from emprestimos-test.sql
+2026-10-20 04:46:26,207 INFO  [org.testcontainers.ext.ScriptUtils] (ForkJoinPool.commonPool-worker-6) Executed database script from emprestimos-test.sql in 66 ms.
+2026-10-20 04:46:26,208 INFO  [io.quarkus.datasource.deployment.devservices.DevServicesDatasourceProcessor] (ForkJoinPool.commonPool-worker-6) Dev Services for default datasource (postgresql) started - container ID is b0ae6e05da11
+2026-10-20 04:46:27,062 INFO  [io.quarkus] (main) emprestimo-service 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.39.4) started in 0.787s. Listening on: http://localhost:8081
+2026-10-20 04:46:27,062 INFO  [io.quarkus] (main) Profile test activated. 
+2026-10-20 04:46:27,062 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, compose, hibernate-validator, jdbc-postgresql, narayana-jta, rest, rest-client, rest-client-jackson, rest-jackson, scheduler, smallrye-context-propagation, smallrye-health, vertx]
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.816 s -- in tcc.moderno.emprestimo.resources.TokenAusenteTest
+[INFO] Running tcc.moderno.emprestimo.services.AtualizacaoMultasIntegrationTest
+2026-10-20 04:46:27,903 INFO  [io.quarkus] (main) emprestimo-service stopped in 0.032s
+2026-10-20 04:46:28,327 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-6) Docker host IP address is localhost
+2026-10-20 04:46:28,349 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-6) Connected to docker: 
+  Server Version: 29.8.2
+  API Version: 1.56
+  Operating System: Docker Desktop
+  Total Memory: 11813 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+2026-10-20 04:46:28,741 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-6) Creating container for image: testcontainers/ryuk:0.14.0
+2026-10-20 04:46:28,992 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-6) Container testcontainers/ryuk:0.14.0 is starting: 9485616588d162f5648abd81caffc0f7486a2c19fff9e419389a045bc87d45af
+2026-10-20 04:46:29,454 INFO  [tc.testcontainers/ryuk:0.14.0] (ForkJoinPool.commonPool-worker-6) Container testcontainers/ryuk:0.14.0 started in PT0.7136371S
+2026-10-20 04:46:29,458 INFO  [org.testcontainers.utility.RyukResourceReaper] (ForkJoinPool.commonPool-worker-6) Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2026-10-20 04:46:29,458 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-6) Checking the system...
+2026-10-20 04:46:29,459 INFO  [org.testcontainers.DockerClientFactory] (ForkJoinPool.commonPool-worker-6) ?? Docker server version should be at least 1.6.0
+2026-10-20 04:46:29,459 INFO  [tc.postgres:14-alpine] (ForkJoinPool.commonPool-worker-6) Creating container for image: postgres:14-alpine
+2026-10-20 04:46:29,574 INFO  [tc.postgres:14-alpine] (ForkJoinPool.commonPool-worker-6) Container postgres:14-alpine is starting: 688decf84d2d0303ed1d5185634de14426338dcda4523d98f6ca46f0a40d3316
+2026-10-20 04:46:31,160 INFO  [tc.postgres:14-alpine] (ForkJoinPool.commonPool-worker-6) Container postgres:14-alpine started in PT1.7014097S
+2026-10-20 04:46:31,161 INFO  [tc.postgres:14-alpine] (ForkJoinPool.commonPool-worker-6) Container is started (JDBC URL: jdbc:postgresql://localhost:17960/quarkus?loggerLevel=OFF)
+2026-10-20 04:46:31,167 INFO  [org.testcontainers.ext.ScriptUtils] (ForkJoinPool.commonPool-worker-6) Executing database script from emprestimos-test.sql
+2026-10-20 04:46:31,234 INFO  [org.testcontainers.ext.ScriptUtils] (ForkJoinPool.commonPool-worker-6) Executed database script from emprestimos-test.sql in 66 ms.
+2026-10-20 04:46:31,235 INFO  [io.quarkus.datasource.deployment.devservices.DevServicesDatasourceProcessor] (ForkJoinPool.commonPool-worker-6) Dev Services for default datasource (postgresql) started - container ID is 688decf84d2d
+2026-10-20 04:46:31,664 INFO  [org.eclipse.jetty.server.Server] (pool-46-thread-1) jetty-11.0.26; built: 2025-08-14T18:03:14.457Z; git: 7559873b6e46eea7c2c6da2b58327ea2ecf941f4; jvm 21.0.8+12-LTS-250
+2026-10-20 04:46:31,676 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (pool-46-thread-1) Started o.e.j.s.ServletContextHandler@69f51b79{/__admin,null,AVAILABLE}
+2026-10-20 04:46:31,682 INFO  [org.eclipse.jetty.server.handler.ContextHandler.ROOT] (pool-46-thread-1) RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+2026-10-20 04:46:31,682 INFO  [org.eclipse.jetty.server.handler.ContextHandler] (pool-46-thread-1) Started o.e.j.s.ServletContextHandler@3d8e5e24{/,null,AVAILABLE}
+2026-10-20 04:46:31,695 INFO  [org.eclipse.jetty.server.AbstractConnector] (pool-46-thread-1) Started NetworkTrafficServerConnector@3fd617d4{HTTP/1.1, (http/1.1, h2c)}{0.0.0.0:17964}
+2026-10-20 04:46:31,697 INFO  [org.eclipse.jetty.server.Server] (pool-46-thread-1) Started Server@3f8a5feb{STARTING}[11.0.26,sto=1000] @36852ms
+2026-10-20 04:46:32,359 INFO  [io.quarkus] (main) emprestimo-service 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.39.4) started in 0.652s. Listening on: http://localhost:8081
+2026-10-20 04:46:32,359 INFO  [io.quarkus] (main) Profile test activated. 
+2026-10-20 04:46:32,359 INFO  [io.quarkus] (main) Installed features: [agroal, cdi, compose, hibernate-validator, jdbc-postgresql, narayana-jta, rest, rest-client, rest-client-jackson, rest-jackson, scheduler, smallrye-context-propagation, smallrye-health, vertx]
+2026-10-20 04:46:32,819 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 100; nova tentativa no proximo ciclo (IllegalStateException)
+2026-10-20 04:46:32,834 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 100; nova tentativa no proximo ciclo (IllegalStateException)
+2026-10-20 04:46:32,850 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 100; nova tentativa no proximo ciclo (ClientWebApplicationException)
+2026-10-20 04:46:32,867 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 100; nova tentativa no proximo ciclo (IllegalStateException)
+2026-10-20 04:46:32,881 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 100; nova tentativa no proximo ciclo (IllegalStateException)
+2026-10-20 04:46:32,894 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 100; nova tentativa no proximo ciclo (IllegalStateException)
+2026-10-20 04:46:33,109 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 100; nova tentativa no proximo ciclo (ProcessingException)
+2026-10-20 04:46:33,136 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 100; nova tentativa no proximo ciclo (ClientWebApplicationException)
+2026-10-20 04:46:33,166 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 100; nova tentativa no proximo ciclo (ClientWebApplicationException)
+2026-10-20 04:46:33,200 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 100; nova tentativa no proximo ciclo (ClientWebApplicationException)
+2026-10-20 04:46:33,227 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 100; nova tentativa no proximo ciclo (ClientWebApplicationException)
+2026-10-20 04:46:33,253 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 100; nova tentativa no proximo ciclo (ClientWebApplicationException)
+2026-10-20 04:46:34,086 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 100; nova tentativa no proximo ciclo (ClientWebApplicationException)
+[INFO] Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.291 s -- in tcc.moderno.emprestimo.services.AtualizacaoMultasIntegrationTest
+[INFO] Running tcc.moderno.emprestimo.clients.UsuarioLegadoAuthTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in tcc.moderno.emprestimo.clients.UsuarioLegadoAuthTest
+[INFO] Running tcc.moderno.emprestimo.services.AtualizacaoMultasServiceTest
+2026-10-20 04:46:35,183 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 1; nova tentativa no proximo ciclo (IllegalStateException)
+2026-10-20 04:46:35,185 WARN  [tcc.moderno.emprestimo.services.AtualizacaoMultasService] (main) Multa nao atualizada para emprestimo 1; nova tentativa no proximo ciclo (IllegalStateException)
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in tcc.moderno.emprestimo.services.AtualizacaoMultasServiceTest
+[INFO] Running Calendário: consulta e cache de feriados
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in Calendário: consulta e cache de feriados
+[INFO] Running Multas: regras do legado a preservar na modernização
+[INFO] Tests run: 44, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.056 s -- in Multas: regras do legado a preservar na modernização
+[INFO] Running Prazos: regras do legado a preservar na modernização
+[INFO] Tests run: 29, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in Prazos: regras do legado a preservar na modernização
+2026-10-20 04:46:35,312 INFO  [io.quarkus] (main) emprestimo-service stopped in 0.028s
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 165, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- quarkus:3.39.4:build (default-build) @ emprestimo-service ---
+[INFO] [io.quarkus.deployment.QuarkusAugmentor] Quarkus augmentation completed in 3276ms
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  53.665 s
+[INFO] Finished at: 2026-10-20T04:46:39-03:00
+[INFO] ------------------------------------------------------------------------

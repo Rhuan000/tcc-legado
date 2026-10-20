@@ -1,0 +1,40 @@
+﻿{
+    "protocolo":  "v2",
+    "estado":  "pre-migracao",
+    "coleta_id":  "piloto-v2-pre-atual-05",
+    "piloto":  true,
+    "repeticoes":  1,
+    "registro_iso":  "2026-10-20T04:35:47.3793651-03:00",
+    "codigo":  {
+                   "commit":  "aa55edd88c412725c84c10bff92e88a503e39fcb",
+                   "arvore":  "b8286eb7acb68c9247e172257232a91a8c6d199d",
+                   "hash_fisico":  "754FF6D6F794DEBBA6BE228E80C0C2050B0FC28B051589C84ADBA764C3CF2B9A",
+                   "arquivos":  77
+               },
+    "ambiente":  {
+                     "java_legado":  "java version \"1.8.0_201\"",
+                     "java_servico_analisador":  "java version \"21.0.8\" 2025-07-15 LTS",
+                     "java_legado_sha256":  "69DF943991C7F2A6B750A5E515EAAE013043D70230716D67DD426D51FB4FFBAC",
+                     "java_servico_sha256":  "F3D26E4F17C45DA613A4676B5B0C6A387BF36D990BE0835D60A177234B2F28BA",
+                     "maven":  "Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)\nMaven home: C:\\Program Files\\Maven\\apache-maven-3.9.11-bin\\apache-maven-3.9.11\nJava version: 1.8.0_201, vendor: Oracle Corporation, runtime: C:\\Program Files (x86)\\Java\\jdk1.8.0_201\\jre\nDefault locale: en_US, platform encoding: Cp1252\nOS name: \"windows 10\", version: \"10.0\", arch: \"x86\", family: \"windows\"",
+                     "maven_executavel":  "C:\\Program Files\\Maven\\apache-maven-3.9.11-bin\\apache-maven-3.9.11\\bin\\mvn.cmd",
+                     "jboss_home":  "C:\\desenvolvimento\\jboss-eap-7.4",
+                     "jboss_config_sha256":  "07141FF10A4D96A8044AD10B81F38495459E5ED6560B790D76CB66D8FAA029CD",
+                     "ck_sha256":  "2F32FA347EF739E97152741828675A9939AEAFE61BEE3F196EE5AF264E612162",
+                     "servico_db_url":  "jdbc:postgresql://localhost:5432/biblioteca",
+                     "servico_db_usuario":  "postgres",
+                     "sistema":  "Microsoft Windows NT 10.0.26300.0",
+                     "processador":  "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+                     "processadores_logicos":  12,
+                     "powershell":  "5.1.26100.9711",
+                     "fuso":  "E. South America Standard Time"
+                 },
+    "coletor_sha256":  "95BBBF25447BC3D8DAB9CEF5B3285D31C1F0A3E2FF01DE0547B528AB05A18085",
+    "validacao_sha256":  null,
+    "portas":  [
+                   18080,
+                   18081,
+                   19990
+               ],
+    "timeout_inicializacao":  120
+}
