@@ -1,0 +1,1610 @@
+{
+  "campanha": "recoleta-20261023-02",
+  "data": "2026-10-23",
+  "observacoes_temporais_finais": 110,
+  "analises_ck_finais": 3,
+  "arquivos_brutos_finais": 307,
+  "commits_medidos": {
+    "pre": "aa55edd88c412725c84c10bff92e88a503e39fcb",
+    "pos_e_servico": "45ff20b3d68ff484143a7b28e35b7c1d93fc361b"
+  },
+  "escopo": "Arquivos finais originais, contexto da execucao, resumo derivado, instrumentos e pacotes funcionais historicos. Pilotos e campanhas antigas nao integram a arvore atual. A documentacao de navegacao permanece identificada pelo proprio Git.",
+  "notas": [
+    "O inventario exclui a si proprio para evitar referencia circular.",
+    "Os cinco arquivos de contexto descrevem a execucao completa, incluindo preparo e pilotos; os dados quantitativos publicados sao somente os 307 arquivos finais.",
+    "Caminhos absolutos nos registros originais foram preservados e sao mapeados no README.",
+    "Os dois ZIPs funcionais sao historicos; nao houve repeticao dos casos manuais nesta recoleta."
+  ],
+  "arquivos": [
+    {
+      "caminho": "medicoes/campanha-v2.ps1",
+      "bytes": 21169,
+      "sha256": "1ED17E68874356015D0707818A20DBD0E1BADE07E3B3C358E1482ACD24EDA17B"
+    },
+    {
+      "caminho": "medicoes/medir-build-monolito-sem-testes.ps1",
+      "bytes": 4810,
+      "sha256": "55C1BDDEB5CE5F67AF145EE55F5EFC029A15BD714DBEB601127637DEC92759B7"
+    },
+    {
+      "caminho": "medicoes/medir-build-servico-sem-testes.ps1",
+      "bytes": 4802,
+      "sha256": "78D274A109BEC3AACAD2583CA22363EED1B02316AC1F4062F63BE39B144E9336"
+    },
+    {
+      "caminho": "metricas/contexto-20261023/comandos.jsonl",
+      "bytes": 95801,
+      "sha256": "30365CC7D2C7AFA8AB986E5212FD9C450A6B890A8FF8AD177D1C3501141FB274"
+    },
+    {
+      "caminho": "metricas/contexto-20261023/contexto.json",
+      "bytes": 4628,
+      "sha256": "BECFA41C97EF28EE54473CADCAC2404132638E30F2E4D7C454DA6351B62729F8"
+    },
+    {
+      "caminho": "metricas/contexto-20261023/plano-execucao.json",
+      "bytes": 2909,
+      "sha256": "443C48AAC48F1AD7B1D01FB322E72F8B1EF13898546FC49094675D77A7EA80AD"
+    },
+    {
+      "caminho": "metricas/contexto-20261023/preparacao-base.jsonl",
+      "bytes": 2103,
+      "sha256": "85E7510A43CBA79B7E395FA06F1F365FF57099E57619E7478EE17EF4E843D67C"
+    },
+    {
+      "caminho": "metricas/contexto-20261023/status-final.json",
+      "bytes": 2730,
+      "sha256": "16738A9538F1F4A000971BED11A6FA130700648AA79CC87372ED2C4EDC9FC81E"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/artefatos.json",
+      "bytes": 42143,
+      "sha256": "D6E17EB7CB98FAD8C7BCF7EE93290B164C6DCF565632CD693397ABC77EA15159"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/medicoes.csv",
+      "bytes": 2404,
+      "sha256": "318CE3AA80C6BC78377DB6D250D4ABFF695401D87D7E235B06319966517026CE"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-01.stderr.log",
+      "bytes": 16793,
+      "sha256": "E71FC84089729EE43DC4263526439328052936E3C4FAEB79A151CF32CE24A8B1"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-01.stdout.log",
+      "bytes": 4014,
+      "sha256": "F305C01EC097829DB03E542F39883741212E6CF55CC3D624D93D652B6991369D"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-02.stderr.log",
+      "bytes": 16793,
+      "sha256": "98143A7F402393AD6758E012BA141C537C884CE66B34ED0587CFC82655C3282B"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-02.stdout.log",
+      "bytes": 4014,
+      "sha256": "4C8508A0D7D183239F9B04F0E20D48BF855CD4FEEE4F9A67C313C3DF7F5BAE7A"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-03.stderr.log",
+      "bytes": 16793,
+      "sha256": "0CB242EA85C0EC48635D13A4FDCF6DF9D8FFF93A92F0C07075C48190DF0C63F8"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-03.stdout.log",
+      "bytes": 4014,
+      "sha256": "DCE6A893D2066314A89A7468B40C23F1DEF819E0CCFBD4E143F1EAD77397C3C2"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-04.stderr.log",
+      "bytes": 16793,
+      "sha256": "CB8DBC061482E6B5C6683DF8A4BCBF7AE743EFFCDA5242176D2E4802DAEF73F9"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-04.stdout.log",
+      "bytes": 4014,
+      "sha256": "974591C3B1876D7A036CB2D494ECF19813830571719F33AE5411CA03C90541C2"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-05.stderr.log",
+      "bytes": 16793,
+      "sha256": "39A4E95DEBBD2D6038D7196F6A46B17AF9D11258677194C6D9985868CC805185"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-05.stdout.log",
+      "bytes": 4014,
+      "sha256": "36AC5AB2F49D1BC24C941019855860D5AC6EA5D0273D003C6A125C524905E514"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-06.stderr.log",
+      "bytes": 16793,
+      "sha256": "0D378FD725182BD67698AFB797F46E92753A71EC9664E86FF49704F8EA5D6723"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-06.stdout.log",
+      "bytes": 4014,
+      "sha256": "7FD93DB80F5FCF529A10ACF62F67A3BD5902ACB3B224B47C6B34AE22B2E6E12B"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-07.stderr.log",
+      "bytes": 16793,
+      "sha256": "807DA46A9E0B60894D008E6956939984D516944E59F3005048B87712E83171CA"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-07.stdout.log",
+      "bytes": 4014,
+      "sha256": "0239D9BD6E71A93E643DCC1FF56EABD0BD78788C37B98A5BE82ED90CDB13482C"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-08.stderr.log",
+      "bytes": 16793,
+      "sha256": "D3E45057E1C23F01FC1C595AF7E5899A591F565D65C6A2B9C31A8820ED381CCC"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-08.stdout.log",
+      "bytes": 4014,
+      "sha256": "B6F86B4BE008D77276EBC087BCAEB9E9051C6E32A76D555E38398B2A8E8A16CF"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-09.stderr.log",
+      "bytes": 16793,
+      "sha256": "CD6978A1FF50FBF499C4E999FB0A3429DD735B5E083C9AC3C4655D931CCC7DF8"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-09.stdout.log",
+      "bytes": 4014,
+      "sha256": "F7A850746CAFC14CBDAC9B0AD2C672A2DD773F2507145BA04CEF1A6B539FD51F"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-10.stderr.log",
+      "bytes": 16793,
+      "sha256": "8CC766ACD0718554918AA4BA36F98FD468B0B2648D5510F044BE1345A5EDF793"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/monolito-10.stdout.log",
+      "bytes": 4014,
+      "sha256": "714DA9172F3084C38D1915F4FCE818942B9665AAB833EA170E17024B3475C7AB"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-01.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-01.stdout.log",
+      "bytes": 48349,
+      "sha256": "53AF4E1ECC5EF0EE11694BC244F30924649B0CB0EA989B7B51FBDE803B0D0410"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-02.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-02.stdout.log",
+      "bytes": 48351,
+      "sha256": "EDE6BF0C484714EDAC34CC9B4640FBEE4D381B5185092A158FBBAABDFEBEA6A7"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-03.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-03.stdout.log",
+      "bytes": 48353,
+      "sha256": "C586EDD011DCE7820ADE97F074D3FBC7EF257561E3327DEB9F8D7C654D96DC3A"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-04.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-04.stdout.log",
+      "bytes": 48357,
+      "sha256": "B22A0D1499142202C985A06ADF27E46601D0375F9147F77FB9EBA87071CF8809"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-05.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-05.stdout.log",
+      "bytes": 48359,
+      "sha256": "ABB4C450C2A321F1F70F9CF4FF15DA2536AC5C6A9AA4468DDF4C6FC13FF9FAEF"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-06.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-06.stdout.log",
+      "bytes": 48356,
+      "sha256": "A4389A0993112FF45BE7968716269C1147E1F9D0C90AEA6433374A22F487EF34"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-07.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-07.stdout.log",
+      "bytes": 48362,
+      "sha256": "784BAA5191ED9B42FA7EF02970C9710D501DF06E41C9D60E56AA325F0423FE11"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-08.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-08.stdout.log",
+      "bytes": 48354,
+      "sha256": "976415E44AD00DC701623C5F07256E18544D6D2F0DC9A926042FE87D3BCA2552"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-09.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-09.stdout.log",
+      "bytes": 48353,
+      "sha256": "0E75043C436AF9946E8460B746D12D0BB0160BA1214B4AED12552FAC004044FB"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-10.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/servico-10.stdout.log",
+      "bytes": 48356,
+      "sha256": "0EB9DE01DA02A4DB9BCCDF9AC1DA477368E8CE7AEDD500F529ADACD3F71AE553"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/artefatos.json",
+      "bytes": 42143,
+      "sha256": "D6E17EB7CB98FAD8C7BCF7EE93290B164C6DCF565632CD693397ABC77EA15159"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/medicoes.csv",
+      "bytes": 4791,
+      "sha256": "D151FA99364DF4A850B5A616049B60DB7A29CE3BD432F0C9B2DC843EEB298DA8"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-1.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-1.stdout.log",
+      "bytes": 16787,
+      "sha256": "38A9FBCC619321D2E00BE0331D807AF22730DA6A45F9B7784AEDEBFF6160F012"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-10.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-10.stdout.log",
+      "bytes": 16772,
+      "sha256": "F1455D1C5B467D1339BEC31D9957AD6C8894BF3E53C766C3A7926A28EE6BCCB9"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-2.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-2.stdout.log",
+      "bytes": 16772,
+      "sha256": "E5CD0B0C876854270443914141865101D2873C096EF8BB733AB3E3631794361B"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-3.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-3.stdout.log",
+      "bytes": 16785,
+      "sha256": "040E1932B42D04BBB784BEC9FC5EFA7354D065C5D6FB16B95C83D974868B4BF4"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-4.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-4.stdout.log",
+      "bytes": 16772,
+      "sha256": "34D44E100E60E7B25FA4712E5088E7FCA37D8FDCD4A318B5909B84C94C13D801"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-5.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-5.stdout.log",
+      "bytes": 16786,
+      "sha256": "CFACB310A4130B5B56B93CA1154CE2F3B6C1D2AC53B06F81588E7BAB1A11E7A2"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-6.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-6.stdout.log",
+      "bytes": 16771,
+      "sha256": "A790752EF97B06F7B8DDBAA9645FE9C8CA2A8EC3222FB33935C74E0D8B859E74"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-7.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-7.stdout.log",
+      "bytes": 16772,
+      "sha256": "F98D71CBA48AB266DDC59EA3C358ED02A49A4DEDD78F8C10D3A0570DCA3C1819"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-8.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-8.stdout.log",
+      "bytes": 16772,
+      "sha256": "68260B08FF6D9F536EFCEF35D5E834B2AC12721BA4433B2DA0EBF498A8F101E6"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-9.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/monolito-9.stdout.log",
+      "bytes": 16771,
+      "sha256": "9FC83BDBC9430B1BE4C0C0C4432446A5428D2A6499901807603A5DB90D5EF8BB"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-1.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-1.stdout.log",
+      "bytes": 682,
+      "sha256": "49ABCF67A3B2AC32F676C3BE5BAAFB58580C5CF8D0772032B64BB078687A49FE"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-10.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-10.stdout.log",
+      "bytes": 682,
+      "sha256": "19493D86D7707213488E2D61F1F4962A8E21A52435391A82D03E3C6C6FE99ABE"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-2.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-2.stdout.log",
+      "bytes": 682,
+      "sha256": "4281E8D1620D07BCAD8B52677C73B054AB8368ABCAFFAFCB3D6679FA23B12F6F"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-3.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-3.stdout.log",
+      "bytes": 682,
+      "sha256": "63C2877DF8BFBAD26B0679D3A6F0961B6487F6674E3CB9AB71D0D60CBF21C61C"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-4.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-4.stdout.log",
+      "bytes": 682,
+      "sha256": "92C3EF8D5656D74DEF4249F36489499AA7D8DF941510A3DA6DDA39D7DD29458C"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-5.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-5.stdout.log",
+      "bytes": 682,
+      "sha256": "5DB3D46E59ED2CDEDCE816F74C760A7EF5E3B06A7A502F03F4DC37BFE48DB0BF"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-6.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-6.stdout.log",
+      "bytes": 682,
+      "sha256": "B5A95C91B284FAF00738D62A7CEEB9AFC0F48C8ABCAC83D94138AC928A2C8F2C"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-7.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-7.stdout.log",
+      "bytes": 682,
+      "sha256": "FBF04377249FF2C4582327D40B02AC13C4A66F426BE74ACA2346906ECBC3C61C"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-8.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-8.stdout.log",
+      "bytes": 682,
+      "sha256": "3FA881A11F69B8A03F9E175CC11EC6A5C0B35D07772E129EF2B1C683651509D3"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-9.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/servico-9.stdout.log",
+      "bytes": 682,
+      "sha256": "3E6476BB6C25A2F78F3EA55D3B0A2C95039A90AD35B2854785C3BE536F7DD39B"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/manifesto.json",
+      "bytes": 2641,
+      "sha256": "0A72D33984CDBE18C42C128CD7596C057C681FAD1EB2DE5BDF2BB86907D30E5A"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/artefatos.json",
+      "bytes": 167,
+      "sha256": "B280FA5B5A6CAE366880A4ADC38CC27BA2FC388EC5F040531409AA769D026B16"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/medicoes.csv",
+      "bytes": 2404,
+      "sha256": "F518F624180E9EEF6EA65F825D8602946D1A4BAD16E0986886B39159DCE42BC6"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-01.stderr.log",
+      "bytes": 16793,
+      "sha256": "CC60A8E16C2D15F3B8BA7A63643DC5FB111D48670D63CC3A5ABBD036986542A8"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-01.stdout.log",
+      "bytes": 4014,
+      "sha256": "F666EF1EEB03470174AE8D0815786500BA6EA92FD108AD0082BA8956AA6F68A7"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-02.stderr.log",
+      "bytes": 16793,
+      "sha256": "5311BD67DED8C9EC47E2AA2175A4BD548EB32F8BF80D731B83AC94DAFFA9C8CF"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-02.stdout.log",
+      "bytes": 4014,
+      "sha256": "0A5025B4400C8E7D208B280ECD7C5D8405F5D3AF17AA717D62C9C43C5ADC14A9"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-03.stderr.log",
+      "bytes": 16793,
+      "sha256": "9FF68E3EC0303762924B63281D608CDAB07B9AC5188B6466799325B8AC814470"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-03.stdout.log",
+      "bytes": 4014,
+      "sha256": "645A0219C6E8260C8A485DC3140452AE07D0DF75315091C66E592230F9A25B0B"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-04.stderr.log",
+      "bytes": 16793,
+      "sha256": "4AEC407BC8D271B3BE796F39262F00E80883BDB702373F4DC0CA271175BC622B"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-04.stdout.log",
+      "bytes": 4014,
+      "sha256": "1F92B162C84FD80635FD92060BF96F5865B3FE1127763BFC577C7CF50B05420F"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-05.stderr.log",
+      "bytes": 16793,
+      "sha256": "1861AA238729E0E5F28CD1B92D6960D51DDCFDD5EE4A894177616612E91C9CBF"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-05.stdout.log",
+      "bytes": 4014,
+      "sha256": "D31A582880A7626AA9F12E3E6E0B6CCFD31B7B42C5A6BCEA7C22589754C6D011"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-06.stderr.log",
+      "bytes": 16793,
+      "sha256": "3A79095D49552F00E9591938F6139BF8FBFC9957FA5D193CA66D5F948684BA6E"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-06.stdout.log",
+      "bytes": 4014,
+      "sha256": "448C399ABBD3902ABAD7A2E6FE21EF4CD946AF4089F712E50F2989EDBEAD6C50"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-07.stderr.log",
+      "bytes": 16793,
+      "sha256": "4BF5919571564B8423EC87EE91A8A77D2F6FF2DEE4B5038546FA46D008F5E20D"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-07.stdout.log",
+      "bytes": 4014,
+      "sha256": "299645B488B67786472A83C604027250BD0564A541798E1118A13EB764B78ABF"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-08.stderr.log",
+      "bytes": 16793,
+      "sha256": "2EF6A7CFCC993DB8D571F63233AD0D62693043DB85032CF045D1EB89021784A5"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-08.stdout.log",
+      "bytes": 4014,
+      "sha256": "3F88601094C0D5AB110EA4CA7DB03B665F50FA77A81AEF59BF6A63CE43639204"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-09.stderr.log",
+      "bytes": 16793,
+      "sha256": "2032BFEEF63F79F908F1152C59A4DFAB02D563EB0292ADD5E5F7914E34A09220"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-09.stdout.log",
+      "bytes": 4014,
+      "sha256": "0F464CB8ACE4C578E1908A8F701CE2461636228DCBE2D905878879382F6C7429"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-10.stderr.log",
+      "bytes": 16793,
+      "sha256": "050603A8E727EF94B68DB58AEF39074021E78C699B9C3E0E53D671B3A5CA97BD"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/monolito-10.stdout.log",
+      "bytes": 4014,
+      "sha256": "10E76585779FEB3F436209E8C4047119118278B8369280C2434A5CD99359A249"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/cbo/ck.stderr.log",
+      "bytes": 228,
+      "sha256": "861BC875CB273D3EDA04F0324AF4D0A0D2B18F4F33A093979EA24388D116E746"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/cbo/ck.stdout.log",
+      "bytes": 22,
+      "sha256": "41AB4BD15A6922A5E9105D01A30AC67259903EC8462D92E375A2E5035D4639BD"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/cbo/class.csv",
+      "bytes": 13027,
+      "sha256": "D4D69171073082BDF49671A802C1C493D9F77F2370B0C0D4C045D5101DE3CF48"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/cbo/field.csv",
+      "bytes": 40853,
+      "sha256": "BE7C2D1E8A610F3AB64B90E9F1D09E9A800E8C1030C8DB955FF3507011BAAF1B"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/cbo/metadados.json",
+      "bytes": 316,
+      "sha256": "110607AF11B06171B014FD6233E97D88EF46E7626492B5143B776FC78043DDB0"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/cbo/method.csv",
+      "bytes": 76190,
+      "sha256": "1405EE79046A1B3FCA69F9C2ED1EA81E8B6CC66BB7CB130FAEF6D97A0EEFADB9"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/cbo/variable.csv",
+      "bytes": 183526,
+      "sha256": "E00CA0EF05164710E261B4E168FC959382863F262A87A16104DB131CACB29C0D"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/artefatos.json",
+      "bytes": 167,
+      "sha256": "24D5CA7234587517EDD7CB6CD56DDCEAF2F7AA622762474F49ECC4F52B5D3239"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/medicoes.csv",
+      "bytes": 4423,
+      "sha256": "98D0DBE8570AEE2616AA58B40C44858558BDF961A969A08E36A6EBEB037FE221"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-1.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-1.stdout.log",
+      "bytes": 16771,
+      "sha256": "8B1D510BF754A4D37BB4FF0549140577581693C8CD3291066D3A1BE45DDEBD1F"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-10.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-10.stdout.log",
+      "bytes": 16771,
+      "sha256": "9B68643279EA8F32D9801C769329055CA994AADEA3DEE979AFD5E07A1BC814FE"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-2.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-2.stdout.log",
+      "bytes": 16770,
+      "sha256": "68171C8225031D0D53BE064F09390A8DF260C2876733A3684C0C0C4C51EA42C8"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-3.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-3.stdout.log",
+      "bytes": 16770,
+      "sha256": "0A064897D673944C02DAD717098ECE510C780459BD1FB05D7FFB4D52780648B2"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-4.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-4.stdout.log",
+      "bytes": 16772,
+      "sha256": "3F5A1FB90211894ED19ABF07BE5152538EF50AB27B8ACCB0EFE9902A0B3DB065"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-5.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-5.stdout.log",
+      "bytes": 16785,
+      "sha256": "40D094AEE4858CF1D8B4242CCD5D21EEDABF62A1CECF7A4541D2241B5CE6A142"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-6.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-6.stdout.log",
+      "bytes": 16786,
+      "sha256": "F279276A38E550D9BA433C195D520F73825006FA1FC6C6A1754E7D587439C257"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-7.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-7.stdout.log",
+      "bytes": 16771,
+      "sha256": "193D13B6E5B00D476B00F6DFC09062EB7787A8A24CA16EACB0A4D8EDEB6B5624"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-8.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-8.stdout.log",
+      "bytes": 16771,
+      "sha256": "15CBC81F8F873C0499B1F749781E9AAD071E1477DC420B97456D248B7291E277"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-9.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/monolito-9.stdout.log",
+      "bytes": 16772,
+      "sha256": "AA3D8ACDF6C40C0F5F3660B5B60CAC28D8FA9FEF79E8E161371472655018856C"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/artefatos.json",
+      "bytes": 41962,
+      "sha256": "715B95CDC28BBF065A4A884C969A24427A33003379CEA36501A72386E196676D"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/medicoes.csv",
+      "bytes": 2390,
+      "sha256": "F32065E655579A199444F2A1B6A6292EE22D27B3E9E30759AFB2348F1E2A2558"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-01.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-01.stdout.log",
+      "bytes": 48345,
+      "sha256": "ACEEE81503643E2F600718D81AE0AA09314AEEDF040F8DB9CCCFC4D13DC6ED8A"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-02.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-02.stdout.log",
+      "bytes": 48353,
+      "sha256": "270469A45FD53102066935B5FE472CF48C1921FE6B6ECD9E35CA46E549A49E58"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-03.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-03.stdout.log",
+      "bytes": 48387,
+      "sha256": "47476AE381585FB664600D3997ACA133ACEA5EBFCF7375C24D73EC1BCC1DFB73"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-04.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-04.stdout.log",
+      "bytes": 48355,
+      "sha256": "6BD661C5284E30AD483A682BC595BB77689CE096357792B35603FB50B9983C55"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-05.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-05.stdout.log",
+      "bytes": 48356,
+      "sha256": "2754FA1E95346DD45726700AFF920ADDD7779C3C08CA3DE5D87DE63805907191"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-06.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-06.stdout.log",
+      "bytes": 48364,
+      "sha256": "890FFD75CE8F2C129B19F9368F16CD85992654F0406C1138A95DD6664DC94580"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-07.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-07.stdout.log",
+      "bytes": 48346,
+      "sha256": "86D732C1F8AFB607199A81BC4113A49AE190841727C9E3F2E2DB0CC1C74DBD04"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-08.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-08.stdout.log",
+      "bytes": 48356,
+      "sha256": "385521091249F38BB086A3D4D5DA4F650BD7ECF604C497423D6076D783F6AD06"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-09.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-09.stdout.log",
+      "bytes": 48349,
+      "sha256": "76825CD771CF6D5820D79BFE10C6127B37B8B43B617877195D85F3B6FA416026"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-10.stderr.log",
+      "bytes": 398,
+      "sha256": "26B4729202E89696A9C350D33969BE962F625026849927647C885BA7EA36E833"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/servico-10.stdout.log",
+      "bytes": 48350,
+      "sha256": "9E592195EF252B6A6D8E9C526904B40397BDA7BF236E22756A4BF71AE719A9E6"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/cbo/ck.stderr.log",
+      "bytes": 228,
+      "sha256": "861BC875CB273D3EDA04F0324AF4D0A0D2B18F4F33A093979EA24388D116E746"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/cbo/ck.stdout.log",
+      "bytes": 22,
+      "sha256": "41AB4BD15A6922A5E9105D01A30AC67259903EC8462D92E375A2E5035D4639BD"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/cbo/class.csv",
+      "bytes": 9573,
+      "sha256": "ECA6245A5EF5DCF215E001E25E6F34D3CA42CF276FA9B03A8EF8CBB51CB1CA26"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/cbo/field.csv",
+      "bytes": 41230,
+      "sha256": "BDB9C61F0FB5D7161DE2F25912E5C4D3AE589FC63139C435245BCFBCD0C5DCE6"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/cbo/metadados.json",
+      "bytes": 315,
+      "sha256": "41A63C4AA16BE88FEAC3B688655C893C5089AB11DBFF1C66987A53206E38C15E"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/cbo/method.csv",
+      "bytes": 31842,
+      "sha256": "71B14D658AB327E0437B9903F7D1B452FC9386EFEDECA5D3E5F9E4348ED553EF"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/cbo/variable.csv",
+      "bytes": 48368,
+      "sha256": "6183D3524A75727C1B1AD697022855BA53B710B06EE3276D2744533F7C0D4A92"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/artefatos.json",
+      "bytes": 41962,
+      "sha256": "2B2893A4D4AB135B15B754437FFB44F9821F275E329AE4FEC7AEE44EE77AB350"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/medicoes.csv",
+      "bytes": 3443,
+      "sha256": "D674D02C0DFF2D93390B88499C8446C55100BB5CEBD580F17776FA4B1A663AC1"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-1.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-1.stdout.log",
+      "bytes": 682,
+      "sha256": "D42210997ABCFA1DE8FDA8AE6DE1A25F79660A1889027066AB1F02E8D4FD5C8D"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-10.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-10.stdout.log",
+      "bytes": 682,
+      "sha256": "6237EAC7AAE52844961227D8BE2DBFC8AB6F4CA63631ACEE89FA26AC69C9B4E6"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-2.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-2.stdout.log",
+      "bytes": 682,
+      "sha256": "42B70C28F293CD7F35273BF31EEA8386D94481F87B71B54ABFD64A2E86E1A1E4"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-3.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-3.stdout.log",
+      "bytes": 682,
+      "sha256": "6E446FEDC411E0411CD3DFBEE909346DC7C0F152C5CF04FD070EF94AC392BB10"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-4.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-4.stdout.log",
+      "bytes": 682,
+      "sha256": "8766C12ACEA1CA90FE051E3C28C3DABC6909F0B039C0E32B4195D4485FF12B08"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-5.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-5.stdout.log",
+      "bytes": 682,
+      "sha256": "E5F2D7303B3EA8F567F4FEABAFB43BB3CC6360F3A5946EEF17E62A0AEA7B47F8"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-6.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-6.stdout.log",
+      "bytes": 682,
+      "sha256": "03AF734167D8DACCF50191D92D92C14F7ADAC16C88D043DEE2A807BD6E0EDCDE"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-7.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-7.stdout.log",
+      "bytes": 682,
+      "sha256": "D45CEF8611905D9679F93283094DE170291F99E82DA0F4DABF1A56DB80BB4D84"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-8.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-8.stdout.log",
+      "bytes": 682,
+      "sha256": "6E617CEE4EDF6EA2EBFBE6E0D1C77BADA8A0B67676B20F85475A7FFEBBD413D5"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-9.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/servico-9.stdout.log",
+      "bytes": 682,
+      "sha256": "A49D6C6A4402F18883BCDBA6D8A551A5B948020BBB2539BE64349AD6E0368C12"
+    },
+    {
+      "caminho": "metricas/pos-migracao/final-v2-pos-20261023-01/validacao-funcional.json",
+      "bytes": 955,
+      "sha256": "2D06EC7120CD9D32EBAF6682F874BFBB0C5409C804819A26096C8B3C665CB797"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/manifesto.json",
+      "bytes": 734,
+      "sha256": "E23DD325D9AA96DD0133499D2BC83A6C07424DF9440A2947D48ED76AC73C4B41"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/medicoes.csv",
+      "bytes": 3267,
+      "sha256": "C616BADE6320A55990BCF05521BE4E280DC729CC2E521A0247838FEF3EA047D3"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-01.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-01.stdout.log",
+      "bytes": 2632,
+      "sha256": "3567FC4B907E6FF68F418F47E179C11A70AE2C7C82EF8D07838A3A3F670665B6"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-02.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-02.stdout.log",
+      "bytes": 2632,
+      "sha256": "A8FE6DD6D42E430C1131658AFCF20F6E7A73DFA0B79FE2271BDEB2DBC4DE9ED6"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-03.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-03.stdout.log",
+      "bytes": 2632,
+      "sha256": "52C6E7B0CA53126633BB6834550C024D3462B87464680B1AAB903D6CBE986D44"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-04.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-04.stdout.log",
+      "bytes": 2632,
+      "sha256": "FD208070CC8A5637920502ACA9489A935B2BA89345D31CBD0E7C7E362015A46C"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-05.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-05.stdout.log",
+      "bytes": 2632,
+      "sha256": "7D200B0C167DBEA50A82A53B4F655C5758D811E6E492EEA508AF4156D14E62F7"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-06.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-06.stdout.log",
+      "bytes": 2632,
+      "sha256": "09D859D036D2AB2AF15E2704F53FAB11CE904F26F0BF519C5025B56BAAFDD73E"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-07.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-07.stdout.log",
+      "bytes": 2632,
+      "sha256": "C31E92B6BE20D276A00157FD40B5825E34313471560E64D31DADFE5D3E8A7E45"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-08.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-08.stdout.log",
+      "bytes": 2633,
+      "sha256": "F9DE8929DAFA7675BAC37EC1B0224380BAFC21CEBFEE3FECB1ACA2CF9987A56E"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-09.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-09.stdout.log",
+      "bytes": 2632,
+      "sha256": "42553A4DEE181D5AC5BE25ECC2BA3C5BEF26EC7DEB11B43FD31CC58D201E1EE0"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-10.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/monolito-10.stdout.log",
+      "bytes": 2632,
+      "sha256": "3FCC34289440494007F5B727ABAA835F5DDAA11C52759851AC3B2A69F41CDD59"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/manifesto.json",
+      "bytes": 714,
+      "sha256": "92FB2289E0000B9116CAAFC8CD081C44030142BCA4FDE0805046A72189817A50"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/medicoes.csv",
+      "bytes": 3251,
+      "sha256": "0394F4CE31E868C888E469861B2212276D6D9C9116CF64D8858E67ED1011AFE6"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-01.stderr.log",
+      "bytes": 199,
+      "sha256": "1DFF7C3270C3D10778EE28235002D86402D0BF23AB0A02A57DC359BD7CBF9B96"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-01.stdout.log",
+      "bytes": 1991,
+      "sha256": "5A7C48F035BF766EBF2DAA20CD7C8705668C0C5573E381B584C245C8022ABAFF"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-02.stderr.log",
+      "bytes": 199,
+      "sha256": "1DFF7C3270C3D10778EE28235002D86402D0BF23AB0A02A57DC359BD7CBF9B96"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-02.stdout.log",
+      "bytes": 1991,
+      "sha256": "37DB8A626339DD1CBB5883A347B391AD815BE8086CE2CCE7D9FE45EDA040E26A"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-03.stderr.log",
+      "bytes": 199,
+      "sha256": "1DFF7C3270C3D10778EE28235002D86402D0BF23AB0A02A57DC359BD7CBF9B96"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-03.stdout.log",
+      "bytes": 1991,
+      "sha256": "1C67F84713222C167740E603533E2D7C1ECC4583C2BA8DD8E8E44D485953AFB6"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-04.stderr.log",
+      "bytes": 199,
+      "sha256": "1DFF7C3270C3D10778EE28235002D86402D0BF23AB0A02A57DC359BD7CBF9B96"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-04.stdout.log",
+      "bytes": 1991,
+      "sha256": "E0EFD7582454D8BEAE450B321E1446FDBBD0EAB287CCC27312B5EAA35461AB0C"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-05.stderr.log",
+      "bytes": 199,
+      "sha256": "1DFF7C3270C3D10778EE28235002D86402D0BF23AB0A02A57DC359BD7CBF9B96"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-05.stdout.log",
+      "bytes": 1991,
+      "sha256": "9ECD253BBD69F9D4E716939A7CB35EC766852C841E3BA295032A6D0599D9116D"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-06.stderr.log",
+      "bytes": 199,
+      "sha256": "1DFF7C3270C3D10778EE28235002D86402D0BF23AB0A02A57DC359BD7CBF9B96"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-06.stdout.log",
+      "bytes": 1991,
+      "sha256": "6B90B5C108D78D90EF48408EBF4F8EB057718611CC88482B21AD2555444804A8"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-07.stderr.log",
+      "bytes": 199,
+      "sha256": "1DFF7C3270C3D10778EE28235002D86402D0BF23AB0A02A57DC359BD7CBF9B96"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-07.stdout.log",
+      "bytes": 1991,
+      "sha256": "D03BD258D6A6EF975EBBB57D375BC405EEB9C95248AD6BEDD87E7141880A17EE"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-08.stderr.log",
+      "bytes": 199,
+      "sha256": "1DFF7C3270C3D10778EE28235002D86402D0BF23AB0A02A57DC359BD7CBF9B96"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-08.stdout.log",
+      "bytes": 1991,
+      "sha256": "3B57A12769D2F417CA256C40267A1948EA091D00F5F769E534533DA4C239CCF4"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-09.stderr.log",
+      "bytes": 199,
+      "sha256": "1DFF7C3270C3D10778EE28235002D86402D0BF23AB0A02A57DC359BD7CBF9B96"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-09.stdout.log",
+      "bytes": 1991,
+      "sha256": "FA0A3CAC9F5224D186BBF6EC13B92C90395B4C163F706E513A1A4D98FA7BB6A3"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-10.stderr.log",
+      "bytes": 199,
+      "sha256": "1DFF7C3270C3D10778EE28235002D86402D0BF23AB0A02A57DC359BD7CBF9B96"
+    },
+    {
+      "caminho": "metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/servico-10.stdout.log",
+      "bytes": 1991,
+      "sha256": "7E341F9EDFC415B7108C87722F860C3D05FFC40B8B84A3CF18E1A915EE80B159"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/manifesto.json",
+      "bytes": 2640,
+      "sha256": "65CF52D0390133963DE39E1B1760315EC65A31A6A6A3CCC7A4D8C19ABFF151BF"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/artefatos.json",
+      "bytes": 167,
+      "sha256": "42E40530AFD9F179D4CC6181C973BF7D886DFF5836ED9FC46FF235A6836BF3D7"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/medicoes.csv",
+      "bytes": 2403,
+      "sha256": "57C95AD46A52A5487AFD23AAF9867E9A7A858F49518D5F1D8E72A4353222747B"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-01.stderr.log",
+      "bytes": 24126,
+      "sha256": "04F1B620F236C2D6EACAAD6FC0794E1588B80C84E7742B1420DDDCE8EEF5C60F"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-01.stdout.log",
+      "bytes": 4324,
+      "sha256": "6AE09939E22A5CC2BB57D0E51D0A0F07DB66B5E9FFF2B76CEE57E7A4FDA89772"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-02.stderr.log",
+      "bytes": 24126,
+      "sha256": "9F551780AE380B324432842585C0347CBE5FC7878AF525BE63974ADE7069861F"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-02.stdout.log",
+      "bytes": 4324,
+      "sha256": "3E4E7BC35135FE72F662768F56030C198C122B7C1C6060D035391543B42D9277"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-03.stderr.log",
+      "bytes": 24126,
+      "sha256": "F808B61371D2A7DE0F7453B079954D911EB0450B046D6ED031BC829472727079"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-03.stdout.log",
+      "bytes": 4324,
+      "sha256": "73F65EDF8733E1EF0CB9EEDD3EBB9D36204EFA4032CFFA1C7D4CA4EE022DAB86"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-04.stderr.log",
+      "bytes": 24126,
+      "sha256": "22159CFDD4DD921CF2B3161E452C4ED7D23C043FDC5BE2D046CF9F6DEB27830B"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-04.stdout.log",
+      "bytes": 4324,
+      "sha256": "75BAD5B04B2340DAD657DF8F0FA00ABBE92FCA02BF461C8727B4B4BCB938EBCD"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-05.stderr.log",
+      "bytes": 24126,
+      "sha256": "6F621F36453FDE7BC8FA5B2FCA8CA313D9BC73F3C9C0C786C180750F201AFBC0"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-05.stdout.log",
+      "bytes": 4324,
+      "sha256": "D5B72E86FF27930D7D2846E83AE34214D814AF1AC195212D4EB1F3F5BCB57C07"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-06.stderr.log",
+      "bytes": 24126,
+      "sha256": "FE6A934C9C7ECFFD5CA29394C20E593A118D0580EF3F944457C777949141B7DF"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-06.stdout.log",
+      "bytes": 4324,
+      "sha256": "7FE711442AFC131AC83230566C4987FE23A5E8F42F33818039D3610A4682578B"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-07.stderr.log",
+      "bytes": 24126,
+      "sha256": "206539314C86663504852E2937D4D5355B8132A05468D2B8AF57043BAC57D0CE"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-07.stdout.log",
+      "bytes": 4324,
+      "sha256": "989D00CAD5B870FD4C28F7B301E2D2F692E7CE321025A992FBE5A804FC927196"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-08.stderr.log",
+      "bytes": 24126,
+      "sha256": "7BC5DC48A3809C9B09BE034B48B041D0C21D1E5BDCFA376A3A860ECABBFEF5A9"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-08.stdout.log",
+      "bytes": 4324,
+      "sha256": "32570FCDE026A8A433EE69B3832EB3B44EC91CB18CD949EAEF77738024854FED"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-09.stderr.log",
+      "bytes": 24126,
+      "sha256": "7CCB770DE41346118E02046612E69DFE1E88653DEDBE3BB0A563C962F0510917"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-09.stdout.log",
+      "bytes": 4324,
+      "sha256": "888EEE6098AFE09287D924CC7E074BAC6F3C6DE5F658C2879366A18963ADE10C"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-10.stderr.log",
+      "bytes": 24126,
+      "sha256": "35101209501A1052DA868EAB334399A5C7DF6FA11BF3FCBFDDF20378CFC8868B"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/monolito-10.stdout.log",
+      "bytes": 4324,
+      "sha256": "608FBFC9D6B6F66807DE096F673C3B4ADB84D4AE988B73831CDF6D1B9767EAC6"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/cbo/ck.stderr.log",
+      "bytes": 228,
+      "sha256": "861BC875CB273D3EDA04F0324AF4D0A0D2B18F4F33A093979EA24388D116E746"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/cbo/ck.stdout.log",
+      "bytes": 22,
+      "sha256": "41AB4BD15A6922A5E9105D01A30AC67259903EC8462D92E375A2E5035D4639BD"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/cbo/class.csv",
+      "bytes": 13280,
+      "sha256": "C31B7B2A42D9399EE6D6D2DD6F2827F17766CAB7ACBEE97C905B62725F449A8F"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/cbo/field.csv",
+      "bytes": 42087,
+      "sha256": "F1BA3D85EB4C323EA0991C8ABD59D23AE23A4F1EA8A697706E92913DEACE9A50"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/cbo/metadados.json",
+      "bytes": 316,
+      "sha256": "42BA56722DB26714FFFA8F00A683BC0F41030DF083BC26D5D8529121909979F4"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/cbo/method.csv",
+      "bytes": 77786,
+      "sha256": "A81943CD8C6EBB1E17BB1EA276FA411D5E6863C86A8552ED336470FA332F1B7C"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/cbo/variable.csv",
+      "bytes": 176755,
+      "sha256": "724BF91466D1CF3118C80D58921447870760E969C62BD36F9D4A63D9317369D2"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/artefatos.json",
+      "bytes": 167,
+      "sha256": "42E40530AFD9F179D4CC6181C973BF7D886DFF5836ED9FC46FF235A6836BF3D7"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/medicoes.csv",
+      "bytes": 4422,
+      "sha256": "69CBD305965238FA1C945D75FC7C44137475825F2F0892915B3BB878A1EC4F12"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-1.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-1.stdout.log",
+      "bytes": 17370,
+      "sha256": "CBDC0152A19151DE01B6075203D2FC91609F255B8C27D1F2B6DAE182A20B6071"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-10.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-10.stdout.log",
+      "bytes": 17354,
+      "sha256": "5D2FC73C30DF640EE47E814C18AF487B5AA05F0EAFC76FCB0DC8EBA7FD0B1D92"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-2.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-2.stdout.log",
+      "bytes": 17357,
+      "sha256": "DFA02FD873C9B8592CF022D8781085EA7AD2583FAFB44039E04DB59BCAB0ED4A"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-3.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-3.stdout.log",
+      "bytes": 17356,
+      "sha256": "F55929A0F4065085B116614613B85EBE1309F362A79ED345A3FFF463979A53C0"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-4.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-4.stdout.log",
+      "bytes": 17356,
+      "sha256": "89E811FED071A0A2C9744734C37FB626D420D57001A2CC2C958AE7E81071759E"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-5.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-5.stdout.log",
+      "bytes": 17355,
+      "sha256": "38DCB95BF060CBC662E428B2F6155BB0A1BEA03F0A4B7515C2F0C33D219A08EA"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-6.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-6.stdout.log",
+      "bytes": 17372,
+      "sha256": "D9B174F3EA9149B1F0716115C3B4A8DA3263E56A053A83AB2518F45978C820F4"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-7.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-7.stdout.log",
+      "bytes": 17356,
+      "sha256": "B0857C90F84F4E20116A7336F7A43A6A16820E9C2CDB62C689D5C896509F5331"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-8.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-8.stdout.log",
+      "bytes": 17357,
+      "sha256": "DCB47A3D17F675407768586176FAD6DCADF5C133884FE6AB01DB8EC848CAA68E"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-9.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/monolito-9.stdout.log",
+      "bytes": 17357,
+      "sha256": "940E238C5E2E1E437E60D6775E863263D80CFD1CE64F7AF39A1775222165318A"
+    },
+    {
+      "caminho": "metricas/pre-migracao/final-v2-pre-20261023-01/validacao-funcional.json",
+      "bytes": 913,
+      "sha256": "8A58BE61BD7248131E58340E19781DEBFB774A6C02E3D648B6A1FE5E3CDE1095"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/manifesto.json",
+      "bytes": 734,
+      "sha256": "0BE185D33136C2D9D8B01F8B63B87E1E845D19CAB60DBBB3CF0ACE02BF80727C"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/medicoes.csv",
+      "bytes": 3269,
+      "sha256": "6B4458F505A5A8710BAFA6F26AAB92DAB6A4D00F6A7D62482136A6D76DC9F0F5"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-01.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-01.stdout.log",
+      "bytes": 2632,
+      "sha256": "B0B2625CBEDD4AA7C37D0FD80CCAAB2F75661649BD6187096E0A84A812EF1D7D"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-02.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-02.stdout.log",
+      "bytes": 2632,
+      "sha256": "1CC99A09B42407A09C2647C6708C8942A664EFB688A99A9EF09F97D1F000D104"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-03.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-03.stdout.log",
+      "bytes": 2632,
+      "sha256": "2D93A2AE918494301E0B0DB7DE5325C776E36E586A6C7D46FF9314113847F01D"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-04.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-04.stdout.log",
+      "bytes": 2632,
+      "sha256": "1B7621E6A70DA21C3491217F0276EF45885FD3504266E520C6D6C53C26C7A99B"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-05.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-05.stdout.log",
+      "bytes": 2632,
+      "sha256": "B9729CEF7D0EB270400DAAF372CACD233CD5D907324FE318EB42358A4C876FD0"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-06.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-06.stdout.log",
+      "bytes": 2632,
+      "sha256": "A7214A0E84A676CC5AD75DAF418494748C38D81065CA9659231F4A9CE8D6F302"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-07.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-07.stdout.log",
+      "bytes": 2632,
+      "sha256": "8BF01318A4C2B954B0B69A180E545481207B0B1C5279FF867F2AE5062784059B"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-08.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-08.stdout.log",
+      "bytes": 2632,
+      "sha256": "B8B01C990F07C8BCAD655E21C806069FAE475A646A7F85EC63D272A1D7C306EB"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-09.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-09.stdout.log",
+      "bytes": 2632,
+      "sha256": "CBF37A3C279FEE8CE3458CD6BB2BEB647FDB6235CCA625ADB4785AAED79BD018"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-10.stderr.log",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "caminho": "metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/monolito-10.stdout.log",
+      "bytes": 2632,
+      "sha256": "3B315D4243D76185FD33ED198028A17645D8AD7295C03A550D6A2F5A803D66C7"
+    },
+    {
+      "caminho": "metricas/resumo-estatistico.csv",
+      "bytes": 3442,
+      "sha256": "316AD8B9539F2C825107BF43690F6B91251D4D332E1B620B5575A1837B4BA3AA"
+    },
+    {
+      "caminho": "validacao/pacotes/TCC-Legado.zip",
+      "bytes": 3136507,
+      "sha256": "6B5B414617DA84BEE6C6A77E2ABB90312CAF6A106BC7F1A4313D6A78D145212E"
+    },
+    {
+      "caminho": "validacao/pacotes/TCC-Pos-Migracao.zip",
+      "bytes": 2849426,
+      "sha256": "36E7914160CCB9213BA3EEF09642EAEA049381F7059F1ED6DA0C9EE232475214"
+    }
+  ]
+}

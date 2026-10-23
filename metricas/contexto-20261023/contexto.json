@@ -1,0 +1,64 @@
+﻿{
+    "inicio_iso":  "2026-10-23T01:46:14.5742868-03:00",
+    "fuso":  "E. South America Standard Time",
+    "data_planejada":  "2026-10-23",
+    "raiz":  "C:\\desenvolvimento\\resultados-tcc\\recoleta-20261023-02",
+    "preparar_somente":  false,
+    "pacote_origem":  "C:\\Users\\Rhuan Elias\\Documents\\Codex\\2026-10-22\\voc\\outputs\\Recoleta_TCC_20261023",
+    "integridade_pacote_sha256":  "41F252D8740259D3E6383F8D981E59A25C2EAB1DBBE74CC1C46ADF546E7A18DC",
+    "executor_sha256":  "33DA81616350116D54460C0602EE63BC3A13FCE2F2D0B151628256F0C78062AB",
+    "powershell":  "5.1.26100.9711",
+    "sistema":  "Microsoft Windows NT 10.0.26300.0",
+    "git":  "git version 2.50.1.windows.1",
+    "pre_commit":  "aa55edd88c412725c84c10bff92e88a503e39fcb",
+    "pos_commit":  "45ff20b3d68ff484143a7b28e35b7c1d93fc361b",
+    "coletores_sha256":  {
+                             "medir-build-monolito-sem-testes.ps1":  "55C1BDDEB5CE5F67AF145EE55F5EFC029A15BD714DBEB601127637DEC92759B7",
+                             "campanha-v2.ps1":  "1ED17E68874356015D0707818A20DBD0E1BADE07E3B3C358E1482ACD24EDA17B",
+                             "medir-build-servico-sem-testes.ps1":  "78D274A109BEC3AACAD2583CA22363EED1B02316AC1F4062F63BE39B144E9336"
+                         },
+    "evidencia_funcional":  "Historica, previamente executada nos mesmos commits. Este executor NAO reexecuta os 41 casos funcionais.",
+    "politica_dados":  "Novas campanhas; sem sobrescrita; sem publicacao automatica; pilotos separados; banco descartavel isolado; fontes originais preservadas.",
+    "java_legado":  "java version \"1.8.0_201\"\nJava(TM) SE Runtime Environment (build 1.8.0_201-b09)\nJava HotSpot(TM) Client VM (build 25.201-b09, mixed mode)",
+    "java_servico":  "java version \"21.0.8\" 2025-07-15 LTS\nJava(TM) SE Runtime Environment (build 21.0.8+12-LTS-250)\nJava HotSpot(TM) 64-Bit Server VM (build 21.0.8+12-LTS-250, mixed mode, sharing)",
+    "maven":  "Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)\nMaven home: C:\\Program Files\\Maven\\apache-maven-3.9.11-bin\\apache-maven-3.9.11\nJava version: 1.8.0_201, vendor: Oracle Corporation, runtime: C:\\Program Files (x86)\\Java\\jdk1.8.0_201\\jre\nDefault locale: en_US, platform encoding: Cp1252\nOS name: \"windows 10\", version: \"10.0\", arch: \"x86\", family: \"windows\"",
+    "jboss_config_sha256":  "07141FF10A4D96A8044AD10B81F38495459E5ED6560B790D76CB66D8FAA029CD",
+    "ck_sha256":  "2F32FA347EF739E97152741828675A9939AEAFE61BEE3F196EE5AF264E612162",
+    "docker":  {
+                   "servidor":  "29.8.2",
+                   "sistema":  "Docker Desktop",
+                   "arquitetura":  "x86_64",
+                   "contexto":  "desktop-linux",
+                   "endpoint":  "npipe:////./pipe/dockerDesktopLinuxEngine"
+               },
+    "integracao":  {
+                       "tokens_distintos":  true,
+                       "tokens_caracteres":  48,
+                       "tokens_persistidos":  false,
+                       "cron_acelerado_removido":  true,
+                       "emprestimo_url":  "http://127.0.0.1:18081",
+                       "legado_url":  "http://127.0.0.1:18080/monolito-biblioteca",
+                       "portas_reservadas":  [
+                                                 4712,
+                                                 4713,
+                                                 8443,
+                                                 18080,
+                                                 18081,
+                                                 19990
+                                             ]
+                   },
+    "postgres_imagem":  {
+                            "nome":  "postgres:14-alpine",
+                            "id":  "sha256:f1341c01408dc7278e9d365ed4f860cd3f87dd16b4464ac326fc0f422083a579",
+                            "digests":  [
+                                            "postgres@sha256:f1341c01408dc7278e9d365ed4f860cd3f87dd16b4464ac326fc0f422083a579"
+                                        ]
+                        },
+    "container_recoleta":  {
+                               "id":  "baeb78fa8318d10afdefa7b2aa1b123723638156bd14457d6fa0a07b5cc2c2d4",
+                               "nome":  "tcc-recoleta-0f6e79d765d24bcb907824c80c65b6e5",
+                               "volume":  "tcc-recoleta-0f6e79d765d24bcb907824c80c65b6e5-dados",
+                               "preservado_apos_execucao":  true,
+                               "publicacao":  "127.0.0.1:5432:5432"
+                           }
+}

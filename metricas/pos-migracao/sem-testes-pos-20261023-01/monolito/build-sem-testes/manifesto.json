@@ -1,0 +1,14 @@
+﻿{
+    "protocolo":  "suplementar-build-sem-testes-v1",
+    "estado":  "pos-migracao",
+    "coleta_id":  "sem-testes-pos-20261023-01",
+    "repeticoes":  10,
+    "commit":  "45ff20b3d68ff484143a7b28e35b7c1d93fc361b",
+    "arvore_escopo":  "cbd8f5b37e2cd3f45a0f5b600d54b3548cb46901",
+    "coletor_sha256":  "55C1BDDEB5CE5F67AF145EE55F5EFC029A15BD714DBEB601127637DEC92759B7",
+    "java":  "java version \"1.8.0_201\"",
+    "maven":  "Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)",
+    "comando":  "mvn -B -o clean package -Dmaven.test.skip=true",
+    "sem_testes":  "nao compila nem executa fontes de teste",
+    "artefato_sha256":  "B4FE90E82EA677D61CA174A30E2DEECC55E2123CF5F03EFD23E87CB1BC6BFB72"
+}

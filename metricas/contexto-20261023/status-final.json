@@ -1,0 +1,48 @@
+﻿{
+    "status":  "sucesso",
+    "inicio_iso":  "2026-10-23T01:46:14.5742868-03:00",
+    "fim_iso":  "2026-10-23T02:19:19.8875775-03:00",
+    "fuso":  "E. South America Standard Time",
+    "raiz":  "C:\\desenvolvimento\\resultados-tcc\\recoleta-20261023-02",
+    "falha":  null,
+    "etapas_concluidas":  [
+                              "preparacao/verificacao-snapshots-instrumentos-e-evidencias",
+                              "ambiente/docker-isolado-pronto",
+                              "piloto-v2-pre-20261023-01/registrar",
+                              "piloto-v2-pre-20261023-01/build",
+                              "piloto-v2-pre-20261023-01/inicializacao",
+                              "piloto-v2-pre-20261023-01/cbo",
+                              "piloto-v2-pre-20261023-01/conferir",
+                              "piloto-v2-pos-20261023-01/registrar",
+                              "piloto-v2-pos-20261023-01/build",
+                              "piloto-v2-pos-20261023-01/inicializacao",
+                              "piloto-v2-pos-20261023-01/cbo",
+                              "piloto-v2-pos-20261023-01/conferir",
+                              "final-v2-pre-20261023-01/registrar",
+                              "final-v2-pre-20261023-01/build",
+                              "final-v2-pre-20261023-01/inicializacao",
+                              "final-v2-pre-20261023-01/cbo",
+                              "final-v2-pre-20261023-01/conferir",
+                              "final-v2-pos-20261023-01/registrar",
+                              "final-v2-pos-20261023-01/build",
+                              "final-v2-pos-20261023-01/inicializacao",
+                              "final-v2-pos-20261023-01/cbo",
+                              "final-v2-pos-20261023-01/conferir",
+                              "sem-testes-pre-20261023-01/medir-build-monolito-sem-testes.ps1",
+                              "sem-testes-pos-20261023-01/medir-build-monolito-sem-testes.ps1",
+                              "sem-testes-pos-20261023-01/medir-build-servico-sem-testes.ps1",
+                              "verificacao/110-observacoes-finais-e-inventario"
+                          ],
+    "erros_restauracao":  [
+
+                          ],
+    "avisos":  [
+
+               ],
+    "container_proprio_id":  "baeb78fa8318d10afdefa7b2aa1b123723638156bd14457d6fa0a07b5cc2c2d4",
+    "container_proprio_nome":  "tcc-recoleta-0f6e79d765d24bcb907824c80c65b6e5",
+    "volume_preservado":  "tcc-recoleta-0f6e79d765d24bcb907824c80c65b6e5-dados",
+    "container_original_reiniciado":  true,
+    "publicacao_automatica":  false,
+    "casos_funcionais_reexecutados":  false
+}

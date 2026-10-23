@@ -1,0 +1,17 @@
+estado,escopo,metrica,unidade,origem,n,media,mediana,desvio_padrao_amostral,minimo,maximo,fontes,observacao
+pos-migracao,conjunto,build,s,medido,10,58.214832490000006,59.007820699999996,3.6066939881351017,53.6795007,62.6446878,metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/build/medicoes.csv,
+pos-migracao,conjunto,inicializacao,s,medido,10,5.61193081,5.62317745,0.12910398381444724,5.4515573999999996,5.7928137,metricas/pos-migracao/final-v2-pos-20261023-01/conjunto/inicializacao/medicoes.csv,
+pos-migracao,monolito,build,s,medido,10,11.44005576,11.3965629,0.16988912368507506,11.2637699,11.7670124,metricas/pos-migracao/final-v2-pos-20261023-01/monolito/build/medicoes.csv,
+pos-migracao,monolito,build-sem-testes,s,medido,10,10.27977748,10.148037949999999,0.3195052845980097,9.9963683,10.957269,metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/medicoes.csv,
+pos-migracao,monolito,inicializacao,s,medido,10,5.84108646,5.2740361,1.3736043646661944,5.0957289,9.522639499999999,metricas/pos-migracao/final-v2-pos-20261023-01/monolito/inicializacao/medicoes.csv,
+pos-migracao,servico,build,s,medido,10,44.10761698,42.17595505,2.7104337936774643,41.7081406,48.2707431,metricas/pos-migracao/final-v2-pos-20261023-01/servico/build/medicoes.csv,
+pos-migracao,servico,build-sem-testes,s,medido,10,9.08229026,9.01478825,0.2496833540284537,8.8171581,9.5387667,metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/medicoes.csv,
+pos-migracao,servico,inicializacao,s,medido,10,1.30950139,1.2964786,0.03268512235247953,1.2739425000000002,1.3588058,metricas/pos-migracao/final-v2-pos-20261023-01/servico/inicializacao/medicoes.csv,
+pre-migracao,monolito,build,s,medido,10,11.95433291,11.942514249999999,0.0962391834724582,11.8364559,12.1922943,metricas/pre-migracao/final-v2-pre-20261023-01/monolito/build/medicoes.csv,
+pre-migracao,monolito,build-sem-testes,s,medido,10,10.13477065,10.14855795,0.04845147594328589,10.0371364,10.2056833,metricas/pre-migracao/sem-testes-pre-20261023-01/monolito/build-sem-testes/medicoes.csv,
+pre-migracao,monolito,inicializacao,s,medido,10,5.19870057,5.1825257,0.12495049206768119,5.0425841,5.3695258,metricas/pre-migracao/final-v2-pre-20261023-01/monolito/inicializacao/medicoes.csv,
+pre-migracao,monolito,cbo,tipos_acoplados_por_tipo,medido,42,4.738095238095238,4.5,3.6563311199891566,0.0,13.0,metricas/pre-migracao/final-v2-pre-20261023-01/monolito/cbo/class.csv,
+pos-migracao,monolito,cbo,tipos_acoplados_por_tipo,medido,41,5.024390243902439,5.0,3.8241849123574605,0.0,15.0,metricas/pos-migracao/final-v2-pos-20261023-01/monolito/cbo/class.csv,
+pos-migracao,servico,cbo,tipos_acoplados_por_tipo,medido,26,5.269230769230769,5.0,4.27605137768659,0.0,19.0,metricas/pos-migracao/final-v2-pos-20261023-01/servico/cbo/class.csv,
+pos-migracao,conjunto,cbo,tipos_acoplados_por_tipo,agregado,67,5.119402985074627,5.0,3.975387871526735,0.0,19.0,metricas/pos-migracao/final-v2-pos-20261023-01/monolito/cbo/class.csv;metricas/pos-migracao/final-v2-pos-20261023-01/servico/cbo/class.csv,Reuniao de 67 tipos; media ponderada pelas quantidades de tipos.
+pos-migracao,conjunto,build-sem-testes,s,estimativa,,19.36206774,,,,,metricas/pos-migracao/sem-testes-pos-20261023-01/monolito/build-sem-testes/medicoes.csv;metricas/pos-migracao/sem-testes-pos-20261023-01/servico/build-sem-testes/medicoes.csv,Soma de medias isoladas; nao houve serie conjunta observada.

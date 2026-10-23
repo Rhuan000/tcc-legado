@@ -1,0 +1,85 @@
+﻿[
+    {
+        "ordem":  1,
+        "tipo":  "piloto",
+        "estado":  "pre-migracao",
+        "coleta_id":  "piloto-v2-pre-20261023-01",
+        "repositorio":  "C:\\desenvolvimento\\resultados-tcc\\recoleta-20261023-02\\codigo\\pre-migracao",
+        "etapas":  [
+                       "registrar",
+                       "build",
+                       "inicializacao",
+                       "cbo",
+                       "conferir"
+                   ]
+    },
+    {
+        "ordem":  2,
+        "tipo":  "piloto",
+        "estado":  "pos-migracao",
+        "coleta_id":  "piloto-v2-pos-20261023-01",
+        "repositorio":  "C:\\desenvolvimento\\resultados-tcc\\recoleta-20261023-02\\codigo\\pos-migracao",
+        "etapas":  [
+                       "registrar",
+                       "build",
+                       "inicializacao",
+                       "cbo",
+                       "conferir"
+                   ]
+    },
+    {
+        "ordem":  3,
+        "tipo":  "final",
+        "estado":  "pre-migracao",
+        "coleta_id":  "final-v2-pre-20261023-01",
+        "repositorio":  "C:\\desenvolvimento\\resultados-tcc\\recoleta-20261023-02\\codigo\\pre-migracao",
+        "etapas":  [
+                       "registrar",
+                       "build",
+                       "inicializacao",
+                       "cbo",
+                       "conferir"
+                   ]
+    },
+    {
+        "ordem":  4,
+        "tipo":  "final",
+        "estado":  "pos-migracao",
+        "coleta_id":  "final-v2-pos-20261023-01",
+        "repositorio":  "C:\\desenvolvimento\\resultados-tcc\\recoleta-20261023-02\\codigo\\pos-migracao",
+        "etapas":  [
+                       "registrar",
+                       "build",
+                       "inicializacao",
+                       "cbo",
+                       "conferir"
+                   ]
+    },
+    {
+        "ordem":  5,
+        "tipo":  "suplementar",
+        "estado":  "pre-migracao",
+        "coleta_id":  "sem-testes-pre-20261023-01",
+        "repositorio":  "C:\\desenvolvimento\\resultados-tcc\\recoleta-20261023-02\\codigo\\pre-migracao",
+        "escopo":  "monolito",
+        "repeticoes":  10
+    },
+    {
+        "ordem":  6,
+        "tipo":  "suplementar",
+        "estado":  "pos-migracao",
+        "coleta_id":  "sem-testes-pos-20261023-01",
+        "repositorio":  "C:\\desenvolvimento\\resultados-tcc\\recoleta-20261023-02\\codigo\\pos-migracao",
+        "escopo":  "monolito",
+        "repeticoes":  10
+    },
+    {
+        "ordem":  7,
+        "tipo":  "suplementar",
+        "estado":  "pos-migracao",
+        "coleta_id":  "sem-testes-pos-20261023-01",
+        "repositorio":  "C:\\desenvolvimento\\resultados-tcc\\recoleta-20261023-02\\codigo\\pos-migracao",
+        "escopo":  "servico",
+        "repeticoes":  10
+    }
+]

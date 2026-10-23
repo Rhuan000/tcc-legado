@@ -2,50 +2,67 @@
 
 Repositório de apoio ao TCC sobre a extração da gestão de empréstimos de um
 monólito Java para um microsserviço Quarkus, com Strangler Fig e
-Anti-Corruption Layer. O sistema foi construído para representar
-características de aplicações legadas no ambiente do estudo.
+Anti-Corruption Layer. O sistema foi construído para representar características
+de aplicações legadas no ambiente do estudo.
 
-## Conteúdo
+Os resultados adotados no TCC são os da **recoleta de 23/10/2026**: 110
+observações de tempo e três análises estáticas CK. Para começar a auditoria,
+consulte o [índice dos dados](metricas/README.md), o
+[resumo estatístico](metricas/resumo-estatistico.csv) e o
+[inventário de integridade](metricas/integridade-publicada.json).
 
-| Caminho | Finalidade |
+## Navegação
+
+| Caminho | Conteúdo |
 | --- | --- |
-| [monolito-biblioteca](monolito-biblioteca/README.md) | Interface, cadastros, estoque e integração com o serviço no estado pós-migração. |
-| [tcc-moderno/emprestimo-service](tcc-moderno/emprestimo-service/README.md) | Regras, API, persistência e processamento de empréstimos. |
-| [medicoes](medicoes/README.md) | Três coletores ativos e protocolo de execução. |
-| [metricas](metricas/README.md) | Campanhas finais e séries suplementares utilizadas no TCC. |
-| [validacao](validacao/README.md) | Massa de ensaio, registros funcionais e roteiro de conferência. |
-| [migracoes](migracoes/001-comandos-emprestimo.sql) | Migração do esquema para o estado pós-migração. |
-| [docs/tcc/DIARIO-DE-BORDO.md](docs/tcc/DIARIO-DE-BORDO.md) | Decisões, testes e obstáculos registrados ao longo do estudo. |
+| [metricas](metricas/README.md) | Campanhas finais, logs, manifestos e contexto da recoleta. |
+| [medicoes](medicoes/README.md) | Três coletores exatos e procedimento para repetir a coleta manualmente. |
+| [validacao](validacao/README.md) | Pacotes dos testes funcionais, rastreabilidade, massa e roteiros. |
+| [monolito-biblioteca](monolito-biblioteca/README.md) | Interface, cadastros, estoque e integração no estado posterior. |
+| [tcc-moderno/emprestimo-service](tcc-moderno/emprestimo-service/README.md) | API, regras, persistência e processamento de empréstimos. |
+| [migracoes](migracoes/001-comandos-emprestimo.sql) | SQL da migração para o estado posterior. |
+| [docs/tcc/DIARIO-DE-BORDO.md](docs/tcc/DIARIO-DE-BORDO.md) | Decisões e registros do desenvolvimento. |
 | [ROTEIRO-TCC.md](ROTEIRO-TCC.md) | Percurso histórico da implementação. |
 
-## Revisões experimentais
+## Código efetivamente medido
 
-- Pré-migração: `aa55edd88c412725c84c10bff92e88a503e39fcb`, na linha
-  `experimento/pre-migracao-revisada`.
-- Pós-migração: `45ff20b3d68ff484143a7b28e35b7c1d93fc361b`, na linha
-  `experimento/migracao-revisada`.
+| Estado | Commit |
+| --- | --- |
+| Legado anterior | `aa55edd88c412725c84c10bff92e88a503e39fcb` |
+| Legado posterior e serviço | `45ff20b3d68ff484143a7b28e35b7c1d93fc361b` |
 
-Esses commits identificam o código medido. Os resultados foram publicados em
-commits posteriores. A `main` reúne o código pós-migração e as evidências
-selecionadas; mudanças de organização posteriores não redefinem os snapshots
-medidos.
+As séries suplementares sem testes utilizam esses mesmos commits. O serviço
+pertence ao mesmo snapshot posterior do monólito. Commits posteriores publicam
+dados e documentação; a revisão atual da `main` não substitui a identificação
+do código medido.
 
-## Ambiente
+## Execução e interpretação
 
-O monólito usa Java 8 e JBoss EAP 7.4; o serviço e o analisador CK usam Java 21.
-As campanhas registram Maven 3.9.11 e PostgreSQL 14. O arquivo
-`docker-compose.yml` configura o banco de ensaio e utiliza `init-db.sql`.
-As instruções de execução e integração estão nos READMEs dos dois projetos.
-As medições exigem o ambiente descrito em [medicoes/README.md](medicoes/README.md).
+O monólito utiliza Java 8 e JBoss EAP 7.4; o serviço e o CK utilizam Java 21.
+Os registros identificam Maven 3.9.11 e PostgreSQL 14. O protocolo detalhado,
+os hashes dos instrumentos e os comandos estão em [medicoes](medicoes/README.md).
 
-## Organização do acervo
+A execução de 23/10 foi coordenada por um executor PowerShell externo, arquivado
+com a campanha original. Ele preparou cópias fixadas nos commits, banco
+descartável e ordem das chamadas aos três coletores. O executor não integra
+este repositório. O manual apresenta os mesmos passos de preparação e coleta
+sem depender desse arquivo.
 
-A árvore atual mantém fontes, testes, configurações, scripts ativos e dados
-utilizados na análise final. Coletores anteriores, pilotos, campanhas
-preliminares e arquivos derivados removidos nesta organização continuam
-consultáveis no histórico, inclusive no commit
-`58a67c39281c54424b8ca5524d05135f58ed235a`, anterior à limpeza.
+As suítes automatizadas foram reexecutadas durante os builds. Os testes
+funcionais manuais são evidências anteriores dos mesmos snapshots; seus casos
+não foram reexecutados na recoleta. Inicialização significa disponibilidade HTTP
+dos endpoints especificados, e o build com testes inclui suítes diferentes
+entre os projetos. Esses limites fazem parte da interpretação dos resultados.
 
-Os CSV, logs e manifestos das campanhas finais e suplementares são preservados
-como registros originais. Arquivos de build, caches e dumps locais são
-ignorados pelo Git.
+## Preservação e histórico
+
+Os 307 arquivos brutos das campanhas finais foram copiados sem alterar bytes,
+observações, caminhos locais ou hashes. Atributos Git preservam os bytes dos
+coletores e dos registros. O inventário publicado cobre apenas o acervo
+selecionado; pilotos, cópias de código, bundles, builds, caches e dumps locais
+não integram a árvore de evidências.
+
+As campanhas anteriores de 20/10 permanecem consultáveis no commit
+[`0d83263d38860c5b271f10a3f668c7b78fba497a`](https://github.com/Rhuan000/tcc-legado/tree/0d83263d38860c5b271f10a3f668c7b78fba497a).
+O acervo anterior à primeira limpeza permanece no commit
+[`58a67c39281c54424b8ca5524d05135f58ed235a`](https://github.com/Rhuan000/tcc-legado/tree/58a67c39281c54424b8ca5524d05135f58ed235a).

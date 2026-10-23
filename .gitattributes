@@ -1,0 +1,4 @@
+# Preservar os bytes dos instrumentos e registros auditaveis.
+/medicoes/*.ps1 -text
+/metricas/** -text
+/validacao/pacotes/*.zip -text

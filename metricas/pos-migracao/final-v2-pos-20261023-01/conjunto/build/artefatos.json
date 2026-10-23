@@ -1,0 +1,702 @@
+﻿[
+    {
+        "caminho":  "\\monolito-biblioteca\\target\\monolito-biblioteca.war",
+        "sha256":  "99351DBF6DBD56126DA11AC09E2AA2B55284B501A6716861353BB0FC4DE74D21"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\app\\emprestimo-service-1.0.0-SNAPSHOT.jar",
+        "sha256":  "FA8B0A65EF81C888866582196B976155419DC35800F2D91161F3C4B76CD28CD3"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\io.quarkus.quarkus-bootstrap-runner-3.39.4.jar",
+        "sha256":  "C5AC30042832480FA77E1F76823F3F41FC76D7B7591BBAE9A9D7CAAFF5C98BA2"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\io.quarkus.quarkus-classloader-commons-3.39.4.jar",
+        "sha256":  "4B5753BD6574803E4F5CC3D90FA3744E444095C5A17B0C225A11D8CCA28AFD8F"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\io.quarkus.quarkus-development-mode-spi-3.39.4.jar",
+        "sha256":  "F9334D8F428A1C6479AE5A0F1D5B9F0DD05F624FEDECE5D132D9ACEB1B8779C3"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\io.quarkus.quarkus-value-registry-3.39.4.jar",
+        "sha256":  "4712FC9E791D12BF5FC92479487C12EEDB98FBECE5165AE1673E7655E6537422"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\io.quarkus.quarkus-vertx-latebound-mdc-provider-3.39.4.jar",
+        "sha256":  "FDAA836FB8EEF176744142ED882FA4E32C307F755511AAAFD01D13D2A0C6A592"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\io.smallrye.common.smallrye-common-constraint-2.19.0.jar",
+        "sha256":  "4454A2F32CAEADB47CF6F0565C667F64C21FACBEE959CF15BCFC8EC8755C471A"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\io.smallrye.common.smallrye-common-cpu-2.19.0.jar",
+        "sha256":  "845825EE711B0E0511C2CD12430680B767C6EE69E60D6B32BB90BEFD52420927"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\io.smallrye.common.smallrye-common-expression-2.19.0.jar",
+        "sha256":  "27863F0441ACD0B003536F63DDFD40F9F8C02F16D97D1FD1E9F616D683541AAA"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\io.smallrye.common.smallrye-common-function-2.19.0.jar",
+        "sha256":  "C78F2661E82821D3AC7153B88BEC4AAEC375E041AAE261832E5E5F4AC17F4800"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\io.smallrye.common.smallrye-common-io-2.19.0.jar",
+        "sha256":  "33D549ED88EB279926706A894459F8FC4AD8A23B1EB01B01B4C72D3E723DA877"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\io.smallrye.common.smallrye-common-net-2.19.0.jar",
+        "sha256":  "F3D1BE529E43214DF263F29703DEC41BC9B8D1BD0A4AF8678166814AE2DA5A96"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\io.smallrye.common.smallrye-common-os-2.19.0.jar",
+        "sha256":  "AC12BA8E86119EBD0A3B14D1053A3B6A4722F63978E9C718FB1FFCBBD4E3A3B5"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\io.smallrye.common.smallrye-common-ref-2.19.0.jar",
+        "sha256":  "56B3173AB124B82559FE6F16BFCBEFBE7F904C0E53D2507BB2E3606B43D6D1DE"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\org.crac.crac-1.5.0.jar",
+        "sha256":  "F4426E1641C8F0FA2F025A4CD7C40C285ABAF265930E6717ADFCAEF03D034850"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\org.jboss.logging.jboss-logging-3.6.3.Final.jar",
+        "sha256":  "7C12EE575508F81E22B1DB9334B969D0EC54EF0FD1DCBA24EEAB1A44235FC366"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\boot\\org.jboss.logmanager.jboss-logmanager-3.2.2.Final.jar",
+        "sha256":  "91D3D76C1E41D403CD717026CD6E8C4495068CB3A4A06461D9D984920FBB856C"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\com.aayushatharva.brotli4j.brotli4j-1.23.0.jar",
+        "sha256":  "5FCF13AD78D07319CC507465DCF61CBC3EFEE9F45C9AE1C42A9902414696BC0B"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\com.aayushatharva.brotli4j.native-windows-x86_64-1.23.0.jar",
+        "sha256":  "8F770F6D6C29CAADE53FC9FC7D848338A09471B080096ED7D5CE851E31CB9504"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\com.aayushatharva.brotli4j.service-1.23.0.jar",
+        "sha256":  "7F298D44DBB7688419F0179EE1DFA0E4436633272B05D38A5FAF3A2B8D08697B"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\com.cronutils.cron-utils-9.2.1.jar",
+        "sha256":  "02AF0E8B2FE93C9FA6EECF97B53B39FAAE14C5B996356EDB132E9FE620013744"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\com.fasterxml.classmate-1.7.1.jar",
+        "sha256":  "CC3299E5DF4FC24180E69477C890D07D38DB79DD2DECC0EF20E74A986897C0A1"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\com.fasterxml.jackson.core.jackson-annotations-2.22.jar",
+        "sha256":  "21DDB598807D3A51A876704EB979D9296E1C6A6F47AB1826FF88C6D6A127A2D0"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\com.fasterxml.jackson.core.jackson-core-2.22.2.jar",
+        "sha256":  "FF167A6317BE15895706C26668F45B898EFE40AB8780970658210FE1393D52A6"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\com.fasterxml.jackson.core.jackson-databind-2.22.2.jar",
+        "sha256":  "D0DA14C12B16B5D54719AA172D83B542FF4ABEB8B0FB7DB476FDE8CEECE760CA"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\com.fasterxml.jackson.datatype.jackson-datatype-jdk8-2.22.2.jar",
+        "sha256":  "5A767CC4BCB04034497422551AD5005B3AFFA3C8D691BDA26D1E7F473485DC15"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\com.fasterxml.jackson.datatype.jackson-datatype-jsr310-2.22.2.jar",
+        "sha256":  "9DF71CC7FB3781FD0BED6C05EEBBFA8B39292A49F5619E76FDD0D889F64C8F33"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\com.fasterxml.jackson.module.jackson-module-parameter-names-2.22.2.jar",
+        "sha256":  "D9A09A3A3EA34EC16E730207D04230CF144BD98BF8C6F366F363B40F6B61CC01"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.agroal.agroal-api-3.2.1.jar",
+        "sha256":  "2A22FB1B0A0FCE6B4890700257A9E7E57D80CF6752529CEA6E4BD818CDBD64D3"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.agroal.agroal-narayana-3.2.1.jar",
+        "sha256":  "0AB1D55B666A5CA667DFD6BED0E14B73A9BE579BF9488234281973A541B71332"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.agroal.agroal-pool-3.2.1.jar",
+        "sha256":  "EA61BE29058A92F5598E77279B1BB5E94D04490A137CA6629051668DF6EEDAF3"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-buffer-4.1.138.Final.jar",
+        "sha256":  "5BEF3EA2B9E80C5E8D03151CA1609BD75FD1E264863BF3E2F8D538392C0F2C38"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-codec-4.1.138.Final.jar",
+        "sha256":  "21B9B7717DA9ED7034C7A9EF4FCEA4A08825E8F52D775DA4D898364EDF99327F"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-codec-dns-4.1.138.Final.jar",
+        "sha256":  "715D8BA984FDE2C9FFC35917C8C1DFDEA6B10F0460922F4F6F587C92DB8F4EF1"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-codec-haproxy-4.1.138.Final.jar",
+        "sha256":  "56CC45103A0D24329E3065305C802360BEB0C921318222142C333059421F3964"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-codec-http2-4.1.138.Final.jar",
+        "sha256":  "C7521231535C252903D9E424E162F789B5B55B0B0799628EA466A9B3DAF49DAE"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-codec-http-4.1.138.Final.jar",
+        "sha256":  "7D9000E53C8E37504BE42B8DD7B646A7D1C73AD2CF801527FE3C6301880FE06F"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-codec-socks-4.1.138.Final.jar",
+        "sha256":  "BC15AD96188A6EEE2D0C5F7F8E443FA916FA30E74A65E220B1AC0A04574DDA87"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-common-4.1.138.Final.jar",
+        "sha256":  "B4EBB8FA44CD5790731928A83FD0F25A530E41C407C093BEF4A0196DB30B693F"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-handler-4.1.138.Final.jar",
+        "sha256":  "A79FB814E029DB17DA82BAEA25A0340172AF2C59F107FD20B394C1FA28680F21"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-handler-proxy-4.1.138.Final.jar",
+        "sha256":  "FD26635E06AF15B2DD3F7502A195DC19FCD451264948A8707FB26F60E4D510B9"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-resolver-4.1.138.Final.jar",
+        "sha256":  "50C338A0E5C9997513E738F0FCB47D579A9E8852D317BA367F5D141E210187C0"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-resolver-dns-4.1.138.Final.jar",
+        "sha256":  "A636815E5BCC9501A7D2C9BDBA8B058811DDEC5D0C76EC58FC6A165F4FACF21C"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-tcnative-classes-2.0.84.Final.jar",
+        "sha256":  "7A4437ABF98B0CEC053AF4443FE321177D2CFCCFEC7BCAD4E7D8B75571BBEC4D"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-transport-4.1.138.Final.jar",
+        "sha256":  "6C064C1CAE4D410B920ABFC07959A49DB1B4778A9547614373E97D31CAB0CAD6"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.netty.netty-transport-native-unix-common-4.1.138.Final.jar",
+        "sha256":  "8D1ADA8F185D6F6DA4CD79F9DAEEF39F1DB49908CFEC8BC2A1FB602458AA2341"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.opentelemetry.instrumentation.opentelemetry-instrumentation-api-2.28.1.jar",
+        "sha256":  "F4F82A26DC391CD8B9DB32046AA6FE01E2D53D9F1F31FC7C7F47EE21B77F2A62"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.opentelemetry.opentelemetry-api-1.62.0.jar",
+        "sha256":  "D58143928C049233653E6BF1282FF8A767EBDD5E6A82B3F336158C30E40B431D"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.opentelemetry.opentelemetry-api-incubator-1.62.0-alpha.jar",
+        "sha256":  "6B8DBE21AEA973896555C65E94DE694FF73F788BDF47C712F8B2267A57B5D0D8"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.opentelemetry.opentelemetry-common-1.62.0.jar",
+        "sha256":  "D6310BEBDE67D65C1519696728D8604005315ED08AB14071956FC0826FD71815"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.opentelemetry.opentelemetry-context-1.62.0.jar",
+        "sha256":  "8EC86C3609222B9B6307BF40154C1F1C288D1F18ADA0155409E7797ADBDBE517"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.opentelemetry.semconv.opentelemetry-semconv-1.41.1.jar",
+        "sha256":  "636AD7DAC093D22FB84BF8D928EF836694F2D63C92D72B3DF21B86002E8BECEF"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.arc.arc-3.39.4.jar",
+        "sha256":  "619DF8083242F203E3E5665BEE62CC8367373DE3F5C51D55E0BB73D79A73D161"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-agroal-3.39.4.jar",
+        "sha256":  "220434AF0DA2A3CC7B4638EB907744CE39BC7D8C6A356DB39BC4F515F080E6C0"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-arc-3.39.4.jar",
+        "sha256":  "BCDCBE5EFB46A2CF5814677408B25235986D045B5F7B8B509715B140272CF540"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-core-3.39.4.jar",
+        "sha256":  "35EC7A88C84D57833013CAD24F4874BA8C1A7678C9F4127F9956FA2B8286326C"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-credentials-3.39.4.jar",
+        "sha256":  "11C3D2E0EC80066DDD5E61CBD87589302941ABAE44785BC090D3FCA0DCB96A38"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-datasource-3.39.4.jar",
+        "sha256":  "1DEFE3A5C603989258ED11E17895B37C37A7AA0517355B0383968E01FFD14BF2"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-datasource-common-3.39.4.jar",
+        "sha256":  "A7DC5F8D24A5AC28F3A60D6B1E8E0A57FC9259A3890C6E817132E64222A2533A"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-devservices-3.39.4.jar",
+        "sha256":  "C5D0F0E465D2E9D0FD40BEC9990320BC3CA3628E45536CC25056530434CBB6CF"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-fs-util-1.4.2.jar",
+        "sha256":  "A6034133B21DE4E3AEE4BC9E250F8416ABFBDC0C86E6E0737F766415C3866169"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-hibernate-validator-3.39.4.jar",
+        "sha256":  "B0E21B383EF2F91E00DEF62223621016378284928EF0904A08C50451B8A2F25F"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-jackson-3.39.4.jar",
+        "sha256":  "B63198273CDCD68B0C8C1546B2526074B68F5CAB229E200096419AA9C78F2CD6"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-jdbc-postgresql-3.39.4.jar",
+        "sha256":  "A139AD24E33071D42C74905B8C0161217ED380E55B2E86813670D701D34E61BC"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-jsonp-3.39.4.jar",
+        "sha256":  "6E422CE3E5A30D52FC20B985128F2462717A3EDAC19F7D5DD8678DA4270A5220"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-mutiny-3.39.4.jar",
+        "sha256":  "DD788E5AF2A109D4C6D769784FB4803C2125F63CAE2E365E5AAD5C3AE9971021"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-narayana-jta-3.39.4.jar",
+        "sha256":  "11EF3798061EE8618472560982BF3CDD8B895F5DE826B0C9C03939823F88186E"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-netty-3.39.4.jar",
+        "sha256":  "93441A70D2492EEFADB321AA239952203EFE4608C2B651EA3F68448FAFFC449B"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-proxy-registry-3.39.4.jar",
+        "sha256":  "D5528987290673B4D203ECC0AD47AF3663D2A903F98D291F588C7AF1B624FA2E"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-rest-3.39.4.jar",
+        "sha256":  "18F9518800622F8CACAF063F0420A6E1F81C8028635A6B189FDBD61544430318"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-rest-client-3.39.4.jar",
+        "sha256":  "EEC930F2EF7D7E9766A30D0479305EBE145CF616F1608AB43ED0EABC88821C21"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-rest-client-config-3.39.4.jar",
+        "sha256":  "8266AA65D40A514F254922181427395A693EF46ADFE6875563B80A7780F0DE83"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-rest-client-jackson-3.39.4.jar",
+        "sha256":  "3481D30B1FE706C470881C61427B8DF169B81C1C0A92F0BA2CAD9CBB5C6886A9"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-rest-client-jaxrs-3.39.4.jar",
+        "sha256":  "0B6BB58316426E9EE3E0D7E6F047895765DEDB62CDA65EAA2D19639ADD0D02D9"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-rest-common-3.39.4.jar",
+        "sha256":  "CB5C665FF9CFAF1D248A028C240C86F9B3E751DB050A6A50067D335A672C0EEB"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-rest-jackson-3.39.4.jar",
+        "sha256":  "A7AF232D2046442FCA6D1745DCC4DF4464727B9F895C0AD99C4FB7DE6C48D520"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-rest-jackson-common-3.39.4.jar",
+        "sha256":  "9E256694214B3FCD383F1B7B54F2A60FBFC26F2420995D87E2B1E8A33CE7E003"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-scheduler-3.39.4.jar",
+        "sha256":  "949BC02E36B32D3E303E0172F7617437B45BAF6E46CBA21288212C26F1942DC0"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-scheduler-api-3.39.4.jar",
+        "sha256":  "B4C1BADEA5B1462D68CC33805557AC15688EFDE38A3AD7D40B47BA1FBC55C673"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-scheduler-common-3.39.4.jar",
+        "sha256":  "F6D2CBD9B9514A19D523CEC842A7DA8EBF01AC04E62FA74FD3743944B461F19C"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-scheduler-kotlin-3.39.4.jar",
+        "sha256":  "3F54F4C19DB9BCF1996359FCC240527265BEA982B361550CA1ECBAB2B37DA57E"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-scheduler-spi-3.39.4.jar",
+        "sha256":  "B05D31FB74ED3C5CD36CEB9470F84B38B01C7777E608B51425EB3354B1DB01A0"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-security-runtime-spi-3.39.4.jar",
+        "sha256":  "3551317E194D58375B5F0A9E783195CAC9EBA6229571C6B35D7644540472FD16"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-smallrye-context-propagation-3.39.4.jar",
+        "sha256":  "A67219288801870B5D2E8E52DD681306DED0FF935003CCB9D3296108EB7E5657"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-smallrye-health-3.39.4.jar",
+        "sha256":  "A54DAE4E30528D7BAADAEF59E1AAA6EF8D897816A448114624CF752911ABEBB6"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-tls-registry-3.39.4.jar",
+        "sha256":  "78CC58F47326CD6C1C128F47CCBFC0FAC605D85268DC8B207D487A5F67941795"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-tls-registry-spi-3.39.4.jar",
+        "sha256":  "CE9732AA251A5A419C301649D49DB665603E5F08516F69FCE5EA7DAFE527EC7A"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-transaction-annotations-3.39.4.jar",
+        "sha256":  "B522FC9CABAA19CFD791225A23BD1501BBE201E3FED364ED9F3EC71279E9D3A2"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-vertx-3.39.4.jar",
+        "sha256":  "EBFDF2AB851277A0693FAA8B6E8E98B681C85CC77F7E1B2A8F1823DCF08ED190"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-vertx-http-3.39.4.jar",
+        "sha256":  "44F081403F52C7830CBC8F08AF080C7345DFB644A01FB9EB97828EFA4520A255"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.quarkus-virtual-threads-3.39.4.jar",
+        "sha256":  "7020EE784CBB824E1554670C255F9C5F40AE039657D877043F6E3400CC6E6DBB"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.resteasy.reactive.resteasy-reactive-3.39.4.jar",
+        "sha256":  "BC8578BC7EB664A69C299B19D9243D8FE040233772CE1BBF252003F16E063879"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.resteasy.reactive.resteasy-reactive-client-3.39.4.jar",
+        "sha256":  "97C07634110BB3343CDC5DD0B177519FAE6BCA2A89832464CC30C93B0AA6B6EE"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.resteasy.reactive.resteasy-reactive-common-3.39.4.jar",
+        "sha256":  "BB514D68B1C167C6DFD86BC87DBA964AB0366EF0E75A0EEEF6DA5280FF8F25E2"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.resteasy.reactive.resteasy-reactive-common-types-3.39.4.jar",
+        "sha256":  "8F6103A46DBD60037B78B8ACD10B00AD2841F49E2014A79A79B280FEB868B969"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.resteasy.reactive.resteasy-reactive-jackson-3.39.4.jar",
+        "sha256":  "9A4E9EADCE5A6BD17F877D31BA8199CEBC7193646232A8A1EA00DE8FD3D38F98"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.resteasy.reactive.resteasy-reactive-vertx-3.39.4.jar",
+        "sha256":  "45CCEF7B417AF3F93DB67FB63A6ABF4992AF8DB9554FCDF2C28F78AA3EB52E9A"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.security.quarkus-security-2.3.2.jar",
+        "sha256":  "9176A0E5B88D7B29AB28B5137D5702D44A248DA3D7E7FA80F1B89D4EC64F929A"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.quarkus.vertx.utils.quarkus-vertx-utils-3.39.4.jar",
+        "sha256":  "12E587AC1D1A77BE0DC9568B74B4CB3B82C9061FF589B40663535AA5A7E5D345"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.certs.smallrye-private-key-pem-parser-0.9.4.jar",
+        "sha256":  "2444AB1430505D1A8A9F6C9797FBA60E14948BFE27CF8C98AE012C37BF768C15"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.common.smallrye-common-annotation-2.19.0.jar",
+        "sha256":  "A29EF5D8ED9E306ED683A4D680BB1C03F89C41196AA0A41C95EB0DDA8E81E346"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.common.smallrye-common-classloader-2.19.0.jar",
+        "sha256":  "868C3FCB738281B2B360BA706B9074B674EE6C697D971A52BD77F4099BA2FD5C"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.common.smallrye-common-search-2.19.0.jar",
+        "sha256":  "973738A728D8EFAC3C0AB75D3A54236CE5F9C435B4B4A2F9BC0F16A0C46001FF"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.common.smallrye-common-vertx-context-2.19.0.jar",
+        "sha256":  "2C3D3326BAB62064E7120AD6C1E4F99E267176B2EFD74A44B3AB2CD5AA5C69D6"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.config.smallrye-config-3.17.2.jar",
+        "sha256":  "D93D4FEC79674F67391C44FC995C61209EF72E816B0FC40FFD631AB883310C14"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.config.smallrye-config-common-3.17.2.jar",
+        "sha256":  "EBBB7B03044580440F63788CB743664749E7169B8EB382B3CFC44A4FB328BB85"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.config.smallrye-config-core-3.17.2.jar",
+        "sha256":  "092050099D3144BCC64B33165B3C2B7D25A519808D3C7618A6E1C1DEBCC0D832"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.config.smallrye-config-validator-3.17.2.jar",
+        "sha256":  "0FA1B7810D7C9877107CE325E3AB448FD73D991B630DAACEEEAE41D935CE873B"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.jandex-3.6.0.jar",
+        "sha256":  "246C038AC0190FBE43E4A218344345F332B7A12543D499B47FA64B05F060A2A1"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.reactive.mutiny-3.3.0.jar",
+        "sha256":  "468035ABDA56638307E8DAD7D4BE3BD818B05725F0559140B32E087BE017B83F"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.reactive.mutiny-smallrye-context-propagation-3.3.0.jar",
+        "sha256":  "E7B20AD3A01D0B0944DFBF86538392621EF38E87E6C69722902FC5BC9AF674FF"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.reactive.mutiny-zero-flow-adapters-1.2.1.jar",
+        "sha256":  "623DC619EC3866C6CE6365ED46CD948FE1B6CAE93D64006249294EF8A941D943"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.reactive.smallrye-mutiny-vertx-auth-common-3.23.1.jar",
+        "sha256":  "D4DEFD33CF294AC695D7817B764F52626D7690D0BEE944BA4B84FFA02278FAAB"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.reactive.smallrye-mutiny-vertx-bridge-common-3.23.1.jar",
+        "sha256":  "8B14169047DDBB2E5DA91DE00B37D62FF8B2CA49AE4553A0742660C50FE91065"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.reactive.smallrye-mutiny-vertx-core-3.23.1.jar",
+        "sha256":  "DC5578295B8E5DC10F9FD8028ECB3AC3ED8B2CCC54B8B80172181188F577372E"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.reactive.smallrye-mutiny-vertx-runtime-3.23.1.jar",
+        "sha256":  "AB996413864654F8977A4459154D36B093DABD661E8D17C3854D2CA20616BF8C"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.reactive.smallrye-mutiny-vertx-uri-template-3.23.1.jar",
+        "sha256":  "95B798FD11F3D199593388C85AEA6F9FFBAE178A2D48444D9D79B4CA3714FA57"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.reactive.smallrye-mutiny-vertx-web-3.23.1.jar",
+        "sha256":  "106413B6575604C1EFF68A1AD6BBE890D635A7C55EE198858CE4BD8012189DA0"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.reactive.smallrye-mutiny-vertx-web-common-3.23.1.jar",
+        "sha256":  "05E78BF89604A2653EDE8CDAD2F540AA63E5E97D1304188A86769DB9A57E7558"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.reactive.smallrye-reactive-converter-api-3.0.3.jar",
+        "sha256":  "8F47B3CBDEF72C5875836011BEB02F485918FEBBB73C15D51738C566EB669253"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.reactive.smallrye-reactive-converter-mutiny-3.0.3.jar",
+        "sha256":  "5255E5E77D38B0BC166511C3CE7AF3A97CF1EDEAA19D2946102F929D99273111"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.smallrye-context-propagation-2.3.0.jar",
+        "sha256":  "BC7D83A626D92D223C9F479C24C80E09DF4C801781134ACE9D826803B8F8EAFF"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.smallrye-context-propagation-api-2.3.0.jar",
+        "sha256":  "DA0BC273588CEFB478E98C4E137F65CC394A54253E35684D5D917060FDC4147C"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.smallrye-context-propagation-jta-2.3.0.jar",
+        "sha256":  "40FDF6411E8CD7CDB493D1FDCF884D9304B72DB58BC4EFD077DFC960F8F1684A"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.smallrye-context-propagation-storage-2.3.0.jar",
+        "sha256":  "0FB685500B833B819C934147F0D2F0AB00397DF196442AA3FA0B1A6D962DEDD0"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.smallrye-fault-tolerance-vertx-6.11.2.jar",
+        "sha256":  "6682D773118EF04FA5A05F3B59D481189593B21F8F7E62E6E70968FF79D35235"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.smallrye-health-4.3.0.jar",
+        "sha256":  "7C87AC1DB8410FFC286A00E8EADEB60992C7EDFA300178EBAB0ECFD0781D3EC4"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.smallrye-health-api-4.3.0.jar",
+        "sha256":  "A91809158320220877F436A9365AD61F98E0CFE53FA62D95D3EB5A88535DBC67"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.smallrye-health-provided-checks-4.3.0.jar",
+        "sha256":  "5EE4C0A40DF05FF06216B6761F45D6F9D4CAA96CF55345DA4BE16FD8D89DC863"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.smallrye.stork.stork-api-2.7.10.jar",
+        "sha256":  "8ECA22CAFD1D24FF9B5A11AB7C4D50F444333B6DF76323B4EF761210716D7EF1"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.vertx.vertx-auth-common-4.5.34.jar",
+        "sha256":  "2FC9F280B2193718DB2BDE020E8CA9107EFF2A78D27389B7C4DB63F72980C4DE"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.vertx.vertx-bridge-common-4.5.34.jar",
+        "sha256":  "B57384BDA3C9EBB78CC734DDF0D83BD6B55335CEB259E41D315854F9B737318A"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.vertx.vertx-core-4.5.34.jar",
+        "sha256":  "750EC27491F9EEA3DF24E3A85670A0B1998827BB729EC95B2D9D3DBBFDF8792C"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.vertx.vertx-uri-template-4.5.34.jar",
+        "sha256":  "D303E9F044347BC350241DFB2150F05D3B93D6C7F56C74757861CA582E8F62DF"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.vertx.vertx-web-4.5.34.jar",
+        "sha256":  "14AE3CADBAC1D0794CBF5E66FDB3CC61611235AC05F57BFDB65D9C21A6B97ADD"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.vertx.vertx-web-client-4.5.34.jar",
+        "sha256":  "1CC978B8A2F5F0B6DCB5E717F1174750ECA10AA844FE17F579183C5F69CFDFA7"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\io.vertx.vertx-web-common-4.5.34.jar",
+        "sha256":  "378371867305E73CDDCEA7027217D9A9FDDBD18E57DE74021824CB2BF1962019"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\jakarta.activation.jakarta.activation-api-2.1.4.jar",
+        "sha256":  "C9DB52100CE6C8AAC95CC39075F95720D2E561B11F8051B81C121AD4EFFD7004"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\jakarta.annotation.jakarta.annotation-api-3.0.0.jar",
+        "sha256":  "B01F55552284CFB149411E64EABCA75E942D26D2E1786B32914250E4330AFAA2"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\jakarta.el.jakarta.el-api-6.0.1.jar",
+        "sha256":  "7E84B5BED49DE32B79CC5E85D90B6F5ADB1A953AC67283ADBB41C1E297F9C605"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\jakarta.enterprise.jakarta.enterprise.cdi-api-4.1.0.jar",
+        "sha256":  "C42C808F17925129A0800F618FEBE050D966E181A4C7384C8A5E7A0283D68699"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\jakarta.enterprise.jakarta.enterprise.lang-model-4.1.0.jar",
+        "sha256":  "BB56F571F60D2862B2387D5468FE8F5540F8094727283ED991F89082708095EE"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\jakarta.inject.jakarta.inject-api-2.0.1.jar",
+        "sha256":  "F7DC98062FCCF14126ABB751B64FAB12C312566E8CBDC8483598BFFCEA93AF7C"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\jakarta.interceptor.jakarta.interceptor-api-2.2.0.jar",
+        "sha256":  "D240D72B4DD38A2E431C804079810010CB97903678FA5F987FB7434878B04398"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\jakarta.json.jakarta.json-api-2.1.3.jar",
+        "sha256":  "BC934142805EA1D794F1440563965A3861A2A9FB7414ECD3FE44F26500734414"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\jakarta.resource.jakarta.resource-api-2.1.0.jar",
+        "sha256":  "4D26AD86A5F72CD2F9C4A31CC4524F7BF3EC0FF74416F081F8642B7CE8041067"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\jakarta.transaction.jakarta.transaction-api-2.0.1.jar",
+        "sha256":  "50C0A7C760C13AE6C042ACF182B28F0047413DB95B4636FB8879BCFFAB5BA875"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\jakarta.validation.jakarta.validation-api-3.1.1.jar",
+        "sha256":  "63CE00156388C365F3AC1BE71FCFAF114682FC0C452020B5DF6E7EC236E142AB"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\jakarta.ws.rs.jakarta.ws.rs-api-3.1.0.jar",
+        "sha256":  "6B3B3628B8B4AEDDA0D24C3354335E985497D8EF3C510B8F3028E920D5B8663D"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\jakarta.xml.bind.jakarta.xml.bind-api-4.0.5.jar",
+        "sha256":  "5E489B6C874C4119E003FF1403DB523EE3A8959EC499F3DE29E77245EFCCF216"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.eclipse.microprofile.config.microprofile-config-api-3.1.1.jar",
+        "sha256":  "0D4EAA7E17730E153B1E0613104A989AF7D7A0D4BA4D19C84C71862BFF993773"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.eclipse.microprofile.context-propagation.microprofile-context-propagation-api-1.3.jar",
+        "sha256":  "69CCC04487E87779D4970AA50C673CC34A9DF080C1C0E8D8EAB2E8B46F825CF4"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.eclipse.microprofile.health.microprofile-health-api-4.0.1.jar",
+        "sha256":  "B89CA4B6C4F7A044250D31C0673F6BC221E40FD669FC5871DBAD5E5A0769CA47"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.eclipse.microprofile.rest.client.microprofile-rest-client-api-4.0.jar",
+        "sha256":  "61CDDC4934D3C8413386210A21C83325A54A0AFCD7388ED708B7BD21D8FD3D7D"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.eclipse.parsson.parsson-1.1.9.jar",
+        "sha256":  "03DC4DC834A928730D52A50952DE0F30C35E0DAF048889132BE19EE1E5053A6C"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.glassfish.expressly.expressly-6.0.0.jar",
+        "sha256":  "86EE67C7040278BAC5204B571F738B8B859F014CEB5F896BD935BACBDAF33CB9"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.hibernate.validator.hibernate-validator-9.1.3.Final.jar",
+        "sha256":  "0497EBBE23FAFE4180B74BD0B96A67EEE8556552DECC4D3C120C1DC737A2B5FB"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.jboss.jboss-transaction-spi-8.0.0.Final.jar",
+        "sha256":  "07E4E62CEAE075A8C11A715D89B19992C879F505B48BE6B2727F5BE798562AE1"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.jboss.logging.commons-logging-jboss-logging-2.0.0.Final.jar",
+        "sha256":  "CE4088809C7512228CB34B54686223DEC45532B97366A36830F82926B58A4C6C"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.jboss.narayana.jta.narayana-jta-7.3.4.Final.jar",
+        "sha256":  "AF32436A56B806ADEFC448D356C99A8C3AD27599A060814227FE535ED146380A"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.jboss.narayana.jts.narayana-jts-integration-7.3.4.Final.jar",
+        "sha256":  "BEBC3292B7A024E3D55FDB4EC14F7BAB70A8BB3C066B6705F722DAE313086BD3"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.jboss.slf4j.slf4j-jboss-logmanager-2.0.2.Final.jar",
+        "sha256":  "BA469A975E9D1E79F34A8BAA1A0AFA8B01BBD8CF080537C0E0899476D31DB84B"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.jboss.threads.jboss-threads-3.9.2.jar",
+        "sha256":  "AC0FD044686122014143267D3688245852CA07C6C4474320C9172062A5AF6634"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.jctools.jctools-core-4.0.5.jar",
+        "sha256":  "D65E5F38BCD0984E26F87187687F1F70DD52740C4D5E046F8D104E01AB5DB95F"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.jspecify.jspecify-1.0.0.jar",
+        "sha256":  "1FAD6E6BE7557781E4D33729D49AE1CDC8FDDA6FE477BB0CC68CE351EAFDFBAB"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.postgresql.postgresql-42.7.13.jar",
+        "sha256":  "6E0E4CC2D8CAE902084F8A2B18728B073A6FD9D1F87C9D8BFF8F298C18185B93"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.reactivestreams.reactive-streams-1.0.4.jar",
+        "sha256":  "F75CA597789B3DAC58F61857B9AC2E1034A68FA672DB35055A8FB4509E325F28"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.slf4j.slf4j-api-2.0.18.jar",
+        "sha256":  "44508FD1576500688C790B190ACDD16FEC4F8C79A3E0B900AFD70503CF055F55"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\lib\\main\\org.wildfly.common.wildfly-common-2.0.1.jar",
+        "sha256":  "FA4A710DB7AE3E598A5F41639EB54E9F7B09DE5FD0F58F56BD6070F21D956374"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\quarkus\\generated-bytecode.jar",
+        "sha256":  "1A096CE3308BA2EDED97A5287FFAC76ABEF9CEDC68A2A2D056679A0A11F8F60B"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\quarkus\\quarkus-application.dat",
+        "sha256":  "89E472C0C46C14F26D0A592CDDB824DD4B4B0E51737C38391DA59EBA9B0CEEB7"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\quarkus\\transformed-bytecode.jar",
+        "sha256":  "3E542C228492997B7CF571AB5ECDE3DAEC4876183D2DEDF01855AB2FA46CCF06"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\quarkus-app-dependencies.txt",
+        "sha256":  "7D8B8E4109BBE33B161D71422C9BF7E41BD50471318BF9F8DA0BFBA68B561A00"
+    },
+    {
+        "caminho":  "\\tcc-moderno\\emprestimo-service\\target\\quarkus-app\\quarkus-run.jar",
+        "sha256":  "A564B42D8D05401E5C5A09CEF8A74B028BCA99C7D4F369609EA9200A1796ABCE"
+    }
+]
