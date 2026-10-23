@@ -66,8 +66,6 @@ Em [contexto-20261023](contexto-20261023/), `contexto.json` registra ferramentas
 commits, hashes e ambiente Docker; `preparacao-base.jsonl` identifica os SQLs
 aplicados; `comandos.jsonl` e `plano-execucao.json` registram a sequência;
 `status-final.json` registra sucesso e restauração do container original.
-O executor externo citado nesses registros permanece arquivado no acervo
-original da campanha e não integra o Git.
 
 ## Como recalcular e interpretar
 

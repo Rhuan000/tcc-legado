@@ -42,11 +42,10 @@ O monólito utiliza Java 8 e JBoss EAP 7.4; o serviço e o CK utilizam Java 21.
 Os registros identificam Maven 3.9.11 e PostgreSQL 14. O protocolo detalhado,
 os hashes dos instrumentos e os comandos estão em [medicoes](medicoes/README.md).
 
-A execução de 23/10 foi coordenada por um executor PowerShell externo, arquivado
-com a campanha original. Ele preparou cópias fixadas nos commits, banco
-descartável e ordem das chamadas aos três coletores. O executor não integra
-este repositório. O manual apresenta os mesmos passos de preparação e coleta
-sem depender desse arquivo.
+O [passo a passo de coleta](medicoes/README.md) mostra como preparar duas cópias
+dos commits, configurar o banco descartável e as integrações, executar as cinco
+etapas da campanha principal e coletar os builds suplementares. As chamadas
+utilizam diretamente os três scripts versionados.
 
 As suítes automatizadas foram reexecutadas durante os builds. Os testes
 funcionais manuais são evidências anteriores dos mesmos snapshots; seus casos

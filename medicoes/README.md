@@ -2,8 +2,8 @@
 
 Este diretório mantém os **três instrumentos exatos da recoleta de 23/10/2026**.
 Os dados publicados estão em [metricas](../metricas/README.md). O procedimento
-abaixo prepara o ambiente e chama os coletores sem o executor externo utilizado
-naquela campanha.
+abaixo detalha a preparação do ambiente e as chamadas diretas aos três
+coletores.
 
 | Instrumento | Finalidade | SHA-256 |
 | --- | --- | --- |
@@ -310,12 +310,7 @@ bases e encerramento ficam fora do tempo de inicialização. Dez repetições
 locais descrevem a variabilidade deste ambiente. Arquitetura, runtime, framework,
 código e testes mudam simultaneamente; o estudo não isola uma única causa.
 
-## Campanha arquivada e histórico
-
-Na recoleta de 23/10, um executor externo coordenou snapshots, tokens e banco
-descartável, pilotos, etapas e restauração do container original. Chamou estes
-três instrumentos sem mudar seus bytes. Seu arquivo permanece no acervo
-original e não é dependência do procedimento manual acima.
+## Histórico
 
 Os dados anteriores de 20/10 continuam no commit
 [`0d83263d38860c5b271f10a3f668c7b78fba497a`](https://github.com/Rhuan000/tcc-legado/tree/0d83263d38860c5b271f10a3f668c7b78fba497a).
