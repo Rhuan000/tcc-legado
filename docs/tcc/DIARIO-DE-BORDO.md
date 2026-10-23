@@ -1,5 +1,10 @@
 # Diário de bordo da migração de empréstimos
 
+Este diário conserva o percurso histórico do estudo. Caminhos de coletores,
+pilotos e campanhas preliminares removidos da árvore atual podem ser consultados
+no commit `58a67c39281c54424b8ca5524d05135f58ed235a`, anterior à limpeza.
+O acervo usado na análise final está descrito em `metricas/README.md`.
+
 Registro iniciado em 24/09/2026. Datas de commits seguem o fuso registrado no Git, UTC-03:00. Entradas anteriores à criação deste arquivo são reconstruções retrospectivas a partir das evidências identificadas, não anotações contemporâneas aos acontecimentos.
 
 ## Finalidade e regras

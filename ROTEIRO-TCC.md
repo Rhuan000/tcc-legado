@@ -1,5 +1,11 @@
 # Roteiro de execução do TCC
 
+Este roteiro registra o percurso de desenvolvimento, incluindo etapas e
+contagens de testes de revisões anteriores. Para os snapshots e resultados
+finais, consultar `README.md` e `metricas/README.md`. Arquivos históricos
+retirados da árvore atual permanecem no commit
+`58a67c39281c54424b8ca5524d05135f58ed235a`, anterior à limpeza.
+
 ## Objetivo do estudo
 
 Avaliar os efeitos da extração incremental da gestão de empréstimos de um

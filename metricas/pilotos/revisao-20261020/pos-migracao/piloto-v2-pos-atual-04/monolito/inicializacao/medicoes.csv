@@ -1,2 +1,0 @@
-﻿"estado","coleta_id","escopo","repeticao","inicio_iso","duracao_ms","sucesso","endpoints","commit","coletor_sha256","artefatos_sha256","base_jboss"
-"pos-migracao","piloto-v2-pos-atual-04","monolito","1","2026-10-20T04:38:10.1646598-03:00","5419.4087","True","http://127.0.0.1:18080/monolito-biblioteca/health","45ff20b3d68ff484143a7b28e35b7c1d93fc361b","95BBBF25447BC3D8DAB9CEF5B3285D31C1F0A3E2FF01DE0547B528AB05A18085","22888F3FD3C83541FF62FDB3A0CFC4A514196A0129D6FE7CDA75B61BB87C8426","C:\Users\RHUANE~1\AppData\Local\Temp\tcc-campanha-0707be36d0a74765864116dced87e6d8"

@@ -16,3 +16,12 @@ metricas/ck.jar
 metricas/legado/
 .experimento/
 docs/tcc/ESTADO-DA-CAMPANHA.md
+
+# Builds, caches e saidas locais; evidencias em metricas/ continuam versionadas
+**/target/
+**/bin/
+/.quarkus/
+/output/
+/tmp/
+/monolito-biblioteca/projeto.txt
+/monolito-biblioteca/variable.csv

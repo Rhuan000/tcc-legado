@@ -1,2 +1,0 @@
-﻿"estado","coleta_id","escopo","repeticao","inicio_iso","duracao_ms","sucesso","codigo_saida","commit","coletor_sha256"
-"pre-migracao","piloto-v2-pre-03","monolito","1","2026-10-12T03:59:12.2511736-03:00","20320.7702","True","0","a95c2dc4dbf9e80f481bca65b6c50cb52a49d9a9","15266F416D8915D6407A1518861BC06D161CC88885440625BDE422F5E101D35B"
